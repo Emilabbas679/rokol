@@ -1,31 +1,20 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
+//use App\Models\Product;
+
+class Type extends Model
 {
+    use HasFactory;
     protected $guarded = [];
 
     protected $casts = [
         'name' => 'array',
     ];
-
-    public function parent()
-    {
-        return $this->belongsTo(Category::class, 'category_id')->whereNull('category_id');
-    }
-
-    public function scopeParentOnly($query)
-    {
-        return $query->whereNull('category_id');
-    }
-
-    public function children()
-    {
-        return $this->hasMany(Category::class, 'category_id')->where('status',1);
-    }
 
     protected static function boot()
     {
@@ -39,4 +28,10 @@ class Category extends Model
             Cache::forget("translations_{$translation->locale}");
         });
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_types', 'type_id', 'product_id');
+    }
+
 }

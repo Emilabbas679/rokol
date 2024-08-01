@@ -5,6 +5,22 @@ use Illuminate\Support\ServiceProvider;
 
 return [
 
+    'langs' => [
+          [
+              'code' => 'az',
+              'name' => 'Azerbaijan',
+          ],
+          [
+              'code' => 'en',
+              'name' => 'English',
+          ],
+          [
+              'code' => 'ru',
+              'name' => 'Russian',
+          ],
+    ],
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

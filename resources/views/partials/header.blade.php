@@ -76,10 +76,10 @@
                     <nav class="nav_desk">
                         <ul class="hdr_menu clearfix">
                             <li>
-                                <a href="" class="">HAQQIMIZDA </a>
+                                <a href="" class="">{{translate('header_about')}} </a>
                             </li>
                             <li>
-                                <a href="" class="">{{translate('header_products')}} </a>
+                                <a href="" class="">{{translate('header_products')}}</a>
                                 <div class="drop_section">
                                     <div class="drop_row">
                                         <div class="drop_col">
@@ -169,19 +169,19 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="" class="">RƏNGLƏR </a>
+                                <a href="" class="">{{translate('header_colors')}} </a>
                             </li>
                             <li>
-                                <a href="" class="active">HƏFTƏNİN TƏKLİFİ </a>
+                                <a href="" class="active">{{translate('header_offers')}} </a>
                             </li>
                             <li>
-                                <a href="" class="">XƏBƏRLƏR </a>
+                                <a href="" class="">{{translate('header_news')}} </a>
                             </li>
                             <li>
-                                <a href="" class="">KATALOQLAR </a>
+                                <a href="" class="">{{translate('header_catalogs')}} </a>
                             </li>
                             <li>
-                                <a href="" class="">ƏLAQƏ </a>
+                                <a href="" class="">{{translate('header_contact')}} </a>
                             </li>
                         </ul>
                     </nav>
@@ -210,22 +210,25 @@
         <div class="mob_body">
             <ul class="hdr_menu clearfix">
                 <li>
-                    <a href="" class="active">Ana səhifə </a>
+                    <a href="" class="">{{translate('header_about')}} </a>
                 </li>
                 <li>
-                    <a href="" class="">Haqqımızda </a>
+                    <a href="" class="">{{translate('header_products')}}</a>
                 </li>
                 <li>
-                    <a href="" class="">Xidmətlər </a>
+                    <a href="" class="">{{translate('header_colors')}} </a>
                 </li>
                 <li>
-                    <a href="" class="">Layihələr </a>
+                    <a href="" class="active">{{translate('header_offers')}} </a>
                 </li>
                 <li>
-                    <a href="" class="">Qalereya </a>
+                    <a href="" class="">{{translate('header_news')}} </a>
                 </li>
                 <li>
-                    <a href="" class="">Əlaqə </a>
+                    <a href="" class="">{{translate('header_catalogs')}} </a>
+                </li>
+                <li>
+                    <a href="" class="">{{translate('header_contact')}} </a>
                 </li>
             </ul>
         </div>

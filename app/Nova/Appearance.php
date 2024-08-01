@@ -4,20 +4,17 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Color as ColorField;
-use Laravel\Nova\Fields\Country;
-use Laravel\Nova\Fields\Number;
-
-class Color extends Resource
+use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Http\Requests\NovaRequest;
+class Appearance extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\Color>
+     * @var class-string<\App\Models\Appearance>
      */
-    public static $model = \App\Models\Color::class;
+    public static $model = \App\Models\Appearance::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -74,12 +71,11 @@ class Color extends Resource
                     $names['ru'] = $request->$requestAttribute;
                     $model->name = $names;
                 }),
-
-            Number::make('code')->min(0)->max(1000000),
-
-            ColorField::make('Color', 'hex'),
-
-
+            Select::make('Status')->options([
+                '0' => 'Deaktiv',
+                '1' => 'Aktiv',
+                '2' => 'Silinib',
+            ])->sortable()->rules('required')->displayUsingLabels(),
         ];
     }
 

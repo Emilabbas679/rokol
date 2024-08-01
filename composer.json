@@ -9,13 +9,16 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "acme/color-picker": "@dev",
+        "dillingham/nova-attach-many": "^1.3",
+        "eminiarts/nova-tabs": "^2.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/nova": "^4.0",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "stepanenko3/nova-json": "^4.0",
-        "acme/color-picker": "@dev"
+        "laravelrotebal/nova-attach-many": "^2.0",
+        "stepanenko3/nova-json": "^4.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",
@@ -70,7 +73,9 @@
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
         },
-        "github-protocols": ["https"],
+        "github-protocols": [
+            "https"
+        ],
         "cache-files-ttl": 600
     },
     "minimum-stability": "stable",
@@ -85,6 +90,10 @@
             "url": "./nova-components/ColorPicker"
         },
         "1": {
+            "type": "path",
+            "url": "./nova-components/ColorPicker"
+        },
+        "2": {
             "type": "path",
             "url": "./nova-components/ColorPicker"
         }

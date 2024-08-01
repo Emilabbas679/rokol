@@ -436,6 +436,11 @@ ul.hdr_menu > li {
     float: left;
     margin: 0;
     padding: 0px 8px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 /* .main_page ul.hdr_menu > li > a {
@@ -454,7 +459,7 @@ ul.hdr_menu > li > a {
     display: block;
     position: relative;
     padding: 12px 0;
-    font-size: 15px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: 1.2;
@@ -491,18 +496,21 @@ ul.hdr_menu > li > a::before,
     -o-transition: transform 0.3s;
 }
 
-ul.hdr_menu > li > a.active::before {
+/* ul.hdr_menu > li > a.active::before {
     transform: scaleX(1);
     transform-origin: left;
-}
+} */
 
 ul.hdr_menu > li > a.active {
     color: #006072;
 }
 
 ul.hdr_menu > li:hover {
-    background-color: #fff;
-    color: #006072;
+    background-color: #006072;
+}
+
+ul.hdr_menu > li:hover > a {
+    color: #fff;
 }
 
 
@@ -603,6 +611,7 @@ nav.nav_mobile ul.hdr_menu li ul li {
     top: 100%;
     left: 0;
     background-color: #fff;
+    box-shadow: 0px 0px 10px #00000020;
     z-index: 99999;
     transition: all 0.25s ease-in;
     -webkit-transition: all 0.25s ease-in;
@@ -707,11 +716,11 @@ ul.hdr_menu > li:hover .drop_section {
     width: 100%;
     position: relative;
     text-align: left;
-    font-size: 12px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    color: #ADADAD;
+    color: #1A1E26;
     word-break: break-word;
     border-bottom: 1px dashed #ADADAD;
     -webkit-transition: all 0.3s ease;
@@ -746,7 +755,7 @@ ul.hdr_menu > li:hover .drop_section {
 }
 
 .drop_list > li > a {
-    padding: 10px 0;
+    padding: 10px 20px 10px 0;
 }
 
 .drop_list > li > a::before {
@@ -1090,10 +1099,10 @@ nav.nav_mobile .number_links {
         padding: 0 8px;
     }
 
-    ul.hdr_menu > li > a {
+    /* ul.hdr_menu > li > a {
         padding: 8px 0;
         font-size: 13px;
-    }
+    } */
 
     .hd_search {
         max-width: 280px;

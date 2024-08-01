@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="{{asset('css/reset.css')}}" />
     <link rel="stylesheet" href="{{asset('css/swiper-bundle.min.css')}}" />
-    <link rel="stylesheet" href="css/select2.min.css" />
+    <link rel="stylesheet" href="{{asset('css/select2.min.css')}}" />
     <link rel='stylesheet prefetch' href="{{asset('css/gallery/gallery.css')}}">
     <link rel="stylesheet" href="{{asset('css/gallery/gallery_style.css')}}">
     <link rel="stylesheet" href="{{asset('css/header.css?v='.time())}}" />
@@ -48,9 +48,9 @@
 <script src="{{asset('js/gallery/jquery.mousewheel.min.js')}}"></script>
 <script src="{{asset('js/gallery/gallery_index.js')}}"></script>
 <script src="{{asset('js/gallery/lg-fullscreen.min.js')}}"></script>
-<script src="js/select2.min.js"></script>
+<script src="{{asset('js/select2.min.js')}}"></script>
 <script src="{{asset('js/jquery.matchHeight-min.js')}}"></script>
-<script src="{{asset('js/myjs.js?v2')}}"></script>
+<script src="{{asset('js/myjs.js?v5')}}"></script>
 
 @stack('js')
 

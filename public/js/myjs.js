@@ -37,16 +37,7 @@ $(document).ready(function () {
   }
   dropLangs();
   // *language
-  // *Favorites 
-  function doFav() {
-    $(".favotites").click(function (e) {
-      e.preventDefault();
-      e.stopPropagation()
-      $(this).toggleClass("dofav");
-    });
-  }
-  doFav();
-  // *Favorites
+
 
   // *Header fixed end
   // function fixedMobileNav() {
@@ -527,6 +518,7 @@ $(document).ready(function () {
   equalHeight();
   function equalHeight(event) {
     $('.item_content').matchHeight({ property: 'min-height' });
+    $('.wrap_category .col_in').matchHeight({ property: 'min-height' });
     $('.item_content_btm').matchHeight({ property: 'min-height' });
     $('.item_content_btm .itm_title').matchHeight({ property: 'min-height' });
     $('.atg_item').matchHeight({ property: 'min-height' });
