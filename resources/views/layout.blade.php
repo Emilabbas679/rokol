@@ -8,6 +8,7 @@
     <title>@yield('title') | {{env('APP_NAME')}} </title>
 
     @stack('meta')
+    <meta name="csrf-token" content="{{csrf_token()}}">
 
     <link rel="stylesheet" href="{{asset('css/reset.css')}}" />
     <link rel="stylesheet" href="{{asset('css/swiper-bundle.min.css')}}" />

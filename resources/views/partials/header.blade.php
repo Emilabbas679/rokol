@@ -79,13 +79,22 @@
                                 <a href="" class="">{{translate('header_about')}} </a>
                             </li>
                             <li>
-                                <a href="" class="">{{translate('header_products')}}</a>
+                                <a href="{{route('products')}}" class="">{{translate('header_products')}}</a>
+
+                                @php
+                                    $header_categories = menu_categories();
+                                    $totalItems = $header_categories->count();
+                                    $half = ceil($totalItems / 2);
+                                    $firstHalfCategories = $header_categories->slice(0, $half);
+                                    $secondHalfCategories = $header_categories->slice($half);
+
+                                @endphp
                                 <div class="drop_section">
                                     <div class="drop_row">
                                         <div class="drop_col">
                                             <ul class="drop_list">
 
-                                                @foreach(menu_categories() as $category)
+                                                @foreach($firstHalfCategories as $category)
                                                 <li>
                                                     <a href="{{route('category', $category->id)}}">{{$category->name[app()->getLocale()]}}</a>
                                                     <ul>
@@ -102,63 +111,20 @@
                                         </div>
                                         <div class="drop_col">
                                             <ul class="drop_list">
-                                                <li>
-                                                    <a href="#">Sənaye boyaları</a>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">Epoksid boyaları</a>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="#">Epoksid boyalar</a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">Poliretan boyaları</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">Sellülozik boyaları</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Sənaye boyaları</a>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">Epoksid boyaları</a>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="#">Epoksid boyalar</a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">Poliretan boyaları</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">Sellülozik boyaları</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Sənaye boyaları</a>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">Epoksid boyaları</a>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="#">Epoksid boyalar</a>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">Poliretan boyaları</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">Sellülozik boyaları</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
+
+                                                @foreach($secondHalfCategories as $category)
+                                                    <li>
+                                                        <a href="{{route('category', $category->id)}}">{{$category->name[app()->getLocale()]}}</a>
+                                                        <ul>
+                                                            @foreach($category->children as $item)
+                                                                <li><a href="{{route('category', $item->id)}}">{{$item->name[app()->getLocale()]}}</a></li>
+                                                            @endforeach
+
+                                                        </ul>
+                                                    </li>
+
+                                                @endforeach
+
                                             </ul>
                                         </div>
                                     </div>

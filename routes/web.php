@@ -15,7 +15,10 @@ use App\Http\Controllers\SiteController;
 */
 
 Route::get('/', [SiteController::class, 'index'])->name('home');
-Route::get('/category/{category_id}', [SiteController::class, 'category'])->name('category');
+Route::match(['get', 'post'],'/category/{category_id}', [SiteController::class, 'category'])->name('category');
+Route::match(['get', 'post'],'/products', [SiteController::class, 'category'])->name('products');
+Route::post('/get/sub-categories', [SiteController::class, 'getSubCategories'])->name('getSubCategories');
 Route::get('/product/{product_id}', [SiteController::class, 'product'])->name('product');
+Route::post('/product/price/{product_id}', [SiteController::class, 'productPrice'])->name('product_price');
 Route::get('/lang/{locale}', [SiteController::class, 'locale'])->name('locale');
 

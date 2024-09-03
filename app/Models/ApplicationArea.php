@@ -15,16 +15,21 @@ class ApplicationArea extends Model
         'name' => 'array',
     ];
 
-    protected static function boot()
+//    protected static function boot()
+//    {
+//        parent::boot();
+//
+//        static::saved(function ($translation) {
+//            Cache::forget("translations_{$translation->locale}");
+//        });
+//
+//        static::deleted(function ($translation) {
+//            Cache::forget("translations_{$translation->locale}");
+//        });
+//    }
+
+    public function products()
     {
-        parent::boot();
-
-        static::saved(function ($translation) {
-            Cache::forget("translations_{$translation->locale}");
-        });
-
-        static::deleted(function ($translation) {
-            Cache::forget("translations_{$translation->locale}");
-        });
+        return $this->belongsToMany(Product::class, 'product_application_areas', 'application_area_id', 'product_id');
     }
 }

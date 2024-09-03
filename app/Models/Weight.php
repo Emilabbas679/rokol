@@ -15,16 +15,16 @@ class Weight extends Model
         'name' => 'array',
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::saved(function ($translation) {
-            Cache::forget("translations_{$translation->locale}");
-        });
-
-        static::deleted(function ($translation) {
-            Cache::forget("translations_{$translation->locale}");
-        });
-    }
+//    protected static function boot()
+//    {
+//        parent::boot();
+//
+//        static::saved(function ($translation) {
+//            Cache::forget("translations_{$translation->locale}");
+//        });
+//
+//        static::deleted(function ($translation) {
+//            Cache::forget("translations_{$translation->locale}");
+//        });
+//    }
 }

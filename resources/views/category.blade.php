@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', translate('category'))
+@section('title', $category['name'][app()->getLocale() ?? ''])
 @push('meta')
 
 @endpush
@@ -19,572 +19,145 @@
                 <div class="filter_container">
                     <h2 class="filter_title">Filterlər</h2>
 
-                    <div class="filter_items">
-                        <div class="filter_head">
-                            <h5>Məhsullar</h5>
-                        </div>
-                        <div class="select_item">
-                            <div class="form_item">
-                                <select name="month" class="js-example-basic-single " id="products_main" data-placeholder="Boyalar">
-                                    <option value="0" selected>Sənaye boyaları</option>
-                                    <option value="1">Epoksid boyaları</option>
-                                    <option value="2">Poliretan boyaları</option>
-                                    <option value="3">Sellülozik boyaları</option>
-                                </select>
-                                <span class="customDrop customDrop-main"></span>
+                    @php $route = route('category', $category['id']);
+                        if ($category['id'] == 0) {$route = route('products');}
+                    @endphp
+                    <form action="{{$route}}" id="formData">
+                        <div class="filter_items">
+                            <div class="filter_head">
+                                <h5>Məhsullar</h5>
                             </div>
-                            <div class="form_item">
-                                <select name="month" class="js-example-basic-single " id="products_other" data-placeholder="Boyalar">
-                                    <option value="0" selected>Epoksid boyaları </option>
-                                    <option value="1">Sənaye boyaları</option>
-                                    <option value="2">Poliretan boyaları</option>
-                                    <option value="3">Sellülozik boyaları</option>
-                                </select>
-                                <span class="customDrop customDrop-other"></span>
+                            <div class="select_item">
+                                <div class="form_item">
+                                    <select name="parent_category_id" class="js-example-basic-single " id="products_main" data-placeholder="{{translate('main_categories')}}">
+                                            <option value="0">{{translate('all')}}</option>
+                                        @foreach($categories as $item)
+                                            <option value="{{$item->id}}" @if($category['id'] == $item->id or $category['category_id'] == $item->id) selected @endif>{{$item->name[app()->getLocale()] ?? ''}}</option>
+                                        @endforeach
+
+                                    </select>
+                                    <span class="customDrop customDrop-main"></span>
+                                </div>
+                                <div class="form_item">
+                                    <select name="category_id" class="js-example-basic-single " id="products_other" data-placeholder="{{translate('sub_categories')}}">
+                                        <option value="{{$category['category_id']}}">{{translate('all')}}</option>
+                                    </select>
+                                    <span class="customDrop customDrop-other"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="filter_items drop_filter_item">
-                        <div class="filter_head">
-                            <h5>Qiymət</h5>
-                        </div>
-                        <div class="filter_check_items">
-
-
-                            <div class="price_range_wrap">
-                                <div class="price-input">
-                                    <div class="field">
-                                        <input type="number" class="input-min" value="">
-                                        <label>₼</label>
-                                    </div>
-                                    <div class="separator">-</div>
-                                    <div class="field">
-                                        <input type="number" class="input-max" value="">
-                                        <label>₼</label>
-                                    </div>
-                                </div>
-                                <div class="slider">
-                                    <div class="progress" style="left: 21.34%; right: 54.09%;"></div>
-                                </div>
-                                <div class="range-input price-field">
-                                    <input type="range" name="min-price" class="range-min" min="0" max="10000" value="0" step="1">
-                                    <input type="range" name="max-price" class="range-max" min="0" max="10000" value="10000" step="1">
-                                </div>
-                                <div class="price-wrap">
-                                    <div class="price-wrap-1">
-                                        <span class="minVal"></span>
-                                        <label>AZN</label>
-                                    </div>
-                                    <div class="price-wrap-2">
-                                        <span class="maxVal"></span>
-                                        <label>AZN</label>
-                                    </div>
-                                </div>
-                                <div class="custom_min_max" style="display: none;">
-                                    <div class="row">
-                                        <div class="col item_col">
-                                            <div class="col_in">
-                                                <input type="number" class="custom-min" placeholder="min" min="0" max="10000" value="">
-                                            </div>
+                        <div class="filter_items drop_filter_item">
+                            <div class="filter_head">
+                                <h5>{{translate('price')}}</h5>
+                            </div>
+                            <div class="filter_check_items">
+                                <div class="price_range_wrap">
+                                    <div class="price-input">
+                                        <div class="field">
+                                            <input type="number" class="input-min" value="">
+                                            <label>₼</label>
                                         </div>
-                                        <div class="col item_col">
-                                            <div class="col_in">
-                                                <input type="number" class="custom-max" placeholder="max" min="0" max="10000" value="">
-                                            </div>
+                                        <div class="separator">-</div>
+                                        <div class="field">
+                                            <input type="number" class="input-max" value="">
+                                            <label>₼</label>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-
-
-                            <!-- <div class="price_range_wrap">
                                     <div class="slider">
-                                        <div class="progress" style="left: 0%; right: 0%;"></div>
+                                        <div class="progress" style="left: 21.34%; right: 54.09%;"></div>
                                     </div>
                                     <div class="range-input price-field">
-                                        <input type="range" name="min-price" class="range-min" min="0" max="240" value="0" step="1">
-                                        <input type="range" name="max-price" class="range-max" min="0" max="240" value="0" step="1">
+                                        <input type="range" name="min_price" class="range-min" min="0" max="10000" value="{{$selected['min_price']}}" step="1">
+                                        <input type="range" name="max_price" class="range-max" min="0" max="10000" value="{{$selected['max_price']}}" step="1">
                                     </div>
                                     <div class="price-wrap">
                                         <div class="price-wrap-1">
-                                            <span class="minVal">0 </span>
+                                            <span class="minVal"></span>
                                             <label>AZN</label>
                                         </div>
                                         <div class="price-wrap-2">
-                                            <span class="maxVal">240</span>
+                                            <span class="maxVal"></span>
                                             <label>AZN</label>
                                         </div>
                                     </div>
-                                    <div class="custom_min_max">
-                                        <input type="number" class="custom-min" placeholder="min" min="0" max="240" value="0">
-                                        <input type="number" class="custom-max" placeholder="max" min="0" max="240" value="0">
+                                    <div class="custom_min_max" style="display: none;">
+                                        <div class="row">
+                                            <div class="col item_col">
+                                                <div class="col_in">
+                                                    <input type="number" class="custom-min" placeholder="min" min="0" max="10000" value="{{$selected['min_price']}}">
+                                                </div>
+                                            </div>
+                                            <div class="col item_col">
+                                                <div class="col_in">
+                                                    <input type="number" class="custom-max" placeholder="max" min="0" max="10000" value="{{$selected['max_price']}}">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div> -->
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="filter_items drop_filter_item">
+                            <div class="filter_head">
+                                <h5>{{translate('properties')}}</h5>
+                            </div>
+                            <div class="filter_check_items">
+                                @foreach(properties() as $item)
+                                <label class="f_check_type">
+                                    <input type="checkbox" name="properties[]" value="{{$item->id}}" @if(isset($selected['properties']) and  in_array($item->id, $selected['properties'])) checked @endif>
+                                    <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
+                                </label>
+                                @endforeach
+                            </div>
+                        </div>
 
 
-                        </div>
-                    </div>
-                    <div class="filter_items drop_filter_item">
-                        <div class="filter_head">
-                            <h5>Xüsusiyyətləri</h5>
-                        </div>
-                        <div class="filter_check_items">
-                            <label class="f_check_type">
-                                <input type="checkbox" name="specials" value="1">
-                                <span>Sellülozik boya</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="specials" value="1">
-                                <span>Silinə bilən</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="specials" value="1" checked>
-                                <span>Antibakterial</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="specials" value="1">
-                                <span>Yuyulan boya</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="specials" value="1">
-                                <span>Antikorroziv</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="filter_items drop_filter_item">
-                        <div class="filter_head">
-                            <h5>Tipi</h5>
-                        </div>
-                        <div class="filter_check_items">
-                            <label class="f_check_type">
-                                <input type="checkbox" name="type" value="1">
-                                <span>Su əsaslı</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="type" value="1">
-                                <span>Sintetik</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="type" value="1">
-                                <span>Epoksi</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="type" value="1">
-                                <span>Sellülozik</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="type" value="1">
-                                <span>Tiner</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="type" value="1">
-                                <span>Poliuretan</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="filter_items drop_filter_item">
-                        <div class="filter_head">
-                            <h5>Tətbiq sahələri</h5>
-                        </div>
-                        <div class="filter_check_items">
-                            <label class="f_check_type">
-                                <input type="checkbox" name="application" value="1">
-                                <span>Tavan</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="application" value="1">
-                                <span>Daş səth</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="application" value="1">
-                                <span>Epoksi</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="application" value="1">
-                                <span>Metal səth</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="application" value="1">
-                                <span>Tiner</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="application" value="1">
-                                <span>Xarici cəbhə</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="filter_items drop_filter_item">
-                        <div class="filter_head">
-                            <h5>Görünüş</h5>
-                        </div>
-                        <div class="filter_check_items">
-                            <label class="f_check_type">
-                                <input type="checkbox" name="views" value="1">
-                                <span>Parlaq</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="views" value="1">
-                                <span>Mat</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="views" value="1">
-                                <span>Yarı-mat</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="views" value="1">
-                                <span>Yarı-parlaq</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="views" value="1">
-                                <span>Yarı-şəffaf</span>
-                            </label>
-                            <label class="f_check_type">
-                                <input type="checkbox" name="views" value="1">
-                                <span>Xarici cəbhə</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="filter_items drop_filter_item">
-                        <div class="filter_head">
-                            <h5>Qablaşdırma</h5>
-                        </div>
-                        <div class="filter_check_items">
-                            <label class="f_check_type radio_btn">
-                                <input type="checkbox" name=packaging" value="1">
-                                <span>2.5 Kq</span>
-                            </label>
-                            <label class="f_check_type radio_btn">
-                                <input type="checkbox" name=packaging" value="1">
-                                <span>7.5 Kq</span>
-                            </label>
-                            <label class="f_check_type radio_btn">
-                                <input type="checkbox" name=packaging" value="1">
-                                <span>12.5 Kq</span>
-                            </label>
-                        </div>
-                    </div>
 
-                    <div class="filter_buttons">
-                        <button type="button" class="filter_btn btn_reset">Sıfırla</button>
-                        <button type="submit" class="filter_btn btn_send">Təsdiqlə</button>
-                    </div>
+                        <div class="filter_items drop_filter_item">
+                            <div class="filter_head">
+                                <h5>{{translate('appearances')}}</h5>
+                            </div>
+                            <div class="filter_check_items">
+                                @foreach(appearances() as $item)
+                                    <label class="f_check_type">
+                                        <input type="checkbox" name="appearances[]" value="{{$item->id}}" @if(isset($selected['appearances']) and  in_array($item->id, $selected['appearances'])) checked @endif>
+                                        <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="filter_items drop_filter_item">
+                            <div class="filter_head">
+                                <h5>{{translate('weights')}}</h5>
+                            </div>
+                            <div class="filter_check_items">
+                                @foreach(weights() as $item)
+                                    <label class="f_check_type">
+                                        <input type="checkbox" name="weights[]" value="{{$item->id}}" @if(isset($selected['weights']) and  in_array($item->id, $selected['weights'])) checked @endif>
+                                        <span>{{$item->weight}} @if($item->weight_type == 0) Q @else Kq @endif</span>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="filter_buttons">
+                            <button type="button" class="filter_btn btn_reset">Sıfırla</button>
+                            <button type="submit" class="filter_btn btn_send">Təsdiqlə</button>
+                        </div>
+                    </form>
 
 
                 </div>
             </div>
             <div class="wrap_right">
-                <div class="row">
-
-                    <div class="col item_col clearfix">
-                        <div class="col_in">
-                            <div class="fav_sect">
-                                <!-- <div class="offer-tag">
-                                    <p class="offer_val">Həftənin təklifi</p>
-                                </div> -->
-                                <!-- click after addclass "dofav" -->
-                                <span class="favotites "></span>
-                            </div>
-                            <a href="#" class="item_img">
-                                <img src="{{asset('img/item.png')}}" alt="product" />
-                            </a>
-                            <div class="item_content">
-                                <h4 class="itm_title">
-                                    <span>
-                                        Rokol
-                                    </span>
-                                    <span class="itm_weight">
-                                        2.5 kq
-                                    </span>
-                                </h4>
-                                <div class="itm_info">
-                                    Sellülozik Boya
-                                </div>
-                                <div class="itm_price">
-                                    <span class="new-price">4.50 AZN</span>
-                                    <span class="old-price">5.00 AZN</span>
-                                </div>
-                                <!-- stocked, unstocked -->
-                                <div class="itm_stock stocked">
-                                    <span class="stock_text">Stokda: 25 ədəd</span>
-                                </div>
-                                <div class="itm_more">
-                                    Səbətə əlavə et
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col item_col clearfix">
-                        <div class="col_in">
-                            <div class="fav_sect">
-                                <!-- <div class="offer-tag">
-                                    <p class="offer_val">Həftənin təklifi</p>
-                                </div> -->
-                                <!-- click after addclass "dofav" -->
-                                <span class="favotites "></span>
-                            </div>
-                            <a href="#" class="item_img">
-                                <img src="{{asset('img/item.png')}}" alt="product" />
-                            </a>
-                            <div class="item_content">
-                                <h4 class="itm_title">
-                                    <span>
-                                        Rokol
-                                    </span>
-                                    <span class="itm_weight">
-                                        2.5 kq
-                                    </span>
-                                </h4>
-                                <div class="itm_info">
-                                    Sellülozik Boya
-                                </div>
-                                <div class="itm_price">
-                                    <span class="new-price">6.90 AZN</span>
-                                    <span class="old-price"></span>
-                                </div>
-                                <!-- stocked, unstocked -->
-                                <div class="itm_stock unstocked">
-                                    <span class="stock_text">Stokda yoxdur </span>
-                                </div>
-                                <div class="itm_more disabled">
-                                    Səbətə əlavə et
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col item_col clearfix">
-                        <div class="col_in">
-                            <div class="fav_sect">
-                                <div class="offer-tag">
-                                    <p class="offer_val">Həftənin təklifi</p>
-                                </div>
-                                <!-- click after addclass "dofav" -->
-                                <span class="favotites "></span>
-                            </div>
-                            <a href="#" class="item_img">
-                                <img src="{{asset('img/item.png')}}" alt="product" />
-                            </a>
-                            <div class="item_content">
-                                <h4 class="itm_title">
-                                    <span>
-                                        Rokol
-                                    </span>
-                                    <span class="itm_weight">
-                                        2.5 kq
-                                    </span>
-                                </h4>
-                                <div class="itm_info">
-                                    Sellülozik Boya
-                                </div>
-                                <div class="itm_price">
-                                    <span class="new-price">4.50 AZN</span>
-                                    <span class="old-price">5.00 AZN</span>
-                                </div>
-                                <!-- stocked, unstocked -->
-                                <div class="itm_stock stocked">
-                                    <span class="stock_text">Stokda: 25 ədəd</span>
-                                </div>
-                                <div class="itm_more">
-                                    Səbətə əlavə et
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col item_col clearfix">
-                        <div class="col_in">
-                            <div class="fav_sect">
-                                <!-- <div class="offer-tag">
-                                    <p class="offer_val">Həftənin təklifi</p>
-                                </div> -->
-                                <!-- click after addclass "dofav" -->
-                                <span class="favotites "></span>
-                            </div>
-                            <a href="#" class="item_img">
-                                <img src="{{asset('img/item.png')}}" alt="product" />
-                            </a>
-                            <div class="item_content">
-                                <h4 class="itm_title">
-                                    <span>
-                                        Rokol
-                                    </span>
-                                    <span class="itm_weight">
-                                        2.5 kq
-                                    </span>
-                                </h4>
-                                <div class="itm_info">
-                                    Sellülozik Boya
-                                </div>
-                                <div class="itm_price">
-                                    <span class="new-price">6.90 AZN</span>
-                                    <span class="old-price"></span>
-                                </div>
-                                <!-- stocked, unstocked -->
-                                <div class="itm_stock unstocked">
-                                    <span class="stock_text">Stokda yoxdur </span>
-                                </div>
-                                <div class="itm_more disabled">
-                                    Səbətə əlavə et
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col item_col clearfix">
-                        <div class="col_in">
-                            <div class="fav_sect">
-                                <!-- <div class="offer-tag">
-                                    <p class="offer_val">Həftənin təklifi</p>
-                                </div> -->
-                                <!-- click after addclass "dofav" -->
-                                <span class="favotites "></span>
-                            </div>
-                            <a href="#" class="item_img">
-                                <img src="{{asset('img/item.png')}}" alt="product" />
-                            </a>
-                            <div class="item_content">
-                                <h4 class="itm_title">
-                                    <span>
-                                        Rokol
-                                    </span>
-                                    <span class="itm_weight">
-                                        2.5 kq
-                                    </span>
-                                </h4>
-                                <div class="itm_info">
-                                    Sellülozik Boya
-                                </div>
-                                <div class="itm_price">
-                                    <span class="new-price">4.50 AZN</span>
-                                    <span class="old-price">5.00 AZN</span>
-                                </div>
-                                <!-- stocked, unstocked -->
-                                <div class="itm_stock stocked">
-                                    <span class="stock_text">Stokda: 25 ədəd</span>
-                                </div>
-                                <div class="itm_more">
-                                    Səbətə əlavə et
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col item_col clearfix">
-                        <div class="col_in">
-                            <div class="fav_sect">
-                                <!-- <div class="offer-tag">
-                                    <p class="offer_val">Həftənin təklifi</p>
-                                </div> -->
-                                <!-- click after addclass "dofav" -->
-                                <span class="favotites "></span>
-                            </div>
-                            <a href="#" class="item_img">
-                                <img src="{{asset('img/item.png')}}" alt="product" />
-                            </a>
-                            <div class="item_content">
-                                <h4 class="itm_title">
-                                    <span>
-                                        Rokol
-                                    </span>
-                                    <span class="itm_weight">
-                                        2.5 kq
-                                    </span>
-                                </h4>
-                                <div class="itm_info">
-                                    Sellülozik Boya
-                                </div>
-                                <div class="itm_price">
-                                    <span class="new-price">6.90 AZN</span>
-                                    <span class="old-price"></span>
-                                </div>
-                                <!-- stocked, unstocked -->
-                                <div class="itm_stock unstocked">
-                                    <span class="stock_text">Stokda yoxdur </span>
-                                </div>
-                                <div class="itm_more disabled">
-                                    Səbətə əlavə et
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col item_col clearfix">
-                        <div class="col_in">
-                            <div class="fav_sect">
-                                <!-- <div class="offer-tag">
-                                    <p class="offer_val">Həftənin təklifi</p>
-                                </div> -->
-                                <!-- click after addclass "dofav" -->
-                                <span class="favotites "></span>
-                            </div>
-                            <a href="#" class="item_img">
-                                <img src="{{asset('img/item.png')}}" alt="product" />
-                            </a>
-                            <div class="item_content">
-                                <h4 class="itm_title">
-                                    <span>
-                                        Rokol
-                                    </span>
-                                    <span class="itm_weight">
-                                        2.5 kq
-                                    </span>
-                                </h4>
-                                <div class="itm_info">
-                                    Sellülozik Boya
-                                </div>
-                                <div class="itm_price">
-                                    <span class="new-price">4.50 AZN</span>
-                                    <span class="old-price">5.00 AZN</span>
-                                </div>
-                                <!-- stocked, unstocked -->
-                                <div class="itm_stock stocked">
-                                    <span class="stock_text">Stokda: 25 ədəd</span>
-                                </div>
-                                <div class="itm_more">
-                                    Səbətə əlavə et
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col item_col clearfix">
-                        <div class="col_in">
-                            <div class="fav_sect">
-                                <!-- <div class="offer-tag">
-                                    <p class="offer_val">Həftənin təklifi</p>
-                                </div> -->
-                                <!-- click after addclass "dofav" -->
-                                <span class="favotites "></span>
-                            </div>
-                            <a href="#" class="item_img">
-                                <img src="{{asset('img/item.png')}}" alt="product" />
-                            </a>
-                            <div class="item_content">
-                                <h4 class="itm_title">
-                                    <span>
-                                        Rokol
-                                    </span>
-                                    <span class="itm_weight">
-                                        2.5 kq
-                                    </span>
-                                </h4>
-                                <div class="itm_info">
-                                    Sellülozik Boya
-                                </div>
-                                <div class="itm_price">
-                                    <span class="new-price">6.90 AZN</span>
-                                    <span class="old-price"></span>
-                                </div>
-                                <!-- stocked, unstocked -->
-                                <div class="itm_stock unstocked">
-                                    <span class="stock_text">Stokda yoxdur </span>
-                                </div>
-                                <div class="itm_more disabled">
-                                    Səbətə əlavə et
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
+                <div class="row" id="product_list">
+                    @include('partials.products')
                 </div>
 
-                <div class="sect_footer clearfix">
-                    <a href="#" class="more">
+                @if(count($products) == 20)
+                <div class="sect_footer clearfix" id="more">
+                    <a href="javascripti:void(0)" class="more" >
                         Daha çox
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
                             <path
@@ -593,6 +166,7 @@
                         </svg>
                     </a>
                 </div>
+                @endif
 
 
             </div>
@@ -632,13 +206,94 @@ $(document).ready(function() {
 </script>
 <script>
 $(document).ready(function() {
-    // *Favorites 
     $(".favotites").click(function(e) {
         e.preventDefault();
         e.stopPropagation()
         $(this).toggleClass("dofav");
     });
-    // *Favorites
 });
+</script>
+
+<script>
+    $("#products_main").change(function (){
+        let main_id = $(this).val();
+        let redirectUrl = "{{env('APP_URL')}}/category/"+main_id;
+        if(main_id == 0) {
+            redirectUrl = "{{route('products')}}";
+        }
+        window.location.replace(redirectUrl);
+        // categoriesAjax(main_id)
+    })
+    $("#products_other").change(function () {
+        let category_id = $(this).val()
+
+        window.location.replace("{{env('APP_URL')}}/category/"+category_id);
+
+    })
+
+    function categoriesAjax(main_id=0)
+    {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type:   "POST",
+            url: "{{route('getSubCategories')}}",
+            data:   {
+                id: main_id,
+                category_id: "{{$category['id']}}",
+            }}).done(function(data) {
+            if(data.status == true) {
+                $("#products_other").html(data.html)
+            }
+        })
+    }
+
+    categoriesAjax($("#products_main").val())
+
+</script>
+
+<script>
+    var page = 0;
+    $("#more").click(function () {
+        $("#more").hide()
+        event.preventDefault();
+        let form = document.getElementById('formData');
+        let formData = new FormData(form);
+        let data = {};
+        formData.forEach((value, key) => {
+            if (data[key]) {
+                if (Array.isArray(data[key])) {
+                    data[key].push(value);
+                } else {
+                    data[key] = [data[key], value];
+                }
+            } else {
+                data[key] = value;
+            }
+        });
+        page = page+1;
+        data['page'] = page;
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type:   "POST",
+            url: "{{route('category', $category['id'])}}",
+            data: data }).done(function(data) {
+                if(data.status == true) {
+                    $("#product_list").append(data.html)
+                    if(data.count == 20) {
+                        $("#more").show()
+                    }
+                }
+        })
+
+    })
 </script>
 @endpush

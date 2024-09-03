@@ -49,18 +49,13 @@
                         </ul>
                         <ul class="footer_menu">
                             <span class="fm_hd">Kateqoriyalar </span>
+
+                            @foreach(menu_categories() as $item)
                             <li>
-                                <a href="" class="">Dekorativ Boyalar </a>
+                                <a href="{{route('category', $item->id)}}" class="">{{$item->name[app()->getLocale()] ?? ''}} </a>
                             </li>
-                            <li>
-                                <a href="" class="">Sənaye Boyaları </a>
-                            </li>
-                            <li>
-                                <a href="" class="">inaat Boyaları </a>
-                            </li>
-                            <li>
-                                <a href="" class="">Digər </a>
-                            </li>
+                            @endforeach
+
                         </ul>
                     </div>
 
@@ -124,7 +119,7 @@
                             </div>
                         </div>
                         <div class="copyrite">
-                            <div class="copyrite_inner">2024 © Bütün hüquqlar qorunur.</div>
+                            <div class="copyrite_inner">{{translate('footer_copyrite')}}</div>
                         </div>
 
                     </div>

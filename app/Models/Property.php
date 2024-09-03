@@ -15,16 +15,10 @@ class Property extends Model
         'name' => 'array',
     ];
 
-    protected static function boot()
+
+
+    public function products()
     {
-        parent::boot();
-
-        static::saved(function ($translation) {
-            Cache::forget("translations_{$translation->locale}");
-        });
-
-        static::deleted(function ($translation) {
-            Cache::forget("translations_{$translation->locale}");
-        });
+        return $this->belongsToMany(Product::class, 'product_properties', 'property_id', 'product_id');
     }
 }

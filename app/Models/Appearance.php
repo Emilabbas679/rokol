@@ -17,16 +17,22 @@ class Appearance extends Model
         'name' => 'array',
     ];
 
-    protected static function boot()
+//    protected static function boot()
+//    {
+//        parent::boot();
+//
+//        static::saved(function ($translation) {
+//            Cache::forget("translations_{$translation->locale}");
+//        });
+//
+//        static::deleted(function ($translation) {
+//            Cache::forget("translations_{$translation->locale}");
+//        });
+//    }
+
+
+    public function products()
     {
-        parent::boot();
-
-        static::saved(function ($translation) {
-            Cache::forget("translations_{$translation->locale}");
-        });
-
-        static::deleted(function ($translation) {
-            Cache::forget("translations_{$translation->locale}");
-        });
+        return $this->belongsToMany(Product::class, 'product_appearances', 'appearance_id', 'product_id');
     }
 }

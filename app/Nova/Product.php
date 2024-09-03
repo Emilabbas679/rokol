@@ -13,7 +13,11 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\Markdown;
+use Waynestate\Nova\CKEditor4Field\CKEditor;
 
 class Product extends Resource
 {
@@ -57,7 +61,8 @@ class Product extends Resource
             Tabs::make('Product', [
 
                 Tab::make('Product', [
-                    BelongsToMany::make('types'),
+
+
 
                     Text::make(__('Name (English)'), 'name_en')
                         ->resolveUsing(function ($value, $resource) {
@@ -99,11 +104,38 @@ class Product extends Resource
                         ->display(function ($category) {
                             return $category->name[app()->getLocale()] ?? '';
                         }),
-                    Number::make('Stock count', 'stock_count'),
+                    Number::make('Stock count', 'stock_count')->default(0),
                     File::make('Image')->disk('public'),
+
+                    BelongsToMany::make('types', 'types', 'App\Nova\Type')
+                        ->nullable()
+                        ->display(function ($item) {
+                            return $item->name[app()->getLocale()] ?? '';
+                        }),
+                    BelongsToMany::make('Appearances', 'Appearances', 'App\Nova\Appearance')
+                        ->nullable()
+                        ->display(function ($item) {
+                            return $item->name[app()->getLocale()] ?? '';
+                        }),
+
+                    BelongsToMany::make('Property', 'refProperties', 'App\Nova\Property')
+                        ->nullable()
+                        ->display(function ($item) {
+                            return $item->name[app()->getLocale()] ?? '';
+                        }),
+
+
+                    BelongsToMany::make('Application Areas', 'applicationAreas', 'App\Nova\ApplicationArea')
+                        ->nullable()
+                        ->display(function ($item) {
+                            return $item->name[app()->getLocale()] ?? '';
+                        }),
+
+                    HasMany::make('Variations', 'prices', ProductPrice::class),
+
                 ]),
                 Tab::make('Haqqında', [
-                    Text::make(__('About (English)'), 'about_en')
+                    CKEditor::make(__('About (English)'), 'about_en')
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->about['en'] ?? '';
                         })
@@ -112,7 +144,7 @@ class Product extends Resource
                             $abouts['en'] = $request->$requestAttribute;
                             $model->about = $abouts;
                         })->hideFromIndex(),
-                    Text::make(__('About (Azerbaijan)'), 'about_az')->hideFromIndex()
+                    CKEditor::make(__('About (Azerbaijan)'), 'about_az')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->about['az'] ?? '';
                         })
@@ -121,7 +153,7 @@ class Product extends Resource
                             $abouts['az'] = $request->$requestAttribute;
                             $model->about = $abouts;
                         }),
-                    Text::make(__('About (Russian)'), 'about_ru')->hideFromIndex()
+                    CKEditor::make(__('About (Russian)'), 'about_ru')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->about['ru'] ?? '';
                         })
@@ -132,7 +164,7 @@ class Product extends Resource
                         }),
                 ]),
                 Tab::make('İstifadə sahələri', [
-                    Text::make(__('Usage (English)'), 'usage_en')
+                    CKEditor::make(__('Usage (English)'), 'usage_en')
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->usage['en'] ?? '';
                         })
@@ -141,7 +173,7 @@ class Product extends Resource
                             $usages['en'] = $request->$requestAttribute;
                             $model->usage = $usages;
                         })->hideFromIndex(),
-                    Text::make(__('Usage (Azerbaijan)'), 'usage_az')->hideFromIndex()
+                    CKEditor::make(__('Usage (Azerbaijan)'), 'usage_az')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->usage['az'] ?? '';
                         })
@@ -150,7 +182,7 @@ class Product extends Resource
                             $usages['az'] = $request->$requestAttribute;
                             $model->usage = $usages;
                         }),
-                    Text::make(__('Usage (Russian)'), 'usage_ru')->hideFromIndex()
+                    CKEditor::make(__('Usage (Russian)'), 'usage_ru')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->usage['ru'] ?? '';
                         })
@@ -160,8 +192,37 @@ class Product extends Resource
                             $model->usage = $usages;
                         }),
                 ]),
+                Tab::make('İstifadə qaydaları', [
+                    CKEditor::make(__('Usage rules (English)'), 'usage_rules_en')
+                        ->resolveUsing(function ($value, $resource) {
+                            return $resource->usage_rules['en'] ?? '';
+                        })
+                        ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                            $usage_rules = $model->usage_rules ?? [];
+                            $usage_rules['en'] = $request->$requestAttribute;
+                            $model->usage_rules = $usage_rules;
+                        })->hideFromIndex(),
+                    CKEditor::make(__('Usage rules (Azerbaijan)'), 'usage_az')->hideFromIndex()
+                        ->resolveUsing(function ($value, $resource) {
+                            return $resource->usage_rules['az'] ?? '';
+                        })
+                        ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                            $usage_rules = $model->usage_rules ?? [];
+                            $usage_rules['az'] = $request->$requestAttribute;
+                            $model->usage_rules = $usage_rules;
+                        }),
+                    CKEditor::make(__('Usage rules (Russian)'), 'usage_ru')->hideFromIndex()
+                        ->resolveUsing(function ($value, $resource) {
+                            return $resource->usage_rules['ru'] ?? '';
+                        })
+                        ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                            $usage_rules = $model->usage_rules ?? [];
+                            $usage_rules['ru'] = $request->$requestAttribute;
+                            $model->usage_rules = $usage_rules;
+                        }),
+                ]),
                 Tab::make('Üstünlükləri', [
-                    Text::make(__('Advantage (English)'), 'advantage_en')
+                    CKEditor::make(__('Advantage (English)'), 'advantage_en')
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->advantage['en'] ?? '';
                         })
@@ -170,7 +231,7 @@ class Product extends Resource
                             $advantages['en'] = $request->$requestAttribute;
                             $model->advantage = $advantages;
                         })->hideFromIndex(),
-                    Text::make(__('Advantage (Azerbaijan)'), 'advantage_az')->hideFromIndex()
+                    CKEditor::make(__('Advantage (Azerbaijan)'), 'advantage_az')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->advantage['az'] ?? '';
                         })
@@ -179,7 +240,7 @@ class Product extends Resource
                             $advantages['az'] = $request->$requestAttribute;
                             $model->advantage = $advantages;
                         }),
-                    Text::make(__('Advantage (Russian)'), 'advantage_ru')->hideFromIndex()
+                    CKEditor::make(__('Advantage (Russian)'), 'advantage_ru')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->advantage['ru'] ?? '';
                         })
@@ -189,8 +250,37 @@ class Product extends Resource
                             $model->advantage = $advantages;
                         }),
                 ]),
+                Tab::make('Tətbiqi', [
+                    CKEditor::make(__('Apply (English)'), 'apply_en')
+                        ->resolveUsing(function ($value, $resource) {
+                            return $resource->apply['en'] ?? '';
+                        })
+                        ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                            $applies = $model->apply ?? [];
+                            $applies['en'] = $request->$requestAttribute;
+                            $model->apply = $applies;
+                        })->hideFromIndex(),
+                    CKEditor::make(__('Apply (Azerbaijan)'), 'apply_az')->hideFromIndex()
+                        ->resolveUsing(function ($value, $resource) {
+                            return $resource->apply['az'] ?? '';
+                        })
+                        ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                            $applies = $model->apply ?? [];
+                            $applies['az'] = $request->$requestAttribute;
+                            $model->apply = $applies;
+                        }),
+                    CKEditor::make(__('Apply (Russian)'), 'apply_ru')->hideFromIndex()
+                        ->resolveUsing(function ($value, $resource) {
+                            return $resource->apply['ru'] ?? '';
+                        })
+                        ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
+                            $applies = $model->apply ?? [];
+                            $applies['ru'] = $request->$requestAttribute;
+                            $model->apply = $applies;
+                        }),
+                ]),
                 Tab::make('Texniki göstəriciləri', [
-                    Text::make(__('Properties (English)'), 'properties_en')
+                    CKEditor::make(__('Properties (English)'), 'properties_en')
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->properties['en'] ?? '';
                         })
@@ -199,7 +289,7 @@ class Product extends Resource
                             $propertiess['en'] = $request->$requestAttribute;
                             $model->properties = $propertiess;
                         })->hideFromIndex(),
-                    Text::make(__('Properties (Azerbaijan)'), 'properties_az')->hideFromIndex()
+                    CKEditor::make(__('Properties (Azerbaijan)'), 'properties_az')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->properties['az'] ?? '';
                         })
@@ -208,7 +298,7 @@ class Product extends Resource
                             $propertiess['az'] = $request->$requestAttribute;
                             $model->properties = $propertiess;
                         }),
-                    Text::make(__('Properties (Russian)'), 'properties_ru')->hideFromIndex()
+                    CKEditor::make(__('Properties (Russian)'), 'properties_ru')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->properties['ru'] ?? '';
                         })
@@ -219,7 +309,7 @@ class Product extends Resource
                         }),
                 ]),
                 Tab::make('Sərfiyyat', [
-                    Text::make(__('Consumption (English)'), 'consumption_en')
+                    CKEditor::make(__('Consumption (English)'), 'consumption_en')
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->consumption['en'] ?? '';
                         })
@@ -228,7 +318,7 @@ class Product extends Resource
                             $consumptions['en'] = $request->$requestAttribute;
                             $model->consumption = $consumptions;
                         })->hideFromIndex(),
-                    Text::make(__('Consumption (Azerbaijan)'), 'consumption_az')->hideFromIndex()
+                    CKEditor::make(__('Consumption (Azerbaijan)'), 'consumption_az')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->consumption['az'] ?? '';
                         })
@@ -237,7 +327,7 @@ class Product extends Resource
                             $consumptions['az'] = $request->$requestAttribute;
                             $model->consumption = $consumptions;
                         }),
-                    Text::make(__('Consumption (Russian)'), 'consumption_ru')->hideFromIndex()
+                    CKEditor::make(__('Consumption (Russian)'), 'consumption_ru')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->consumption['ru'] ?? '';
                         })
@@ -248,7 +338,7 @@ class Product extends Resource
                         }),
                 ]),
                 Tab::make('Saxlama müddəti', [
-                    Text::make(__('Retention (English)'), 'retention_en')
+                    CKEditor::make(__('Retention (English)'), 'retention_en')
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->retention['en'] ?? '';
                         })
@@ -257,7 +347,7 @@ class Product extends Resource
                             $retentions['en'] = $request->$requestAttribute;
                             $model->retention = $retentions;
                         })->hideFromIndex(),
-                    Text::make(__('Retention (Azerbaijan)'), 'retention_az')->hideFromIndex()
+                    CKEditor::make(__('Retention (Azerbaijan)'), 'retention_az')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->retention['az'] ?? '';
                         })
@@ -266,7 +356,7 @@ class Product extends Resource
                             $retentions['az'] = $request->$requestAttribute;
                             $model->retention = $retentions;
                         }),
-                    Text::make(__('Retention (Russian)'), 'retention_ru')->hideFromIndex()
+                    CKEditor::make(__('Retention (Russian)'), 'retention_ru')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->retention['ru'] ?? '';
                         })
@@ -277,7 +367,7 @@ class Product extends Resource
                         }),
                 ]),
                 Tab::make('Xəbərdarlıqlar', [
-                    Text::make(__('Warning (English)'), 'warning_en')
+                    CKEditor::make(__('Warning (English)'), 'warning_en')
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->warning['en'] ?? '';
                         })
@@ -286,7 +376,7 @@ class Product extends Resource
                             $warnings['en'] = $request->$requestAttribute;
                             $model->warning = $warnings;
                         })->hideFromIndex(),
-                    Text::make(__('Warning (Azerbaijan)'), 'warning_az')->hideFromIndex()
+                    CKEditor::make(__('Warning (Azerbaijan)'), 'warning_az')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->warning['az'] ?? '';
                         })
@@ -295,7 +385,7 @@ class Product extends Resource
                             $warnings['az'] = $request->$requestAttribute;
                             $model->warning = $warnings;
                         }),
-                    Text::make(__('Warning (Russian)'), 'warning_ru')->hideFromIndex()
+                    CKEditor::make(__('Warning (Russian)'), 'warning_ru')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->warning['ru'] ?? '';
                         })
@@ -306,7 +396,7 @@ class Product extends Resource
                         }),
                 ]),
                 Tab::make('Zəmanət', [
-                    Text::make(__('Guarantee (English)'), 'guarantee_en')
+                    CKEditor::make(__('Guarantee (English)'), 'guarantee_en')
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->guarantee['en'] ?? '';
                         })
@@ -315,7 +405,7 @@ class Product extends Resource
                             $guarantees['en'] = $request->$requestAttribute;
                             $model->guarantee = $guarantees;
                         })->hideFromIndex(),
-                    Text::make(__('Guarantee (Azerbaijan)'), 'guarantee_az')->hideFromIndex()
+                    CKEditor::make(__('Guarantee (Azerbaijan)'), 'guarantee_az')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->guarantee['az'] ?? '';
                         })
@@ -324,7 +414,7 @@ class Product extends Resource
                             $guarantees['az'] = $request->$requestAttribute;
                             $model->guarantee = $guarantees;
                         }),
-                    Text::make(__('Guarantee (Russian)'), 'guarantee_ru')->hideFromIndex()
+                    CKEditor::make(__('Guarantee (Russian)'), 'guarantee_ru')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->guarantee['ru'] ?? '';
                         })

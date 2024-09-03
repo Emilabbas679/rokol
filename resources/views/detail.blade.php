@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Error')
+@section('title', $product->name)
 @push('meta')
 
 @endpush
@@ -15,8 +15,8 @@
         <div class="section_wrap wrap_breadcrumb">
             <div class="breadcrumb">
                 <a href="{{route('home')}}">Əsas səhifə</a>
-                <a href="#">Məhsullar</a>
-                <a href="#">Rokol Sellülozik Boya</a>
+                <a href="{{route('category', $product->category_id)}}">Məhsullar</a>
+                <a href="javascript:void(0)">{{$product->name}}</a>
             </div>
             <!-- <div class="pr_like_button">
                 <span class="favotites "></span>
@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div class="item_img">
-                            <img src="{{asset('img/item.png')}}" alt="product" />
+                            <img src="{{asset('storage/'.$product->image)}}" alt="product" />
                         </div>
                     </div>
                 </div>
@@ -48,67 +48,74 @@
 
                                 <div class="pr_tbl_left">
                                     <h1 class="product_title">Sellülozik Boya</h1>
-                                    <p class="pr_short_info">Məhsulun kodu: T8850-000003</p>
+                                    <p class="pr_short_info">Məhsulun kodu: {{$product->code}}</p>
 
                                     <div class="price_section">
                                         <div class="pr_price_info">
-                                            <div class="itm_price">
-                                                <span class="old-price">5.00 AZN</span>
-                                                <span class="new-price">4.50 AZN</span>
+                                            <div class="itm_price" id="item_price">
+
+                                                @include('partials.product_price')
+
+
+
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="pr_row">
-                                        <div class="pr_cat_name">Kateqoriya:</div>
-                                        <div class="pr_cat_info">Məhsullar</div>
+                                        <div class="pr_cat_name">{{translate('product_category')}}:</div>
+                                        <div class="pr_cat_info">{{$product->category->name[app()->getLocale()] ?? ''}}</div>
                                     </div>
-                                    <div class="pr_row">
-                                        <div class="pr_cat_name">Tipi:</div>
-                                        <div class="pr_cat_info">Sellülozik</div>
-                                    </div>
-                                    <div class="pr_row">
-                                        <div class="pr_cat_name">Görünüş:</div>
-                                        <div class="pr_cat_info">Şəffaf</div>
-                                    </div>
-                                    <div class="pr_row">
-                                        <div class="pr_cat_name">Tətbiq sahələri:</div>
-                                        <div class="pr_cat_info">Daxili cəbhə</div>
-                                    </div>
-                                    <div class="choose_color">
-                                        <div class="pr_select_title">Rəngi seç</div>
-                                        <div class="filter_check_items">
-                                            <label class="f_check_type radio_btn">
-                                                <input type="checkbox" name="color" value="1">
-                                                <span style="background-color: #C1AC93;"></span>
-                                            </label>
-                                            <label class="f_check_type radio_btn">
-                                                <input type="checkbox" name="color" value="2">
-                                                <span style="background-color: #BB272D;"></span>
-                                            </label>
-                                            <label class="f_check_type radio_btn">
-                                                <input type="checkbox" name="packaging" value="3">
-                                                <span style="background-color: #7a1115;"></span>
-                                            </label>
+                                    @if(count($product->types) > 0)
+                                        <div class="pr_row">
+                                            <div class="pr_cat_name">{{translate('product_type')}}:</div>
+                                            @php $types = []; @endphp
+                                            @foreach ($product->types as $type)
+                                            @php $types[] = $type->name[app()->getLocale()] ?? '' @endphp
+                                            @endforeach
+                                            <div class="pr_cat_info">{{implode(', ', $types)}}</div>
                                         </div>
+                                    @endif
+
+                                    @if(count($product->appearances) > 0)
+                                    <div class="pr_row">
+                                        <div class="pr_cat_name">{{translate('product_appearance')}}:</div>
+                                        @php $appearances = []; @endphp
+                                        @foreach ($product->appearances as $item)
+                                            @php $appearances[] = $item->name[app()->getLocale()] ?? '' @endphp
+                                        @endforeach
+                                        <div class="pr_cat_info">{{implode(', ', $appearances)}}</div>
                                     </div>
-                                    <div class="choose_weight">
-                                        <div class="pr_select_title">Çəkini seç</div>
-                                        <div class="filter_check_items">
-                                            <label class="f_check_type radio_btn">
-                                                <input type="checkbox" name="packaging" value="1">
-                                                <span>2.5 Kq</span>
-                                            </label>
-                                            <label class="f_check_type radio_btn">
-                                                <input type="checkbox" name="packaging" value="1">
-                                                <span>7.5 Kq</span>
-                                            </label>
-                                            <label class="f_check_type radio_btn">
-                                                <input type="checkbox" name="packaging" value="1">
-                                                <span>12.5 Kq</span>
-                                            </label>
-                                        </div>
+                                    @endif
+
+
+                                    @if(count($product->refProperties) > 0)
+                                    <div class="pr_row">
+                                        <div class="pr_cat_name">{{translate('product_properties')}}:</div>
+                                        @php $properties = []; @endphp
+                                        @foreach ($product->refProperties as $item)
+                                            @php $properties[] = $item->name[app()->getLocale()] ?? '' @endphp
+                                        @endforeach
+                                        <div class="pr_cat_info">{{implode(', ', $properties)}}</div>
                                     </div>
+                                    @endif
+
+                                    @if(count($product->applicationAreas) > 0)
+                                    <div class="pr_row">
+                                        <div class="pr_cat_name">{{translate('product_application_areas')}}:</div>
+                                        @php $applicationAreas= []; @endphp
+                                        @foreach ($product->applicationAreas as $item)
+                                            @php $applicationAreas[] = $item->name[app()->getLocale()] ?? '' @endphp
+                                        @endforeach
+                                        <div class="pr_cat_info">{{implode(', ', $applicationAreas)}}</div>
+                                    </div>
+                                    @endif
+
+                                    <div id="color_weights">
+                                        @include('partials.product_color_weights')
+                                    </div>
+
+
                                 </div>
                                 <div class="pr_tbl_right">
                                     <div class="pr_main_buttons">
@@ -134,10 +141,9 @@
                             <div class="product_select_proporties">
 
                                 <div class="pr_stock_info">
-                                    <!-- stocked, unstocked -->
-                                    <div class="itm_stock stocked">
-                                        <span class="stock_text">Stokda: 25 ədəd </span>
-                                    </div>
+{{--                                    <div class="itm_stock stocked">--}}
+{{--                                        <span class="stock_text">Stokda: 25 ədəd </span>--}}
+{{--                                    </div>--}}
                                 </div>
                                 <div class="pr_row add_backet_sect">
                                     <div class="pr_slct_left">
@@ -205,110 +211,56 @@
                                 <div class="indicators_content">
 
                                     <div class="indicators_items">
-                                        <h6 class="indicator_title">Məhsul haqqında :</h6>
-                                        <p>Alkid əsaslı, yüksək örtmə qabliyyətinə, saralmağa qarşı müqavimətə, sürtünməyə və suya qarşı dayanıqlığa malik, asan silinə bilən və mükəmməl yayılma gücü sayəsində asan istifadəni təmin edən sintetik boyadır.</p>
+                                        <h6 class="indicator_title">Məhsul haqqında:</h6>
+                                        <p>{!! $product->about !!}</p>
                                     </div>
                                     <div class="indicators_items">
-                                        <h6 class="indicator_title">İstifadə Sahələri :</h6>
-                                        Bu boyadan:
-                                        <ul>
-                                            <li>bütün növ metal, taxta, suvaq və beton səthlərdə istifadə olunur.</li>
-                                        </ul>
+                                        <h6 class="indicator_title">İstifadə Sahələri:</h6>
+                                        <p>{!! $product->usage !!}</p>
+                                    </div>
+                                    <div class="indicators_items">
+                                        <h6 class="indicator_title">İstifadə Qaydaları:</h6>
+                                        <p>{!! $product->usage_rules !!}</p>
                                     </div>
                                     <div class="indicators_items">
                                         <h6 class="indicator_title">Üstünlükləri :</h6>
-                                        <ul>
-                                            <li>yüksək örtmə qabliyyətinə malikdir;</li>
-                                            <li>saralmağa qarşı müqavimətlidir;</li>
-                                            <li>sürtünməyə və suya qarşı dayanıqlıdır;</li>
-                                            <li>asan silinir;</li>
-                                            <li>mükəmməl yayılma qabiliyyətinə malikdir</li>
-                                            <li>istifadəsi asandır.</li>
-                                        </ul>
+                                        <p>{!! $product->advantage !!}</p>
                                     </div>
                                     <div class="indicators_items">
-                                        <h6 class="indicator_title">Sərfiyyat :</h6>
-                                        <ul>
-                                            <li>1 m2 səthə 80 - 100 qr boya istifadə oluna bilər.</li>
-                                        </ul>
+                                        <h6 class="indicator_title">Tətbiqi :</h6>
+                                        <p>{!! $product->apply !!}</p>
                                     </div>
-                                    <div class="indicators_items">
-                                        <h6 class="indicator_title">Saxlama müddəti :</h6>
-                                        <ul>
-                                            <li>Açılmamış qablarda, sərin yerdə 3 il saxlanıla bilər.</li>
-                                        </ul>
-                                    </div>
-                                    <div class="indicators_items">
-                                        <h6 class="indicator_title">Xəbərdarlıqlar :</h6>
-                                        <ul>
-                                            <li>boya buxarının nəfəsə daxil olmaması və həmçinin dəriyə və gözə düşməməsi üçün fərdi mühavizə vasitələrindən istifadə edin;</li>
-                                            <li>uşaqların əli çatmayan yerlərdə saxlayın;</li>
-                                            <li>oddan qoruyun.</li>
-                                        </ul>
-                                    </div>
-
                                 </div>
                             </div>
                             <div class="bf_tb_items " data-id="1">
                                 <div class="indicators_content">
 
                                     <div class="indicators_items">
-                                        <h6 class="indicator_title">İstifadə Sahələri :</h6>
-                                        Bu boyadan:
-                                        <ul>
-                                            <li>bütün növ metal, taxta, suvaq və beton səthlərdə istifadə olunur.</li>
-                                        </ul>
-                                    </div>
-                                    <div class="indicators_items">
-                                        <h6 class="indicator_title">Üstünlükləri :</h6>
-                                        <ul>
-                                            <li>yüksək örtmə qabliyyətinə malikdir;</li>
-                                            <li>saralmağa qarşı müqavimətlidir;</li>
-                                            <li>sürtünməyə və suya qarşı dayanıqlıdır;</li>
-                                            <li>asan silinir;</li>
-                                            <li>mükəmməl yayılma qabiliyyətinə malikdir</li>
-                                            <li>istifadəsi asandır.</li>
-                                        </ul>
-                                    </div>
-                                    <div class="indicators_items">
-                                        <h6 class="indicator_title">Sərfiyyat :</h6>
-                                        <ul>
-                                            <li>1 m2 səthə 80 - 100 qr boya istifadə oluna bilər.</li>
-                                        </ul>
-                                    </div>
-                                    <div class="indicators_items">
-                                        <h6 class="indicator_title">Saxlama müddəti :</h6>
-                                        <ul>
-                                            <li>Açılmamış qablarda, sərin yerdə 3 il saxlanıla bilər.</li>
-                                        </ul>
-                                    </div>
-                                    <div class="indicators_items">
-                                        <h6 class="indicator_title">Xəbərdarlıqlar :</h6>
-                                        <ul>
-                                            <li>boya buxarının nəfəsə daxil olmaması və həmçinin dəriyə və gözə düşməməsi üçün fərdi mühavizə vasitələrindən istifadə edin;</li>
-                                            <li>uşaqların əli çatmayan yerlərdə saxlayın;</li>
-                                            <li>oddan qoruyun.</li>
-                                        </ul>
-                                    </div>
+                                        <h6 class="indicator_title">{{translate('product_properties')}}:</h6>
+                                        <p>{!! $product->properties !!}</p>
 
+                                    </div>
+                                    <div class="indicators_items">
+                                        <h6 class="indicator_title">{{translate('product_consumption')}}:</h6>
+                                        <p>{!! $product->consumption !!}</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="bf_tb_items " data-id="2">
                                 <div class="indicators_content">
 
                                     <div class="indicators_items">
-                                        <h6 class="indicator_title">Saxlama müddəti :</h6>
-                                        <ul>
-                                            <li>Açılmamış qablarda, sərin yerdə 3 il saxlanıla bilər.</li>
-                                        </ul>
+                                        <h6 class="indicator_title">Saxlama müddəti:</h6>
+                                        <p>{!! $product->retention !!}</p>
+
                                     </div>
                                     <div class="indicators_items">
-                                        <h6 class="indicator_title">Xəbərdarlıqlar :</h6>
-                                        <ul>
-                                            <li>boya buxarının nəfəsə daxil olmaması və həmçinin dəriyə və gözə düşməməsi üçün fərdi mühavizə vasitələrindən istifadə edin;</li>
-                                            <li>uşaqların əli çatmayan yerlərdə saxlayın;</li>
-                                            <li>oddan qoruyun.</li>
-                                        </ul>
+                                        <h6 class="indicator_title">Xəbərdarlıqlar:</h6>
+                                        <p>{!! $product->warning !!}</p>
+                                    </div>
+                                    <div class="indicators_items">
+                                        <h6 class="indicator_title">Zəmanət:</h6>
+                                        <p>{!! $product->guarantee !!}</p>
                                     </div>
 
                                 </div>
@@ -561,5 +513,39 @@ $(document).ready(function() {
     // *Favorites
 
 });
+
+
+var color_id = 0;
+var weight_id = 0;
+
+
+$("body").on("change", "input[name='color']", function () {
+    color_id = $(this).val();
+    priceAjax()
+})
+
+// $("body").on("change", "input[name='weight']", function () {
+//     weight_id = $(this).val();
+//     priceAjax()
+// })
+
+function priceAjax()
+{
+    $.ajax({
+        type: "POST",
+        url: "{{route('product_price', $product->id)}}",
+        data: {
+            color_id: color_id,
+            // weight_id: weight_id,
+            "_token": "{{ csrf_token() }}",
+        },
+        success: function (result) {
+            $("#color_weights").html(result.html)
+            $("#item_price").html(result.price)
+        }
+    });
+}
+
+
 </script>
 @endpush

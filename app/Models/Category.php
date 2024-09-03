@@ -27,16 +27,16 @@ class Category extends Model
         return $this->hasMany(Category::class, 'category_id')->where('status',1);
     }
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::saved(function ($translation) {
-            Cache::forget("translations_{$translation->locale}");
-        });
-
-        static::deleted(function ($translation) {
-            Cache::forget("translations_{$translation->locale}");
-        });
-    }
+//    protected static function boot()
+//    {
+//        parent::boot();
+//
+//        static::saved(function ($translation) {
+//            Cache::forget("translations_{$translation->locale}");
+//        });
+//
+//        static::deleted(function ($translation) {
+//            Cache::forget("translations_{$translation->locale}");
+//        });
+//    }
 }

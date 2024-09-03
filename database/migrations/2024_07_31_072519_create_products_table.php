@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('code')->nullable();
             $table->text('about')->nullable();
             $table->text('usage')->nullable();
+            $table->text('usage_rules')->nullable();
+            $table->text('apply')->nullable();
             $table->text('advantage')->nullable();
             $table->text('properties')->nullable();
             $table->text('consumption')->nullable();
