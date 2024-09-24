@@ -268,6 +268,67 @@ class SiteController extends Controller
         return redirect()->back();
 
     }
+
+    public function login()
+    {
+        return view('login');
+    }
+    public function register()
+    {
+        return view('register');
+    }
+    public function forgot_password()
+    {
+        return view('forgot_password');
+    }
+    public function new_password()
+    {
+        return view('new_password');
+    }
+    public function settings()
+    {
+        return view('settings');
+    }
+    public function news()
+    {
+        return view('news');
+    }
+    public function news_in()
+    {
+        return view('news_in');
+    }
+    public function basket()
+    {
+        return view('basket');
+    }
+    public function create_address()
+    {
+        return view('create_address');
+    }
+    public function my_address()
+    {
+        return view('my_address');
+    }
+    public function selected()
+    {
+        return view('selected');
+    }
+    public function orders()
+    {
+        return view('orders');
+    }
+    public function about()
+    {
+        return view('about');
+    }
+    public function static()
+    {
+        return view('static');
+    }
+    public function contact()
+    {
+        return view('contact');
+    }
 }
 
 

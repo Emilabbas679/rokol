@@ -7,7 +7,7 @@
                     <div class="logo_sect clearfix">
                         <a href="/" class="logo">
                             <div class="logo_img">
-                                <img src="{{asset('img/icons/logo.svg')}}" alt="" />
+                                <img src="{{asset('img/icons/logo.svg')}}" alt="Logo" >
                             </div>
                         </a>
                     </div>
@@ -24,7 +24,9 @@
 
                     <div class="ftr_menu_sect">
                         <ul class="footer_menu">
-                            <span class="fm_hd">Menular </span>
+                            <li>
+                                <span class="fm_hd">Menular </span>
+                            </li>
                             <li>
                                 <a href="" class="">HAQQIMIZDA </a>
                             </li>
@@ -48,7 +50,9 @@
                             </li>
                         </ul>
                         <ul class="footer_menu">
-                            <span class="fm_hd">Kateqoriyalar </span>
+                            <li>
+                                <span class="fm_hd">Kateqoriyalar </span>
+                            </li>
 
                             @foreach(menu_categories() as $item)
                             <li>
@@ -76,35 +80,35 @@
                                         <li>
                                             <a href="" class="social_icon" target="_blank">
                                                 <span class="scl_icn">
-                                                    <img src="https://rokol.ain.az/img/icons/fb_w.svg?v1" alt="">
+                                                    <img src="https://rokol.ain.az/img/icons/fb_w.svg?v1" alt="Facebook">
                                                 </span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="" class="social_icon" target="_blank">
                                                 <span class="scl_icn">
-                                                    <img src="https://rokol.ain.az/img/icons/ins_w.svg?v1" alt="">
+                                                    <img src="https://rokol.ain.az/img/icons/ins_w.svg?v1" alt="Instagram">
                                                 </span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="" class="social_icon" target="_blank">
                                                 <span class="scl_icn">
-                                                    <img src="https://rokol.ain.az/img/icons/lnkd_w.svg?v1" alt="">
+                                                    <img src="https://rokol.ain.az/img/icons/lnkd_w.svg?v1" alt="Linkedn">
                                                 </span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="" class="social_icon" target="_blank">
                                                 <span class="scl_icn">
-                                                    <img src="https://rokol.ain.az/img/icons/ytb_w.svg?v1" alt="">
+                                                    <img src="https://rokol.ain.az/img/icons/ytb_w.svg?v1" alt="Youtube">
                                                 </span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="" class="social_icon" target="_blank">
                                                 <span class="scl_icn">
-                                                    <img src="https://rokol.ain.az/img/icons/tiktok_w.svg?v1" alt="">
+                                                    <img src="https://rokol.ain.az/img/icons/tiktok_w.svg?v1" alt="Tiktok">
                                                 </span>
                                             </a>
                                         </li>

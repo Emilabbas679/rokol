@@ -21,7 +21,7 @@
                         <a href="" class="swiper-link clearfix">
                             <div class="col_in">
                                 <div class="item_img">
-                                    <img src="{{asset('img/main.png?v3')}}" alt="Main slider Image" />
+                                    <img src="{{asset('img/main.png?v3')}}" alt="Main slider Image" >
                                 </div>
                             </div>
                         </a>
@@ -30,7 +30,7 @@
                         <a href="" class="swiper-link clearfix">
                             <div class="col_in">
                                 <div class="item_img">
-                                    <img src="{{asset('img/main.png?v3')}}" alt="Main slider Image" />
+                                    <img src="{{asset('img/main.png?v3')}}" alt="Main slider Image" >
                                 </div>
                             </div>
                         </a>
@@ -39,7 +39,7 @@
                         <a href="" class="swiper-link clearfix">
                             <div class="col_in">
                                 <div class="item_img">
-                                    <img src="{{asset('img/main.png?v3')}}" alt="Main slider Image" />
+                                    <img src="{{asset('img/main.png?v3')}}" alt="Main slider Image" >
                                 </div>
                             </div>
                         </a>
@@ -48,7 +48,7 @@
                         <a href="" class="swiper-link clearfix">
                             <div class="col_in">
                                 <div class="item_img">
-                                    <img src="{{asset('img/main.png?v1')}}" alt="Main slider Image" />
+                                    <img src="{{asset('img/main.png?v1')}}" alt="Main slider Image" >
                                 </div>
                             </div>
                         </a>
@@ -78,7 +78,7 @@
                         <div class="col_in">
                             <a href="#" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/product1.png')}}" alt="" />
+                                    <img src="{{asset('img/product1.png')}}" alt="Daxili məkan boyaları" >
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -99,7 +99,7 @@
                         <div class="col_in">
                             <a href="#" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/product2.png')}}" alt="" />
+                                    <img src="{{asset('img/product2.png')}}" alt="Fasad Boyaları" >
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -120,7 +120,7 @@
                         <div class="col_in">
                             <a href="#" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/product3.png')}}" alt="" />
+                                    <img src="{{asset('img/product3.png')}}" alt="Yol Cizgi Boyaları" >
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -141,7 +141,7 @@
                         <div class="col_in">
                             <a href="#" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/product1.png')}}" alt="" />
+                                    <img src="{{asset('img/product1.png')}}" alt="Boya, Dolğu və Laklar" >
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -162,7 +162,7 @@
                         <div class="col_in">
                             <a href="#" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/product2.png')}}" alt="" />
+                                    <img src="{{asset('img/product2.png')}}" alt="Sənaye Boyaları" >
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -228,7 +228,7 @@
         <div class="item_color_hov how_1">
             <div class="hov_item"><span>1</span></div>
             <div class="hov_content">
-                <img src="{{asset('img/hov_item_img.png?v1')}}" alt="">
+                <img src="{{asset('img/hov_item_img.png?v1')}}" alt="Emulsiya">
                 <h6 class="hov_title">Emulsiya</h6>
                 <p class="hov_info">Plus Boya</p>
             </div>
@@ -236,7 +236,7 @@
         <div class="item_color_hov how_2">
             <div class="hov_item"><span>2</span></div>
             <div class="hov_content">
-                <img src="{{asset('img/hov_item_img.png?v1')}}" alt="">
+                <img src="{{asset('img/hov_item_img.png?v1')}}" alt="Emulsiya">
                 <h6 class="hov_title">Emulsiya</h6>
                 <p class="hov_info">Plus Boya</p>
             </div>
@@ -244,7 +244,7 @@
         <div class="item_color_hov how_3">
             <div class="hov_item"><span>3</span></div>
             <div class="hov_content">
-                <img src="{{asset('img/hov_item_img.png?v1')}}" alt="">
+                <img src="{{asset('img/hov_item_img.png?v1')}}" alt="Emulsiya">
                 <h6 class="hov_title">Emulsiya</h6>
                 <p class="hov_info">Plus Boya</p>
             </div>
@@ -268,7 +268,7 @@
                         <div class="swiper-slide">
                             <a href="#" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/item1.png?v2')}}" alt="" />
+                                    <img src="{{asset('img/item1.png?v2')}}" alt="Rokol Parlaq Boya" >
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -280,7 +280,7 @@
                         <div class="swiper-slide">
                             <a href="#" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/item1.png?v2')}}" alt="" />
+                                    <img src="{{asset('img/item1.png?v2')}}" alt="Rokol Parlaq Boya" >
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -292,7 +292,7 @@
                         <div class="swiper-slide">
                             <a href="#" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/item1.png?v2')}}" alt="" />
+                                    <img src="{{asset('img/item1.png?v2')}}" alt="Rokol Parlaq Boya" >
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -304,7 +304,7 @@
                         <div class="swiper-slide">
                             <a href="#" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/item2.png?v2')}}" alt="" />
+                                    <img src="{{asset('img/item2.png?v2')}}" alt="Rokol Parlaq Boya" >
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -316,7 +316,7 @@
                         <div class="swiper-slide">
                             <a href="#" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/item3.png?v2')}}" alt="" />
+                                    <img src="{{asset('img/item3.png?v2')}}" alt="Rokol Parlaq Boya" >
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -328,7 +328,7 @@
                         <div class="swiper-slide">
                             <a href="#" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/item2.png?v2')}}" alt="" />
+                                    <img src="{{asset('img/item2.png?v2')}}" alt="Rokol Parlaq Boya" >
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -340,7 +340,7 @@
                         <div class="swiper-slide">
                             <a href="#" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/item1.png?v2')}}" alt="" />
+                                    <img src="{{asset('img/item1.png?v2')}}" alt="Rokol Parlaq Boya" >
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -352,7 +352,7 @@
                         <div class="swiper-slide">
                             <a href="#" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/item3.png?v2')}}" alt="" />
+                                    <img src="{{asset('img/item3.png?v2')}}" alt="Rokol Parlaq Boya" >
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">

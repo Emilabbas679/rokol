@@ -22,3 +22,19 @@ Route::get('/product/{product_id}', [SiteController::class, 'product'])->name('p
 Route::post('/product/price/{product_id}', [SiteController::class, 'productPrice'])->name('product_price');
 Route::get('/lang/{locale}', [SiteController::class, 'locale'])->name('locale');
 
+Route::get('/login', [SiteController::class, 'login'])->name('login');
+Route::get('/register', [SiteController::class, 'register'])->name('register');
+Route::get('/forgot_password', [SiteController::class, 'forgot_password'])->name('forgot_password');
+Route::get('/new_password', [SiteController::class, 'new_password'])->name('new_password');
+Route::get('/settings', [SiteController::class, 'settings'])->name('settings');
+Route::get('/news', [SiteController::class, 'news'])->name('news');
+Route::get('/news_in', [SiteController::class, 'news_in'])->name('news_in');
+Route::get('/basket', [SiteController::class, 'basket'])->name('basket');
+Route::get('/create_address', [SiteController::class, 'create_address'])->name('create_address');
+Route::get('/my_address', [SiteController::class, 'my_address'])->name('my_address');
+Route::get('/selected', [SiteController::class, 'selected'])->name('selected');
+Route::get('/orders', [SiteController::class, 'orders'])->name('orders');
+Route::get('/about', [SiteController::class, 'about'])->name('about');
+Route::get('/static', [SiteController::class, 'static'])->name('static');
+Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
+

@@ -5,7 +5,7 @@
                 <div class="logo_sect clearfix">
                     <a href="/" class="logo">
                         <div class="logo_img">
-                            <img src="{{asset('img/icons/logo.svg?v2')}}" alt="Logo" />
+                            <img src="{{asset('img/icons/logo.svg?v2')}}" alt="Logo" >
                         </div>
                     </a>
                 </div>
@@ -22,42 +22,42 @@
                         </form>
                     </div>
                     <div class="hd_r_icons">
-                        <a href="" class="repairer"></a>
+                        <!-- <a href="" class="repairer"></a> -->
                         <a href="" class="register_btn">Online sifariş</a>
                         <a href="tel:*3030" class="call_center">*3030</a>
                         <ul class="socials clearfix">
                             <li>
                                 <a href="" class="social_icon" target="_blank">
                                     <span class="scl_icn">
-                                        <img src="{{asset('img/icons/fb.svg?v1')}}" alt="">
+                                        <img src="{{asset('img/icons/fb.svg?v1')}}" alt="Facebook">
                                     </span>
                                 </a>
                             </li>
                             <li>
                                 <a href="" class="social_icon" target="_blank">
                                     <span class="scl_icn">
-                                        <img src="{{asset('img/icons/ins.svg?v1')}}" alt="">
+                                        <img src="{{asset('img/icons/ins.svg?v1')}}" alt="Instagram">
                                     </span>
                                 </a>
                             </li>
                             <li>
                                 <a href="" class="social_icon" target="_blank">
                                     <span class="scl_icn">
-                                        <img src="{{asset('img/icons/tiktok.svg?v1')}}" alt="">
+                                        <img src="{{asset('img/icons/tiktok.svg?v1')}}" alt="Tiktok">
                                     </span>
                                 </a>
                             </li>
                             <li>
                                 <a href="" class="social_icon" target="_blank">
                                     <span class="scl_icn">
-                                        <img src="{{asset('img/icons/lnkd.svg?v1')}}" alt="">
+                                        <img src="{{asset('img/icons/lnkd.svg?v1')}}" alt="Linkedn">
                                     </span>
                                 </a>
                             </li>
                             <li>
                                 <a href="" class="social_icon" target="_blank">
                                     <span class="scl_icn">
-                                        <img src="{{asset('img/icons/ytb.svg?v1')}}" alt="">
+                                        <img src="{{asset('img/icons/ytb.svg?v1')}}" alt="Youtube">
                                     </span>
                                 </a>
                             </li>
@@ -97,14 +97,7 @@
                                                 @foreach($firstHalfCategories as $category)
                                                 <li>
                                                     <a href="{{route('category', $category->id)}}">{{$category->name[app()->getLocale()]}}</a>
-                                                    <ul>
-                                                        @foreach($category->children as $item)
-                                                        <li><a href="{{route('category', $item->id)}}">{{$item->name[app()->getLocale()]}}</a></li>
-                                                        @endforeach
-
-                                                    </ul>
                                                 </li>
-
                                                 @endforeach
 
                                             </ul>
@@ -115,23 +108,13 @@
                                                 @foreach($secondHalfCategories as $category)
                                                     <li>
                                                         <a href="{{route('category', $category->id)}}">{{$category->name[app()->getLocale()]}}</a>
-                                                        <ul>
-                                                            @foreach($category->children as $item)
-                                                                <li><a href="{{route('category', $item->id)}}">{{$item->name[app()->getLocale()]}}</a></li>
-                                                            @endforeach
-
-                                                        </ul>
                                                     </li>
-
                                                 @endforeach
 
                                             </ul>
                                         </div>
                                     </div>
 
-                                    <div class="drop_image">
-                                        <img src="{{asset('img/drop_image.png')}}" alt="">
-                                    </div>
                                 </div>
                             </li>
                             <li>
@@ -164,8 +147,49 @@
                             </li>
                         </ul>
                     </div>
-                    <a href="#" class="login_btn">Giriş</a>
+                    <div class="prof_items_sect">
+                        <!-- <a href="#" class="login_btn">Giriş</a> -->
+                        <div class="login_profile">Azizxan</div>
+                        <div class="prof_drop clearfix">
+                            <div class="profile_setting clearfix">
+                                <ul class="profile_list clearfix">
+                                    <li class="prof_icon icon_prof">
+                                        <a href="#" class="clearfix">
+                                            <span class="prof_icon_name">Azizxan Sadiyev </span>
+                                        </a>
+                                    </li>
+                                    <li class="prof_icon">
+                                        <a href="#" class="clearfix">
+                                            <span class="prof_icon_name">Sifarişlərim</span>
+                                        </a>
+                                    </li>
+                                    <li class="prof_icon">
+                                        <a href="#" class="clearfix">
+                                            <span class="prof_icon_name">Seçilmişlərim</span>
+                                        </a>
+                                    </li>
+                                    <li class="prof_icon">
+                                        <a href="#" class="clearfix">
+                                            <span class="prof_icon_name">Ünvanlarım</span>
+                                        </a>
+                                    </li>
+                                    <li class="prof_icon">
+                                        <a href="#" class="clearfix">
+                                            <span class="prof_icon_name">Şəxsi məlumatlarım </span>
+                                        </a>
+                                    </li>
+                                    <li class="prof_icon icon_exit">
+                                        <a href="#" class="clearfix">
+                                            <span class="prof_icon_name">Çıxış</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="menu_btn open"></div>
+
                 </div>
 
             </div>

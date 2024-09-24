@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div class="item_img">
-                            <img src="{{asset('storage/'.$product->image)}}" alt="product" />
+                            <img src="{{asset('storage/'.$product->image)}}" alt="product" >
                         </div>
                     </div>
                 </div>
@@ -209,58 +209,53 @@
                         <div class="bf_tb_content">
                             <div class="bf_tb_items " data-id="0">
                                 <div class="indicators_content">
-
                                     <div class="indicators_items">
                                         <h6 class="indicator_title">Məhsul haqqında:</h6>
-                                        <p>{!! $product->about !!}</p>
+                                        <div>{!! $product->about !!}</div>
                                     </div>
                                     <div class="indicators_items">
                                         <h6 class="indicator_title">İstifadə Sahələri:</h6>
-                                        <p>{!! $product->usage !!}</p>
+                                        <div>{!! $product->usage !!}</div>
                                     </div>
                                     <div class="indicators_items">
                                         <h6 class="indicator_title">İstifadə Qaydaları:</h6>
-                                        <p>{!! $product->usage_rules !!}</p>
+                                        <div>{!! $product->usage_rules !!}</div>
                                     </div>
                                     <div class="indicators_items">
                                         <h6 class="indicator_title">Üstünlükləri :</h6>
-                                        <p>{!! $product->advantage !!}</p>
+                                        <div>{!! $product->advantage !!}</div>
                                     </div>
                                     <div class="indicators_items">
                                         <h6 class="indicator_title">Tətbiqi :</h6>
-                                        <p>{!! $product->apply !!}</p>
+                                        <div>{!! $product->apply !!}</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="bf_tb_items " data-id="1">
                                 <div class="indicators_content">
-
                                     <div class="indicators_items">
                                         <h6 class="indicator_title">{{translate('product_properties')}}:</h6>
-                                        <p>{!! $product->properties !!}</p>
-
+                                        <div>{!! $product->properties !!}</div>
                                     </div>
                                     <div class="indicators_items">
                                         <h6 class="indicator_title">{{translate('product_consumption')}}:</h6>
-                                        <p>{!! $product->consumption !!}</p>
+                                        <div>{!! $product->consumption !!}</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="bf_tb_items " data-id="2">
                                 <div class="indicators_content">
-
                                     <div class="indicators_items">
                                         <h6 class="indicator_title">Saxlama müddəti:</h6>
-                                        <p>{!! $product->retention !!}</p>
-
+                                        <div>{!! $product->retention !!}</div>
                                     </div>
                                     <div class="indicators_items">
                                         <h6 class="indicator_title">Xəbərdarlıqlar:</h6>
-                                        <p>{!! $product->warning !!}</p>
+                                        <div>{!! $product->warning !!}</div>
                                     </div>
                                     <div class="indicators_items">
                                         <h6 class="indicator_title">Zəmanət:</h6>
-                                        <p>{!! $product->guarantee !!}</p>
+                                        <div>{!! $product->guarantee !!}</div>
                                     </div>
 
                                 </div>
@@ -291,11 +286,11 @@
                                     <span class="favotites "></span>
                                 </div>
                                 <a href="#" class="item_img">
-                                    <img src="{{asset('img/item.png')}}" alt="product" />
+                                    <img src="{{asset('img/item.png')}}" alt="product" >
                                 </a>
                                 <div class="item_content">
                                     <h4 class="itm_title">
-                                        <span>
+                                        <span class="itm_name">
                                             Rokol
                                         </span>
                                         <span class="itm_weight">
@@ -329,11 +324,11 @@
                                     <span class="favotites "></span>
                                 </div>
                                 <a href="#" class="item_img">
-                                    <img src="{{asset('img/item.png')}}" alt="product" />
+                                    <img src="{{asset('img/item.png')}}" alt="product" >
                                 </a>
                                 <div class="item_content">
                                     <h4 class="itm_title">
-                                        <span>
+                                        <span class="itm_name">
                                             Rokol
                                         </span>
                                         <span class="itm_weight">
@@ -367,11 +362,11 @@
                                     <span class="favotites "></span>
                                 </div>
                                 <a href="#" class="item_img">
-                                    <img src="{{asset('img/item.png')}}" alt="product" />
+                                    <img src="{{asset('img/item.png')}}" alt="product" >
                                 </a>
                                 <div class="item_content">
                                     <h4 class="itm_title">
-                                        <span>
+                                        <span class="itm_name">
                                             Rokol
                                         </span>
                                         <span class="itm_weight">
@@ -405,11 +400,11 @@
                                     <span class="favotites "></span>
                                 </div>
                                 <a href="#" class="item_img">
-                                    <img src="{{asset('img/item.png')}}" alt="product" />
+                                    <img src="{{asset('img/item.png')}}" alt="product" >
                                 </a>
                                 <div class="item_content">
                                     <h4 class="itm_title">
-                                        <span>
+                                        <span class="itm_name">
                                             Rokol
                                         </span>
                                         <span class="itm_weight">
@@ -471,30 +466,45 @@ $(document).ready(function() {
     });
 });
 </script>
+
 <script>
 $(document).ready(function() {
+
     var maxCount = 15;
     var minCount = 0;
 
-    $('.pr_plus').on('click', function() {
-        var currentCount = parseInt($('.product_counter input').val());
+    $('.pr_plus').click(function() {
+        var $counterSection = $(this).closest('.product_counter');
+        var $input = $counterSection.find('input[name="counter"]');
+        var $numberSpan = $counterSection.find('.pr_number');
+
+        var currentCount = parseInt($input.val());
+
         if (currentCount < maxCount) {
             currentCount++;
-            $('.product_counter input').val(currentCount);
-            $('.pr_number').text(currentCount);
+            $input.val(currentCount);
+            $numberSpan.text(currentCount);
         }
     });
 
-    $('.pr_minus').on('click', function() {
-        var currentCount = parseInt($('.product_counter input').val());
+    $('.pr_minus').click(function() {
+        var $counterSection = $(this).closest('.product_counter');
+        var $input = $counterSection.find('input[name="counter"]');
+        var $numberSpan = $counterSection.find('.pr_number');
+
+        var currentCount = parseInt($input.val());
+
         if (currentCount > minCount) {
             currentCount--;
-            $('.product_counter input').val(currentCount);
-            $('.pr_number').text(currentCount);
+            $input.val(currentCount);
+            $numberSpan.text(currentCount);
         }
     });
+
 });
 </script>
+
+
 <script>
 $(document).ready(function() {
     // *Favorites 

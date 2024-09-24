@@ -79,6 +79,30 @@ $(document).ready(function () {
   // *Header fixed end
 
   // *benefit tabs
+  // function benefitTabs() {
+  //   $(".clicked_tab_btn").each(function (index) {
+  //     let this_id = $(this).data("id");
+  //     if($(this).hasClass("active")) {
+  //       $(this).parents(".benefit_tabs").find(".bf_tb_content").find(".bf_tb_items[data-id=" + this_id + "]").addClass("active");
+  //       $(this).parents(".benefit_tabs").find(".bf_tb_content").find(".bf_tb_items[data-id=" + this_id + "]").siblings().removeClass("active");
+  //     }
+
+  //     $(this).click(function () {
+  //       let this_id = $(this).data("id");
+  //       $(this).siblings(".glider").removeClass(function (index, className) {
+  //         return (className.match(/(^|\s)active_\S+/g) || []).join(' ');
+  //       });
+  //       $(this).siblings(".glider").addClass(`active_${this_id}`);
+
+  //       $(this).addClass("active");
+  //       $(this).siblings().removeClass("active");
+  //       $(this).parents(".benefit_tabs").find(".bf_tb_content").find(".bf_tb_items[data-id=" + this_id + "]").addClass("active");
+  //       $(this).parents(".benefit_tabs").find(".bf_tb_content").find(".bf_tb_items[data-id=" + this_id + "]").siblings().removeClass("active");
+  //     });
+  //   });
+  // }
+  // benefitTabs();
+
   function benefitTabs() {
     $(".clicked_tab_btn").each(function (index) {
       let this_id = $(this).data("id");
@@ -88,7 +112,14 @@ $(document).ready(function () {
       }
 
       $(this).click(function () {
+        console.log("safafaf");
         let this_id = $(this).data("id");
+
+        $(this).siblings(".glider").removeClass(function (index, className) {
+          return (className.match(/(^|\s)active_\S+/g) || []).join(' ');
+        });
+
+        $(this).siblings(".glider").addClass(`active_${this_id}`);
         $(this).addClass("active");
         $(this).siblings().removeClass("active");
         $(this).parents(".benefit_tabs").find(".bf_tb_content").find(".bf_tb_items[data-id=" + this_id + "]").addClass("active");
@@ -97,6 +128,7 @@ $(document).ready(function () {
     });
   }
   benefitTabs();
+
   // *benefit tabs
 
   // *Menu 
@@ -180,36 +212,37 @@ $(document).ready(function () {
   // *dropFilterItem
 
   // * Form input
-  $(".form_item select").each(function () {
-    if($(this).val() == "" || $(this).val() == null) {
-      $(this).parents(".form_item").removeClass("show_label");
-    } else {
-      $(this).parents(".form_item").addClass("show_label");
-    }
-    $(".form_item select").change(function () {
-      if($(this).val() == "" || $(this).val() == null) {
-        $(this).parents(".form_item").removeClass("show_label");
-      } else {
-        $(this).parents(".form_item").addClass("show_label");
-      }
-    });
-  });
+  // $(".form_item select").each(function () {
+  //   if($(this).val() == "" || $(this).val() == null) {
+  //     $(this).parents(".form_item").removeClass("show_label");
+  //   } else {
+  //     $(this).parents(".form_item").addClass("show_label");
+  //   }
+  //   $(".form_item select").change(function () {
+  //     if($(this).val() == "" || $(this).val() == null) {
+  //       $(this).parents(".form_item").removeClass("show_label");
+  //     } else {
+  //       $(this).parents(".form_item").addClass("show_label");
+  //     }
+  //   });
+  // });
 
-  $('.item_input').on("input", function () {
-    if($(this).val() === "") {
-      $(this).parents(".form_item").removeClass("show_label");
-    } else {
-      $(this).parents(".form_item").addClass("show_label");
-    }
-  });
+  // $('.item_input').on("input", function () {
+  //   if($(this).val() === "") {
+  //     $(this).parents(".form_item").removeClass("show_label");
+  //   } else {
+  //     $(this).parents(".form_item").addClass("show_label");
+  //   }
+  // });
 
-  $(".item_input").each(function () {
-    if($(this).val() === "") {
-      $(this).parents(".form_item").removeClass("show_label");
-    } else {
-      $(this).parents(".form_item").addClass("show_label");
-    }
-  });
+  // $(".item_input").each(function () {
+  //   if($(this).val() === "") {
+  //     $(this).parents(".form_item").removeClass("show_label");
+  //   } else {
+  //     $(this).parents(".form_item").addClass("show_label");
+  //   }
+  // });
+
   $(".price_show").click(function () {
     $(this).parents(".form_item").toggleClass("show_price_wrap ");
   });
@@ -281,14 +314,23 @@ $(document).ready(function () {
   $(".open_modal").click(function (e) {
     e.preventDefault();
     e.stopPropagation();
-    $(".modal[data-id=" + $(this).data("id") + "]").fadeIn();
+    $(".modal[data-id=" + $(this).data("id") + "]").addClass("opened");
   })
   $(".close_modal").click(function (e) {
     e.preventDefault();
     e.stopPropagation();
-    $(this).parents(".modal").fadeOut();
+    $(this).parents(".modal").removeClass("opened");
   })
+
   // * Modal js
+  // * Profile js
+
+  $(".login_profile").click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $(".prof_drop").toggleClass("transformed");
+  })
+  // * Profile js
 
   // * Category filter
   const rangeInput = document.querySelectorAll(".range-input input"),
@@ -517,14 +559,19 @@ $(document).ready(function () {
   // *Equal height
   equalHeight();
   function equalHeight(event) {
-    $('.item_content').matchHeight({ property: 'min-height' });
-    $('.wrap_category .col_in').matchHeight({ property: 'min-height' });
+    // $('.item_content').matchHeight({ property: 'min-height' });
+    // $('.wrap_category .col_in').matchHeight({ property: 'min-height' });
+    $('.wrap_category .bf_tb_items.active .item_content').matchHeight({ property: 'min-height' });
+    $('.wrap_category .bf_tb_items.active .col_in').matchHeight({ property: 'min-height' });
+    $('.wrap_similar_product .item_content').matchHeight({ property: 'min-height' });
+    $('.wrap_similar_product .col_in').matchHeight({ property: 'min-height' });
     $('.item_content_btm').matchHeight({ property: 'min-height' });
     $('.item_content_btm .itm_title').matchHeight({ property: 'min-height' });
     $('.atg_item').matchHeight({ property: 'min-height' });
     $('.atg_content').matchHeight({ property: 'min-height' });
     $('.service_item_title').matchHeight({ property: 'min-height' });
     $('.abt_h').matchHeight({ property: 'min-height' });
+    $('.news_item_content').matchHeight({ property: 'min-height' });
   }
   // *Equal height
 });
