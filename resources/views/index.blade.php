@@ -18,40 +18,108 @@
                 <div class="swiper-wrapper">
 
                     <div class="swiper-slide">
-                        <a href="" class="swiper-link clearfix">
+                        <div class="swiper-link clearfix">
                             <div class="col_in">
                                 <div class="item_img">
                                     <img src="{{asset('img/main.png?v3')}}" alt="Main slider Image" >
                                 </div>
+                                <div class="main_slider_content">
+                                    <div class="main_center clearfix">
+                                        <div class="main_slider_inner clearfix">
+                                            <h4 class="itm_title">
+                                                Dəqiq qiymətləndirmə, doğru qərarlar
+                                            </h4>
+                                            <p class="itm_info">
+                                                Düzgün qərarlar qəbul etmək üçün dəqiq və peşəkar
+                                                qiymətləndirmə xidmətimizdən faydalanın. Bizim qymətləndirmələrimiz
+                                                sizə güvən verəcəkdir
+                                            </p>
+                                            <div class="go_product">
+                                                <a href="#">Ətraflı</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
                     <div class="swiper-slide">
-                        <a href="" class="swiper-link clearfix">
+                        <div class="swiper-link clearfix">
                             <div class="col_in">
                                 <div class="item_img">
                                     <img src="{{asset('img/main.png?v3')}}" alt="Main slider Image" >
                                 </div>
+                                <div class="main_slider_content">
+                                    <div class="main_center clearfix">
+                                        <div class="main_slider_inner clearfix">
+                                            <h4 class="itm_title">
+                                                Dəqiq qiymətləndirmə, doğru qərarlar
+                                            </h4>
+                                            <p class="itm_info">
+                                                Düzgün qərarlar qəbul etmək üçün dəqiq və peşəkar
+                                                qiymətləndirmə xidmətimizdən faydalanın. Bizim qymətləndirmələrimiz
+                                                sizə güvən verəcəkdir
+                                            </p>
+                                            <div class="go_product">
+                                                <a href="#">Ətraflı</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
                     <div class="swiper-slide">
-                        <a href="" class="swiper-link clearfix">
+                        <div class="swiper-link clearfix">
                             <div class="col_in">
                                 <div class="item_img">
                                     <img src="{{asset('img/main.png?v3')}}" alt="Main slider Image" >
                                 </div>
+                                <div class="main_slider_content">
+                                    <div class="main_center clearfix">
+                                        <div class="main_slider_inner clearfix">
+                                            <h4 class="itm_title">
+                                                Dəqiq qiymətləndirmə, doğru qərarlar
+                                            </h4>
+                                            <p class="itm_info">
+                                                Düzgün qərarlar qəbul etmək üçün dəqiq və peşəkar
+                                                qiymətləndirmə xidmətimizdən faydalanın. Bizim qymətləndirmələrimiz
+                                                sizə güvən verəcəkdir
+                                            </p>
+                                            <div class="go_product">
+                                                <a href="#">Ətraflı</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
                     <div class="swiper-slide">
-                        <a href="" class="swiper-link clearfix">
+                        <div class="swiper-link clearfix">
                             <div class="col_in">
                                 <div class="item_img">
                                     <img src="{{asset('img/main.png?v1')}}" alt="Main slider Image" >
                                 </div>
+                                <div class="main_slider_content">
+                                    <div class="main_center clearfix">
+                                        <div class="main_slider_inner clearfix">
+                                            <h4 class="itm_title">
+                                                Dəqiq qiymətləndirmə, doğru qərarlar
+                                            </h4>
+                                            <p class="itm_info">
+                                                Düzgün qərarlar qəbul etmək üçün dəqiq və peşəkar
+                                                qiymətləndirmə xidmətimizdən faydalanın. Bizim qymətləndirmələrimiz
+                                                sizə güvən verəcəkdir
+                                            </p>
+                                            <div class="go_product">
+                                                <a href="#">Ətraflı</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
 
                 </div>
@@ -68,8 +136,121 @@
     </div>
     <!-- Main Slider -->
 
+
+
     <!-- Prodcts section -->
-    <div class="section_wrap wrap_advantage product_items">
+    <div class="section_wrap wrap_advantage product_items wrap_slider">
+        <div class="main_center clearfix">
+            <div class="sect_body slider_container clearfix">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <a href="#" class="atg_item">
+                                <div class="atg_img">
+                                    <img src="{{asset('img/product1.png')}}" alt="Daxili məkan boyaları" >
+                                </div>
+                                <div class="atg_content">
+                                    <div class="row_inner">
+                                        <h5 class="itm_title">Daxili məkan boyaları</h5>
+                                        <p class="itm_info">
+                                            Nitrosellüloz əsaslı, tez quruyan,
+                                            birkompo nentli, parlaq son qat metal və mebel boyasıdır.
+                                        </p>
+                                        <div class="go_product">
+                                            <span>Məhsullara keçin</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#" class="atg_item">
+                                <div class="atg_img">
+                                    <img src="{{asset('img/product2.png')}}" alt="Fasad Boyaları" >
+                                </div>
+                                <div class="atg_content">
+                                    <div class="row_inner">
+                                        <h5 class="itm_title">Fasad Boyaları</h5>
+                                        <p class="itm_info">
+                                            Nitrosellüloz əsaslı, tez quruyan,
+                                            birkompo nentli, parlaq son qat metal və mebel boyasıdır.
+                                        </p>
+                                        <div class="go_product">
+                                            <span>Məhsullara keçin</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#" class="atg_item">
+                                <div class="atg_img">
+                                    <img src="{{asset('img/product3.png')}}" alt="Yol Cizgi Boyaları" >
+                                </div>
+                                <div class="atg_content">
+                                    <div class="row_inner">
+                                        <h5 class="itm_title">Yol Cizgi Boyaları</h5>
+                                        <p class="itm_info">
+                                            Nitrosellüloz əsaslı, tez quruyan,
+                                            birkompo nentli, parlaq son qat metal və mebel boyasıdır.
+                                        </p>
+                                        <div class="go_product">
+                                            <span>Məhsullara keçin</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#" class="atg_item">
+                                <div class="atg_img">
+                                    <img src="{{asset('img/product1.png')}}" alt="Boya, Dolğu və Laklar" >
+                                </div>
+                                <div class="atg_content">
+                                    <div class="row_inner">
+                                        <h5 class="itm_title">Boya, Dolğu və Laklar</h5>
+                                        <p class="itm_info">
+                                            Nitrosellüloz əsaslı, tez quruyan,
+                                            birkompo nentli, parlaq son qat metal və mebel boyasıdır.
+                                        </p>
+                                        <div class="go_product">
+                                            <span>Məhsullara keçin</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="#" class="atg_item">
+                                <div class="atg_img">
+                                    <img src="{{asset('img/product2.png')}}" alt="Sənaye Boyaları" >
+                                </div>
+                                <div class="atg_content">
+                                    <div class="row_inner">
+                                        <h5 class="itm_title">Sənaye Boyaları</h5>
+                                        <p class="itm_info">
+                                            Nitrosellüloz əsaslı, tez quruyan,
+                                            birkompo nentli, parlaq son qat metal və mebel boyasıdır.
+                                        </p>
+                                        <div class="go_product">
+                                            <span>Məhsullara keçin</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="swiper_pagin_items">
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="section_wrap wrap_advantage product_items">
         <div class="main_center clearfix">
             <div class="sect_body clearfix">
                 <div class="row">
@@ -183,7 +364,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Prodcts section -->
 
     <!-- Colors table Part -->
@@ -364,6 +545,9 @@
                     </div>
                 </div>
             </div>
+            <div class="swiper_pagin_items">
+                <div class="swiper-pagination"></div>
+            </div>
         </div>
     </div>
 
@@ -388,7 +572,7 @@
                 prevEl: '.main_slider .swiper-button-prev',
             },
             pagination: {
-                el: ".swiper-pagination",
+                el: ".main_slider .swiper-pagination",
                 clickable: true,
             }
         });
@@ -406,9 +590,68 @@
                 prevEl: '.video_items .swiper-button-prev',
             },
             pagination: {
-                el: ".swiper-pagination",
+                el: ".video_items .swiper-pagination",
                 clickable: true,
-            }
+            },
+            breakpoints: { 
+                0: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                560: {
+                    slidesPerView: 3,
+                    spaceBetween: 32,
+                },
+                1024: {
+                    slidesPerView: 5,
+                    spaceBetween: 32,
+                },
+            },
+        });
+        var swiper = new Swiper('.product_items .swiper-container', {
+            slidesPerView: 5,
+            spaceBetween: 32,
+            loop: false,
+            pagination: {
+                el: ".product_items .swiper-pagination",
+                clickable: true,
+            },
+            breakpoints: { 
+                0: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                    loop: true,
+                    speed: 2000,
+                    autoplay: {
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    },
+                },
+                560: {
+                    slidesPerView: 3,
+                    spaceBetween: 32,
+                    loop: true,
+                    speed: 2000,
+                    autoplay: {
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    },
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 32,
+                    loop: true,
+                    speed: 2000,
+                    autoplay: {
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    },
+                },
+                1199: {
+                    slidesPerView: 5,
+                    spaceBetween: 32,
+                },
+            },
         });
     </script>
 @endpush

@@ -397,9 +397,8 @@ footer .scl_icn {
 
 .copyrite {
     display: block;
-    float: left;
     width: 100%;
-    max-width: 265px;
+    /* max-width: 265px; */
 }
 
 .copyrite_inner {
@@ -438,6 +437,7 @@ footer .scl_icn {
     align-items: center;
     position: relative;
     width: 100%;
+    min-height: 66px;
     margin-left: 20px;
     padding-left: 76px;
     text-align: left;
@@ -454,12 +454,38 @@ footer .scl_icn {
 
     /* Footer responsive */
     .ftr_menu_sect .footer_menu {
-        margin-left: 64px;
+        margin: 0 16px 0 0;
     }
 
-    .address_sect {
-        margin: 0 0 0 64px;
+    .ftr_menu_sect .footer_menu > li {
+        padding: 0 0 20px 0;
     }
+
+    .adrs_row {
+        flex-wrap: wrap;
+    }
+
+    .copyrite_text {
+        margin: 16px 0 0 0;
+    }
+
+    .ftr_social .socials {
+        justify-content: flex-start;
+    }
+
+    /* footer .socials li {
+        margin: 0 8px 0 0 !important;
+    }
+
+    footer .social_icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    footer .scl_icn {
+        width: 20px;
+        height: 20px;
+    } */
 
     /* Footer responsive */
 }
@@ -469,12 +495,14 @@ footer .scl_icn {
     /* Footer responsive */
     .ftr_top {
         flex-wrap: wrap;
-        padding: 64px 0;
+        padding: 24px 16px 36px 16px;
     }
 
     .ftr_left {
         float: none;
         width: 100%;
+        max-width: 100%;
+        margin: 0 0 0 0;
     }
 
     .ftr_right {
@@ -483,6 +511,29 @@ footer .scl_icn {
         float: none;
         width: 100%;
         padding: 0;
+    }
+
+    footer .logo_sect {
+        margin: 0 0 4px 0;
+    }
+
+    .footer_menu {
+        float: none;
+        width: 100%;
+    }
+
+    .ftr_menu_sect {
+        float: none;
+        width: 100%;
+        margin-top: 12px;
+    }
+
+    .ftr_menu_sect .footer_menu:nth-child(2) {
+        display: none !important;
+    }
+
+    .ftr_menu_sect .footer_menu {
+        margin: 0 16px 0 0;
     }
 
     .ftr_social {
@@ -495,32 +546,33 @@ footer .scl_icn {
         justify-content: flex-start;
     }
 
-    .socials li {
-        margin: 0 12px 0 0;
+    footer .socials li {
+        margin: 0 8px 0 0 !important;
     }
 
-    .created_by_sm {
-        float: none;
-        position: relative;
-        margin: 24px 0;
-        left: 0;
+    footer .social_icon {
+        width: 56px;
+        height: 56px;
     }
 
-    .copyrite {
+    footer .scl_icn {
+        width: 24px;
+        height: 24px;
+    }
+
+    .address_sect {
         float: none;
-        max-width: 100%;
+        width: 100%;
+        margin: 32px 0 0 0;
+    }
+
+    .adrs_row {
+        flex-wrap: wrap;
     }
 
     .copyrite_text {
-        font-size: 32px;
+        margin: 16px 0 0 0;
     }
-
-    .adrs_list {
-        float: none;
-        width: 100%;
-        margin-top: 32px;
-    }
-
 
     /* Footer responsive */
 }
@@ -530,12 +582,14 @@ footer .scl_icn {
     /* Footer responsive */
     .ftr_top {
         flex-wrap: wrap;
-        padding: 64px 0;
+        padding: 24px 16px 36px 16px;
     }
 
     .ftr_left {
         float: none;
         width: 100%;
+        max-width: 100%;
+        margin: 0 0 0 0;
     }
 
     .ftr_right {
@@ -544,6 +598,29 @@ footer .scl_icn {
         float: none;
         width: 100%;
         padding: 0;
+    }
+
+    footer .logo_sect {
+        margin: 0 0 4px 0;
+    }
+
+    .footer_menu {
+        float: none;
+        width: 100%;
+    }
+
+    .ftr_menu_sect {
+        float: none;
+        width: 100%;
+        margin-top: 12px;
+    }
+
+    .ftr_menu_sect .footer_menu:nth-child(2) {
+        display: none !important;
+    }
+
+    .ftr_menu_sect .footer_menu {
+        margin: 0 16px 0 0;
     }
 
     .ftr_social {
@@ -556,32 +633,33 @@ footer .scl_icn {
         justify-content: flex-start;
     }
 
-    .socials li {
-        margin: 0 12px 0 0;
+    footer .socials li {
+        margin: 0 8px 0 0 !important;
     }
 
-    .created_by_sm {
-        float: none;
-        position: relative;
-        margin: 24px 0;
-        left: 0;
+    footer .social_icon {
+        width: 56px;
+        height: 56px;
     }
 
-    .copyrite {
+    footer .scl_icn {
+        width: 24px;
+        height: 24px;
+    }
+
+    .address_sect {
         float: none;
-        max-width: 100%;
+        width: 100%;
+        margin: 32px 0 0 0;
+    }
+
+    .adrs_row {
+        flex-wrap: wrap;
     }
 
     .copyrite_text {
-        font-size: 32px;
+        margin: 16px 0 0 0;
     }
-
-    .adrs_list {
-        float: none;
-        width: 100%;
-        margin-top: 32px;
-    }
-
 
     /* Footer responsive */
 }
@@ -591,12 +669,14 @@ footer .scl_icn {
     /* Footer responsive */
     .ftr_top {
         flex-wrap: wrap;
-        padding: 64px 0;
+        padding: 24px 16px 36px 16px;
     }
 
     .ftr_left {
         float: none;
         width: 100%;
+        max-width: 100%;
+        margin: 0 0 0 0;
     }
 
     .ftr_right {
@@ -607,6 +687,28 @@ footer .scl_icn {
         padding: 0;
     }
 
+    footer .logo_sect {
+        margin: 0 0 4px 0;
+    }
+
+    .footer_menu {
+        float: none;
+        width: 100%;
+    }
+
+    .ftr_menu_sect {
+        float: none;
+        width: 100%;
+        margin-top: 12px;
+    }
+
+    .ftr_menu_sect .footer_menu:nth-child(2) {
+        display: none !important;
+    }
+
+    .ftr_menu_sect .footer_menu {
+        margin: 0 16px 0 0;
+    }
 
     .ftr_social {
         float: none;
@@ -618,32 +720,33 @@ footer .scl_icn {
         justify-content: flex-start;
     }
 
-    .socials li {
-        margin: 0 12px 0 0;
+    footer .socials li {
+        margin: 0 8px 0 0 !important;
     }
 
-    .created_by_sm {
-        float: none;
-        position: relative;
-        margin: 24px 0;
-        left: 0;
+    footer .social_icon {
+        width: 56px;
+        height: 56px;
     }
 
-    .copyrite {
+    footer .scl_icn {
+        width: 24px;
+        height: 24px;
+    }
+
+    .address_sect {
         float: none;
-        max-width: 100%;
+        width: 100%;
+        margin: 32px 0 0 0;
+    }
+
+    .adrs_row {
+        flex-wrap: wrap;
     }
 
     .copyrite_text {
-        font-size: 32px;
+        margin: 16px 0 0 0;
     }
-
-    .adrs_list {
-        float: none;
-        width: 100%;
-        margin-top: 32px;
-    }
-
 
     /* Footer responsive */
 }

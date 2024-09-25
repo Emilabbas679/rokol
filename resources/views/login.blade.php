@@ -24,15 +24,16 @@
                 <div class="sign_tab_sect">
                     <div class="bf_tb_hd">
                         <span class="glider "></span>
-                        <div class="bt_tb_title clicked_tab_btn " data-id="0"><span>Telefon nömrəsi</span></div>
-                        <div class="bt_tb_title clicked_tab_btn " data-id="1"><span>E-poçt ünvanı</span></div>
+                        <div class="bt_tb_title clicked_tab_btn " data-id="0"><span>E-poçt ünvanı</span></div>
+                        <div class="bt_tb_title clicked_tab_btn " data-id="1"><span>Telefon nömrəsi</span></div>
                     </div>
                 </div>
                 <div class="bf_tb_content clearfix">
 
-                    <div class="bf_tb_items " data-id="0">
+                    <div class="bf_tb_items active" data-id="0">
 
-                        <form action="#" method="post">
+                        <form action="{!! route('login') !!}" method="post">
+                            @csrf
                             <div class="form_item ">
                                 <input type="text" name="email" placeholder="E-poçt ünvanı" value="" class="item_input" >
                                 <!-- <div class="error_type">Supporting text</div> -->
@@ -52,14 +53,15 @@
                                 <button type="submit" class="btn_sign submit_btn">Daxil ol</button>
                             </div>
                             <div class="form_item">
-                                <button type="submit" class="btn_sign link_btn">Qeydiyyatdan keç</button>
+                                <a href="{!! route('register') !!}" class="btn_sign link_btn">Qeydiyyatdan keç</a>
                             </div>
                         </form>
 
                     </div>
-                    <div class="bf_tb_items active" data-id="1">
+                    <div class="bf_tb_items" data-id="1">
 
-                        <form action="#" method="post">
+                        <form action="{!! route('login') !!}" method="post">
+                            @csrf
                             <div class="form_item ">
                                 <input type="text" name="phone" placeholder="Telefon nömrəsi (+994)" value="" class="item_input phone" >
                                 <!-- <div class="error_type">Supporting text</div> -->
@@ -79,7 +81,7 @@
                                 <button type="submit" class="btn_sign submit_btn">Daxil ol</button>
                             </div>
                             <div class="form_item">
-                                <button type="submit" class="btn_sign link_btn">Qeydiyyatdan keç</button>
+                                <a href="{!! route('register') !!}" class="btn_sign link_btn">Qeydiyyatdan keç</a>
                             </div>
                         </form>
 

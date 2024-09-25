@@ -47,26 +47,24 @@
                         <div class="row_setg">
                             <label class="itm_inp_label">Ad</label>
                             <div class="form_item ">
-                                <input type="text" name="firstname" placeholder="Ad" value="Azizxan Sadiyev" class="item_input" >
+                                <input type="text" name="firstname" placeholder="Ad" value="Azizxan Sadiyev" class="item_input">
                                 <!-- <div class="error_type">Supporting text</div> -->
                             </div>
                         </div>
                         <div class="row_setg">
                             <label class="itm_inp_label">Telefon</label>
                             <div class="form_item ">
-                                <input type="text" name="lastname" placeholder="Telefon" value="+994 55 000 00 00" class="item_input phone" >
+                                <input type="text" name="lastname" placeholder="Telefon" value="+994 55 000 00 00" class="item_input phone">
                                 <!-- <div class="error_type">Supporting text</div> -->
                             </div>
                         </div>
                         <div class="row_setg">
                             <label class="itm_inp_label">E-poçt ünvanı</label>
                             <div class="form_item ">
-                                <input type="text" name="email" placeholder="E-poçt ünvanı" value="xataitest@gmail.com" class="item_input" >
+                                <input type="text" name="email" placeholder="E-poçt ünvanı" value="xataitest@gmail.com" class="item_input">
                                 <!-- <div class="error_type">Supporting text</div> -->
                             </div>
                         </div>
-
-                        <button type="submit" class="btn_sign submit_btn">Yadda saxla</button>
                     </div>
                     <div class="right_setting">
                         <div class="sect_header clearfix">
@@ -75,7 +73,7 @@
                         <div class="row_setg">
                             <label class="itm_inp_label">Hazırki şifrə</label>
                             <div class="form_item">
-                                <input type="password" name="password" placeholder="Hazırki şifrə" value="123456" class="item_input " >
+                                <input type="password" name="password" placeholder="Hazırki şifrə" value="123456" class="item_input ">
                                 <!-- <div class="error_type">Supporting text</div> -->
                                 <div class="pass_eye">
                                     <span class="password-showhide">
@@ -88,7 +86,7 @@
                         <div class="row_setg">
                             <label class="itm_inp_label">Yeni şifrə</label>
                             <div class="form_item">
-                                <input type="password" name="password" placeholder="Yeni şifrə" value="" class="item_input " >
+                                <input type="password" name="password" placeholder="Yeni şifrə" value="" class="item_input ">
                                 <!-- <div class="error_type">Supporting text</div> -->
                                 <div class="pass_eye">
                                     <span class="password-showhide">
@@ -101,7 +99,7 @@
                         <div class="row_setg">
                             <label class="itm_inp_label">Yeni şifrə təkrar</label>
                             <div class="form_item">
-                                <input type="password" name="password" placeholder="Yeni şifrə təkrar" value="" class="item_input " >
+                                <input type="password" name="password" placeholder="Yeni şifrə təkrar" value="" class="item_input ">
                                 <!-- <div class="error_type">Supporting text</div> -->
                                 <div class="pass_eye">
                                     <span class="password-showhide">
@@ -112,7 +110,11 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="row_setg">
+                        <div class="left_setting">
+                            <button type="submit" class="btn_sign submit_btn">Yadda saxla</button>
+                        </div>
+                    </div>
                 </form>
             </div>
 

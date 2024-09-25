@@ -28,25 +28,25 @@
                                 <span class="fm_hd">Menular </span>
                             </li>
                             <li>
-                                <a href="" class="">HAQQIMIZDA </a>
+                                <a href="" class="">{{translate('header_about')}} </a>
                             </li>
                             <li>
-                                <a href="" class="">MƏHSULLAR </a>
+                                <a href="" class="">{{translate('header_products')}}</a>
                             </li>
                             <li>
-                                <a href="" class="">RƏNGLƏR </a>
+                                <a href="" class="">{{translate('header_colors')}} </a>
                             </li>
                             <li>
-                                <a href="" class="">HəftənİN TƏKLİFİ </a>
+                                <a href="" class="active">{{translate('header_offers')}} </a>
                             </li>
                             <li>
-                                <a href="" class="">XƏBƏRLƏR </a>
+                                <a href="" class="">{{translate('header_news')}} </a>
                             </li>
+                            <!-- <li>
+                                <a href="" class="">{{translate('header_catalogs')}} </a>
+                            </li> -->
                             <li>
-                                <a href="" class="">BLOQ </a>
-                            </li>
-                            <li>
-                                <a href="" class="">Əlaqə </a>
+                                <a href="" class="">{{translate('header_contact')}} </a>
                             </li>
                         </ul>
                         <ul class="footer_menu">

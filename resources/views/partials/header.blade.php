@@ -12,8 +12,8 @@
             </div>
             <div class="header_right clearfix">
 
-                <div class="header_row hrow_top clearfix">
-                    <div class="hd_search">
+                <div class="header_row hrow_top desk_show clearfix">
+                    <div class="hd_search ">
                         <form method="post" action="#">
                             <div class="search_row clearfix">
                                 <input type="text" name="query" class="search_input" value="" placeholder="Sayt üzrə axtarış">
@@ -22,8 +22,7 @@
                         </form>
                     </div>
                     <div class="hd_r_icons">
-                        <!-- <a href="" class="repairer"></a> -->
-                        <a href="" class="register_btn">Online sifariş</a>
+                        <a href="#" class="register_btn">Online sifariş</a>
                         <a href="tel:*3030" class="call_center">*3030</a>
                         <ul class="socials clearfix">
                             <li>
@@ -62,7 +61,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="lang_sect desk">
+                        <div class="lang_sect ">
                             <div class="lang_btn" style="text-transform: capitalize">{{app()->getLocale()}}</div>
                             <ul class="langs">
                                 <li @if(app()->getLocale() == 'az') class="active" @endif><a href="{{route('locale', 'az')}}">Az</a> </li>
@@ -126,20 +125,21 @@
                             <li>
                                 <a href="" class="">{{translate('header_news')}} </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="" class="">{{translate('header_catalogs')}} </a>
-                            </li>
+                            </li> -->
                             <li>
                                 <a href="" class="">{{translate('header_contact')}} </a>
                             </li>
                         </ul>
                     </nav>
                     <div class="hd_r_icons">
+                        <div class="seacrh_mobile_icon"></div>
                         <ul class="shop_icons_list">
                             <li>
                                 <a href="" class="shop_icon icon_backet"></a>
                             </li>
-                            <li>
+                            <li class="desk_show">
                                 <a href="" class="shop_icon icon_fav"></a>
                             </li>
                             <li>
@@ -149,7 +149,7 @@
                     </div>
                     <div class="prof_items_sect">
                         <!-- <a href="#" class="login_btn">Giriş</a> -->
-                        <div class="login_profile">Azizxan</div>
+                        <div class="login_profile"><span>Azizxan</span> </div>
                         <div class="prof_drop clearfix">
                             <div class="profile_setting clearfix">
                                 <ul class="profile_list clearfix">
@@ -186,9 +186,17 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                    
+                    </div>                    
                     <div class="menu_btn open"></div>
+
+                    <div class="hd_search mobile_search_sect">
+                        <form method="post" action="#">
+                            <div class="search_row clearfix">
+                                <input type="text" name="query" class="search_input" value="" placeholder="Sayt üzrə axtarış">
+                                <button type="submit" class="search_btn"></button>
+                            </div>
+                        </form>
+                    </div>
 
                 </div>
 
@@ -197,6 +205,15 @@
     </div>
     <nav class="nav_mobile">
         <div class="menu_btn close"></div>
+        <div class="mob_header">
+            <ul class="langs">
+                <li @if(app()->getLocale() == 'az') class="active" @endif><a href="{{route('locale', 'az')}}">Az</a> </li>
+                <li @if(app()->getLocale() == 'en') class="active" @endif><a href="{{route('locale', 'en')}}">En</a></li>
+                <li @if(app()->getLocale() == 'ru') class="active" @endif><a href="{{route('locale', 'ru')}}">Ru</a></li>
+            </ul>
+            <a href="#" class="register_btn">Online sifariş</a>
+            <a href="tel:*3030" class="call_center">*3030</a>
+        </div>
         <div class="mob_body">
             <ul class="hdr_menu clearfix">
                 <li>
@@ -204,6 +221,19 @@
                 </li>
                 <li>
                     <a href="" class="">{{translate('header_products')}}</a>
+                    <ul>
+                        @foreach($firstHalfCategories as $category)
+                        <li>
+                            <a href="{{route('category', $category->id)}}">{{$category->name[app()->getLocale()]}}</a>
+                        </li>
+                        @endforeach
+                        @foreach($secondHalfCategories as $category)
+                            <li>
+                                <a href="{{route('category', $category->id)}}">{{$category->name[app()->getLocale()]}}</a>
+                            </li>
+                        @endforeach
+
+                    </ul>
                 </li>
                 <li>
                     <a href="" class="">{{translate('header_colors')}} </a>
@@ -214,21 +244,52 @@
                 <li>
                     <a href="" class="">{{translate('header_news')}} </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="" class="">{{translate('header_catalogs')}} </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="" class="">{{translate('header_contact')}} </a>
                 </li>
             </ul>
         </div>
         <div class="mob_ftr">
-            <a href="tel:+994507342371" class="number_links ">
-                +994 50 734 23 71
-            </a>
-            <a href="" class="sing_links ">
-                Bizə yazın!
-            </a>
+            <ul class="socials clearfix">
+                <li>
+                    <a href="" class="social_icon" target="_blank">
+                        <span class="scl_icn">
+                            <img src="{{asset('img/icons/fb.svg?v1')}}" alt="Facebook">
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="social_icon" target="_blank">
+                        <span class="scl_icn">
+                            <img src="{{asset('img/icons/ins.svg?v1')}}" alt="Instagram">
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="social_icon" target="_blank">
+                        <span class="scl_icn">
+                            <img src="{{asset('img/icons/tiktok.svg?v1')}}" alt="Tiktok">
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="social_icon" target="_blank">
+                        <span class="scl_icn">
+                            <img src="{{asset('img/icons/lnkd.svg?v1')}}" alt="Linkedn">
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="social_icon" target="_blank">
+                        <span class="scl_icn">
+                            <img src="{{asset('img/icons/ytb.svg?v1')}}" alt="Youtube">
+                        </span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </nav>
 </header>

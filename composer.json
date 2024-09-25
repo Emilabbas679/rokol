@@ -19,6 +19,7 @@
         "laravel/nova": "^4.0",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "laravel/ui": "^4.5",
         "laravelrotebal/nova-attach-many": "^2.0",
         "stepanenko3/nova-json": "^4.0",
         "waynestate/nova-ckeditor4-field": "^1.4"
