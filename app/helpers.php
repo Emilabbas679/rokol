@@ -7,6 +7,7 @@ use App\Models\ApplicationArea;
 use App\Models\Appearance;
 use App\Models\Property;
 use App\Models\Weight;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 
 if (!function_exists('translate')) {

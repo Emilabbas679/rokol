@@ -6,6 +6,7 @@ use App\Http\Requests\CartAddProductRequest;
 use App\Models\Cart;
 use App\Models\ProductPrice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -15,12 +16,12 @@ class CartController extends Controller
     public function index()
     {
         $carts = Cart::query()
-            ->with(['product', 'productPrice.color', 'productPrice.weight'])
-            ->where('user_id', auth()->id())
-            ->where('status', Cart::STATUS_UNCOMPLETED)
-            ->paginate(20);
+            ->with( [ 'product', 'productPrice.color', 'productPrice.weight' ] )
+            ->where( 'user_id', auth()->id() )
+            ->where( 'status', Cart::STATUS_UNCOMPLETED )
+            ->paginate( 20 );
 
-        return view('cart', compact('carts'));
+        return view( 'cart', compact( 'carts' ) );
     }
 
     /**
@@ -34,7 +35,7 @@ class CartController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store( Request $request )
     {
         //
     }
@@ -42,7 +43,7 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show( string $id )
     {
         //
     }
@@ -50,7 +51,7 @@ class CartController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit( string $id )
     {
         //
     }
@@ -58,7 +59,7 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update( Request $request, string $id )
     {
         //
     }
@@ -66,7 +67,7 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy( string $id )
     {
         //
     }
@@ -74,24 +75,25 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function addProduct(CartAddProductRequest $request)
+    public function addProduct( CartAddProductRequest $request )
     {
-        $validated = collect($request->validated());
+        $validated = collect( $request->validated() );
         $productPriceId = ProductPrice::query()
-            ->select('id')
-            ->where('product_id', $validated->get('product_id'))
-            ->where('color_id', $validated->get('color_id'))
-            ->where('weight_id', $validated->get('weight_id'))
+            ->select( 'id' )
+            ->where( 'product_id', $validated->get( 'product_id' ) )
+            ->where( 'color_id', $validated->get( 'color_id' ) )
+            ->where( 'weight_id', $validated->get( 'weight_id' ) )
             ->first()
             ->id;
 
-        Cart::query()->create([
+        Cart::query()->updateOrCreate( [
             'user_id' => fUserId(),
-            'product_id' => $validated->get('product_id'),
+            'product_id' => $validated->get( 'product_id' ),
             'product_price_id' => $productPriceId,
-            'count' => $validated->get('count'),
             'status' => Cart::STATUS_UNCOMPLETED
-        ]);
+        ], [
+            'count' => DB::raw( 'count + ' . $validated->get( 'count' ) ),
+        ] );
 
 
     }
