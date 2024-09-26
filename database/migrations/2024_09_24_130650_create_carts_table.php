@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('product_price_id');
             $table->integer('count');
-            $table->tinyInteger('status')->comment('1 uncompleted, 2 completed ');
+            $table->tinyInteger('status')->default(1)->comment('1 uncompleted, 2 completed ');
             $table->timestamps();
         });
     }

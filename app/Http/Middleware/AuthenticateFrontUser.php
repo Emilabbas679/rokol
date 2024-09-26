@@ -2,18 +2,19 @@
 
 namespace App\Http\Middleware;
 
+use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class SetLocale
+class AuthenticateFrontUser
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (session()->has('locale')) {
-            \app()->setLocale(session('locale'));
-        } else {
-            \app()->setLocale('az');
+
+        if (!Auth::guard('web')->check()) {
+            return redirect(RouteServiceProvider::HOME);
         }
         return $next($request);
     }

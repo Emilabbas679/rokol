@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CartAddProductRequest;
 use App\Models\Cart;
+use App\Models\ProductPrice;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -67,5 +69,30 @@ class CartController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function addProduct(CartAddProductRequest $request)
+    {
+        $validated = collect($request->validated());
+        $productPriceId = ProductPrice::query()
+            ->select('id')
+            ->where('product_id', $validated->get('product_id'))
+            ->where('color_id', $validated->get('color_id'))
+            ->where('weight_id', $validated->get('weight_id'))
+            ->first()
+            ->id;
+
+        Cart::query()->create([
+            'user_id' => fUserId(),
+            'product_id' => $validated->get('product_id'),
+            'product_price_id' => $productPriceId,
+            'count' => $validated->get('count'),
+            'status' => Cart::STATUS_UNCOMPLETED
+        ]);
+
+
     }
 }

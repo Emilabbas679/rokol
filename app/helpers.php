@@ -22,7 +22,7 @@ if (!function_exists('translate')) {
         $translations = Cache::rememberForever("translations_{$locale}", function () use ($locale) {
             return Translation::where('locale', $locale)->pluck('value', 'key')->toArray();
         });
-        
+
         return $translations[$key] ?? $key;
     }
 }
@@ -82,3 +82,18 @@ if (!function_exists('weights')) {
         return $weights;
     }
 }
+
+if (!function_exists('fUser')) {
+    function fUser()
+    {
+        return auth()->guard('web')->user();
+    }
+}
+if (!function_exists('fUserId')) {
+    function fUserId()
+    {
+        return auth()->guard('web')->id();
+    }
+}
+
+

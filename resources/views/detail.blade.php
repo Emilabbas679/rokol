@@ -149,15 +149,15 @@
                                     <div class="pr_slct_left">
                                         <div class="filter_check_items">
                                             <div class="product_counter">
-                                                <input type="hidden" name="counter" value="0">
+                                                <input type="hidden" name="counter" value="1">
                                                 <button type="button" class="pr_btn_counter pr_minus"></button>
-                                                <div class="pr_number_sect"><span class="pr_number">0</span></div>
+                                                <div class="pr_number_sect"><span class="pr_number">1</span></div>
                                                 <button type="button" class="pr_btn_counter pr_plus"></button>
                                             </div>
 
                                         </div>
                                     </div>
-                                    <div class="btn_detail btn_basket">
+                                    <div class="btn_detail btn_basket" onclick="addToCart({!! $product->id !!})">
                                         <span>
                                             Səbətə əlavə et
                                         </span>
@@ -507,14 +507,14 @@ $(document).ready(function() {
 
 <script>
 $(document).ready(function() {
-    // *Favorites 
+    // *Favorites
     $(".favotites").click(function(e) {
         e.preventDefault();
         e.stopPropagation()
         $(this).toggleClass("dofav");
     });
     // *Favorites
-    // *Favorites 
+    // *Favorites
     $(".btn_fav").click(function(e) {
         e.preventDefault();
         e.stopPropagation()
@@ -554,6 +554,32 @@ function priceAjax()
             $("#item_price").html(result.price)
         }
     });
+}
+
+function addToCart(productId){
+    let colorId = $("input[name='color']:checked").val();
+    let weightId = $('input[name="weight"]:checked').val();
+    let count = $('input[name="counter"]').val();
+    $.ajax({
+        url: '{!! route('carts.add') !!}',
+        method: 'POST',
+        data: {
+            product_id: productId,
+            color_id: colorId,
+            weight_id: weightId,
+            count
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: 'JSON',
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (data) {
+
+        }
+    })
 }
 
 

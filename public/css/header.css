@@ -1314,7 +1314,8 @@ nav.nav_mobile .number_links {
     color: #006072;
 }
 
-.prof_icon a {
+.prof_icon a,
+.prof_icon button {
     display: flex;
     align-items: center;
     position: relative;
@@ -1327,6 +1328,10 @@ nav.nav_mobile .number_links {
     line-height: 1.5;
     letter-spacing: 0.1px;
     color: #000;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
     word-break: break-word;
     transition: all 0.3s ease;
     -webkit-transition: all 0.3s ease;
@@ -1336,7 +1341,8 @@ nav.nav_mobile .number_links {
 }
 
 .prof_icon.icon_prof a::before,
-.prof_icon.icon_exit a::before {
+.prof_icon.icon_exit a::before,
+.prof_icon.icon_exit button::before {
     content: "";
     display: block;
     float: left;
@@ -1367,7 +1373,8 @@ nav.nav_mobile .number_links {
 }
 
 
-.icon_exit a::before {
+.icon_exit a::before,
+.icon_exit button::before {
     background-image: url("../img/icons/login.svg?v2");
 }
 
@@ -1376,7 +1383,8 @@ nav.nav_mobile .number_links {
     border-top: 1px solid #D7DAE0;
 }
 
-.icon_exit a {
+.icon_exit a,
+.icon_exit button {
     padding: 12px 0 0 30px;
 }
 
@@ -1529,6 +1537,17 @@ nav.nav_mobile .number_links {
         display: block;
     }
 
+    header .login_btn span {
+        display: none !important;
+    }
+
+    header .login_btn {
+        height: 24px;
+        padding: 0;
+        margin: 0 16px;
+        background-color: transparent;
+    }
+
     /* Header responsive */
 }
 
@@ -1654,6 +1673,17 @@ nav.nav_mobile .number_links {
         display: block;
     }
 
+    header .login_btn span {
+        display: none !important;
+    }
+
+    header .login_btn {
+        height: 24px;
+        padding: 0;
+        margin: 0 16px;
+        background-color: transparent;
+    }
+
     /* Header responsive */
 }
 
@@ -1777,6 +1807,17 @@ nav.nav_mobile .number_links {
 
     .seacrh_mobile_icon {
         display: block;
+    }
+
+    header .login_btn span {
+        display: none !important;
+    }
+
+    header .login_btn {
+        height: 24px;
+        padding: 0;
+        margin: 0 16px;
+        background-color: transparent;
     }
 
     /* Header responsive */

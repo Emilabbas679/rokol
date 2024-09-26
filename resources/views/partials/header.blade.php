@@ -5,7 +5,7 @@
                 <div class="logo_sect clearfix">
                     <a href="/" class="logo">
                         <div class="logo_img">
-                            <img src="{{asset('img/icons/logo.svg?v2')}}" alt="Logo" >
+                            <img src="{{asset('img/icons/logo.svg?v2')}}" alt="Logo">
                         </div>
                     </a>
                 </div>
@@ -16,7 +16,8 @@
                     <div class="hd_search ">
                         <form method="post" action="#">
                             <div class="search_row clearfix">
-                                <input type="text" name="query" class="search_input" value="" placeholder="Sayt üzrə axtarış">
+                                <input type="text" name="query" class="search_input" value=""
+                                       placeholder="Sayt üzrə axtarış">
                                 <button type="submit" class="search_btn"></button>
                             </div>
                         </form>
@@ -64,9 +65,12 @@
                         <div class="lang_sect ">
                             <div class="lang_btn" style="text-transform: capitalize">{{app()->getLocale()}}</div>
                             <ul class="langs">
-                                <li @if(app()->getLocale() == 'az') class="active" @endif><a href="{{route('locale', 'az')}}">Az</a> </li>
-                                <li @if(app()->getLocale() == 'en') class="active" @endif><a href="{{route('locale', 'en')}}">En</a></li>
-                                <li @if(app()->getLocale() == 'ru') class="active" @endif><a href="{{route('locale', 'ru')}}">Ru</a></li>
+                                <li @if(app()->getLocale() == 'az') class="active" @endif><a
+                                        href="{{route('locale', 'az')}}">Az</a></li>
+                                <li @if(app()->getLocale() == 'en') class="active" @endif><a
+                                        href="{{route('locale', 'en')}}">En</a></li>
+                                <li @if(app()->getLocale() == 'ru') class="active" @endif><a
+                                        href="{{route('locale', 'ru')}}">Ru</a></li>
                             </ul>
                         </div>
                     </div>
@@ -94,9 +98,9 @@
                                             <ul class="drop_list">
 
                                                 @foreach($firstHalfCategories as $category)
-                                                <li>
-                                                    <a href="{{route('category', $category->id)}}">{{$category->name[app()->getLocale()]}}</a>
-                                                </li>
+                                                    <li>
+                                                        <a href="{{route('category', $category->id)}}">{{$category->name[app()->getLocale()]}}</a>
+                                                    </li>
                                                 @endforeach
 
                                             </ul>
@@ -148,51 +152,62 @@
                         </ul>
                     </div>
                     <div class="prof_items_sect">
-                        <!-- <a href="#" class="login_btn">Giriş</a> -->
-                        <div class="login_profile"><span>Azizxan</span> </div>
-                        <div class="prof_drop clearfix">
-                            <div class="profile_setting clearfix">
-                                <ul class="profile_list clearfix">
-                                    <li class="prof_icon icon_prof">
-                                        <a href="#" class="clearfix">
-                                            <span class="prof_icon_name">Azizxan Sadiyev </span>
-                                        </a>
-                                    </li>
-                                    <li class="prof_icon">
-                                        <a href="#" class="clearfix">
-                                            <span class="prof_icon_name">Sifarişlərim</span>
-                                        </a>
-                                    </li>
-                                    <li class="prof_icon">
-                                        <a href="#" class="clearfix">
-                                            <span class="prof_icon_name">Seçilmişlərim</span>
-                                        </a>
-                                    </li>
-                                    <li class="prof_icon">
-                                        <a href="#" class="clearfix">
-                                            <span class="prof_icon_name">Ünvanlarım</span>
-                                        </a>
-                                    </li>
-                                    <li class="prof_icon">
-                                        <a href="#" class="clearfix">
-                                            <span class="prof_icon_name">Şəxsi məlumatlarım </span>
-                                        </a>
-                                    </li>
-                                    <li class="prof_icon icon_exit">
-                                        <a href="#" class="clearfix">
-                                            <span class="prof_icon_name">Çıxış</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                        @guest()
+                            <a href="{!! route('login') !!}" class="login_btn">
+                                <span>
+                                    Giriş
+                                </span>
+                            </a>
+                        @else
+                            <div class="login_profile"><span>{!! fUser()->full_name !!}</span></div>
+                            <div class="prof_drop clearfix">
+                                <div class="profile_setting clearfix">
+                                    <ul class="profile_list clearfix">
+                                        <li class="prof_icon icon_prof">
+                                            <a href="#" class="clearfix">
+                                                <span class="prof_icon_name">{!! fUser()->full_name !!} </span>
+                                            </a>
+                                        </li>
+                                        <li class="prof_icon">
+                                            <a href="{!! route('orders') !!}" class="clearfix">
+                                                <span class="prof_icon_name">@lang('Sifarişlərim')</span>
+                                            </a>
+                                        </li>
+                                        <li class="prof_icon">
+                                            <a href="#" class="clearfix">
+                                                <span class="prof_icon_name">Seçilmişlərim</span>
+                                            </a>
+                                        </li>
+                                        <li class="prof_icon">
+                                            <a href="{!! route('addresses.index') !!}" class="clearfix">
+                                                <span class="prof_icon_name">@lang('Ünvanlarım')</span>
+                                            </a>
+                                        </li>
+                                        <li class="prof_icon">
+                                            <a href="{!! route('settings.index') !!}" class="clearfix">
+                                                <span class="prof_icon_name">@lang('Şəxsi məlumatlarım')</span>
+                                            </a>
+                                        </li>
+                                        <li class="prof_icon icon_exit">
+                                            <form action="{!! route('logout') !!}" method="post">
+                                                @csrf
+                                                <button class="clearfix">
+                                                    <span class="prof_icon_name">@lang('Çıxış')</span>
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                    </div>                    
+                        @endguest
+                    </div>
                     <div class="menu_btn open"></div>
 
                     <div class="hd_search mobile_search_sect">
                         <form method="post" action="#">
                             <div class="search_row clearfix">
-                                <input type="text" name="query" class="search_input" value="" placeholder="Sayt üzrə axtarış">
+                                <input type="text" name="query" class="search_input" value=""
+                                       placeholder="Sayt üzrə axtarış">
                                 <button type="submit" class="search_btn"></button>
                             </div>
                         </form>
@@ -207,9 +222,12 @@
         <div class="menu_btn close"></div>
         <div class="mob_header">
             <ul class="langs">
-                <li @if(app()->getLocale() == 'az') class="active" @endif><a href="{{route('locale', 'az')}}">Az</a> </li>
-                <li @if(app()->getLocale() == 'en') class="active" @endif><a href="{{route('locale', 'en')}}">En</a></li>
-                <li @if(app()->getLocale() == 'ru') class="active" @endif><a href="{{route('locale', 'ru')}}">Ru</a></li>
+                <li @if(app()->getLocale() == 'az') class="active" @endif><a href="{{route('locale', 'az')}}">Az</a>
+                </li>
+                <li @if(app()->getLocale() == 'en') class="active" @endif><a href="{{route('locale', 'en')}}">En</a>
+                </li>
+                <li @if(app()->getLocale() == 'ru') class="active" @endif><a href="{{route('locale', 'ru')}}">Ru</a>
+                </li>
             </ul>
             <a href="#" class="register_btn">Online sifariş</a>
             <a href="tel:*3030" class="call_center">*3030</a>
@@ -223,9 +241,9 @@
                     <a href="" class="">{{translate('header_products')}}</a>
                     <ul>
                         @foreach($firstHalfCategories as $category)
-                        <li>
-                            <a href="{{route('category', $category->id)}}">{{$category->name[app()->getLocale()]}}</a>
-                        </li>
+                            <li>
+                                <a href="{{route('category', $category->id)}}">{{$category->name[app()->getLocale()]}}</a>
+                            </li>
                         @endforeach
                         @foreach($secondHalfCategories as $category)
                             <li>

@@ -9,8 +9,17 @@ class Cart extends Model
 {
     protected $table = 'carts';
 
+    protected $fillable = [
+        'user_id',
+        'product_id',
+        'product_price_id',
+        'count',
+        'status'
+    ];
+
     const STATUS_UNCOMPLETED = 1;
     const STATUS_COMPLETED = 2;
+
 
     public function product(): BelongsTo
     {

@@ -35,7 +35,7 @@
                                     </a>
                                     <div class="basket_item_content">
                                         <div class="bsk_row_list">
-                                            <p class="itm_title"> {{ $product->name }} </p>
+                                            <p class="itm_title"> {{ $product->name[app()->getLocale()] }} </p>
                                             <div class="bsk_icons">
                                                 <span class="favotites "></span>
                                                 <span class="delete "></span>
@@ -43,11 +43,12 @@
                                         </div>
                                         <div class="bsk_row_list">
                                             <span class="bck_itm_name">@lang('Color'):</span>
-                                            <span class="bck_itm_val">{!! $cart->productPrice->name !!}</span>
+                                            <span class="bck_itm_val">{!! $cart->productPrice->color->name[app()->getLocale()]
+ !!}</span>
                                         </div>
                                         <div class="bsk_row_list">
                                             <span class="bck_itm_name">@lang('Weight'):</span>
-                                            <span class="bck_itm_val">{!! $cart->productPrice->weight . " " . $cart->productPrice->weight_type !!} kq</span>
+                                            <span class="bck_itm_val">{!! $cart->productPrice->weight->weight . " " . $cart->productPrice->weight->weight_type !!} kq</span>
                                         </div>
                                         <div class="bsk_row_list">
                                             <div class="pr_slct_left">

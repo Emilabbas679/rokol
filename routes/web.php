@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SettingController;
+use App\Http\Middleware\AuthenticateFrontUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
@@ -28,16 +32,25 @@ Route::get('/lang/{locale}', [SiteController::class, 'locale'])->name('locale');
 
 //Route::get('/login', [SiteController::class, 'login'])->name('login');
 //Route::get('/register', [SiteController::class, 'register'])->name('register');
+Route::middleware([AuthenticateFrontUser::class])->group(function () {
+    Route::prefix("/carts")->name('carts.')->group(function () {
+        Route::get('/', [CartController::class, 'index'])->name('index');
+        Route::post('add', [CartController::class, 'addProduct'])->name('add');
+    });
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+    Route::resource('addresses', AddressController::class)->except(['create', 'edit']);
+    Route::resource('settings', SettingController::class);
+});
+
 Route::get('/forgot_password', [SiteController::class, 'forgot_password'])->name('forgot_password');
 Route::get('/new_password', [SiteController::class, 'new_password'])->name('new_password');
-Route::get('/settings', [SiteController::class, 'settings'])->name('settings');
+//Route::get('/settings', [SiteController::class, 'settings'])->name('settings');
 Route::get('/news', [SiteController::class, 'news'])->name('news');
 Route::get('/news_in', [SiteController::class, 'news_in'])->name('news_in');
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/create_address', [SiteController::class, 'create_address'])->name('create_address');
 Route::get('/my_address', [SiteController::class, 'my_address'])->name('my_address');
 Route::get('/selected', [SiteController::class, 'selected'])->name('selected');
-Route::get('/orders', [SiteController::class, 'orders'])->name('orders');
+Route::get('/catalogs', [SiteController::class, 'catalogs'])->name('catalogs');
 Route::get('/about', [SiteController::class, 'about'])->name('about');
 Route::get('/static', [SiteController::class, 'static'])->name('static');
 Route::get('/contact', [SiteController::class, 'contact'])->name('contact');

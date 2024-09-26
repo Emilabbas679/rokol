@@ -318,6 +318,10 @@ class SiteController extends Controller
     {
         return view('orders');
     }
+    public function catalogs()
+    {
+        return view('catalogs');
+    }
     public function about()
     {
         return view('about');
