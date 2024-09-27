@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->json('name')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+//            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->cascadeOnUpdate();
             $table->integer('status')->default(0);
             $table->timestamps();
         });

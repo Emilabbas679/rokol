@@ -33,36 +33,36 @@ return new class extends Migration
         });
 
 
-
-        Schema::create('product_appearances', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('product_id')->default(0)->index();
-            $table->unsignedBigInteger('appearance_id')->default(0)->index();
-            $table->timestamps();
-        });
-
-        Schema::create('product_prices', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('product_id')->default(0)->index();
-            $table->unsignedBigInteger('color_id')->default(0)->index();
-            $table->unsignedBigInteger('weight_id')->default(0)->index();
-            $table->float('price')->default(0);
-            $table->float('sale_price')->default(0);
-            $table->timestamps();
-        });
-
-        Schema::create('product_application_areas', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('product_id')->default(0)->index();
-            $table->unsignedBigInteger('application_area_id')->default(0)->index();
-            $table->timestamps();
-        });
-        Schema::create('product_properties', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('product_id')->default(0)->index();
-            $table->unsignedBigInteger('property_id')->default(0)->index();
-            $table->timestamps();
-        });
+//
+//        Schema::create('product_appearances', function (Blueprint $table) {
+//            $table->id();
+//            $table->unsignedBigInteger('product_id')->default(0)->index();
+//            $table->unsignedBigInteger('appearance_id')->default(0)->index();
+//            $table->timestamps();
+//        });
+//
+//        Schema::create('product_prices', function (Blueprint $table) {
+//            $table->id();
+//            $table->unsignedBigInteger('product_id')->default(0)->index();
+//            $table->unsignedBigInteger('color_id')->default(0)->index();
+//            $table->unsignedBigInteger('weight_id')->default(0)->index();
+//            $table->float('price')->default(0);
+//            $table->float('sale_price')->default(0);
+//            $table->timestamps();
+//        });
+//
+//        Schema::create('product_application_areas', function (Blueprint $table) {
+//            $table->id();
+//            $table->unsignedBigInteger('product_id')->default(0)->index();
+//            $table->unsignedBigInteger('application_area_id')->default(0)->index();
+//            $table->timestamps();
+//        });
+//        Schema::create('product_properties', function (Blueprint $table) {
+//            $table->id();
+//            $table->unsignedBigInteger('product_id')->default(0)->index();
+//            $table->unsignedBigInteger('property_id')->default(0)->index();
+//            $table->timestamps();
+//        });
 
     }
 

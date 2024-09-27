@@ -19,7 +19,7 @@ services:
         depends_on:
             - mysql
             - redis
-    #        command: ['chmod', '-R', '777', './']
+#        command: ['chmod', '-R', '777', './']
     mysql:
         image: 'mysql/mysql-server:8.0'
         container_name: rokol_mysql
