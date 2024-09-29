@@ -1,6 +1,6 @@
 # Copied from cyberduck/php-fpm-laravel
 #https://github.com/Cyber-Duck/php-fpm-laravel/blob/8.1/Dockerfile
-FROM php:8.3-fpm
+FROM php:8.1-fpm
 
 ARG WWWGROUP
 ARG NODE_VERSION=20

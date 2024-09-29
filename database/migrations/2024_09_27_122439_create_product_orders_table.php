@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->unsignedBigInteger( 'user_id' );
             $table->unsignedBigInteger( 'address_id' )->nullable();
             $table->double( 'amount', 9, 2 );
+            $table->double( 'delivery_price', 9, 2 );
             $table->enum( 'delivered_status', [ ProductOrder::DELIVERED_STATUS_COMPLETED, ProductOrder::DELIVERED_STATUS_PREPARING, ProductOrder::DELIVERED_STATUS_CANCELED ] );
             $table->unsignedSmallInteger( 'item_count' );
             $table->enum( 'payment_method', [ ProductOrder::PAYMENT_METHOD_CASH, ProductOrder::PAYMENT_METHOD_ONLINE, ProductOrder::PAYMENT_METHOD_CARD, ] );
