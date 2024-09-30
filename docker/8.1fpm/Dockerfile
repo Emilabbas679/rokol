@@ -191,7 +191,7 @@ ADD ./php.ini /usr/local/etc/php/conf.d
 #RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.3
 
 RUN groupadd --force -g $WWWGROUP sail
-RUN useradd -r -u 1000 -g sail  sail
+RUN useradd -r -u 1000 -g sail sail
 
 COPY start-container /usr/local/bin/start-container
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
@@ -202,4 +202,3 @@ ENTRYPOINT ["php-fpm"]
 
 
 EXPOSE 9000
-

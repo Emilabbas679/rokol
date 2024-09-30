@@ -89,8 +89,12 @@ class SiteController extends Controller
 
 
 
-        $query = Product::select('id', 'status', 'category_id', 'image','name')
+        $query = Product::query()->select('id', 'status', 'category_id', 'image','name')
             ->where('status', 1);
+
+        if (auth('web')->check()) {
+            $query->with(['favorite']);
+        }
 
         if ($category['id'] != 0) {
             $query->whereIn('category_id', $category_ids);

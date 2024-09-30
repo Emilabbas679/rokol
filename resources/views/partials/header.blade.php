@@ -140,9 +140,11 @@
                     <div class="hd_r_icons">
                         <div class="seacrh_mobile_icon"></div>
                         <ul class="shop_icons_list">
-                            <li>
-                                <a href="" class="shop_icon icon_backet"></a>
-                            </li>
+                            @auth()
+                                <li>
+                                    <a href="{!! route('carts.index') !!}" class="shop_icon icon_backet"></a>
+                                </li>
+                            @endauth
                             <li class="desk_show">
                                 <a href="" class="shop_icon icon_fav"></a>
                             </li>
@@ -155,7 +157,7 @@
                         @guest()
                             <a href="{!! route('login') !!}" class="login_btn">
                                 <span>
-                                    Giriş
+                                    @lang('Giriş')
                                 </span>
                             </a>
                         @else
@@ -175,7 +177,7 @@
                                         </li>
                                         <li class="prof_icon">
                                             <a href="#" class="clearfix">
-                                                <span class="prof_icon_name">Seçilmişlərim</span>
+                                                <span class="prof_icon_name">@lang('Seçilmişlərim')</span>
                                             </a>
                                         </li>
                                         <li class="prof_icon">

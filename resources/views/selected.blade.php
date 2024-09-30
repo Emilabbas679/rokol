@@ -12,26 +12,7 @@
 
 <!-- Wrap Profile section -->
 <!-- Breadcrumb -->
-<div class="section_wrap wrap_breadcrumb_profile">
-    <div class="main_center clearfix">
-        <ul class="breadcrumb_list">
-            <li class="">
-                <a href="#">Sifarişlərim</a>
-            </li>
-            <li class="active">
-                <a href="#">Seçilmişlərim</a>
-            </li>
-            <li class="">
-                <a href="#">Ünvanlarım</a>
-            </li>
-            <li class="">
-                <a href="#">Şəxsi məlumatlarım</a>
-            </li>
-        </ul>
-
-        <a href="#" class="login_btn">Çıxış et</a>
-    </div>
-</div>
+@include('partials.breadcrumbs')
 <!-- Breadcrumb -->
 
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SettingController;
 use App\Http\Middleware\AuthenticateFrontUser;
@@ -43,6 +44,7 @@ Route::middleware([AuthenticateFrontUser::class])->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders');
     Route::resource('addresses', AddressController::class)->except(['create', 'edit']);
     Route::resource('settings', SettingController::class);
+    Route::resource('favorites', FavoriteController::class);
 });
 
 Route::get('/forgot_password', [SiteController::class, 'forgot_password'])->name('forgot_password');

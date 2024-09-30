@@ -1169,9 +1169,11 @@ nav.nav_mobile .number_links {
 .wrap_breadcrumb_profile .main_center {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .wrap_breadcrumb_profile .login_btn {
+    cursor: pointer;
     background-color: transparent;
     margin-left: auto;
 }
