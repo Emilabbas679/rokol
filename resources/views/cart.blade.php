@@ -13,9 +13,9 @@
     <!-- Wrap Sign section -->
     <div class="section_wrap wrap_basket_page">
         <div class="main_center">
+
+
             <div class="sect_body clearfix">
-                
-                <!-- Empty basket sect -->
                 <div class="empty_basket_section clearfix">
                     <div class="empty_bs_icon"></div>
                     <div class="empty_bs_title">Səbətinizdə məhsul yoxdur!</div>
@@ -23,7 +23,7 @@
                         <a href="/" class="filter_btn btn_send">Alış-verişə davam et</a>
                     </div>
                 </div>
-                <!-- Empty basket sect -->                
+                <!-- Empty basket sect -->
                 <!-- Mobile basket section -->
                 <div class="basket_mob_fix_back"></div>
                 <div class="basket_mob_fix">
@@ -37,18 +37,16 @@
                         </div>
                     </div>
                 </div>
-                <!-- Mobile basket section -->
-
                 <div class="wrap_left">
                     <div class="basket_items_sect">
                         <div class="sect_header clearfix">
-                            <h2 class="sect_title">Səbət </h2>
-                            <div class="basket_count_items">3 məhsul</div>
+                            <h2 class="sect_title">@lang('Səbət')</h2>
+                            <div class="basket_count_items">{!! $carts->count() !!} @lang('məhsul')</div>
                         </div>
                         <div class="sect_body clearfix">
                             @foreach($carts as $cart)
                                 @php
-                                $product = $cart->product;
+                                    $product = $cart->product;
                                 @endphp
                                 <div class="basket_items">
                                     <a href="{!! route('product', $product) !!}" class="item_img">
@@ -61,7 +59,11 @@
                                             <p class="itm_title"> {{ $product->name[app()->getLocale()] }} </p>
                                             <div class="bsk_icons">
                                                 <span class="favotites "></span>
-                                                <span class="delete "></span>
+                                                <form action="{!! route('carts.destroy', $cart) !!}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="delete"></button>
+                                                </form>
                                             </div>
                                         </div>
                                         <div class="bsk_row_list">
@@ -70,13 +72,17 @@
                                         </div>
                                         <div class="bsk_row_list">
                                             <span class="bck_itm_name">@lang('Weight'):</span>
-                                            <span class="bck_itm_val">{!! $cart->productPrice->weight->weight . " " . $cart->productPrice->weight->weight_type !!} kq</span>
+                                            <span
+                                                class="bck_itm_val">{!! $cart->productPrice->weight->weight . " " . $cart->productPrice->weight->weight_type !!}
+												kq
+											</span>
                                         </div>
                                         <div class="bsk_row_list">
                                             <div class="pr_slct_left">
                                                 <div class="filter_check_items">
                                                     <div class="product_counter">
-                                                        <input type="hidden" name="counter" value="{!! $cart->count !!}">
+                                                        <input type="hidden" name="counter"
+                                                               value="{!! $cart->count !!}">
                                                         <button type="button" class="pr_btn_counter pr_minus"></button>
                                                         <div class="pr_number_sect">
                                                             <span class="pr_number">{!! $cart->count !!}</span>
@@ -85,13 +91,23 @@
                                                     </div>
                                                 </div>
                                                 <!-- stocked, unstocked -->
-                                                <div class="itm_stock stocked">
-                                                    <span class="stock_text">Stokda: 25 ədəd</span>
-                                                </div>
+                                                {{--                                                <div class="itm_stock stocked">--}}
+                                                {{--                                                    <span class="stock_text">Stokda: 25 ədəd</span>--}}
+                                                {{--                                                </div>--}}
                                             </div>
                                             <div class="itm_price">
-                                                <span class="old-price">5.00 AZN</span>
-                                                <span class="new-price">6.00 AZN</span>
+                                                @if($cart->productPrice->sale_price)
+                                                    <span class="old-price">
+														{!! $cart->productPrice->price !!} AZN
+													</span>
+                                                    <span class="new-price">
+														{!! $cart->productPrice->sale_price !!} AZN
+													</span>
+                                                @else
+                                                    <span class="new-price">
+														{!! $cart->productPrice->price !!} AZN
+													</span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -103,40 +119,46 @@
                     </div>
 
                 </div>
-                <div class="wrap_right mobile_fix_item">
+                <div class="wrap_right">
                     <div class="basket_info_sect">
                         <ul class="basket_info_list">
-                            <li>Sifariş təsdiqindən sonra məhsullar 3 iş günündə çatdırılacaq.</li>
-                            <li>Ünvanı yoxlayın, lazım olsa dəyişiklik edin.</li>
-                            <li>Sifariş statusunu e-poçt və ya SMS ilə izləyin.</li>
+                            <li>@lang('Sifariş təsdiqindən sonra məhsullar 3 iş günündə çatdırılacaq').</li>
+                            <li>@lang('Ünvanı yoxlayın, lazım olsa dəyişiklik edin').</li>
+                            <li>@lang('Sifariş statusunu e-poçt və ya SMS ilə izləyin').</li>
                         </ul>
                         <div class="basket_items_table">
                             <form action="#" method="post">
                                 <!-- Endirim varsa "discount_price",  cemi ise bu class "total_price"  -->
                                 <div class="bsk_itm_row">
-                                    <div class="bsk_itm_name">Qiymət:</div>
-                                    <div class="bsk_itm_val">585 AZN</div>
+                                    <div class="bsk_itm_name">@lang('Qiymət'):</div>
+                                    <div
+                                        class="bsk_itm_val">
+                                        {!! $totalPrice = $carts->sum(fn ($cart) => $cart->productPrice->price * $cart->count) !!}
+                                        AZN
+                                    </div>
                                 </div>
                                 <div class="bsk_itm_row discount_price">
-                                    <div class="bsk_itm_name">Endirim:</div>
-                                    <div class="bsk_itm_val">-18 AZN</div>
+                                    <div class="bsk_itm_name">@lang('Endirim'):</div>
+                                    <div class="bsk_itm_val">
+                                        {!! $totalPrice - ( $totalPriceWithDiscount = $carts->sum(fn ($cart) => $cart->productPrice->sale_price > 0 ? $cart->productPrice->sale_price * $cart->count : $cart->productPrice->price * $cart->count ) ) !!}
+                                        AZN
+                                    </div>
                                 </div>
                                 <div class="bsk_itm_row">
-                                    <div class="bsk_itm_name">Çatıdırılma:</div>
+                                    <div class="bsk_itm_name">@lang('Çatıdırılma'):</div>
                                     <div class="bsk_itm_val">5 AZN</div>
                                 </div>
                                 <div class="bsk_itm_row total_price">
-                                    <div class="bsk_itm_name">Ödəniləcək məbləğ:</div>
-                                    <div class="bsk_itm_val">550 AZN</div>
+                                    <div class="bsk_itm_name">@lang('Ödəniləcək məbləğ'):</div>
+                                    <div class="bsk_itm_val">{!! $totalPriceWithDiscount + 5 !!} AZN
+                                    </div>
                                 </div>
-                                <button type="submit" class="filter_btn btn_send">Checkout</button>
+                                <button type="submit" class="filter_btn btn_send">@lang('Checkout')</button>
                             </form>
 
                         </div>
                     </div>
                 </div>
-                
-
             </div>
         </div>
 
@@ -146,7 +168,7 @@
 @endsection
 
 @push('js')
-    <script>
+	<script>
         $(document).ready(function () {
             $(".favotites").click(function (e) {
                 e.preventDefault();
@@ -154,13 +176,11 @@
                 $(this).toggleClass("dofav");
             });
             $(".delete").click(function (e) {
-                e.preventDefault();
-                e.stopPropagation()
                 $(this).toggleClass("dodel");
             });
         });
-    </script>
-    <script>
+	</script>
+	<script>
         $(document).ready(function () {
 
             var maxCount = 15;
@@ -195,5 +215,5 @@
             });
 
         });
-    </script>
+	</script>
 @endpush

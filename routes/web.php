@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SettingController;
 use App\Http\Middleware\AuthenticateFrontUser;
@@ -36,10 +37,14 @@ Route::middleware([AuthenticateFrontUser::class])->group(function () {
     Route::prefix("/carts")->name('carts.')->group(function () {
         Route::get('/', [CartController::class, 'index'])->name('index');
         Route::post('add', [CartController::class, 'addProduct'])->name('add');
+        Route::post('address', [CartController::class, 'selectAddress'])->name('address');
+        Route::delete('{id}', [CartController::class, 'destroy'])->name('destroy');
+        Route::post('complete', [CartController::class, 'completeCart'])->name('complete');
     });
     Route::get('/orders', [OrderController::class, 'index'])->name('orders');
     Route::resource('addresses', AddressController::class)->except(['create', 'edit']);
     Route::resource('settings', SettingController::class);
+    Route::resource('favorites', FavoriteController::class);
 });
 
 Route::get('/forgot_password', [SiteController::class, 'forgot_password'])->name('forgot_password');
