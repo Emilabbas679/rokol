@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProductOrder extends Model
+class ProductOrder extends
+    Model
 {
     use SoftDeletes;
 
@@ -19,6 +20,21 @@ class ProductOrder extends Model
 
     protected $table = 'product_orders';
 
+    protected $fillable = [
+        'user_id',
+        'address_id',
+        'amount',
+        'delivery_price',
+        'delivered_status',
+        'item_count',
+        'payment_method',
+        'total_discount'
+    ];
+
+    public function items(): HasMany
+    {
+        return $this->hasMany( ProductOrderItem::class, 'order_id' );
+    }
 
 
 }

@@ -41,7 +41,7 @@ Route::middleware([AuthenticateFrontUser::class])->group(function () {
         Route::delete('{id}', [CartController::class, 'destroy'])->name('destroy');
         Route::post('complete', [CartController::class, 'completeCart'])->name('complete');
     });
-    Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::resource('addresses', AddressController::class)->except(['create', 'edit']);
     Route::resource('settings', SettingController::class);
     Route::resource('favorites', FavoriteController::class);
