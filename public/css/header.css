@@ -1405,7 +1405,11 @@ nav.nav_mobile .number_links {
 
     /* Header responsive */
     ul.hdr_menu > li {
-        padding: 0 8px;
+        padding: 0 3px;
+    }
+
+    ul.hdr_menu > li > a {
+        padding: 12px 5px;
     }
 
     .hd_search {

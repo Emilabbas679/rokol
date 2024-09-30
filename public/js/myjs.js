@@ -37,6 +37,38 @@ $(document).ready(function () {
   }
   dropLangs();
   // *language
+  // *Mobile basket 
+  $(".open_filter").click(function (e) {
+    e.stopPropagation()
+    $(".mobile_fix_item").toggleClass("opened");
+    $(".basket_mob_fix_back").toggleClass("opened");
+    $("body").toggleClass("mm_noscroll");
+  });
+  $(".close_filter").click(function (e) {
+    e.stopPropagation()
+    $(".mobile_fix_item").removeClass("opened");
+    $(".basket_mob_fix_back").removeClass("opened");
+    $("body").removeClass("mm_noscroll");
+  });
+
+  $(".basket_total_mob").click(function (e) {
+    e.stopPropagation()
+    $(this).parents(".basket_mob_fix").toggleClass("opened");
+    $(".mobile_fix_item").toggleClass("opened");
+    $(".basket_mob_fix_back").toggleClass("opened");
+    $("body").toggleClass("mm_noscroll");
+  });
+  $(".basket_mob_fix").click(function () {
+    $(this).removeClass("opened");
+    $(".mobile_fix_item").removeClass("opened");
+    $(".basket_mob_fix_back").removeClass("opened");
+    $("body").removeClass("mm_noscroll");
+  });
+  $(".basket_mob_fix_content").click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+  // *Mobile basket
 
 
   // *Header fixed end

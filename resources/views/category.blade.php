@@ -15,9 +15,15 @@
     <div class="main_center clearfix">
 
         <div class="sect_body clearfix">
-            <div class="wrap_left">
+            
+            <div class="basket_mob_fix_back"></div>
+
+            <div class="wrap_left mobile_fix_item">
                 <div class="filter_container">
-                    <h2 class="filter_title">Filterlər</h2>
+                    <h2 class="filter_title">
+                        Filterlər
+                        <span class="close_filter"></span>
+                    </h2>
 
                     @php $route = route('category', $category['id']);
                         if ($category['id'] == 0) {$route = route('products');}
@@ -150,25 +156,34 @@
 
                 </div>
             </div>
-            <div class="wrap_right">
+            <div class="wrap_right moble_list_items">
 
                 <div class="benefit_tabs">
 
                     <div class="filter_sort_sect">
-                        <div class="sort_count">230 məhsul tapıldı</div>
+                        <div class="sort_count desk_show ">230 məhsul tapıldı</div>
                         <div class="sort_items">
-                            <div class="sort_seletc_item">
-                                Sort by:
-                                <div class="form_item">
-                                    <select name="sort_category_id" class="js-example-basic-single " id="sort_main" data-placeholder="Most popular">
-                                        <option value="0">Most popular</option>
-                                        <option value="1">Most expensive </option>
-                                        <option value="2">Most cheap </option>
-                                    </select>
-                                    <span class="customDrop customDrop-sort"></span>
+                            
+                            <div class="sort_itm_mob">
+                                <div class="open_filter">
+                                    Filter
+                                </div>
+
+                                <div class="sort_seletc_item">
+                                    <span>Sort by:</span>
+                                    <div class="form_item">
+                                        <select name="sort_category_id" class="js-example-basic-single " id="sort_main" data-placeholder="Most popular">
+                                            <option value="0">Most popular</option>
+                                            <option value="1">Most expensive </option>
+                                            <option value="2">Most cheap </option>
+                                        </select>
+                                        <span class="customDrop customDrop-sort"></span>
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="bf_tb_hd grid_button_items">
+                                <div class="sort_count">230 məhsul tapıldı</div>
                                 <div class="grid_button clicked_tab_btn btn_list " data-id="0"></div>
                                 <div class="grid_button clicked_tab_btn btn_grid active" data-id="1"></div>
                             </div>
