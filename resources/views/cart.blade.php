@@ -16,6 +16,7 @@
 
 
             <div class="sect_body clearfix">
+                @if(!$carts->count())
                 <div class="empty_basket_section clearfix">
                     <div class="empty_bs_icon"></div>
                     <div class="empty_bs_title">Səbətinizdə məhsul yoxdur!</div>
@@ -24,19 +25,25 @@
                     </div>
                 </div>
                 <!-- Empty basket sect -->
+                @else
+                @php
+                     $totalPrice = $carts->sum(fn ($cart) => $cart->productPrice->price * $cart->count);
+                     $discount = $totalPrice - ( $totalPriceWithDiscount = $carts->sum(fn ($cart) => $cart->productPrice->sale_price > 0 ? $cart->productPrice->sale_price * $cart->count : $cart->productPrice->price * $cart->count ) );
+                @endphp
                 <!-- Mobile basket section -->
                 <div class="basket_mob_fix_back"></div>
                 <div class="basket_mob_fix">
                     <div class="basket_mob_fix_content">
                         <div class="basket_total_mob discount_price">
-                            <span class="bsk_itm_name">Cəmi</span>
-                            <span class="bsk_itm_val ">550 AZN</span>
+                            <span class="bsk_itm_name">@lang('Cəmi')</span>
+                            <span class="bsk_itm_val ">{!! $totalPriceWithDiscount + \App\Models\ProductOrder::DELIVERU_PRICE !!} AZN</span>
                         </div>
                         <div class="basket_btn_mob">
-                            <button type="submit" class="filter_btn btn_send">Checkout</button>
+                            <button type="submit" class="filter_btn btn_send" form="cart_form">@lang('Checkout')</button>
                         </div>
                     </div>
                 </div>
+
                 <div class="wrap_left">
                     <div class="basket_items_sect">
                         <div class="sect_header clearfix">
@@ -73,8 +80,7 @@
                                         <div class="bsk_row_list">
                                             <span class="bck_itm_name">@lang('Weight'):</span>
                                             <span
-                                                class="bck_itm_val">{!! $cart->productPrice->weight->weight . " " . $cart->productPrice->weight->weight_type !!}
-												kq
+                                                class="bck_itm_val">{!! $cart->productPrice->weight->weight . " " . ($cart->productPrice->weight->weight_type == 1 ? 'Kq' : 'q') !!}
 											</span>
                                         </div>
                                         <div class="bsk_row_list">
@@ -119,7 +125,7 @@
 					</div>
 
 				</div>
-				<div class="wrap_right">
+				<div class="wrap_right mobile_fix_item">
 					<div class="basket_info_sect">
 						<ul class="basket_info_list">
 							<li>@lang('Sifariş təsdiqindən sonra məhsullar 3 iş günündə çatdırılacaq').</li>
@@ -127,31 +133,30 @@
 							<li>@lang('Sifariş statusunu e-poçt və ya SMS ilə izləyin').</li>
 						</ul>
 						<div class="basket_items_table">
-							<form action="{!! route('carts.address') !!}" method="post">
-								@csrf
+							<form action="{!! route('carts.address') !!}" method="get" id="cart_form">
 								<!-- Endirim varsa "discount_price",  cemi ise bu class "total_price"  -->
 								<div class="bsk_itm_row">
 									<div class="bsk_itm_name">@lang('Qiymət'):</div>
-									<div
-											class="bsk_itm_val">
-										{!! $totalPrice = $carts->sum(fn ($cart) => $cart->productPrice->price * $cart->count) !!}
+									<div class="bsk_itm_val">
+										{!! $totalPrice !!}
 										AZN
 									</div>
 								</div>
 								<div class="bsk_itm_row discount_price">
 									<div class="bsk_itm_name">@lang('Endirim'):</div>
 									<div class="bsk_itm_val">
-										{!! $totalPrice - ( $totalPriceWithDiscount = $carts->sum(fn ($cart) => $cart->productPrice->sale_price > 0 ? $cart->productPrice->sale_price * $cart->count : $cart->productPrice->price * $cart->count ) ) !!}
+										{!! $discount !!}
 										AZN
 									</div>
 								</div>
 								<div class="bsk_itm_row">
 									<div class="bsk_itm_name">@lang('Çatıdırılma'):</div>
-									<div class="bsk_itm_val">5 AZN</div>
+									<div class="bsk_itm_val">{!! \App\Models\ProductOrder::DELIVERU_PRICE !!} AZN</div>
 								</div>
 								<div class="bsk_itm_row total_price">
 									<div class="bsk_itm_name">@lang('Ödəniləcək məbləğ'):</div>
-									<div class="bsk_itm_val">{!! $totalPriceWithDiscount + 5 !!} AZN
+									<div class="bsk_itm_val">
+                                        {!! $totalPriceWithDiscount + \App\Models\ProductOrder::DELIVERU_PRICE !!} AZN
 									</div>
 								</div>
 								<button type="submit" class="filter_btn btn_send">@lang('Checkout')</button>
@@ -160,6 +165,7 @@
 						</div>
 					</div>
 				</div>
+                @endif
 			</div>
 		</div>
 

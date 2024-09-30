@@ -14,7 +14,7 @@ class AuthenticateFrontUser
     {
 
         if (!Auth::guard('web')->check()) {
-            return redirect(RouteServiceProvider::HOME);
+            return redirect()->route('login');
         }
         return $next($request);
     }

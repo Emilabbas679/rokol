@@ -7,7 +7,9 @@
 <div class="col item_col clearfix">
     <div class="col_in">
         <div class="fav_sect">
-            <span class="favotites "></span>
+            @auth()
+                <span class="favotites @if($product->favorite) dofav @endif" data-product-id="{!! $product->id !!}"></span>
+            @endauth
         </div>
         <a href="{{route('product', $product->id)}}" class="item_img">
             <img src="{{asset('storage/'.$product->image)}}" alt="product" >
@@ -35,9 +37,9 @@
             <div class="itm_stock stocked">
 {{--                <span class="stock_text">Stokda: 25 ədəd</span>--}}
             </div>
-            <div class="itm_more">
-                Səbətə əlavə et
-            </div>
+{{--            <div class="itm_more">--}}
+{{--                Səbətə əlavə et--}}
+{{--            </div>--}}
         </div>
     </div>
 </div>

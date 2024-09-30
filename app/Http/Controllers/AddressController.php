@@ -29,10 +29,13 @@ class AddressController extends Controller
     {
         $validated = collect($request->validated());
         $validated->put('user_id', fUserId());
-        Address::query()->create(
+        $address = Address::query()->create(
             $validated->toArray()
         );
 
+        if ($request->wantsJson()){
+            return response()->json($address->toArray());
+        }
         session()->flash('status', 'Address successfully created!');
         return response()->json(['status' => 'success']);
     }

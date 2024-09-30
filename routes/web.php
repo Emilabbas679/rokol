@@ -37,13 +37,14 @@ Route::middleware([AuthenticateFrontUser::class])->group(function () {
     Route::prefix("/carts")->name('carts.')->group(function () {
         Route::get('/', [CartController::class, 'index'])->name('index');
         Route::post('add', [CartController::class, 'addProduct'])->name('add');
-        Route::post('address', [CartController::class, 'selectAddress'])->name('address');
+        Route::get('address', [CartController::class, 'selectAddress'])->name('address');
         Route::delete('{id}', [CartController::class, 'destroy'])->name('destroy');
         Route::post('complete', [CartController::class, 'completeCart'])->name('complete');
     });
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::resource('addresses', AddressController::class)->except(['create', 'edit']);
-    Route::resource('settings', SettingController::class);
+    Route::get('/settings', [SettingController::class, 'edit'])->name('settings.edit');
+    Route::put('/settings/update', [SettingController::class, 'update'])->name('settings.update');
     Route::resource('favorites', FavoriteController::class);
 });
 

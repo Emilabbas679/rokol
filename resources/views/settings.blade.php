@@ -1,5 +1,5 @@
 @extends('layout')
-{{--@section('title', $category['name'][app()->getLocale() ?? ''])--}}
+@section('title', 'Settings' /*$category['name'][app()->getLocale() ?? '']*/)
 @push('meta')
 
 @endpush
@@ -12,26 +12,7 @@
 
 <!-- Wrap Category section -->
 <!-- Breadcrumb -->
-<div class="section_wrap wrap_breadcrumb_profile">
-    <div class="main_center clearfix">
-        <ul class="breadcrumb_list">
-            <li class="">
-                <a href="#">Sifarişlərim</a>
-            </li>
-            <li class="">
-                <a href="#">Seçilmişlərim</a>
-            </li>
-            <li class="">
-                <a href="#">Ünvanlarım</a>
-            </li>
-            <li class="active">
-                <a href="#">Şəxsi məlumatlarım</a>
-            </li>
-        </ul>
-
-        <a href="#" class="login_btn">Çıxış et</a>
-    </div>
-</div>
+@include('partials.breadcrumbs')
 <!-- Breadcrumb -->
 
 <div class="section_wrap wrap_profile_sect">
@@ -39,42 +20,46 @@
         <div class="sect_body clearfix">
 
             <div class="adrs_container clearfix">
-                <form action="#" method="post" class="create_address_form clearfix">
+                <form action="{!! route('settings.update') !!}" method="post" class="create_address_form clearfix">
+                    @csrf
+                    @method('PUT')
                     <div class="left_setting">
                         <div class="sect_header clearfix">
-                            <h2 class="sect_title">Şəxsi məlumatlarım </h2>
+                            <h2 class="sect_title">@lang('Şəxsi məlumatlarım')</h2>
                         </div>
                         <div class="row_setg">
-                            <label class="itm_inp_label">Ad</label>
+                            <label class="itm_inp_label">@lang('Ad, Soyad')</label>
                             <div class="form_item ">
-                                <input type="text" name="firstname" placeholder="Ad" value="Azizxan Sadiyev" class="item_input">
-                                <!-- <div class="error_type">Supporting text</div> -->
+                                <input type="text" name="full_name" required placeholder="@lang('Ad, Soyad')" value="{{ $user->full_name }}" class="item_input">
+                                @error('full_name')
+                                <div class="error_type">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row_setg">
-                            <label class="itm_inp_label">Telefon</label>
+                            <label class="itm_inp_label">@lang('Telefon')</label>
                             <div class="form_item ">
-                                <input type="text" name="lastname" placeholder="Telefon" value="+994 55 000 00 00" class="item_input phone">
-                                <!-- <div class="error_type">Supporting text</div> -->
+                                <input type="text" placeholder="@lang('Telefon')" value="{!! $user->phone !!}" class="item_input phone">
                             </div>
                         </div>
                         <div class="row_setg">
-                            <label class="itm_inp_label">E-poçt ünvanı</label>
+                            <label class="itm_inp_label">@lang('E-poçt ünvanı')</label>
                             <div class="form_item ">
-                                <input type="text" name="email" placeholder="E-poçt ünvanı" value="xataitest@gmail.com" class="item_input">
-                                <!-- <div class="error_type">Supporting text</div> -->
+                                <input type="text" placeholder="@lang('E-poçt ünvanı')" value="{!! $user->email !!}" class="item_input">
                             </div>
                         </div>
                     </div>
                     <div class="right_setting">
                         <div class="sect_header clearfix">
-                            <h2 class="sect_title">Şifrəni dəyiş </h2>
+                            <h2 class="sect_title">@lang('Şifrəni dəyiş')</h2>
                         </div>
                         <div class="row_setg">
-                            <label class="itm_inp_label">Hazırki şifrə</label>
+                            <label class="itm_inp_label">@lang('Hazırki şifrə')</label>
                             <div class="form_item">
-                                <input type="password" name="password" placeholder="Hazırki şifrə" value="123456" class="item_input ">
-                                <!-- <div class="error_type">Supporting text</div> -->
+                                <input type="password" required name="current_password" placeholder="@lang('Hazırki şifrə')" class="item_input">
+                                @error('current_password')
+                                <div class="error_type">{{ $message }}</div>
+                                @enderror
                                 <div class="pass_eye">
                                     <span class="password-showhide">
                                         <span class="show-password"> </span>
@@ -86,8 +71,10 @@
                         <div class="row_setg">
                             <label class="itm_inp_label">Yeni şifrə</label>
                             <div class="form_item">
-                                <input type="password" name="password" placeholder="Yeni şifrə" value="" class="item_input ">
-                                <!-- <div class="error_type">Supporting text</div> -->
+                                <input type="password" required name="password" placeholder="@lang('Yeni şifrə')" class="item_input">
+                                @error('password')
+                                <div class="error_type">{{ $message }}</div>
+                                @enderror
                                 <div class="pass_eye">
                                     <span class="password-showhide">
                                         <span class="show-password"> </span>
@@ -97,10 +84,9 @@
                             </div>
                         </div>
                         <div class="row_setg">
-                            <label class="itm_inp_label">Yeni şifrə təkrar</label>
+                            <label class="itm_inp_label">@lang('Yeni şifrə təkrar')</label>
                             <div class="form_item">
-                                <input type="password" name="password" placeholder="Yeni şifrə təkrar" value="" class="item_input ">
-                                <!-- <div class="error_type">Supporting text</div> -->
+                                <input type="password" required name="password_confirmation" placeholder="@lang('Yeni şifrə təkrar')" class="item_input">
                                 <div class="pass_eye">
                                     <span class="password-showhide">
                                         <span class="show-password"> </span>

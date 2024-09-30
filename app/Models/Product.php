@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
 //use App\Models\Type;
 
 
@@ -49,10 +51,16 @@ class Product extends Model
     {
         return $this->belongsToMany(ApplicationArea::class, 'product_application_areas', 'product_id', 'application_area_id');
     }
-    
+
     public function prices()
     {
         return $this->hasMany(ProductPrice::class);
+    }
+
+
+    public function favorite(): HasOne
+    {
+        return $this->hasOne( Favorite::class )->where( 'user_id', fUserId() );
     }
 
 

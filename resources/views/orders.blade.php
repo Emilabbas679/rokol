@@ -16,8 +16,10 @@
 			<div class="sect_header clearfix">
 				<h2 class="sect_title">Sifarişlərim </h2>
 				<div class="order_links">
-					<a href="#" class="active">Davam edən</a>
-					<a href="#" class="">Tamamlanmış</a>
+					<a href="{!! route('orders.index') !!}" class="{!! !request()->filled('status') ? 'active' : '' !!}">@lang('Hamısı')</a>
+					<a href="{!! route('orders.index', ['status' => \App\Models\ProductOrder::DELIVERED_STATUS_COMPLETED]) !!}" class="{!! activeClassByQueryParam('status', \App\Models\ProductOrder::DELIVERED_STATUS_COMPLETED)  !!}">@lang('Tamamlanmış')</a>
+					<a href="{!! route('orders.index', ['status' => \App\Models\ProductOrder::DELIVERED_STATUS_PREPARING]) !!}" class="{!! activeClassByQueryParam('status', \App\Models\ProductOrder::DELIVERED_STATUS_PREPARING)  !!}">@lang('Hazırlananlar')</a>
+					<a href="{!! route('orders.index', ['status' => \App\Models\ProductOrder::DELIVERED_STATUS_CANCELED]) !!}" class="{!! activeClassByQueryParam('status', \App\Models\ProductOrder::DELIVERED_STATUS_CANCELED)  !!}">@lang('Ləğv edilmişlər')</a>
 				</div>
 			</div>
 			<div class="sect_body clearfix">

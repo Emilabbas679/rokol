@@ -17,6 +17,8 @@ class ProductOrder extends
     const PAYMENT_METHOD_CASH = 'CASH';
     const PAYMENT_METHOD_ONLINE = 'ONLINE';
     const PAYMENT_METHOD_CARD = 'CARD';
+    const DELIVERU_PRICE = 5;
+
 
     protected $table = 'product_orders';
 

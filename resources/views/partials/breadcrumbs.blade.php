@@ -11,7 +11,7 @@
                 <a href="{!! route('addresses.index') !!}">@lang('Ünvanlarım')</a>
             </li>
             <li class="@if(request()->routeIs('settings.*')) active @endif">
-                <a href="">@lang('Şəxsi məlumatlarım')</a>
+                <a href="{!! route('settings.edit') !!}">@lang('Şəxsi məlumatlarım')</a>
             </li>
         </ul>
 

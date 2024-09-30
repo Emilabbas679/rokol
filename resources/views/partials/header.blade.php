@@ -79,10 +79,12 @@
                     <nav class="nav_desk">
                         <ul class="hdr_menu clearfix">
                             <li>
-                                <a href="{!! route('about') !!}" class="{!! request()->routeIs('about') ? 'active' :  '' !!}">{{translate('header_about')}} </a>
+                                <a href="{!! route('about') !!}"
+                                   class="{!! request()->routeIs('about') ? 'active' :  '' !!}">{{translate('header_about')}} </a>
                             </li>
                             <li>
-                                <a href="{{route('products')}}" class="{!! request()->routeIs('products') ? 'active' :  '' !!}">{{translate('header_products')}}</a>
+                                <a href="{{route('products')}}"
+                                   class="{!! request()->routeIs('products') ? 'active' :  '' !!}">{{translate('header_products')}}</a>
 
                                 @php
                                     $header_categories = menu_categories();
@@ -144,10 +146,10 @@
                                 <li>
                                     <a href="{!! route('carts.index') !!}" class="shop_icon icon_backet"></a>
                                 </li>
+                                <li class="desk_show">
+                                    <a href="" class="shop_icon icon_fav"></a>
+                                </li>
                             @endauth
-                            <li class="desk_show">
-                                <a href="" class="shop_icon icon_fav"></a>
-                            </li>
                             <li>
                                 <a href="" class="shop_icon icon_calc"></a>
                             </li>
@@ -186,7 +188,7 @@
                                             </a>
                                         </li>
                                         <li class="prof_icon">
-                                            <a href="{!! route('settings.index') !!}" class="clearfix">
+                                            <a href="{!! route('settings.edit') !!}" class="clearfix">
                                                 <span class="prof_icon_name">@lang('Şəxsi məlumatlarım')</span>
                                             </a>
                                         </li>
