@@ -79,10 +79,10 @@
                     <nav class="nav_desk">
                         <ul class="hdr_menu clearfix">
                             <li>
-                                <a href="" class="">{{translate('header_about')}} </a>
+                                <a href="{!! route('about') !!}" class="{!! request()->routeIs('about') ? 'active' :  '' !!}">{{translate('header_about')}} </a>
                             </li>
                             <li>
-                                <a href="{{route('products')}}" class="">{{translate('header_products')}}</a>
+                                <a href="{{route('products')}}" class="{!! request()->routeIs('products') ? 'active' :  '' !!}">{{translate('header_products')}}</a>
 
                                 @php
                                     $header_categories = menu_categories();
@@ -124,10 +124,10 @@
                                 <a href="" class="">{{translate('header_colors')}} </a>
                             </li>
                             <li>
-                                <a href="" class="active">{{translate('header_offers')}} </a>
+                                <a href="" class="">{{translate('header_offers')}} </a>
                             </li>
                             <li>
-                                <a href="" class="">{{translate('header_news')}} </a>
+                                <a href="{!! route('news') !!}" class="">{{translate('header_news')}} </a>
                             </li>
                             <!-- <li>
                                 <a href="" class="">{{translate('header_catalogs')}} </a>
@@ -166,17 +166,17 @@
                                 <div class="profile_setting clearfix">
                                     <ul class="profile_list clearfix">
                                         <li class="prof_icon icon_prof">
-                                            <a href="#" class="clearfix">
+                                            <a href="" class="clearfix">
                                                 <span class="prof_icon_name">{!! fUser()->full_name !!} </span>
                                             </a>
                                         </li>
                                         <li class="prof_icon">
-                                            <a href="{!! route('orders') !!}" class="clearfix">
+                                            <a href="{!! route('orders.index') !!}" class="clearfix">
                                                 <span class="prof_icon_name">@lang('Sifarişlərim')</span>
                                             </a>
                                         </li>
                                         <li class="prof_icon">
-                                            <a href="#" class="clearfix">
+                                            <a href="{!! route('favorites.index') !!}" class="clearfix">
                                                 <span class="prof_icon_name">@lang('Seçilmişlərim')</span>
                                             </a>
                                         </li>

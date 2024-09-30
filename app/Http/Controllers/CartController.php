@@ -7,6 +7,7 @@ use App\Http\Requests\CartCompleteRequest;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\ProductOrder;
+use App\Models\ProductOrderItem;
 use App\Models\ProductPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -126,7 +127,7 @@ class CartController extends
     public function completeCart( CartCompleteRequest $request )
     {
         $validated = collect( $request->validated() );
-        $deliveryPrice = $validated->has( 'select_address' ) && $validated->input( 'select_address' ) === 'address' ? 5 : 0;
+        $deliveryPrice = $validated->has( 'select_address' ) && $validated->get( 'select_address' ) === 'address' ? 5 : 0;
         $carts = Cart::query()
             ->with( [ 'product',
                       'productPrice.color',
@@ -134,14 +135,44 @@ class CartController extends
             ->where( 'user_id', auth()->id() )
             ->where( 'status', Cart::STATUS_UNCOMPLETED )
             ->get();
-        $amount = $carts->sum( fn( $cart ) => $cart->productPrice->sale_price > 0 ? $cart->productPrice->sale_price * $cart->count : $cart->productPrice->price * $cart->count );
-        ProductOrder::query()->create(
-            [
-                'user_id'    => fUserId(),
-                'address_id' => $validated->get( 'address_id' ),
-                'amount'     => $amount + $deliveryPrice,
+        $amount = $carts->sum( fn( $cart ) => $cart->productPrice->price * $cart->count );
+        $totalDiscount = $amount - ( $carts->sum( fn( $cart ) => $cart->productPrice->sale_price > 0 ? $cart->productPrice->sale_price * $cart->count : $cart->productPrice->price * $cart->count ) );
+        $itemsCount = $carts->sum( fn( $cart ) => $cart->count );
 
-            ]
-        );
+        DB::beginTransaction();
+
+
+        try {
+            $order = ProductOrder::query()->create(
+                [
+                    'user_id'          => fUserId(),
+                    'address_id'       => $validated->get( 'address_id' ),
+                    'amount'           => ( $amount - $totalDiscount ) + $deliveryPrice,
+                    'delivered_status' => ProductOrder::DELIVERED_STATUS_PREPARING,
+                    'delivery_price'   => $deliveryPrice,
+                    'payment_method'   => ProductOrder::PAYMENT_METHOD_CASH,
+                    'item_count'       => $itemsCount,
+                    'total_discount'   => $totalDiscount
+                ]
+            );
+            foreach ( $carts as $cart ) {
+                ProductOrderItem::query()->create(
+                    [
+                        'order_id'         => $order->id,
+                        'product_id'       => $cart->product_id,
+                        'product_price_id' => $cart->product_price_id,
+                        'count'            => $cart->count
+                    ]
+                );
+                $cart->update( [
+                                   'status' => Cart::STATUS_COMPLETED
+                               ] );
+            }
+        } catch ( \Exception $e ) {
+            DB::rollBack();
+            dd( $e->getMessage() );
+        }
+        DB::commit();
+        return redirect()->route( 'orders.index' );
     }
 }
