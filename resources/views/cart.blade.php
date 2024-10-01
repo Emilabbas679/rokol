@@ -36,7 +36,7 @@
                     <div class="basket_mob_fix_content">
                         <div class="basket_total_mob discount_price">
                             <span class="bsk_itm_name">@lang('Cəmi')</span>
-                            <span class="bsk_itm_val ">{!! $totalPriceWithDiscount + \App\Models\ProductOrder::DELIVERU_PRICE !!} AZN</span>
+                            <span class="bsk_itm_val total-price">{!! $totalPriceWithDiscount + \App\Models\ProductOrder::DELIVERU_PRICE !!} AZN</span>
                         </div>
                         <div class="basket_btn_mob">
                             <button type="submit" class="filter_btn btn_send" form="cart_form">@lang('Checkout')</button>
@@ -103,15 +103,24 @@
                                             </div>
                                             <div class="itm_price">
                                                 @if($cart->productPrice->sale_price)
-                                                    <span class="old-price">
+                                                    <span class="old-main-price">
 														{!! $cart->productPrice->price !!} AZN
 													</span>
-                                                    <span class="new-price">
+                                                    <span class="old-price">
+														
+													</span>
+                                                    <span class="main-price">
 														{!! $cart->productPrice->sale_price !!} AZN
 													</span>
-                                                @else
                                                     <span class="new-price">
+														
+													</span>
+                                                @else
+                                                    <span class="main-price">
 														{!! $cart->productPrice->price !!} AZN
+													</span>
+                                                    <span class="new-price">
+														
 													</span>
 												@endif
 											</div>
@@ -137,14 +146,14 @@
 								<!-- Endirim varsa "discount_price",  cemi ise bu class "total_price"  -->
 								<div class="bsk_itm_row">
 									<div class="bsk_itm_name">@lang('Qiymət'):</div>
-									<div class="bsk_itm_val">
+									<div class="bsk_itm_val total-price">
 										{!! $totalPrice !!}
 										AZN
 									</div>
 								</div>
 								<div class="bsk_itm_row discount_price">
 									<div class="bsk_itm_name">@lang('Endirim'):</div>
-									<div class="bsk_itm_val">
+									<div class="bsk_itm_val sale-price">
 										{!! $discount !!}
 										AZN
 									</div>
@@ -155,7 +164,7 @@
 								</div>
 								<div class="bsk_itm_row total_price">
 									<div class="bsk_itm_name">@lang('Ödəniləcək məbləğ'):</div>
-									<div class="bsk_itm_val">
+									<div class="bsk_itm_val total-basket">
                                         {!! $totalPriceWithDiscount + \App\Models\ProductOrder::DELIVERU_PRICE !!} AZN
 									</div>
 								</div>
@@ -188,6 +197,59 @@
         });
 	</script>
 	<script>
+        function updatePrices(countClass, priceClass, targetClass) {
+            $('.basket_item_content').each(function() {
+                const count = parseInt($(this).find(countClass).text(), 10);
+                const priceText = $(this).find(priceClass).text().replace(' AZN', '').trim();
+                const price = parseFloat(priceText);
+                const productTotal = count * price;
+                $(this).find(targetClass).text(productTotal.toFixed(2) + ' AZN');
+            });
+        }
+        function calculateGrandTotal() {
+            let total = 0;
+
+            $('.basket_item_content').each(function() {
+                const count = parseInt($(this).find('.pr_number').text(), 10);
+                const oldPriceElement = $(this).find('.old-main-price');
+                const priceElement = $(this).find('.main-price');
+                
+                // Eğer 'old-main-price' varsa, onun değerini al, yoksa 'main-price' değerini al
+                const price = oldPriceElement.length ? parseFloat(oldPriceElement.text()) : parseFloat(priceElement.text());
+                
+                total += count * price;
+            });
+
+            $('.total-price').text(total.toFixed(2) + ' AZN');
+            return total;
+        }
+        function saleCalculateGrandTotal() {
+            let saleTotal = 0;
+
+            $('.basket_item_content').each(function() {
+                const count = parseInt($(this).find('.pr_number').text(), 10);
+                const priceElement = $(this).find('.main-price');
+                
+                const price = parseFloat(priceElement.text());
+                
+                saleTotal += count * price;
+            });
+            return saleTotal;
+            
+        }
+        function calculateDifference() {
+            const total = calculateGrandTotal();
+            const saleTotal = saleCalculateGrandTotal();
+
+            const difference = total - saleTotal;
+            
+            $('.sale-price').text(difference.toFixed(2) + ' AZN');
+        }
+        calculateGrandTotal();
+        saleCalculateGrandTotal();
+        calculateDifference()
+        updatePrices('.pr_number', '.old-main-price', '.old-price');
+        updatePrices('.pr_number', '.main-price', '.new-price');
         $(document).ready(function () {
 
             var maxCount = 15;
@@ -205,6 +267,11 @@
                     $input.val(currentCount);
                     $numberSpan.text(currentCount);
                 }
+                updatePrices('.pr_number', '.old-main-price', '.old-price');
+                updatePrices('.pr_number', '.main-price', '.new-price');
+                calculateGrandTotal();
+                saleCalculateGrandTotal();
+                calculateDifference()
             });
 
             $('.pr_minus').click(function () {
@@ -219,24 +286,17 @@
                     $input.val(currentCount);
                     $numberSpan.text(currentCount);
                 }
+                updatePrices('.pr_number', '.old-main-price', '.old-price');
+                updatePrices('.pr_number', '.main-price', '.new-price');
+                calculateGrandTotal();
+                saleCalculateGrandTotal();
+                calculateDifference()
             });
 
             
             
         });
-        $(document).ready(function() {
-            $('.basket_item_content').each(function() {
-                const count = parseInt($(this).find('.pr_number').text(), 10);
-                const priceText = $(this).find('.new-price').text().replace(' AZN', '').trim(); // AZN ifadesini kaldır
-                const price = parseFloat(priceText);
 
-                // Ürün toplamını hesapla
-                const productTotal = count * price;
-
-                // Ürün toplamını konsola yazdır
-                console.log('Ürün Toplamı:', productTotal.toFixed(2) + ' AZN');
-            });
-        });
 
 
 	</script>

@@ -8682,6 +8682,14 @@ img.product_gallery_images_upload {
 
 }
 
+.main-price {
+  display: none;
+}
+
+.old-main-price {
+  display: none;
+}
+
 /** ---- Modal Section----- */
 /*! ---Popup Part --- */
 /* .modal {
