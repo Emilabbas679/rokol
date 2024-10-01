@@ -248,6 +248,7 @@
         calculateGrandTotal();
         saleCalculateGrandTotal();
         calculateDifference()
+        $('.total-basket').text(saleCalculateGrandTotal() + 5 + ' AZN');
         updatePrices('.pr_number', '.old-main-price', '.old-price');
         updatePrices('.pr_number', '.main-price', '.new-price');
         $(document).ready(function () {
@@ -272,6 +273,7 @@
                 calculateGrandTotal();
                 saleCalculateGrandTotal();
                 calculateDifference()
+                $('.total-basket').text(saleCalculateGrandTotal() + 5 + ' AZN');
             });
 
             $('.pr_minus').click(function () {
@@ -291,6 +293,7 @@
                 calculateGrandTotal();
                 saleCalculateGrandTotal();
                 calculateDifference()
+                $('.total-basket').text(saleCalculateGrandTotal() + 5 + ' AZN');
             });
 
             
