@@ -158,8 +158,11 @@
                                         </div>
                                     </div>
                                     <div class="btn_detail btn_basket" onclick="addToCart({!! $product->id !!})">
-                                        <span>
+                                        <span class="add_basket">
                                             Səbətə əlavə et
+                                        </span>
+                                        <span class="added_basket">
+                                            Səbətə əlavə edildi
                                         </span>
                                     </div>
                                     <!-- click after addclass "dofav" -->
@@ -557,9 +560,16 @@ function priceAjax()
 }
 
 function addToCart(productId){
+    if ($(".btn_basket").hasClass('added')) {
+        return;
+    }
     let colorId = $("input[name='color']:checked").val();
     let weightId = $('input[name="weight"]:checked').val();
     let count = $('input[name="counter"]').val();
+    $(".btn_basket").addClass("added")
+    setTimeout(function() {
+        $(".btn_basket").removeClass("added")
+    },2000)
     $.ajax({
         url: '{!! route('carts.add') !!}',
         method: 'POST',

@@ -221,6 +221,23 @@
                 }
             });
 
+            
+            
         });
+        $(document).ready(function() {
+            $('.basket_item_content').each(function() {
+                const count = parseInt($(this).find('.pr_number').text(), 10);
+                const priceText = $(this).find('.new-price').text().replace(' AZN', '').trim(); // AZN ifadesini kaldır
+                const price = parseFloat(priceText);
+
+                // Ürün toplamını hesapla
+                const productTotal = count * price;
+
+                // Ürün toplamını konsola yazdır
+                console.log('Ürün Toplamı:', productTotal.toFixed(2) + ' AZN');
+            });
+        });
+
+
 	</script>
 @endpush
