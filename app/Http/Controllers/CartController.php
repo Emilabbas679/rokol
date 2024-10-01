@@ -9,10 +9,13 @@ use App\Models\Cart;
 use App\Models\ProductOrder;
 use App\Models\ProductOrderItem;
 use App\Models\ProductPrice;
+use App\Rules\ArrayKeysExists;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
-class CartController extends Controller
+class CartController extends
+    Controller
 {
     /**
      * Display a listing of the resource.
@@ -109,6 +112,18 @@ class CartController extends Controller
 
     public function selectAddress()
     {
+        $validated = Validator::make( \request()->all(), [
+            'counters'   => [ 'required', 'array', new ArrayKeysExists( \request()->input( 'counters' ) ) ],
+            'counters.*' => [ 'required', 'numeric', 'min:1', 'max:15' ],
+        ] )->validated();
+        DB::beginTransaction();
+        try {
+            $this->updateCountsAllCartElements( $validated[ 'counters' ] );
+        } catch ( \Exception $e ) {
+            dd( $e->getMessage() );
+            return redirect()->back()->withInput( $validated );
+        }
+        DB::commit();
         $addresses = Address::query()
             ->where( 'user_id', fUserId() )
             ->get();
@@ -173,5 +188,17 @@ class CartController extends Controller
         }
         DB::commit();
         return redirect()->route( 'orders.index' );
+    }
+
+    private function updateCountsAllCartElements( array $counters ): void
+    {
+        foreach ( $counters as $key => $value ) {
+
+            Cart::query()->where( 'id', $key )
+                ->where( 'status', Cart::STATUS_UNCOMPLETED )
+                ->update( [
+                              'count' => $value
+                          ] );
+        }
     }
 }
