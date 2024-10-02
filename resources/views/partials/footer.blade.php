@@ -11,14 +11,14 @@
                             </div>
                         </a>
                     </div>
-                    <ul class="footer_menu">
+                    <!-- <ul class="footer_menu">
                         <li>
                             <a href="" class="">Baş oﬁs </a>
                         </li>
                         <li>
                             <a href="" class="">Fabrik ünvanı</a>
                         </li>
-                    </ul>
+                    </ul> -->
                 </div>
                 <div class="ftr_right">
 
@@ -78,40 +78,40 @@
                                     </div>
                                     <ul class="socials ftr_desk">
                                         <li>
-                                            <a href="" class="social_icon" target="_blank">
+                                            <a href="https://www.facebook.com/RokolBoyalari" class="social_icon" target="_blank">
                                                 <span class="scl_icn">
                                                     <img src="https://rokol.ain.az/img/icons/fb_w.svg?v1" alt="Facebook">
                                                 </span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="" class="social_icon" target="_blank">
+                                            <a href="https://www.instagram.com/rokolboyalari/" class="social_icon" target="_blank">
                                                 <span class="scl_icn">
                                                     <img src="https://rokol.ain.az/img/icons/ins_w.svg?v1" alt="Instagram">
                                                 </span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="" class="social_icon" target="_blank">
+                                            <a href="https://www.linkedin.com/company/rokol-boyalar%C4%B1/" class="social_icon" target="_blank">
                                                 <span class="scl_icn">
                                                     <img src="https://rokol.ain.az/img/icons/lnkd_w.svg?v1" alt="Linkedn">
                                                 </span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="" class="social_icon" target="_blank">
+                                            <a href="https://www.youtube.com/@MatanatAcompany" class="social_icon" target="_blank">
                                                 <span class="scl_icn">
                                                     <img src="https://rokol.ain.az/img/icons/ytb_w.svg?v1" alt="Youtube">
                                                 </span>
                                             </a>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <a href="" class="social_icon" target="_blank">
                                                 <span class="scl_icn">
                                                     <img src="https://rokol.ain.az/img/icons/tiktok_w.svg?v1" alt="Tiktok">
                                                 </span>
                                             </a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                             </div>

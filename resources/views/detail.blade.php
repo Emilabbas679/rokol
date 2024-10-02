@@ -474,7 +474,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 
     var maxCount = 15;
-    var minCount = 0;
+    var minCount = 1;
 
     $('.pr_plus').click(function() {
         var $counterSection = $(this).closest('.product_counter');

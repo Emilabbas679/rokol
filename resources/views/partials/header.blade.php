@@ -27,35 +27,35 @@
                         <a href="tel:*3030" class="call_center">*3030</a>
                         <ul class="socials clearfix">
                             <li>
-                                <a href="" class="social_icon" target="_blank">
+                                <a href="https://www.facebook.com/RokolBoyalari" class="social_icon" target="_blank">
                                     <span class="scl_icn">
                                         <img src="{{asset('img/icons/fb.svg?v1')}}" alt="Facebook">
                                     </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="" class="social_icon" target="_blank">
+                                <a href="https://www.instagram.com/rokolboyalari/" class="social_icon" target="_blank">
                                     <span class="scl_icn">
                                         <img src="{{asset('img/icons/ins.svg?v1')}}" alt="Instagram">
                                     </span>
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="" class="social_icon" target="_blank">
                                     <span class="scl_icn">
                                         <img src="{{asset('img/icons/tiktok.svg?v1')}}" alt="Tiktok">
                                     </span>
                                 </a>
-                            </li>
+                            </li> -->
                             <li>
-                                <a href="" class="social_icon" target="_blank">
+                                <a href="https://www.linkedin.com/company/rokol-boyalar%C4%B1/" class="social_icon" target="_blank">
                                     <span class="scl_icn">
                                         <img src="{{asset('img/icons/lnkd.svg?v1')}}" alt="Linkedn">
                                     </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="" class="social_icon" target="_blank">
+                                <a href="https://www.youtube.com/@MatanatAcompany" class="social_icon" target="_blank">
                                     <span class="scl_icn">
                                         <img src="{{asset('img/icons/ytb.svg?v1')}}" alt="Youtube">
                                     </span>

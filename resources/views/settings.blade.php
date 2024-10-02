@@ -153,9 +153,9 @@
 
                     <button type="submit" class="btn_sign submit_btn submit_address">@lang('Yadda saxla')</button>
 
-                    <div class="security_content modal_little_content">
-                        @lang('+994 55 *** ** 20 nömrəsinə SMS kod göndərildi')
-                    </div>
+                    <a href="javascript:void(0)" class="security_content modal_little_content modal_centered resend_code">
+                        Kodu yenidən göndər
+                    </a>
                 </form>
             </div>
         </div>
@@ -176,38 +176,73 @@ $(document).ready(function() {
 });
 </script>
 <script>
-$(".show-password, .hide-password").on('click', function() {
+    $(".show-password, .hide-password").on('click', function() {
 
-    var passwordId = $(this).parents('.form_item').find('input');
+        var passwordId = $(this).parents('.form_item').find('input');
 
-    if ($(this).hasClass('show-password')) {
-        $(passwordId).attr("type", "text");
-        $(this).parent().find(".show-password").hide();
-        $(this).parent().find(".hide-password").show();
-    } else {
-        $(passwordId).attr("type", "password");
-        $(this).parent().find(".hide-password").hide();
-        $(this).parent().find(".show-password").show();
+        if ($(this).hasClass('show-password')) {
+            $(passwordId).attr("type", "text");
+            $(this).parent().find(".show-password").hide();
+            $(this).parent().find(".hide-password").show();
+        } else {
+            $(passwordId).attr("type", "password");
+            $(this).parent().find(".hide-password").hide();
+            $(this).parent().find(".show-password").show();
+        }
+    });
+
+    $('.phone_modal input').on('input', function() {
+        if ($(this).val().trim() !== '') {
+            $(this).addClass('filled');
+        } else {
+            $(this).removeClass('filled');
+        }
+    });
+    $('.phone_modal input').on('input', function() {
+        this.value = this.value.replace(/[^0-9]/g, '');
+        if (this.value.length === 1) {
+            $(this).parents(".col").next('.col').find(".item_input").focus();
+        }
+    });
+    $('.phone_modal input').on('keydown', function(e) {
+        if (e.key === 'Backspace' && this.value.length === 0) {
+            $(this).parents(".col").prev('.col').find(".item_input").focus();
+        }
+    });
+    $(".submit_btn").click(function(){
+        $(".modal").addClass("opened")
+    })
+    var countdownInterval;
+    function startCountdown() {
+        var countdown = 5; 
+        clearInterval(countdownInterval); 
+        $('.message').text(''); 
+        $('.resend_code')
+            .text('Kod yeniden gönderildi!')
+            .css('pointer-events', 'none')
+            .css('color', 'grey'); 
+        countdownInterval = setInterval(function() {
+            
+            var minutes = Math.floor(countdown / 60);
+            var seconds = countdown % 60;
+            var formattedTime = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+            
+            $('.message').text(formattedTime);
+            countdown--;
+            
+            if (countdown < 0) {
+                clearInterval(countdownInterval); 
+                $('.message').text(''); 
+                $('.resend_code')
+                    .text('Kodu yenidən göndər')
+                    .css('pointer-events', 'auto') 
+                    .css('color', '#414752'); 
+            }
+        }, 1000);
     }
-});
 
-$('.phone_modal input').on('input', function() {
-  if ($(this).val().trim() !== '') {
-    $(this).addClass('filled');
-  } else {
-    $(this).removeClass('filled');
-  }
-});
-$('.phone_modal input').on('input', function() {
-  this.value = this.value.replace(/[^0-9]/g, '');
-  if (this.value.length === 1) {
-    $(this).parents(".col").next('.col').find(".item_input").focus();
-  }
-});
-$('.phone_modal input').on('keydown', function(e) {
-  if (e.key === 'Backspace' && this.value.length === 0) {
-    $(this).parents(".col").prev('.col').find(".item_input").focus();
-  }
-});
+    $('.resend_code').on('click', function() {
+        startCountdown(); 
+    });
 </script>
 @endpush

@@ -87,13 +87,14 @@
                                             <div class="pr_slct_left">
                                                 <div class="filter_check_items">
                                                     <div class="product_counter">
-                                                        <input type="hidden" name="counter"
+                                                        <input type="hidden" name="counters[{!! $cart->id !!}]"
+                                                               form="cart_form"
                                                                value="{!! $cart->count !!}">
-                                                        <button type="button" class="pr_btn_counter pr_minus"></button>
+                                                        <button type="button" class="pr_btn_counter pr_minus" data-cart-id="{!! $cart->id !!}"></button>
                                                         <div class="pr_number_sect">
                                                             <span class="pr_number">{!! $cart->count !!}</span>
                                                         </div>
-                                                        <button type="button" class="pr_btn_counter pr_plus"></button>
+                                                        <button type="button" class="pr_btn_counter pr_plus" data-cart-id="{!! $cart->id !!}"></button>
                                                     </div>
                                                 </div>
                                                 <!-- stocked, unstocked -->
@@ -254,11 +255,12 @@
         $(document).ready(function () {
 
             var maxCount = 15;
-            var minCount = 0;
+            var minCount = 1;
 
             $('.pr_plus').click(function () {
+                var cartId = $(this).data('cartId');
                 var $counterSection = $(this).closest('.product_counter');
-                var $input = $counterSection.find('input[name="counter"]');
+                var $input = $counterSection.find(`input[name="counters[${cartId}]"]`);
                 var $numberSpan = $counterSection.find('.pr_number');
 
                 var currentCount = parseInt($input.val());
@@ -277,8 +279,9 @@
             });
 
             $('.pr_minus').click(function () {
+                var cartId = $(this).data('cartId');
                 var $counterSection = $(this).closest('.product_counter');
-                var $input = $counterSection.find('input[name="counter"]');
+                var $input = $counterSection.find(`input[name="counters[${cartId}]"]`);
                 var $numberSpan = $counterSection.find('.pr_number');
 
                 var currentCount = parseInt($input.val());
