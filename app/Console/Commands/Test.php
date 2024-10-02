@@ -22,8 +22,8 @@ class Test extends
 
     public function handle()
     {
-        $this->smsService->setMsisdn( '994708421483' )->setMsgBody( "salam :: salam" )->send();
-
+        $this->smsService->setMsisdn( '99470348421483' )->setMsgBody( "salam :: salam" )->send();
+        dd( $this->smsService->json() );
     }
 
 }

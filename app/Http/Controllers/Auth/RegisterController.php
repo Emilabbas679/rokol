@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterUserRequest;
+use App\Jobs\SendVerifyPhoneSmsJob;
+use App\Models\PhoneVerification;
 use App\Models\User;
 use App\Rules\PhoneNumberRule;
 use Illuminate\Auth\Events\Registered;
@@ -12,7 +15,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class RegisterController extends Controller
+class RegisterController extends
+    Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -29,7 +33,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('register');
+        return view( 'register' );
     }
 
     public function redirectTo()
@@ -37,19 +41,19 @@ class RegisterController extends Controller
         return '/';
     }
 
-    public function register( Request $request )
+    public function register( RegisterUserRequest $request )
     {
-        $this->validator($request->all())->validate();
+        $validated = $request->validated();
 
-        event(new Registered($user = $this->create($request->all())));
+        event( new Registered( $user = $this->create( $validated ) ) );
 
-        if ($response = $this->registered($request, $user)) {
+        if ( $response = $this->registered( $request, $user ) ) {
             return $response;
         }
 
         return $request->wantsJson()
-            ? new JsonResponse([], 201)
-            : redirect($this->redirectPath());
+            ? new JsonResponse( [], 201 )
+            : redirect( $this->redirectPath() );
     }
 
 
@@ -67,38 +71,65 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
-    }
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'full_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required', 'string', 'max:255', 'unique:users', new PhoneNumberRule()],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        $this->middleware( 'guest' );
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create( array $data )
     {
-        return User::create([
-            'full_name' => $data['full_name'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
-            'password' => Hash::make($data['password']),
-        ]);
+        return User::create( [
+                                 'full_name' => $data[ 'full_name' ],
+                                 'email'     => $data[ 'email' ],
+                                 'phone'     => $data[ 'phone' ],
+                                 'password'  => Hash::make( $data[ 'password' ] ),
+                             ] );
+    }
+
+    public function sendPhoneVerificationCode( RegisterUserRequest $request )
+    {
+        $phone = $request->validated( 'phone' );
+        $phone = str_replace( [ '+', '(', ')', ' ' ], '', $phone );
+        $phoneVerification = $this->getRetry( $phone, 2 );
+        if ( !is_null( $phoneVerification ) ) {
+            return response()->json(
+                [
+                    'status'  => 'fail',
+                    'message' => __( 'You can\'t try now' )
+                ]
+            );
+        }
+        dispatch( new SendVerifyPhoneSmsJob( $phone ) );
+        return response()->json(
+            [
+                'status' => 'success'
+            ]
+        );
+    }
+
+    public function verifyNumber()
+    {
+        $validated = Validator::make(
+            \request()->all(),
+            [
+                'code' => ['required', 'array'],
+                'code.*' => []
+            ] );
+        $codes = \request()->input( 'code' );
+        $code = implode( '', $codes );
+        if ()
+    }
+
+    private function getRetry( $phone, int $minutes )
+    {
+        $time = now()->subMinutes( $minutes )->format( 'Y-m-d H:i:s' );
+        return PhoneVerification::query()
+            ->where( 'phone', $phone )
+            ->where( 'created_at', '>', $time )
+            ->first();
     }
 }

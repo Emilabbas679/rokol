@@ -4,19 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends
+    Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('phone_verification', function (Blueprint $table) {
+        Schema::create( 'phone_verification', function ( Blueprint $table ) {
             $table->id();
             $table->string( 'phone' )->unique();
-            $table->string('code');
-            $table->timestamps();
-        });
+            $table->string( 'code' );
+            $table->boolean('verified')->default(0);
+            $table->dateTime( 'created_at' );
+        } );
     }
 
     /**
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('phone_verification');
+        Schema::dropIfExists( 'phone_verification' );
     }
 };

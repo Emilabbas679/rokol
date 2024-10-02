@@ -20,7 +20,7 @@
                     <div class="sign_title">Qeydiyyatdan keç</div>
                     <div class="sign_info">Giriş məlumatlarını daxil edin</div>
                 </div>
-                <form action="{!! route('register') !!}" method="post">
+                <form action="{!! route('register') !!}" method="post" id="register_form">
                     @csrf
                     <div class="form_item ">
                         <input type="text" name="full_name" placeholder="@lang('Ad, Soyad')" class="item_input"
@@ -95,31 +95,32 @@
                 <div class="modal_body">
                     <form action="{!! route('addresses.store') !!}" method="post" class="create_address_form" id="address_form">
                         <div class="security_content">
-                            @lang('+994 55 *** ** 20 nömrəsinə SMS kod göndərildi')
+                            <span class="phone_number">+994 55 *** ** 20</span>
+                            @lang('nömrəsinə SMS kod göndərildi')
                         </div>
 
                         <div class="row">
                                 <div class="col">
                                     <div class="form_item ">
-                                        <input type="text"  name="" class="item_input" maxlength="1" required>
+                                        <input type="text"  name="code[]" class="item_input" maxlength="1" required>
                                         <!-- <div class="error_type">Supporting text</div> -->
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form_item ">
-                                        <input type="text"  name="" class="item_input" maxlength="1" required>
+                                        <input type="text"  name="code[]" class="item_input" maxlength="1" required>
                                         <!-- <div class="error_type">Supporting text</div> -->
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form_item ">
-                                        <input type="text"  name="" class="item_input " maxlength="1" required>
+                                        <input type="text"  name="code[]" class="item_input " maxlength="1" required>
                                         <!-- <div class="error_type">Supporting text</div> -->
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form_item ">
-                                        <input type="text"  name="" 
+                                        <input type="text"  name="code[]"
                                             class="item_input" maxlength="1" required>
                                         <!-- <div class="error_type">Supporting text</div> -->
                                     </div>
@@ -127,7 +128,7 @@
 
                             </div>
 
-                        <button type="submit" class="btn_sign submit_btn submit_address">@lang('Yadda saxla')</button>
+                        <button type="submit" class="btn_sign submit_btn submit_address">@lang('Göndər')</button>
 
                         <a href="javascript:void(0)" class="security_content modal_little_content modal_centered resend_code">
                             Kodu yenidən göndər
@@ -185,8 +186,32 @@
                 $(this).parents(".col").prev('.col').find(".item_input").focus();
             }
         });
-        $(".submit_btn").click(function(){
-            $(".modal").addClass("opened")
+        $(".submit_btn").click(function(e){
+            e.preventDefault();
+            let phoneNumber = $('input[name="phone"]').val().replaceAll(/\(|\)/gi, '');
+            let data = $('#register_form').serialize();
+            let validationNumber = phoneNumber.replaceAll(' ', '');
+            if (validationNumber.trim() !== '' && validationNumber.length === 13 ) {
+                $.ajax({
+                    url: '{!! route('phone.send_code') !!}',
+                    method: 'POST',
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    data,
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if(data.status === 'success') {
+                            $(".modal").addClass("opened");
+                        }
+                    },
+                    error: function (data) {
+                        $.each(data.responseJSON.errors, (key, value) => {
+                            $(`<div class="error_type">${value[0]}</div>`).insertAfter(`input[name=${key}]`);
+                        })
+                    },
+                });
+                
+                
+            }
         })
 
         var countdownInterval;
