@@ -8690,6 +8690,52 @@ img.product_gallery_images_upload {
   display: none;
 }
 
+.news_header {
+  display: flex;
+  flex-direction: row;
+}
+
+.news_header .sect_title {
+  width: auto !important;
+}
+
+.phone_modal {
+  max-width: 358px;
+}
+
+.modal_little_content {
+  margin-top: 20px !important;
+}
+
+
+.phone_modal .row {
+  justify-content: center;
+}
+
+.phone_modal .col {
+  width: 21%;
+}
+
+.phone_modal .item_input {
+  border: none;
+  border-bottom: 2px solid #D7DAE0 !important;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 22px;
+}
+
+.phone_modal .item_input:focus {
+  border-color: #0C8299 !important;
+}
+
+.phone_modal .item_input.filled {
+  border-color: #1A1E26 !important;
+}
+
+.modal_centered {
+  text-align: center;
+}
+
 /** ---- Modal Section----- */
 /*! ---Popup Part --- */
 /* .modal {

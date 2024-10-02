@@ -108,6 +108,60 @@
     </div>
 </div>
 <!-- Wrap Category section -->
+<!-- Modal Section -->
+<div class="modal" id="new_address_modal" data-id="create_address_modal">
+    <div class="modal_section">
+        <div class="modal_container phone_modal">
+            <div class="modal_header">
+                <h5 class="modal_title">Yeni ünvan yarat</h5>
+                <span class="close_modal"></span>
+            </div>
+            <div class="modal_body">
+                <form action="{!! route('addresses.store') !!}" method="post" class="create_address_form" id="address_form">
+                    <div class="security_content">
+                        @lang('+994 55 *** ** 20 nömrəsinə SMS kod göndərildi')
+                    </div>
+
+                    <div class="row">
+                            <div class="col">
+                                <div class="form_item ">
+                                    <input type="text"  name="" class="item_input" maxlength="1" required>
+                                    <!-- <div class="error_type">Supporting text</div> -->
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form_item ">
+                                    <input type="text"  name="" class="item_input" maxlength="1" required>
+                                    <!-- <div class="error_type">Supporting text</div> -->
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form_item ">
+                                    <input type="text"  name="" class="item_input " maxlength="1" required>
+                                    <!-- <div class="error_type">Supporting text</div> -->
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form_item ">
+                                    <input type="text"  name="" 
+                                           class="item_input" maxlength="1" required>
+                                    <!-- <div class="error_type">Supporting text</div> -->
+                                </div>
+                            </div>
+
+                        </div>
+
+                    <button type="submit" class="btn_sign submit_btn submit_address">@lang('Yadda saxla')</button>
+
+                    <div class="security_content modal_little_content">
+                        @lang('+994 55 *** ** 20 nömrəsinə SMS kod göndərildi')
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Section -->
 
 @endsection
 
@@ -135,6 +189,25 @@ $(".show-password, .hide-password").on('click', function() {
         $(this).parent().find(".hide-password").hide();
         $(this).parent().find(".show-password").show();
     }
+});
+
+$('.phone_modal input').on('input', function() {
+  if ($(this).val().trim() !== '') {
+    $(this).addClass('filled');
+  } else {
+    $(this).removeClass('filled');
+  }
+});
+$('.phone_modal input').on('input', function() {
+  this.value = this.value.replace(/[^0-9]/g, '');
+  if (this.value.length === 1) {
+    $(this).parents(".col").next('.col').find(".item_input").focus();
+  }
+});
+$('.phone_modal input').on('keydown', function(e) {
+  if (e.key === 'Backspace' && this.value.length === 0) {
+    $(this).parents(".col").prev('.col').find(".item_input").focus();
+  }
 });
 </script>
 @endpush
