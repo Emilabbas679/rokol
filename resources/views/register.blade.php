@@ -131,7 +131,6 @@
 
                         <a href="javascript:void(0)" class="security_content modal_little_content modal_centered resend_code">
                             Kodu yenidən göndər
-                            <div class="message"></div>
                         </a>
                     </form>
                 </div>
@@ -190,33 +189,42 @@
             $(".modal").addClass("opened")
         })
 
+        var countdownInterval;
+
+        function startCountdown() {
+            var countdown = 5; 
+            clearInterval(countdownInterval); 
+            $('.message').text(''); 
+            $('.resend_code')
+                .text('Kod yeniden gönderildi!')
+                .css('pointer-events', 'none')
+                .css('color', 'grey'); 
+
+            countdownInterval = setInterval(function() {
+                
+                var minutes = Math.floor(countdown / 60);
+                var seconds = countdown % 60;
+                var formattedTime = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+
+                
+                $('.message').text(formattedTime);
+                countdown--;
+
+                
+                if (countdown < 0) {
+                    clearInterval(countdownInterval); 
+                    $('.message').text(''); 
+                    $('.resend_code')
+                        .text('Kodu yenidən göndər')
+                        .css('pointer-events', 'auto') 
+                        .css('color', '#414752'); 
+                }
+            }, 1000);
+        }
+
+        
         $('.resend_code').on('click', function() {
-                // Bağlantı metnini değiştir
-                $(this).text('Kod yeniden gönderildi!');
-
-                // Bağlantıyı devre dışı bırak
-                $(this).off('click').css('pointer-events', 'none').css('color', 'grey');
-
-                // Geri sayım başlat
-                var countdown = 30; // Geri sayım süresi (saniye)
-                var countdownInterval = setInterval(function() {
-                    // Saniyeleri formatla
-                    var minutes = Math.floor(countdown / 60);
-                    var seconds = countdown % 60;
-                    var formattedTime = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-
-                    // Geri sayımı güncelle
-                    $('.message').text(formattedTime);
-                    countdown--;
-
-                    // Geri sayım bittiğinde
-                    if (countdown < 0) {
-                        clearInterval(countdownInterval); // Intervali durdur
-                        $('.message').text(''); // Mesajı sıfırla
-                        $('.resend_code').text('Kodu yenidən göndər'); // Bağlantı metnini eski haline getir
-                        $('.resend_code').css('pointer-events', 'auto').css('color', 'blue'); // Bağlantıyı tekrar etkinleştir
-                    }
-                }, 1000); // Her 1000 ms'de (1 saniye) tekrar et
-            });
+            startCountdown(); 
+        });
     </script>
 @endpush
