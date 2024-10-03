@@ -37,10 +37,10 @@
                                 <a href="{!! route('catalogs') !!}" class="">{{translate('header_colors')}} </a>
                             </li>
                             <li>
-                                <a href="" class="active">{{translate('header_offers')}} </a>
+                                <a href="" class="">{{translate('header_offers')}} </a>
                             </li>
                             <li>
-                                <a href="{!! route('news') !!}" class="">{{translate('header_news')}} </a>
+                                <a href="{!! route('news.index') !!}" class="">{{translate('header_news')}} </a>
                             </li>
                             <!-- <li>
                                 <a href="" class="">{{translate('header_catalogs')}} </a>

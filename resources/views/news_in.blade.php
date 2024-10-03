@@ -112,160 +112,27 @@
             </div>
             <div class="sect_body clearfix">
                 <div class="row">
-
-                    <div class="col">
-                        <div class="col_in">
-                            <a href="" target="_blank" title="" class="stat_item_link">
-                                <div class="stat_img">
-                                    <img src="{{asset('img/item1.png?v1')}}" alt="News">
-                                </div>
-                                <div class="news_item_content">
-                                    <div class="odds_row">
-                                        <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
+                    @foreach($similarArticles as $similarArticle)
+                        <div class="col">
+                            <div class="col_in">
+                                <a href="{!! route('news.show', $article) !!}" target="_blank" title="" class="stat_item_link">
+                                    <div class="stat_img">
+                                        <img src="{{asset('storage/'.$article->image)}}" alt="{{ $article->title[app()->getLocale()] }}">
                                     </div>
-                                    <div class="odds_row">
-                                        <h2 class="stat_title">
-                                            Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
-                                        </h2>
+                                    <div class="news_item_content">
+                                        <div class="odds_row">
+                                            <h3 class="stat_catg">{!! $article->created_at->format('d M, Y / H:i') !!}</h3>
+                                        </div>
+                                        <div class="odds_row">
+                                            <h2 class="stat_title">
+                                                {{ $article->title[app()->getLocale()] }}
+                                            </h2>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="col_in">
-                            <a href="" target="_blank" title="" class="stat_item_link">
-                                <div class="stat_img">
-                                    <img src="{{asset('img/item2.png?v1')}}" alt="News">
-                                </div>
-                                <div class="news_item_content">
-                                    <div class="odds_row">
-                                        <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                    </div>
-                                    <div class="odds_row">
-                                        <h2 class="stat_title">
-                                            Merih Demiral gələcəyi ilə bağlı yekun qərarını açıqlayıb
-                                        </h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="col_in">
-                            <a href="" target="_blank" title="" class="stat_item_link">
-                                <div class="stat_img">
-                                    <img src="{{asset('img/item3.png?v1')}}" alt="News">
-                                </div>
-                                <div class="news_item_content">
-                                    <div class="odds_row">
-                                        <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                    </div>
-                                    <div class="odds_row">
-                                        <h2 class="stat_title">
-                                            Yanacaqla işləyən avtomobillərə maraq niyə azalıb?
-                                        </h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="col_in">
-                            <a href="" target="_blank" title="" class="stat_item_link">
-                                <div class="stat_img">
-                                    <img src="{{asset('img/item3.png?v1')}}" alt="News">
-                                </div>
-                                <div class="news_item_content">
-                                    <div class="odds_row">
-                                        <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                    </div>
-                                    <div class="odds_row">
-                                        <h2 class="stat_title">
-                                            "The Grand Tour"un final bölümünün treyleri yayımlanıb
-                                        </h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="col_in">
-                            <a href="" target="_blank" title="" class="stat_item_link">
-                                <div class="stat_img">
-                                    <img src="{{asset('img/item1.png?v1')}}" alt="News">
-                                </div>
-                                <div class="news_item_content">
-                                    <div class="odds_row">
-                                        <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                    </div>
-                                    <div class="odds_row">
-                                        <h2 class="stat_title">
-                                            Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
-                                        </h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="col_in">
-                            <a href="" target="_blank" title="" class="stat_item_link">
-                                <div class="stat_img">
-                                    <img src="{{asset('img/item2.png?v1')}}" alt="News">
-                                </div>
-                                <div class="news_item_content">
-                                    <div class="odds_row">
-                                        <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                    </div>
-                                    <div class="odds_row">
-                                        <h2 class="stat_title">
-                                            Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
-                                        </h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="col_in">
-                            <a href="" target="_blank" title="" class="stat_item_link">
-                                <div class="stat_img">
-                                    <img src="{{asset('img/item3.png?v1')}}" alt="News">
-                                </div>
-                                <div class="news_item_content">
-                                    <div class="odds_row">
-                                        <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                    </div>
-                                    <div class="odds_row">
-                                        <h2 class="stat_title">
-                                            Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
-                                        </h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="col_in">
-                            <a href="" target="_blank" title="" class="stat_item_link">
-                                <div class="stat_img">
-                                    <img src="{{asset('img/item3.png?v1')}}" alt="News">
-                                </div>
-                                <div class="news_item_content">
-                                    <div class="odds_row">
-                                        <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                    </div>
-                                    <div class="odds_row">
-                                        <h2 class="stat_title">
-                                            Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
-                                        </h2>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
+                    @endforeach
 
                 </div>
             </div>
