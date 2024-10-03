@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', $product->name)
+@section('title', translate('detail'))
 @push('meta')
 
 @endpush

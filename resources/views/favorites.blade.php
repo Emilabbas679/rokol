@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Favorites')
+@section('title', 'favorites')
 @push('meta')
 
 @endpush

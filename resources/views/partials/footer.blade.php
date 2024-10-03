@@ -28,25 +28,25 @@
                                 <span class="fm_hd">Menular </span>
                             </li>
                             <li>
-                                <a href="" class="">{{translate('header_about')}} </a>
+                                <a href="{!! route('about') !!}" class="">{{translate('header_about')}} </a>
                             </li>
                             <li>
-                                <a href="" class="">{{translate('header_products')}}</a>
+                                <a href="{!! route('products') !!}" class="">{{translate('header_products')}}</a>
                             </li>
                             <li>
-                                <a href="" class="">{{translate('header_colors')}} </a>
+                                <a href="{!! route('catalogs') !!}" class="">{{translate('header_colors')}} </a>
                             </li>
                             <li>
                                 <a href="" class="active">{{translate('header_offers')}} </a>
                             </li>
                             <li>
-                                <a href="" class="">{{translate('header_news')}} </a>
+                                <a href="{!! route('news') !!}" class="">{{translate('header_news')}} </a>
                             </li>
                             <!-- <li>
                                 <a href="" class="">{{translate('header_catalogs')}} </a>
                             </li> -->
                             <li>
-                                <a href="" class="">{{translate('header_contact')}} </a>
+                                <a href="{!! route('contact') !!}" class="">{{translate('header_contact')}} </a>
                             </li>
                         </ul>
                         <ul class="footer_menu">

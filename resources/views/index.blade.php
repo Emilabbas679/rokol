@@ -391,7 +391,7 @@
                     </p>
                 </div>
                 <div class="more_color">
-                    <a href="">Rəngləri kəşf et</a>
+                    <a href="{!! route('catalogs') !!}">Rəngləri kəşf et</a>
                 </div>
             </div>
             <div class="abt_right abt_h">

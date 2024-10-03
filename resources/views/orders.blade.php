@@ -1,5 +1,5 @@
 @extends('layout')
-{{--@section('title', $category['name'][app()->getLocale() ?? ''])--}}
+@section('title', 'orders')
 @push('meta')
 
 @endpush

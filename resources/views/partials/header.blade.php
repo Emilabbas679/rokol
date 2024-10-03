@@ -123,7 +123,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="" class="">{{translate('header_colors')}} </a>
+                                <a href="{!! route('catalogs') !!}" class="">{{translate('header_colors')}} </a>
                             </li>
                             <li>
                                 <a href="" class="">{{translate('header_offers')}} </a>
@@ -135,7 +135,7 @@
                                 <a href="" class="">{{translate('header_catalogs')}} </a>
                             </li> -->
                             <li>
-                                <a href="" class="">{{translate('header_contact')}} </a>
+                                <a href="{!! route('contact') !!}" class="">{{translate('header_contact')}} </a>
                             </li>
                         </ul>
                     </nav>
