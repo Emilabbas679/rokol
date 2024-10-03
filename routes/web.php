@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\OrderController;
@@ -30,6 +31,7 @@ Route::post('/get/sub-categories', [SiteController::class, 'getSubCategories'])-
 Route::get('/product/{product_id}', [SiteController::class, 'product'])->name('product');
 Route::post('/product/price/{product_id}', [SiteController::class, 'productPrice'])->name('product_price');
 Route::get('/lang/{locale}', [SiteController::class, 'locale'])->name('locale');
+Route::post('/phone/send-code', [RegisterController::class, 'sendPhoneVerificationCode'])->name('phone.send_code');
 
 //Route::get('/login', [SiteController::class, 'login'])->name('login');
 //Route::get('/register', [SiteController::class, 'register'])->name('register');
