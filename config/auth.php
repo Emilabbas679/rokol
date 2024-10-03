@@ -40,9 +40,9 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'admin' => [
+        'admins' => [
             'driver' => 'session',
-            'provider' => 'admin'
+            'provider' => 'admins'
         ]
     ],
 
@@ -68,13 +68,9 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'admin' => [
-            'driver' => 'eloquent',
+        'admins' => [
+            'driver' => 'admin_provider_driver',
             'model' => App\Models\User::class,
-            'table' => 'users',
-            'filter' => function($query) {
-                return $query->where('is_admin', true);
-            }
         ],
 
         // 'users' => [

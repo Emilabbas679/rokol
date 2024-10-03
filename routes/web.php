@@ -32,6 +32,7 @@ Route::get('/product/{product_id}', [SiteController::class, 'product'])->name('p
 Route::post('/product/price/{product_id}', [SiteController::class, 'productPrice'])->name('product_price');
 Route::get('/lang/{locale}', [SiteController::class, 'locale'])->name('locale');
 Route::post('/phone/send-code', [RegisterController::class, 'sendPhoneVerificationCode'])->name('phone.send_code');
+Route::post('/phone/verify', [RegisterController::class, 'verifyNumber'])->name('phone.verify');
 
 //Route::get('/login', [SiteController::class, 'login'])->name('login');
 //Route::get('/register', [SiteController::class, 'register'])->name('register');
@@ -53,7 +54,8 @@ Route::middleware([AuthenticateFrontUser::class])->group(function () {
 Route::get('/forgot_password', [SiteController::class, 'forgot_password'])->name('forgot_password');
 Route::get('/new_password', [SiteController::class, 'new_password'])->name('new_password');
 //Route::get('/settings', [SiteController::class, 'settings'])->name('settings');
-Route::get('/news', [SiteController::class, 'news'])->name('news');
+Route::get('/news', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.index');
+Route::get('/news/{id}', [\App\Http\Controllers\NewsController::class, 'show'])->name('news.show');
 Route::get('/news_in', [SiteController::class, 'news_in'])->name('news_in');
 Route::get('/create_address', [SiteController::class, 'create_address'])->name('create_address');
 Route::get('/my_address', [SiteController::class, 'my_address'])->name('my_address');

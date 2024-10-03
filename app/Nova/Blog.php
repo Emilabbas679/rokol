@@ -75,6 +75,13 @@ class Blog extends Resource
                             2 => 'Blog',
                         ])->displayUsingLabels()->default(1)
                         ->sortable(),
+                    Select::make('Category')
+                        ->options([
+                            \App\Models\Blog::CATEGORY_MASTERS_CLUB => __('Ustalar klubu'),
+                            \App\Models\Blog::CATEGORY_CAMPAIGNS => __('Kampaniyalar'),
+                            \App\Models\Blog::CATEGORY_MEETS_AND_SEMINARS => __('Görüş və seminarlar'),
+                        ])->displayUsingLabels()
+                        ->sortable(),
                     File::make('Image')->disk('public'),
                     Images::make('Images', 'images')->fullSize()->hideFromIndex()->singleImageRules('dimensions:min_width=100'),
 

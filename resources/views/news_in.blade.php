@@ -22,17 +22,17 @@
 
                         <div class="news_header clearfix">
                             <h1 class="news_hd">
-                                Məktəbin yeganə şagirdi: Tək olmağım məndə ruh düşkünlüyü yaratmır
+                                {{ $article->title[app()->getLocale()] }}
                             </h1>
                         </div>
                         <div class="section_body clearfix">
 
                             <div class="news_in_img">
-                                <img src="{{asset('img/main.png?v2')}}" alt="">
+                                <img src="{{asset('storage/'.$article->image)}}" alt="">
                             </div>
                             <div class="newsin_icons">
                                 <!-- <div class="view_count">4562</div> -->
-                                <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
+                                <h3 class="stat_catg">{!! $article->created_at->format('d M, Y / H:i') !!}</h3>
                                 <div class="text_scale">
                                     <a href="javascript:void(0)" class="scaleminus" id="btn-decrease"></a>
                                     <div class="scalefont text_reset"></div>
@@ -41,67 +41,25 @@
                             </div>
 
                             <div class="nw_in_text clearfix">
-                                <p>
-                                    46 yaşlı britaniyalı aktrisa Keyt Uinslet film çəkilişləri zamanı yıxıldıqdan sonra xəstəxanaya yerləşdirilib. Bildirilir ki, hazırda Hollivud ulduzu Xorvatiyada “Li” tarixi dramının çəkilişlərində
-                                    iştirak edir. Məlumata görə, çəkiliş zamanı Uinslet müvazinətini itirərək yıxılıb və xəsarət alıb, bundan sonra tibb müəssisəsinə yerləşdirilib.
-                                </p>
-                                <p>
-                                    Mənbədən bildirilib ki, hazırda onun səhhətinə heç bir təhlükə yoxdur və işləməyə davam edə bilər. “Keyt sürüşərək yıxılıb və ehtiyat tədbiri olaraq xəstəxanaya aparılıb. O, yaxşıdır və bu həftə,
-                                    planlaşdırıldığı kimi, çəkilişlərə başlanacaq”, - deyə aktrisanın nümayəndələri bildiriblər.
-                                </p>
-                                <p>
-                                    46 yaşlı britaniyalı aktrisa Keyt Uinslet film çəkilişləri zamanı yıxıldıqdan sonra xəstəxanaya yerləşdirilib. Bildirilir ki, hazırda Hollivud ulduzu Xorvatiyada “Li” tarixi dramının çəkilişlərində
-                                    iştirak edir. Məlumata görə, çəkiliş zamanı Uinslet müvazinətini itirərək yıxılıb və xəsarət alıb, bundan sonra tibb müəssisəsinə yerləşdirilib. Mənbədən bildirilib ki, hazırda onun səhhətinə heç
-                                    bir
-                                    təhlükə yoxdur və işləməyə davam edə bilər.
-                                </p>
-                                <p>
-                                    <img src="{{asset('img/item1.png?v2')}}" alt="Main image">
-                                </p>
-
-                                <p>
-                                    46 yaşlı britaniyalı aktrisa Keyt Uinslet film çəkilişləri zamanı yıxıldıqdan sonra xəstəxanaya yerləşdirilib. Bildirilir ki, hazırda Hollivud ulduzu Xorvatiyada “Li” tarixi dramının çəkilişlərində
-                                    iştirak edir. Məlumata görə, çəkiliş zamanı Uinslet müvazinətini itirərək yıxılıb və xəsarət alıb, bundan sonra tibb müəssisəsinə yerləşdirilib. Mənbədən bildirilib ki, hazırda onun səhhətinə heç
-                                    bir
-                                    təhlükə yoxdur və işləməyə davam edə bilər.
-                                </p>
-                                <p>
-                                    46 yaşlı britaniyalı aktrisa Keyt Uinslet film çəkilişləri zamanı yıxıldıqdan sonra xəstəxanaya yerləşdirilib. Bildirilir ki, hazırda Hollivud ulduzu Xorvatiyada “Li” tarixi dramının çəkilişlərində
-                                    iştirak edir. Məlumata görə, çəkiliş zamanı Uinslet müvazinətini itirərək yıxılıb və xəsarət alıb, bundan sonra tibb müəssisəsinə yerləşdirilib. Mənbədən bildirilib ki, hazırda onun səhhətinə heç
-
-
-                                    bir
-                                    təhlükə yoxdur və işləməyə davam edə bilər. “Keyt sürüşərək yıxılıb və ehtiyat tədbiri olaraq xəstəxanaya aparılıb. O, yaxşıdır və bu həftə, planlaşdırıldığı kimi, çəkilişlərə başlanacaq”, - deyə
-                                    aktrisanın nümayəndələri bildiriblər. Qeyd edək ki, “Oskar” mükafatçısı İkinci Dünya müharibəsi zamanı “Vogue” jurnalında müharibə müxbiri kimi fəaliyyət göstərən fotoqraf Li Milleri canlandıracaq.
-                                    Aktyor heyətinə Marion Kotiyar, Cud Lou, Andrea Rayzboro və Coş Okonnor da daxildir.
-                                </p>
-                                <p>
-                                    “Keyt sürüşərək yıxılıb və ehtiyat tədbiri olaraq xəstəxanaya aparılıb. O, yaxşıdır və bu həftə, planlaşdırıldığı kimi, çəkilişlərə başlanacaq”, - deyə aktrisanın nümayəndələri bildiriblər.
-                                </p>
+                               {!! $article->description['ru'] !!}
                             </div>
-
+                            
+{{--                            @dd($article->getMediaCollection('images'))--}}
+                            
                             <div class="fancy_gallery clearfix">
                                 <div class="row">
-
+                                    @foreach($article->getMedia('images') as  $media)
                                     <div class="col">
                                         <div class="col_in">
-                                            <a href="{{asset('img/item1.png?v1')}}" class="fancy_items" data-fancybox="gallery_offer">
-                                                <img src="{{asset('img/item1.png?v1')}}" alt="item1">
+                                            <a href="{{$media->getUrl()}}" class="fancy_items" data-fancybox="gallery_offer">
+                                                <img src="{{$media->getUrl()}}" alt="item1">
                                             </a>
                                         </div>
                                     </div>
-
-                                    <div class="col">
-                                        <div class="col_in">
-                                            <a href="{{asset('img/item2.png?v1')}}" class="fancy_items" data-fancybox="gallery_offer">
-                                                <img src="{{asset('img/item2.png?v1')}}" alt="item2">
-                                            </a>
-                                        </div>
-                                    </div>
-
+                                    @endforeach
                                 </div>
                             </div>
-
+        
                             <div class="news_in_social clearfix">
                                 <div class="nw_social_sect">
                                     <div class="share_name">

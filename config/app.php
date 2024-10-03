@@ -86,7 +86,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Baku',
 
     /*
     |--------------------------------------------------------------------------
@@ -185,6 +185,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\NovaServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+//        App\Providers\CustomAuthServiceProvider::class,
     ])->toArray(),
 
     /*

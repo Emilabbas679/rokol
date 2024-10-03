@@ -23,10 +23,10 @@
                         <span>Bölmə:</span>
                         <div class="form_item">
                             <select name="sort_category_id" class="js-example-basic-single " id="sort_main" data-placeholder="Hamısı">
-                                <option value="0">Hamısı </option>
-                                <option value="1">Ustalar Klubu	</option>
-                                <option value="2">Kompaniyalar </option>
-                                <option value="3">Görüş və seminarlar </option>
+                                <option value="0">Hamısı</option>
+                                <option value="{!! \App\Models\Blog::CATEGORY_MASTERS_CLUB !!}">Ustalar Klubu</option>
+                                <option value="{!! \App\Models\Blog::CATEGORY_CAMPAIGNS !!}">Kompaniyalar</option>
+                                <option value="{!! \App\Models\Blog::CATEGORY_MEETS_AND_SEMINARS !!}">Görüş və seminarlar</option>
                             </select>
                             <span class="customDrop customDrop-sort"></span>
                         </div>
@@ -37,237 +37,27 @@
         <div class="sect_body clearfix">
             <div class="row">
 
+                @foreach($articles as $article)
                 <div class="col">
                     <div class="col_in">
-                        <a href="" target="_blank" title="" class="stat_item_link">
+                        <a href="{!! route('news.show', $article) !!}" target="_blank" title="" class="stat_item_link">
                             <div class="stat_img">
-                                <img src="{{asset('img/item1.png?v1')}}" alt="News">
+                                <img src="{{asset('storage/'.$article->image)}}" alt="{{ $article->title[app()->getLocale()] }}">
                             </div>
                             <div class="news_item_content">
                                 <div class="odds_row">
-                                    <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
+                                    <h3 class="stat_catg">{!! $article->created_at->format('d M, Y / H:i') !!}</h3>
                                 </div>
                                 <div class="odds_row">
                                     <h2 class="stat_title">
-                                        Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
+                                        {{ $article->title[app()->getLocale()] }}
                                     </h2>
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="col_in">
-                        <a href="" target="_blank" title="" class="stat_item_link">
-                            <div class="stat_img">
-                                <img src="{{asset('img/item2.png?v1')}}" alt="News">
-                            </div>
-                            <div class="news_item_content">
-                                <div class="odds_row">
-                                    <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                </div>
-                                <div class="odds_row">
-                                    <h2 class="stat_title">
-                                        Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
-                                    </h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="col_in">
-                        <a href="" target="_blank" title="" class="stat_item_link">
-                            <div class="stat_img">
-                                <img src="{{asset('img/item3.png?v1')}}" alt="News">
-                            </div>
-                            <div class="news_item_content">
-                                <div class="odds_row">
-                                    <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                </div>
-                                <div class="odds_row">
-                                    <h2 class="stat_title">
-                                        Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
-                                    </h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="col_in">
-                        <a href="" target="_blank" title="" class="stat_item_link">
-                            <div class="stat_img">
-                                <img src="{{asset('img/item3.png?v1')}}" alt="News">
-                            </div>
-                            <div class="news_item_content">
-                                <div class="odds_row">
-                                    <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                </div>
-                                <div class="odds_row">
-                                    <h2 class="stat_title">
-                                        Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
-                                    </h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="col_in">
-                        <a href="" target="_blank" title="" class="stat_item_link">
-                            <div class="stat_img">
-                                <img src="{{asset('img/item1.png?v1')}}" alt="News">
-                            </div>
-                            <div class="news_item_content">
-                                <div class="odds_row">
-                                    <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                </div>
-                                <div class="odds_row">
-                                    <h2 class="stat_title">
-                                        Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
-                                    </h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="col_in">
-                        <a href="" target="_blank" title="" class="stat_item_link">
-                            <div class="stat_img">
-                                <img src="{{asset('img/item2.png?v1')}}" alt="News">
-                            </div>
-                            <div class="news_item_content">
-                                <div class="odds_row">
-                                    <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                </div>
-                                <div class="odds_row">
-                                    <h2 class="stat_title">
-                                        Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
-                                    </h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="col_in">
-                        <a href="" target="_blank" title="" class="stat_item_link">
-                            <div class="stat_img">
-                                <img src="{{asset('img/item3.png?v1')}}" alt="News">
-                            </div>
-                            <div class="news_item_content">
-                                <div class="odds_row">
-                                    <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                </div>
-                                <div class="odds_row">
-                                    <h2 class="stat_title">
-                                        Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
-                                    </h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="col_in">
-                        <a href="" target="_blank" title="" class="stat_item_link">
-                            <div class="stat_img">
-                                <img src="{{asset('img/item3.png?v1')}}" alt="News">
-                            </div>
-                            <div class="news_item_content">
-                                <div class="odds_row">
-                                    <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                </div>
-                                <div class="odds_row">
-                                    <h2 class="stat_title">
-                                        Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
-                                    </h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="col_in">
-                        <a href="" target="_blank" title="" class="stat_item_link">
-                            <div class="stat_img">
-                                <img src="{{asset('img/item1.png?v1')}}" alt="News">
-                            </div>
-                            <div class="news_item_content">
-                                <div class="odds_row">
-                                    <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                </div>
-                                <div class="odds_row">
-                                    <h2 class="stat_title">
-                                        Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
-                                    </h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="col_in">
-                        <a href="" target="_blank" title="" class="stat_item_link">
-                            <div class="stat_img">
-                                <img src="{{asset('img/item2.png?v1')}}" alt="News">
-                            </div>
-                            <div class="news_item_content">
-                                <div class="odds_row">
-                                    <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                </div>
-                                <div class="odds_row">
-                                    <h2 class="stat_title">
-                                        Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
-                                    </h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="col_in">
-                        <a href="" target="_blank" title="" class="stat_item_link">
-                            <div class="stat_img">
-                                <img src="{{asset('img/item3.png?v1')}}" alt="News">
-                            </div>
-                            <div class="news_item_content">
-                                <div class="odds_row">
-                                    <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                </div>
-                                <div class="odds_row">
-                                    <h2 class="stat_title">
-                                        Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
-                                    </h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="col_in">
-                        <a href="" target="_blank" title="" class="stat_item_link">
-                            <div class="stat_img">
-                                <img src="{{asset('img/item3.png?v1')}}" alt="News">
-                            </div>
-                            <div class="news_item_content">
-                                <div class="odds_row">
-                                    <h3 class="stat_catg">23 avq, 2024 / 15:14</h3>
-                                </div>
-                                <div class="odds_row">
-                                    <h2 class="stat_title">
-                                        Bakı və bəzi bölgələrdə güclü külək əsəcək - XƏBƏRDARLIQ
-                                    </h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
 
             <div class="pagination">

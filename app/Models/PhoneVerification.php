@@ -14,7 +14,7 @@ class PhoneVerification extends
     protected $fillable = [
         'phone',
         'code',
-        'status',
+        'verified',
         'created_at'
     ];
 
