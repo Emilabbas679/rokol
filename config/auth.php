@@ -69,8 +69,8 @@ return [
             'model' => App\Models\User::class,
         ],
         'admins' => [
-            'driver' => 'admin_provider_driver',
-            'model' => App\Models\User::class,
+            'driver' => 'eloquent',
+            'model' => \App\Models\Admin::class,
         ],
 
         // 'users' => [

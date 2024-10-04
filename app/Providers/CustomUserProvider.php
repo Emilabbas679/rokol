@@ -6,23 +6,22 @@ use App\Models\User;
 use App\Services\CustomUserService;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
+use Illuminate\Support\Facades\Hash;
 
 class CustomUserProvider implements UserProvider
 {
-    private $userService;
 
-    public function __construct( CustomUserService $userService )
+    public function __construct( private CustomUserService $userService )
     {
-        $this->userService = $userService;
     }
 
     public function retrieveById( $identifier )
     {
         $result = $this->userService->getUserByID( $identifier );
-        if ( is_null( $result ) ) {
+        if ( empty( $result ) ) {
             $user = null;
         } else {
-            $user = new User( $result[ 0 ] );
+            $user = new User( $result );
         }
 
         return $user;
@@ -42,16 +41,25 @@ class CustomUserProvider implements UserProvider
 
     public function updateRememberToken( Authenticatable $user, $token )
     {
-        // Implement your own.
+        $user->setRememberToken($token);
+
+        $timestamps = $user->timestamps;
+
+        $user->timestamps = false;
+
+        $user->save();
+
+        $user->timestamps = $timestamps;
     }
 
     public function retrieveByCredentials( array $credentials ): ?User
     {
         $result = $this->userService->getUserByCredentials( $credentials );
-        if ( is_null( $result ) ) {
+
+        if ( empty( $result ) ) {
             $user = null;
         } else {
-            $user = new User( $result->toArray() );
+            $user = new User( $result );
         }
         return $user;
 
@@ -59,6 +67,7 @@ class CustomUserProvider implements UserProvider
 
     public function validateCredentials( Authenticatable $user, array $credentials ): bool
     {
+        dump( $user );
         return true;
     }
 }

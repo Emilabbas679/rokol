@@ -29,9 +29,9 @@
 								@endif</span>
 						@endif
 					</h4>
-					<!-- <div class="itm_info">Sellülozik Boya</div> -->
+					<div class="itm_info">{!! $product->category->name[app()->getLocale()] !!}</div>
 					<div class="itm_price">
-						
+
 						@if(isset($price['price']))
 							@if($price->sale_price != 0)
 								<span class="old-price">{{$price->price}} AZN</span>
@@ -40,7 +40,7 @@
 								<span class="new-price">{{$price->price}} AZN</span>
 							@endif
 						@endif
-					
+
 					</div>
 					<div class="itm_stock stocked">
 						{{--                <span class="stock_text">Stokda: 25 ədəd</span>--}}
