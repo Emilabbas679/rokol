@@ -8,6 +8,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -49,14 +50,29 @@ class Order extends Resource
             BelongsTo::make('User', 'user')
                 ->display('full_name')
                 ->showOnPreview()
-                ->required(),
+                ->withMeta(['extraAttributes' => [
+                    'readonly' => true
+                ]]),
             BelongsTo::make('Address', 'address')
                 ->display('address')
                 ->showOnPreview()
-                ->required(),
-            Text::make('Amount')->showOnPreview(),
-            Text::make('Discount', 'total_discount')->showOnPreview(),
+                ->withMeta(['extraAttributes' => [
+                    'readonly' => true
+                ]]),
+            Text::make('Amount')
+                ->showOnPreview()
+                ->withMeta(['extraAttributes' => [
+                    'readonly' => true
+                ]]),
+            Text::make('Discount', 'total_discount')
+                ->showOnPreview()
+                ->withMeta(['extraAttributes' => [
+                    'readonly' => true
+                ]]),
             Text::make('Method', 'payment_method')
+                ->withMeta(['extraAttributes' => [
+                    'readonly' => true
+                ]])
                 ->showOnPreview()
                 ->displayUsing(function ($value) {
                     if ($value === ProductOrder::PAYMENT_METHOD_CASH) {
@@ -67,7 +83,12 @@ class Order extends Resource
                         return __('Bank');
                     }
                 }),
-            Text::make('Status', 'delivered_status')
+            Select::make('Status', 'delivered_status')
+                ->options([
+                    ProductOrder::DELIVERED_STATUS_COMPLETED => ProductOrder::DELIVERED_STATUS_COMPLETED,
+                    ProductOrder::DELIVERED_STATUS_PREPARING => ProductOrder::DELIVERED_STATUS_PREPARING,
+                    ProductOrder::DELIVERED_STATUS_CANCELED => ProductOrder::DELIVERED_STATUS_CANCELED
+                ])
                 ->showOnPreview()
                 ->displayUsing(function ($value) {
                     if ($value === ProductOrder::DELIVERED_STATUS_COMPLETED) {
@@ -78,9 +99,18 @@ class Order extends Resource
                         return __('Canceled');
                     }
                 }),
-            HasMany::make('Items', 'items', OrderItem::class),
-            Text::make('Delivery price')->showOnPreview(),
+            HasMany::make('Items', 'items', OrderItem::class)
+                ->withMeta(['extraAttributes' => [
+                    'readonly' => true
+                ]]),
+            Text::make('Delivery price')->showOnPreview()
+                ->withMeta(['extraAttributes' => [
+                    'readonly' => true
+                ]]),
             DateTime::make('Created at')
+                ->withMeta(['extraAttributes' => [
+                    'readonly' => true
+                ]])
                 ->showOnPreview()
                 ->displayUsing(fn($value) => $value ? $value->format('d.m.Y H:i') : '')
         ];
@@ -140,8 +170,8 @@ class Order extends Resource
         return false;
     }
 
-    public function authorizedToUpdate(Request $request)
-    {
-        return false;
-    }
+//    public function authorizedToUpdate(Request $request)
+//    {
+//        return false;
+//    }
 }

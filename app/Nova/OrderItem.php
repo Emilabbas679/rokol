@@ -2,8 +2,11 @@
 
 namespace App\Nova;
 
-use Illuminate\Http\Request;
+
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class OrderItem extends Resource
@@ -34,23 +37,39 @@ class OrderItem extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function fields(NovaRequest $request)
+    public function fields( NovaRequest $request )
     {
         return [
             ID::make()->sortable(),
+            BelongsTo::make( "Product", "product", Product::class )
+                ->display( function ( $value ) {
+                    return $value[ 'name' ][ app()->getLocale() ];
+                } ),
+            BelongsTo::make( "Price", "price", ProductPrice::class )
+                ->display( "price" ),
+            BelongsTo::make( "Sale price", "price", ProductPrice::class )
+                ->display( function ($value) {
+                    return $value[ 'sale_price' ];
+                } ),
+
+            Text::make( 'Count' ),
+            DateTime::make('Created at')
+                ->showOnPreview()
+                ->displayUsing(fn($value) => $value ? $value->format('d.m.Y H:i') : '')
+
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function cards(NovaRequest $request)
+    public function cards( NovaRequest $request )
     {
         return [];
     }
@@ -58,10 +77,10 @@ class OrderItem extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function filters(NovaRequest $request)
+    public function filters( NovaRequest $request )
     {
         return [];
     }
@@ -69,10 +88,10 @@ class OrderItem extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function lenses(NovaRequest $request)
+    public function lenses( NovaRequest $request )
     {
         return [];
     }
@@ -80,10 +99,10 @@ class OrderItem extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function actions(NovaRequest $request)
+    public function actions( NovaRequest $request )
     {
         return [];
     }

@@ -3,71 +3,31 @@
 namespace App\Providers;
 
 use App\Models\User;
-use App\Services\CustomUserService;
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\UserProvider;
-use Illuminate\Support\Facades\Hash;
+use Closure;
+use Illuminate\Auth\EloquentUserProvider;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Hashing\HashManager;
 
-class CustomUserProvider implements UserProvider
+class CustomUserProvider extends EloquentUserProvider
 {
 
-    public function __construct( private CustomUserService $userService )
+    public function __construct($app, $model)
     {
+        parent::__construct( new HashManager( $app ), $model );
     }
 
     public function retrieveById( $identifier )
     {
-        $result = $this->userService->getUserByID( $identifier );
-        if ( empty( $result ) ) {
-            $user = null;
-        } else {
-            $user = new User( $result );
-        }
+        $model = $this->createModel();
 
-        return $user;
+        return $this->newModelQuery( $model )
+            ->where( $model->getAuthIdentifierName(), $identifier )
+            ->where( 'is_admin', true )
+            ->first();
     }
 
-    public function retrieveByToken( $identifier, $token )
+    public function retrieveByCredentials( array $credentials )
     {
-        $result = $this->userService->getUserByToken( $token );
-        if ( count( $result ) === 0 ) {
-            $user = null;
-        } else {
-            $user = new User( $result[ 0 ] );
-        }
-
-        return $user;
-    }
-
-    public function updateRememberToken( Authenticatable $user, $token )
-    {
-        $user->setRememberToken($token);
-
-        $timestamps = $user->timestamps;
-
-        $user->timestamps = false;
-
-        $user->save();
-
-        $user->timestamps = $timestamps;
-    }
-
-    public function retrieveByCredentials( array $credentials ): ?User
-    {
-        $result = $this->userService->getUserByCredentials( $credentials );
-
-        if ( empty( $result ) ) {
-            $user = null;
-        } else {
-            $user = new User( $result );
-        }
-        return $user;
-
-    }
-
-    public function validateCredentials( Authenticatable $user, array $credentials ): bool
-    {
-        dump( $user );
-        return true;
+        return parent::retrieveByCredentials( array_merge( $credentials, [ 'is_admin' => true ] ) );
     }
 }
