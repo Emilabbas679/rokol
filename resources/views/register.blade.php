@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'register')
+@section('title', translate('register'))
 @push('meta')
 
 @endpush
@@ -85,7 +85,7 @@
 	</div>
 	<!-- Wrap Sign section -->
 	<!-- Modal Section -->
-	<div class="modal" id="code_modal" data-id="code_modal">
+	<div class="modal reg_modal" id="code_modal" data-id="code_modal">
 		<div class="modal_section">
 			<div class="modal_container phone_modal">
 				<div class="modal_header">
@@ -128,6 +128,7 @@
 						
 						</div>
 						
+						<div class="error_type" style="display:none">Kod düzgün daxil edilməyib</div>
 						<button type="submit" class="btn_sign submit_btn submit_code">@lang('Göndər')</button>
 						
 						<a href="javascript:void(0)"

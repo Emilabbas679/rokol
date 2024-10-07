@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'favorites')
+@section('title', translate('favorites'))
 @push('meta')
 
 @endpush
@@ -44,34 +44,36 @@
                                 <!-- click after addclass "dofav" -->
                                 <span class="favotites dofav" data-product-id="{!! $product->id !!}"></span>
                             </div>
-                            <a href="{!! route('product', $product) !!}" class="item_img">
-                                <img src="{{asset('img/item.png')}}" alt="product" >
+                            <a href="{!! route('product', $product) !!}">
+                                <div class="item_img">
+                                    <img src="{{asset('img/item.png')}}" alt="product" >
+                                </div>
+                                <div class="item_content">
+                                    <h4 class="itm_title">
+                                        <span class="itm_name">
+                                            {!! $product->name[$locale] !!}
+                                        </span>
+                                        <span class="itm_weight">
+                                            @if(isset($weight['weight']))
+                                                <span class="itm_weight">{{$weight->weight}} @if($weight->weight_type == 0) Q @else Kq @endif</span>
+                                            @endif
+                                        </span>
+                                    </h4>
+                                   <div class="itm_info">
+                                       Sellülozik Boya
+                                    </div>
+                                    <div class="itm_price">
+                                        @include('partials.product_price')
+                                    </div>
+                                    <!-- stocked, unstocked -->
+                                    <!-- <div class="itm_stock stocked">
+                                       <span class="stock_text">Stokda: 25 ədəd</span>
+                                    </div> -->
+                                    <div class="itm_more">
+                                       Səbətə əlavə et
+                                   </div>
+                                </div>
                             </a>
-                            <div class="item_content">
-                                <h4 class="itm_title">
-                                    <span class="itm_name">
-                                        {!! $product->name[$locale] !!}
-                                    </span>
-                                    <span class="itm_weight">
-                                        @if(isset($weight['weight']))
-                                            <span class="itm_weight">{{$weight->weight}} @if($weight->weight_type == 0) Q @else Kq @endif</span>
-                                        @endif
-                                    </span>
-                                </h4>
-{{--                                <div class="itm_info">--}}
-{{--                                    Sellülozik Boya--}}
-{{--                                </div>--}}
-                                <div class="itm_price">
-                                    @include('partials.product_price')
-                                </div>
-                                <!-- stocked, unstocked -->
-                                <div class="itm_stock stocked">
-{{--                                    <span class="stock_text">Stokda: 25 ədəd</span>--}}
-                                </div>
-{{--                                <div class="itm_more">--}}
-{{--                                    Səbətə əlavə et--}}
-{{--                                </div>--}}
-                            </div>
                         </div>
                     </div>
                @endforeach

@@ -637,8 +637,12 @@ $(document).ready(function () {
     $('.atg_item').matchHeight({ property: 'min-height' });
     $('.atg_content').matchHeight({ property: 'min-height' });
     $('.service_item_title').matchHeight({ property: 'min-height' });
+    $('.itm_name.card_head').matchHeight({ property: 'min-height' });
     $('.abt_h').matchHeight({ property: 'min-height' });
     $('.news_item_content').matchHeight({ property: 'min-height' });
   }
   // *Equal height
+
+
+
 });

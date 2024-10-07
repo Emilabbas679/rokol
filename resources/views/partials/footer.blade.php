@@ -40,7 +40,7 @@
                                 <a href="" class="active">{{translate('header_offers')}} </a>
                             </li>
                             <li>
-                                <a href="{!! route('news') !!}" class="">{{translate('header_news')}} </a>
+                                <a href="{!! route('news.index') !!}" class="">{{translate('header_news')}} </a>
                             </li>
                             <!-- <li>
                                 <a href="" class="">{{translate('header_catalogs')}} </a>
@@ -74,7 +74,7 @@
                             <div class="adrs_row">
                                 <div>
                                     <div class="adrs_head">
-                                        Sosial şəbəkələrimiz:                                    
+                                        Sosial şəbəkələrimiz:
                                     </div>
                                     <ul class="socials ftr_desk">
                                         <li>

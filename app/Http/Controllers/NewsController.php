@@ -12,7 +12,7 @@ class NewsController extends Controller
         $articles = Blog::query()
             ->where( 'type', Blog::TYPE_NEWS )
             ->where( 'status', Blog::STATUS_ACTIVE )
-            ->get();
+            ->paginate(20);
         return view( 'news', compact( 'articles' ) );
     }
 

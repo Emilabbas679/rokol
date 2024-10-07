@@ -48,40 +48,40 @@
                             </div>
                             <ul class="socials">
                                 <li>
-                                    <a href="" class="social_icon" target="_blank">
+                                    <a href="https://www.facebook.com/RokolBoyalari" class="social_icon" target="_blank">
                                         <span class="scl_icn">
                                             <img src="https://rokol.ain.az/img/icons/fb_w.svg?v1" alt="Facebook">
                                         </span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="" class="social_icon" target="_blank">
+                                    <a href="https://www.instagram.com/rokolboyalari/" class="social_icon" target="_blank">
                                         <span class="scl_icn">
                                             <img src="https://rokol.ain.az/img/icons/ins_w.svg?v1" alt="Instagram">
                                         </span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="" class="social_icon" target="_blank">
+                                    <a href="https://www.linkedin.com/company/rokol-boyalar%C4%B1/" class="social_icon" target="_blank">
                                         <span class="scl_icn">
                                             <img src="https://rokol.ain.az/img/icons/lnkd_w.svg?v1" alt="Linkedn">
                                         </span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="" class="social_icon" target="_blank">
+                                    <a href="https://www.youtube.com/@MatanatAcompany" class="social_icon" target="_blank">
                                         <span class="scl_icn">
                                             <img src="https://rokol.ain.az/img/icons/ytb_w.svg?v1" alt="Youtube">
                                         </span>
                                     </a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="" class="social_icon" target="_blank">
                                         <span class="scl_icn">
                                             <img src="https://rokol.ain.az/img/icons/tiktok_w.svg?v1" alt="Tiktok">
                                         </span>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -92,35 +92,35 @@
                         <div class="row_setg">
                             <label class="itm_inp_label">Ad</label>
                             <div class="form_item ">
-                                <input type="text" name="firstname" placeholder="Ad" value="Azizxan" class="item_input">
+                                <input type="text" name="firstname" placeholder="Ad" value="" class="item_input">
                                 <!-- <div class="error_type">Supporting text</div> -->
                             </div>
                         </div>
                         <div class="row_setg">
                             <label class="itm_inp_label">Soyad</label>
                             <div class="form_item ">
-                                <input type="text" name="lastname" placeholder="Soyad" value="Sadiyev" class="item_input">
+                                <input type="text" name="lastname" placeholder="Soyad" value="" class="item_input">
                                 <!-- <div class="error_type">Supporting text</div> -->
                             </div>
                         </div>
                         <div class="row_setg">
                             <label class="itm_inp_label">Telefon</label>
                             <div class="form_item ">
-                                <input type="text" name="phone" placeholder="Telefon" value="+994 55 000 00 00" class="item_input phone">
+                                <input type="text" name="phone" placeholder="Telefon" value="" class="item_input phone">
                                 <!-- <div class="error_type">Supporting text</div> -->
                             </div>
                         </div>
                         <div class="row_setg">
                             <label class="itm_inp_label">E-poçt</label>
                             <div class="form_item ">
-                                <input type="text" name="email" placeholder="E-poçt" value="xataitest@gmail.com" class="item_input">
+                                <input type="text" name="email" placeholder="E-poçt" value="" class="item_input">
                                 <!-- <div class="error_type">Supporting text</div> -->
                             </div>
                         </div>
                         <div class="row_setg">
                             <label class="itm_inp_label">Yazın</label>
                             <div class="form_item ">
-                                <textarea placeholder="Yazın" class="item_input"></textarea>
+                                <textarea placeholder="Yazın" class="item_input" style="height: 140px;"></textarea>
                                 <!-- <div class="error_type">Supporting text</div> -->
                             </div>
                         </div>

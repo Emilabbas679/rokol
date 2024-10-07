@@ -146,7 +146,7 @@
                     <div class="swiper-wrapper">
 
                         <div class="swiper-slide">
-                            <a href="#" class="atg_item">
+                            <a href="./category/1" class="atg_item">
                                 <div class="atg_img">
                                     <img src="{{asset('img/product1.png')}}" alt="Daxili məkan boyaları" >
                                 </div>
@@ -165,7 +165,7 @@
                             </a>
                         </div>
                         <div class="swiper-slide">
-                            <a href="#" class="atg_item">
+                            <a href="./category/2" class="atg_item">
                                 <div class="atg_img">
                                     <img src="{{asset('img/product2.png')}}" alt="Fasad Boyaları" >
                                 </div>
@@ -184,7 +184,7 @@
                             </a>
                         </div>
                         <div class="swiper-slide">
-                            <a href="#" class="atg_item">
+                            <a href="./category/3" class="atg_item">
                                 <div class="atg_img">
                                     <img src="{{asset('img/product3.png')}}" alt="Yol Cizgi Boyaları" >
                                 </div>
@@ -203,7 +203,7 @@
                             </a>
                         </div>
                         <div class="swiper-slide">
-                            <a href="#" class="atg_item">
+                            <a href="./category/6" class="atg_item">
                                 <div class="atg_img">
                                     <img src="{{asset('img/product1.png')}}" alt="Boya, Dolğu və Laklar" >
                                 </div>
@@ -222,7 +222,7 @@
                             </a>
                         </div>
                         <div class="swiper-slide">
-                            <a href="#" class="atg_item">
+                            <a href="./category/7" class="atg_item">
                                 <div class="atg_img">
                                     <img src="{{asset('img/product2.png')}}" alt="Sənaye Boyaları" >
                                 </div>

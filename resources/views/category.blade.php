@@ -500,36 +500,39 @@
         });
     });
 </script>
-<script>
-    $(document).ready(function() {
-        $(".favotites").on('click', function(e) {
-            let productId = $(this).data('productId');
-            let el = $(this);
-            let route = '{!! route('favorites.store') !!}';
-            let method = 'post'
-            if (el.hasClass('dofav')) {
-                method = 'delete'
-                route = '{!! url('favorites / ') !!}/' + productId;
-            }
-            $.ajax({
-                url: route,
-                type: method,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    product_id: productId
-                },
-                dataType: 'JSON',
-                success: function(data) {
-                    if (data.status === 'success') {
-                        el.toggleClass("dofav");
-                    }
-                },
+
+@auth()
+    <script>
+        $(document).ready(function() {
+            $(".favotites").on('click', function(e) {
+                let productId = $(this).data('productId');
+                let el = $(this);
+                let route = '{!! route('favorites.store') !!}';
+                let method = 'post'
+                if (el.hasClass('dofav')) {
+                    method = 'delete'
+                    route = '{!! url('favorites / ') !!}/' + productId;
+                }
+                $.ajax({
+                    url: route,
+                    type: method,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        product_id: productId
+                    },
+                    dataType: 'JSON',
+                    success: function(data) {
+                        if (data.status === 'success') {
+                            el.toggleClass("dofav");
+                        }
+                    },
+                });
             });
         });
-    });
-</script>
+    </script>
+@endauth
 
 <script>
     $("#products_main").change(function() {

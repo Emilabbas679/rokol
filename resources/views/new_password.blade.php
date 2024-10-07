@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'new_pass')
+@section('title', translate('new_pass'))
 @push('meta')
 
 @endpush

@@ -147,7 +147,7 @@
                                     <a href="{!! route('carts.index') !!}" class="shop_icon icon_backet"></a>
                                 </li>
                                 <li class="desk_show">
-                                    <a href="" class="shop_icon icon_fav"></a>
+                                    <a href="{!! route('favorites.index') !!}" class="shop_icon icon_fav"></a>
                                 </li>
                             @endauth
                             <li>
@@ -315,3 +315,29 @@
         </div>
     </nav>
 </header>
+@push('js')
+    <script>
+        $('.favotites').click(function(){
+            if($('#dynamic-message').length) {
+                $('#dynamic-message').stop(true, true).remove();
+            }
+            let message = '';
+            if($(this).hasClass('dologin')){
+                window.location.href = '/login';
+            }else if($(this).hasClass('dofav')){
+                message = "<?php echo translate('remove_fav'); ?>";
+                $('body').append('<div id="dynamic-message" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); padding:10px; background-color:#006072; color:#fff; border-radius:5px; z-index:9999;">' + message + '</div>'); 
+            } 
+            else {
+                message = "<?php echo translate('add_fav'); ?>";
+                $('body').append('<div id="dynamic-message" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); padding:10px; background-color:#006072; color:#fff; border-radius:5px; z-index:9999;">' + message + '</div>');
+            }
+            
+
+            $('#dynamic-message').fadeIn(500).delay(3000).fadeOut(500, function(){
+                $(this).remove();
+            });
+
+        });
+    </script>
+@endpush

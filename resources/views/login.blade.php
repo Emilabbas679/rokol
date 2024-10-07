@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'login')
+@section('title', translate('login'))
 @push('meta')
 
 @endpush
@@ -14,7 +14,11 @@
 <div class="section_wrap wrap_sign_page">
 
     <div class="section_wrap wrap_sign_items ">
-
+        <div class="reg_text" style="display:none">
+            <span>
+                Qeydiyyat uğurla tamamlandı daxil ola bilərsiniz.
+            </span>
+        </div>
         <div class="section_wrap wrap_sign_content ">
             <div class="benefit_tabs">
                 <div class="sign_header">
