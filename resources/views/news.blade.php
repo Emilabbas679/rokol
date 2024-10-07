@@ -22,11 +22,11 @@
                    <div class="sort_seletc_item">
                         <span>Bölmə:</span>
                         <div class="form_item">
-                            <select name="sort_category_id" class="js-example-basic-single " id="sort_main" data-placeholder="Hamısı">
+                            <select name="sort_category_id" class="js-example-basic-single article_category_id" id="sort_main" data-placeholder="Hamısı">
                                 <option value="0">Hamısı</option>
-                                <option value="{!! \App\Models\Blog::CATEGORY_MASTERS_CLUB !!}">Ustalar Klubu</option>
-                                <option value="{!! \App\Models\Blog::CATEGORY_CAMPAIGNS !!}">Kompaniyalar</option>
-                                <option value="{!! \App\Models\Blog::CATEGORY_MEETS_AND_SEMINARS !!}">Görüş və seminarlar</option>
+                                <option value="{!! \App\Models\Blog::CATEGORY_MASTERS_CLUB !!}" {!! request()->input('category_id') == \App\Models\Blog::CATEGORY_MASTERS_CLUB ? 'selected' : '' !!}>Ustalar Klubu</option>
+                                <option value="{!! \App\Models\Blog::CATEGORY_CAMPAIGNS !!}" {!! request()->input('category_id') == \App\Models\Blog::CATEGORY_CAMPAIGNS ? 'selected' : '' !!}>Kompaniyalar</option>
+                                <option value="{!! \App\Models\Blog::CATEGORY_MEETS_AND_SEMINARS !!}" {!! request()->input('category_id') == \App\Models\Blog::CATEGORY_MEETS_AND_SEMINARS ? 'selected' : '' !!}>Görüş və seminarlar</option>
                             </select>
                             <span class="customDrop customDrop-sort"></span>
                         </div>
@@ -111,6 +111,17 @@
             $('#sort_main').select2({
                 minimumResultsForSearch: Infinity,
                 dropdownParent: $('.customDrop-sort')
+            });
+        });
+    </script>
+    
+    <script>
+        $(document).ready(function() {
+            $('.article_category_id').on('change', function () {
+                let val = $(this).val();
+                val = parseInt(val);
+                window.location.href = `{!! url('news') !!}${val === 0 ? '' : '?category_id='+val}`;
+                console.log(`{!! url('news') !!}${val === 0 ? '' : '?category_id='+val}`);
             });
         });
     </script>

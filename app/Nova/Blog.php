@@ -156,6 +156,7 @@ class Blog extends Resource
 
 
             ]),
+
         ];
     }
 

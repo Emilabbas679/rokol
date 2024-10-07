@@ -23,6 +23,11 @@ class ProductOrderItem extends
         return $this->belongsTo( Product::class );
     }
 
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo( ProductOrder::class );
+    }
+
     public function price(): BelongsTo
     {
         return $this->belongsTo( ProductPrice::class, 'product_price_id' );

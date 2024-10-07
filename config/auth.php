@@ -70,7 +70,7 @@ return [
         ],
         'admins' => [
             'driver' => 'admin_provider_driver',
-            'model' => App\Models\User::class,
+            'model' => \App\Models\User::class,
         ],
 
         // 'users' => [
