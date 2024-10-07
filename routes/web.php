@@ -60,7 +60,7 @@ Route::get('/news_in', [SiteController::class, 'news_in'])->name('news_in');
 Route::get('/create_address', [SiteController::class, 'create_address'])->name('create_address');
 Route::get('/my_address', [SiteController::class, 'my_address'])->name('my_address');
 Route::get('/selected', [SiteController::class, 'selected'])->name('selected');
-Route::get('/catalogs', [SiteController::class, 'catalogs'])->name('catalogs');
+Route::get('/catalogs', [\App\Http\Controllers\CatalogController::class, 'index'])->name('catalogs');
 Route::get('/about', [SiteController::class, 'about'])->name('about');
 Route::get('/static', [SiteController::class, 'static'])->name('static');
 Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
