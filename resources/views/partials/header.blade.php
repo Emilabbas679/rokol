@@ -133,9 +133,9 @@
                                 <a href="{!! route('news.index') !!}"
                                    class="{!! request()->routeIs('news.*') ? 'active' : '' !!}">{{translate('header_news')}} </a>
                             </li>
-                            <!-- <li>
-                                <a href="" class="">{{translate('header_catalogs')}} </a>
-                            </li> -->
+                            <li>
+                                <a href="{!! route('catalogs.index') !!}" class="">{{translate('header_catalogs')}} </a>
+                            </li>
                             <li>
                                 <a href="{!! route('contact') !!}" class="">{{translate('header_contact')}} </a>
                             </li>
@@ -269,9 +269,9 @@
                     <a href="{!! route('news.index') !!}"
                        class="{!! request()->routeIs('news.*') ? 'active' : '' !!}">{{translate('header_news')}} </a>
                 </li>
-                <!-- <li>
-                    <a href="" class="">{{translate('header_catalogs')}} </a>
-                </li> -->
+                <li>
+                    <a href="{!! route('catalogs.index') !!}" class="">{{translate('header_catalogs')}} </a>
+                </li>
                 <li>
                     <a href="" class="">{{translate('header_contact')}} </a>
                 </li>

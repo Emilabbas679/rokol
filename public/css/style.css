@@ -8515,7 +8515,7 @@ img.product_gallery_images_upload {
 }
 
 .catalog_row_inner .item_col {
-  width: 20%;
+  width: 16.666666%;
   padding: 0 8px;
 }
 
@@ -8992,12 +8992,12 @@ img.product_gallery_images_upload {
   }
 
   .catalog_row_main {
-    margin: 0 -16px;
+    margin: 0;
   }
 
   .catalog_row_main>.item_col {
-    width: 50%;
-    padding: 0 16px 32px 16px;
+    width: 100%;
+    padding: 0 0 16px 0;
   }
 
   /* Catalogs Page  */
@@ -9660,7 +9660,7 @@ img.product_gallery_images_upload {
 
   .catalog_row_main>.item_col {
     width: 100%;
-    padding: 0 0 24px 0;
+    padding: 0 0 16px 0;
   }
 
   .catalog_row_inner {
@@ -9668,8 +9668,8 @@ img.product_gallery_images_upload {
   }
 
   .catalog_row_inner .item_col {
-    width: 20%;
-    padding: 0 4px;
+    width: 33%;
+    padding: 0 4px 8px 4px;
   }
 
   /* Catalogs Page  */
@@ -9811,6 +9811,17 @@ img.product_gallery_images_upload {
   }
 
   /* Baskets Mobile Page  */
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1199px) {
+  .catalog_row_main {
+    margin: 0 -24px;
+  }
+
+  .catalog_row_main>.item_col {
+    width: 50%;
+    padding: 0 24px 40px 24px;
+  }
 }
 
 

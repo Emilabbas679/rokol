@@ -62,6 +62,8 @@ class RegisterController extends Controller
 
         $phoneVerification->delete();
 
+        session()->flash('success_register');
+
         return new JsonResponse( [
             'status'  => 'success',
             'message' => 'User created successfully.'

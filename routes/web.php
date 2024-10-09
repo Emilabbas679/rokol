@@ -65,5 +65,6 @@ Route::get('/about', [\App\Http\Controllers\AboutController::class, 'index'])->n
 Route::get('/static', [SiteController::class, 'static'])->name('static');
 Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
 Route::post('/messages', [\App\Http\Controllers\MessageController::class, 'store'])->name('messages.store');
+Route::get('/catalog', [\App\Http\Controllers\CatalogController::class, 'index'])->name('catalogs.index');
 
 
