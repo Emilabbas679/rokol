@@ -3,21 +3,20 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Email;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Waynestate\Nova\CKEditor4Field\CKEditor;
 
-class About extends Resource
+class Message extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\About>
+     * @var class-string<\App\Models\Message>
      */
-    public static $model = \App\Models\About::class;
+    public static $model = \App\Models\Message::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -41,21 +40,25 @@ class About extends Resource
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function fields( NovaRequest $request )
+    public function fields(NovaRequest $request)
     {
         return [
             ID::make()->sortable(),
-            Text::make( 'Title Az', 'title->az' ),
-            Text::make( 'Title En', 'title->en' ),
-            Text::make( 'Title Ru', 'title->ru' ),
-            CKEditor::make(__('Body Az'), 'body->az')
-                ->hideFromIndex(),
-            CKEditor::make(__('Body En'), 'body->en')
-                ->hideFromIndex(),
-            CKEditor::make(__('Body Ru'), 'body->ru')
-                ->hideFromIndex(),
-            Image::make( 'Image' )->disk( 'public' ),
-
+            Text::make(__('First name'), 'firstname')
+                ->showOnPreview()
+                ->readonly(),
+            Text::make(__('Last name'), 'lastname')
+                ->showOnPreview()
+                ->readonly(),
+            Text::make(__('Phone'), 'phone')
+                ->showOnPreview()
+                ->readonly(),
+            Email::make(__('Email'), 'email')
+                ->showOnPreview()
+                ->readonly(),
+            Textarea::make(__('Content'), 'content')
+                ->showOnPreview()
+                ->readonly()
         ];
     }
 
@@ -65,7 +68,7 @@ class About extends Resource
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function cards( NovaRequest $request )
+    public function cards(NovaRequest $request)
     {
         return [];
     }
@@ -76,7 +79,7 @@ class About extends Resource
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function filters( NovaRequest $request )
+    public function filters(NovaRequest $request)
     {
         return [];
     }
@@ -87,7 +90,7 @@ class About extends Resource
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function lenses( NovaRequest $request )
+    public function lenses(NovaRequest $request)
     {
         return [];
     }
@@ -98,21 +101,8 @@ class About extends Resource
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function actions( NovaRequest $request )
+    public function actions(NovaRequest $request)
     {
         return [];
     }
-
-
-    public static function authorizedToCreate(Request $request)
-    {
-        return !\App\Models\About::query()->count();
-    }
-
-
-    public function authorizedToReplicate(Request $request)
-    {
-        return false;
-    }
-
 }

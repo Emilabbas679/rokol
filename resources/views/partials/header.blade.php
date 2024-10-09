@@ -14,10 +14,10 @@
 
                 <div class="header_row hrow_top desk_show clearfix">
                     <div class="hd_search ">
-                        <form method="post" action="#">
+                        <form method="get" action="{!! route('products') !!}">
                             <div class="search_row clearfix">
-                                <input type="text" name="query" class="search_input" value=""
-                                       placeholder="Sayt üzrə axtarış">
+                                <input type="text" name="q" class="search_input" value="{{ request()->get('q') }}"
+                                       placeholder="@lang('Sayt üzrə axtarış')">
                                 <button type="submit" class="search_btn"></button>
                             </div>
                         </form>
@@ -48,7 +48,8 @@
                                 </a>
                             </li> -->
                             <li>
-                                <a href="https://www.linkedin.com/company/rokol-boyalar%C4%B1/" class="social_icon" target="_blank">
+                                <a href="https://www.linkedin.com/company/rokol-boyalar%C4%B1/" class="social_icon"
+                                   target="_blank">
                                     <span class="scl_icn">
                                         <img src="{{asset('img/icons/lnkd.svg?v1')}}" alt="Linkedn">
                                     </span>
@@ -123,13 +124,14 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="{!! route('catalogs') !!}" class="">{{translate('header_colors')}} </a>
+                                <a href="{!! route('colors') !!}" class="">{{translate('header_colors')}} </a>
                             </li>
                             <li>
                                 <a href="" class="">{{translate('header_offers')}} </a>
                             </li>
                             <li>
-                                <a href="{!! route('news.index') !!}" class="{!! request()->routeIs('news.*') ? 'active' : '' !!}">{{translate('header_news')}} </a>
+                                <a href="{!! route('news.index') !!}"
+                                   class="{!! request()->routeIs('news.*') ? 'active' : '' !!}">{{translate('header_news')}} </a>
                             </li>
                             <!-- <li>
                                 <a href="" class="">{{translate('header_catalogs')}} </a>
@@ -208,10 +210,10 @@
                     <div class="menu_btn open"></div>
 
                     <div class="hd_search mobile_search_sect">
-                        <form method="post" action="#">
+                        <form method="post" action="{!! route('products') !!}">
                             <div class="search_row clearfix">
-                                <input type="text" name="query" class="search_input" value=""
-                                       placeholder="Sayt üzrə axtarış">
+                                <input type="text" name="q" class="search_input" value="{{ request()->get('q') }}"
+                                       placeholder="@lang('Sayt üzrə axtarış')">
                                 <button type="submit" class="search_btn"></button>
                             </div>
                         </form>
@@ -264,7 +266,8 @@
                     <a href="" class="active">{{translate('header_offers')}} </a>
                 </li>
                 <li>
-                    <a href="{!! route('news.index') !!}" class="{!! request()->routeIs('news.*') ? 'active' : '' !!}">{{translate('header_news')}} </a>
+                    <a href="{!! route('news.index') !!}"
+                       class="{!! request()->routeIs('news.*') ? 'active' : '' !!}">{{translate('header_news')}} </a>
                 </li>
                 <!-- <li>
                     <a href="" class="">{{translate('header_catalogs')}} </a>
@@ -317,22 +320,21 @@
 </header>
 @push('js')
     <script>
-        $('.favotites').click(function(){
-            if($('#dynamic-message').length) {
+        $('.favotites').click(function () {
+            if ($('#dynamic-message').length) {
                 $('#dynamic-message').stop(true, true).remove();
             }
             let message = '';
-            if($(this).hasClass('dologin')){
+            if ($(this).hasClass('dologin')) {
                 window.location.href = '/login';
-            }else if($(this).hasClass('dofav')){
+            } else if ($(this).hasClass('dofav')) {
                 message = "<?php echo translate('remove_fav'); ?>";
-                $('body').append('<div id="dynamic-message" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); padding:10px; background-color:#006072; color:#fff; border-radius:5px; z-index:9999;">' + message + '</div>'); 
-            } 
-            else {
+                $('body').append('<div id="dynamic-message" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); padding:10px; background-color:#006072; color:#fff; border-radius:5px; z-index:9999;">' + message + '</div>');
+            } else {
                 message = "<?php echo translate('add_fav'); ?>";
                 $('body').append('<div id="dynamic-message" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); padding:10px; background-color:#006072; color:#fff; border-radius:5px; z-index:9999;">' + message + '</div>');
             }
-            
+
 
             $('#dynamic-message').fadeIn(500).delay(3000).fadeOut(500, function(){
                 $(this).remove();

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Artisan;
 
 class ProductOrder extends
     Model
@@ -18,7 +19,7 @@ class ProductOrder extends
     const PAYMENT_METHOD_CASH = 'CASH';
     const PAYMENT_METHOD_ONLINE = 'ONLINE';
     const PAYMENT_METHOD_CARD = 'CARD';
-    const DELIVERU_PRICE = 5;
+    const DELIVERY_PRICE = 5;
 
 
     protected $table = 'product_orders';

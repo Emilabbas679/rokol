@@ -16,7 +16,7 @@
         <div class="sect_body slider_container clearfix">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-
+                    @foreach($sliders as $slider)
                     <div class="swiper-slide">
                         <div class="swiper-link clearfix">
                             <div class="col_in">
@@ -27,15 +27,13 @@
                                     <div class="main_center clearfix">
                                         <div class="main_slider_inner clearfix">
                                             <h4 class="itm_title">
-                                                Dəqiq qiymətləndirmə, doğru qərarlar
+                                                {{ $slider->header[app()->getLocale()] }}
                                             </h4>
                                             <p class="itm_info">
-                                                Düzgün qərarlar qəbul etmək üçün dəqiq və peşəkar
-                                                qiymətləndirmə xidmətimizdən faydalanın. Bizim qymətləndirmələrimiz
-                                                sizə güvən verəcəkdir
+                                                {{ $slider->content[app()->getLocale()] }}
                                             </p>
                                             <div class="go_product">
-                                                <a href="#">Ətraflı</a>
+                                                <a href="{{ $slider->url }}">@lang('Ətraflı')</a>
                                             </div>
                                         </div>
                                     </div>
@@ -43,85 +41,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="swiper-link clearfix">
-                            <div class="col_in">
-                                <div class="item_img">
-                                    <img src="{{asset('img/main.png?v3')}}" alt="Main slider Image" >
-                                </div>
-                                <div class="main_slider_content">
-                                    <div class="main_center clearfix">
-                                        <div class="main_slider_inner clearfix">
-                                            <h4 class="itm_title">
-                                                Dəqiq qiymətləndirmə, doğru qərarlar
-                                            </h4>
-                                            <p class="itm_info">
-                                                Düzgün qərarlar qəbul etmək üçün dəqiq və peşəkar
-                                                qiymətləndirmə xidmətimizdən faydalanın. Bizim qymətləndirmələrimiz
-                                                sizə güvən verəcəkdir
-                                            </p>
-                                            <div class="go_product">
-                                                <a href="#">Ətraflı</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="swiper-link clearfix">
-                            <div class="col_in">
-                                <div class="item_img">
-                                    <img src="{{asset('img/main.png?v3')}}" alt="Main slider Image" >
-                                </div>
-                                <div class="main_slider_content">
-                                    <div class="main_center clearfix">
-                                        <div class="main_slider_inner clearfix">
-                                            <h4 class="itm_title">
-                                                Dəqiq qiymətləndirmə, doğru qərarlar
-                                            </h4>
-                                            <p class="itm_info">
-                                                Düzgün qərarlar qəbul etmək üçün dəqiq və peşəkar
-                                                qiymətləndirmə xidmətimizdən faydalanın. Bizim qymətləndirmələrimiz
-                                                sizə güvən verəcəkdir
-                                            </p>
-                                            <div class="go_product">
-                                                <a href="#">Ətraflı</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="swiper-link clearfix">
-                            <div class="col_in">
-                                <div class="item_img">
-                                    <img src="{{asset('img/main.png?v1')}}" alt="Main slider Image" >
-                                </div>
-                                <div class="main_slider_content">
-                                    <div class="main_center clearfix">
-                                        <div class="main_slider_inner clearfix">
-                                            <h4 class="itm_title">
-                                                Dəqiq qiymətləndirmə, doğru qərarlar
-                                            </h4>
-                                            <p class="itm_info">
-                                                Düzgün qərarlar qəbul etmək üçün dəqiq və peşəkar
-                                                qiymətləndirmə xidmətimizdən faydalanın. Bizim qymətləndirmələrimiz
-                                                sizə güvən verəcəkdir
-                                            </p>
-                                            <div class="go_product">
-                                                <a href="#">Ətraflı</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    @endforeach
                 </div>
             </div>
             <div class="swiper_pagin_items">
@@ -391,7 +311,7 @@
                     </p>
                 </div>
                 <div class="more_color">
-                    <a href="{!! route('catalogs') !!}">Rəngləri kəşf et</a>
+                    <a href="{!! route('colors') !!}">Rəngləri kəşf et</a>
                 </div>
             </div>
             <div class="abt_right abt_h">
@@ -593,7 +513,7 @@
                 el: ".video_items .swiper-pagination",
                 clickable: true,
             },
-            breakpoints: { 
+            breakpoints: {
                 0: {
                     slidesPerView: 2,
                     spaceBetween: 20,
@@ -616,7 +536,7 @@
                 el: ".product_items .swiper-pagination",
                 clickable: true,
             },
-            breakpoints: { 
+            breakpoints: {
                 0: {
                     slidesPerView: 2,
                     spaceBetween: 20,

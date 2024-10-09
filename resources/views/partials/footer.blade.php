@@ -34,7 +34,7 @@
                                 <a href="{!! route('products') !!}" class="">{{translate('header_products')}}</a>
                             </li>
                             <li>
-                                <a href="{!! route('catalogs') !!}" class="">{{translate('header_colors')}} </a>
+                                <a href="{!! route('colors') !!}" class="">{{translate('header_colors')}} </a>
                             </li>
                             <li>
                                 <a href="" class="">{{translate('header_offers')}} </a>
