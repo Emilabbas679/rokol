@@ -9,158 +9,158 @@
 @endpush
 
 @section('content')
-	
-	<!-- Wrap Sign section -->
-	<div class="section_wrap wrap_sign_page">
-		
-		<div class="section_wrap wrap_sign_items ">
-			
-			<div class="section_wrap wrap_sign_content ">
-				<div class="sign_header">
-					<div class="sign_title">Qeydiyyatdan keç</div>
-					<div class="sign_info">Giriş məlumatlarını daxil edin</div>
-				</div>
-				<form action="{!! route('register') !!}" method="post" id="register_form">
-					@csrf
-					<div class="form_item ">
-						<input type="text" name="full_name" placeholder="@lang('Ad, Soyad')" class="item_input"
-						       required>
-						@error('full_name')
-						<div class="error_type">{{ $message }}</div>
-						@enderror
-					</div>
-					<div class="form_item ">
-						<input type="text" name="phone" placeholder="@lang('Telefon nömrəsi (+994)')"
-						       class="item_input phone" required>
-						@error('phone')
-						<div class="error_type">{{ $message }}</div>
-						@enderror
-					</div>
-					<div class="form_item ">
-						<input type="text" name="email" placeholder="@lang('E-poçt ünvanı')" class="item_input"
-						       required>
-						@error('email')
-						<div class="error_type">{{ $message }}</div>
-						@enderror
-					</div>
-					<div class="form_item">
-						<input type="password" name="password" placeholder="@lang('Şifrə')" class="item_input "
-						       required>
-						@error('password')
-						<div class="error_type">{{ $message }}</div>
-						@enderror
-						<div class="pass_eye">
+
+    <!-- Wrap Sign section -->
+    <div class="section_wrap wrap_sign_page">
+
+        <div class="section_wrap wrap_sign_items ">
+
+            <div class="section_wrap wrap_sign_content ">
+                <div class="sign_header">
+                    <div class="sign_title">Qeydiyyatdan keç</div>
+                    <div class="sign_info">Giriş məlumatlarını daxil edin</div>
+                </div>
+                <form action="{!! route('register') !!}" method="post" id="register_form">
+                    @csrf
+                    <div class="form_item ">
+                        <input type="text" name="full_name" placeholder="@lang('Ad, Soyad')" class="item_input"
+                               required>
+                        @error('full_name')
+                        <div class="error_type">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form_item ">
+                        <input type="text" name="phone" placeholder="@lang('Telefon nömrəsi (+994)')"
+                               class="item_input phone" required>
+                        @error('phone')
+                        <div class="error_type">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form_item ">
+                        <input type="text" name="email" placeholder="@lang('E-poçt ünvanı')" class="item_input"
+                               required>
+                        @error('email')
+                        <div class="error_type">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form_item">
+                        <input type="password" name="password" placeholder="@lang('Şifrə')" class="item_input "
+                               required>
+                        @error('password')
+                        <div class="error_type">{{ $message }}</div>
+                        @enderror
+                        <div class="pass_eye">
 							<span class="password-showhide">
 								<span class="show-password"></span>
 								<span class="hide-password"></span>
 							</span>
-						</div>
-					</div>
-					<div class="form_item">
-						<input type="password" name="password_confirmation" placeholder="@lang('Şifrə təkrar')"
-						       class="item_input ">
-						<!-- <div class="error_type">Supporting text</div> -->
-						<div class="pass_eye">
+                        </div>
+                    </div>
+                    <div class="form_item">
+                        <input type="password" name="password_confirmation" placeholder="@lang('Şifrə təkrar')"
+                               class="item_input ">
+                        <!-- <div class="error_type">Supporting text</div> -->
+                        <div class="pass_eye">
 							<span class="password-showhide">
 								<span class="show-password"></span>
 								<span class="hide-password"></span>
 							</span>
-						</div>
-					</div>
-					<div class="security_content">
-						Siz davam et düyməsini sıxmaqla <a href="#">İstifadəçi şərtlərini</a> və <a href="#">Məxfilik
-							siyasətini</a> qəbul etmiş olursunuz.
-					</div>
-					<div class="form_item">
-						<button type="submit" class="btn_sign submit_btn">Qeydiyyatdan keç</button>
-					</div>
-					<div class="form_item">
-						<a href="{!! route('login') !!}" class="btn_sign link_btn">Daxil ol</a>
-					</div>
-				</form>
-			
-			
-			</div>
-		</div>
-	</div>
-	<!-- Wrap Sign section -->
-	<!-- Modal Section -->
-	<div class="modal reg_modal" id="code_modal" data-id="code_modal">
-		<div class="modal_section">
-			<div class="modal_container phone_modal">
-				<div class="modal_header">
-					<h5 class="modal_title">Təsdiqlə</h5>
-					<span class="close_modal"></span>
-				</div>
-				<div class="modal_body">
-					<form id="code_form">
-						<div class="security_content">
-							<span class="phone_number">+994 55 *** ** 20</span>
-							@lang('nömrəsinə SMS kod göndərildi')
-						</div>
-						
-						<div class="row">
-							<div class="col">
-								<div class="form_item ">
-									<input type="text" name="code[]" class="item_input" maxlength="1" required>
-									<!-- <div class="error_type">Supporting text</div> -->
-								</div>
-							</div>
-							<div class="col">
-								<div class="form_item ">
-									<input type="text" name="code[]" class="item_input" maxlength="1" required>
-									<!-- <div class="error_type">Supporting text</div> -->
-								</div>
-							</div>
-							<div class="col">
-								<div class="form_item ">
-									<input type="text" name="code[]" class="item_input " maxlength="1" required>
-									<!-- <div class="error_type">Supporting text</div> -->
-								</div>
-							</div>
-							<div class="col">
-								<div class="form_item ">
-									<input type="text" name="code[]"
-									       class="item_input" maxlength="1" required>
-									<!-- <div class="error_type">Supporting text</div> -->
-								</div>
-							</div>
-						
-						</div>
-						
-						<div class="error_type" style="display:none">Kod düzgün daxil edilməyib</div>
-						<button type="submit" class="btn_sign submit_btn submit_code">@lang('Göndər')</button>
-						
-						<a href="javascript:void(0)"
-						   class="security_content modal_little_content modal_centered resend_code">
-							Kodu yenidən göndər
-						</a>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Modal Section -->
-	
-	<div class="modal" id="message_modal" data-id="message_modal">
-		<div class="modal_section">
-			<div class="modal_container phone_modal">
-				<div class="modal_header">
-					<h5 class="modal_title"></h5>
-					<span class="close_modal"></span>
-				</div>
-				<div class="modal_body">
-				
-				</div>
-			</div>
-		</div>
-	</div>
+                        </div>
+                    </div>
+                    <div class="security_content">
+                        Siz davam et düyməsini sıxmaqla <a href="#">İstifadəçi şərtlərini</a> və <a href="#">Məxfilik
+                            siyasətini</a> qəbul etmiş olursunuz.
+                    </div>
+                    <div class="form_item">
+                        <button type="submit" class="btn_sign submit_btn">Qeydiyyatdan keç</button>
+                    </div>
+                    <div class="form_item">
+                        <a href="{!! route('login') !!}" class="btn_sign link_btn">Daxil ol</a>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Wrap Sign section -->
+    <!-- Modal Section -->
+    <div class="modal reg_modal" id="code_modal" data-id="code_modal">
+        <div class="modal_section">
+            <div class="modal_container phone_modal">
+                <div class="modal_header">
+                    <h5 class="modal_title">Təsdiqlə</h5>
+                    <span class="close_modal"></span>
+                </div>
+                <div class="modal_body">
+                    <form id="code_form">
+                        <div class="security_content">
+                            <span class="phone_number">+994 55 *** ** 20</span>
+                            @lang('nömrəsinə SMS kod göndərildi')
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form_item ">
+                                    <input type="text" name="code[]" class="item_input" maxlength="1" required>
+                                    {{--									 <div class="error_type">Supporting text</div>--}}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form_item ">
+                                    <input type="text" name="code[]" class="item_input" maxlength="1" required>
+                                    <!-- <div class="error_type">Supporting text</div> -->
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form_item ">
+                                    <input type="text" name="code[]" class="item_input " maxlength="1" required>
+                                    <!-- <div class="error_type">Supporting text</div> -->
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form_item ">
+                                    <input type="text" name="code[]"
+                                           class="item_input" maxlength="1" required>
+                                    <!-- <div class="error_type">Supporting text</div> -->
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="error_type" id="code_error" style="display:none">Kod düzgün daxil edilməyib</div>
+                        <button type="submit" class="btn_sign submit_btn submit_code">@lang('Göndər')</button>
+
+                        <a href="javascript:void(0)"
+                           class="security_content modal_little_content modal_centered resend_code">
+                            Kodu yenidən göndər
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Section -->
+
+    <div class="modal" id="message_modal" data-id="message_modal">
+        <div class="modal_section">
+            <div class="modal_container phone_modal">
+                <div class="modal_header">
+                    <h5 class="modal_title"></h5>
+                    <span class="close_modal"></span>
+                </div>
+                <div class="modal_body">
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 
 @push('js')
-	
-	<script>
+
+    <script>
         $(document).ready(function () {
 
             $(".phone").inputmask({
@@ -168,8 +168,8 @@
             });
 
         });
-	</script>
-	<script>
+    </script>
+    <script>
         $(".show-password, .hide-password").on('click', function () {
 
             var passwordId = $(this).parents('.form_item').find('input');
@@ -202,8 +202,8 @@
                 $(this).parents(".col").prev('.col').find(".item_input").focus();
             }
         });
-        $(".submit_btn").click(function (e) {
-            e.preventDefault();
+
+        function sendCode(isFirst) {
             let phoneNumber = $('input[name="phone"]').val().replaceAll(/\(|\)/gi, '');
             let data = $('#register_form').serialize();
             let validationNumber = phoneNumber.replaceAll(' ', '');
@@ -217,6 +217,9 @@
                     success: function (data) {
                         if (data.status === 'success') {
                             $('.phone_number').text(phoneNumber);
+                            if (isFirst) {
+                                startCountdown();
+                            }
                             $("#code_modal").addClass("opened");
                         }
                     },
@@ -228,9 +231,15 @@
                     },
                 });
             }
+        }
+
+        $(".submit_btn").click(function (e) {
+            e.preventDefault();
+            sendCode(true);
         })
         $(".submit_code").click(function (e) {
             e.preventDefault();
+            $('#code_error').css('display', 'none');
             let code = $('#code_form').serialize();
             let data = $('#register_form').serialize();
             data = `${data}&${code}`;
@@ -243,18 +252,20 @@
                 success: function (data) {
                     if (data.status === 'success') {
                         registerUser();
+                    } else {
+                        $('#code_error').css('display', 'block');
                     }
                 },
                 error: function (data) {
                     $('#message_modal.modal_title').text('{!! __('Təsdiqləmə xətası') !!}')
-	                $('#message_modal.modal_title').text(data.responseJSON.message);
+                    $('#message_modal.modal_title').text(data.responseJSON.message);
                     $("#code_modal").removeClass('opened');
                     $("#message_modal").addClass('opened');
                 },
             });
         });
-        
-        function registerUser(){
+
+        function registerUser() {
             let data = $('#register_form').serialize();
             $.ajax({
                 url: '{!! route('register') !!}',
@@ -274,11 +285,11 @@
         var countdownInterval;
 
         function startCountdown() {
-            var countdown = 5;
+            var countdown = 59;
             clearInterval(countdownInterval);
             $('.message').text('');
             $('.resend_code')
-                .text('Kod yeniden gönderildi!')
+                .text('Kodu yenidən göndərildi!')
                 .css('pointer-events', 'none')
                 .css('color', 'grey');
 
@@ -286,27 +297,26 @@
 
                 var minutes = Math.floor(countdown / 60);
                 var seconds = countdown % 60;
-                var formattedTime = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                var formattedTime = seconds;
 
-
-                $('.message').text(formattedTime);
+                $('.resend_code').html('Kod yeniden göndərildi! ' + formattedTime);
                 countdown--;
-
 
                 if (countdown < 0) {
                     clearInterval(countdownInterval);
                     $('.message').text('');
                     $('.resend_code')
-                        .text('Kodu yenidən göndər')
+                        .html('Kodu yenidən gəndər')
                         .css('pointer-events', 'auto')
                         .css('color', '#414752');
                 }
             }, 1000);
         }
 
-
         $('.resend_code').on('click', function () {
             startCountdown();
+            sendCode(false);
         });
-	</script>
+
+    </script>
 @endpush

@@ -2,21 +2,18 @@
 
 namespace App\Nova;
 
-use Illuminate\Http\Request;
-use Laravel\Nova\Fields\ID;
+use Eminiarts\Tabs\Tab;
+use Eminiarts\Tabs\Tabs;
+use Eminiarts\Tabs\Traits\HasTabs;
+use Illuminate\Database\Eloquent\Builder;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\File;
+use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Eminiarts\Tabs\Traits\HasTabs;
-use Eminiarts\Tabs\Tabs;
-use Eminiarts\Tabs\Tab;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\File;
-use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\Markdown;
 use Waynestate\Nova\CKEditor4Field\CKEditor;
 
 class Product extends Resource
@@ -55,6 +52,14 @@ class Product extends Resource
      */
     public function fields(NovaRequest $request)
     {
+
+//        $subCategories = \App\Models\Category::query()->whereNot('category_id', null)->get();
+//        $parentCategories = \App\Models\Category::query()->where('category_id', null)->get();
+//        $arr = [];
+//        foreach ( $subCategories as $subCategory ) {
+//            $arr[$parentCategories->where('id', 5)->first()->name[app()->getLocale()]][$subCategory->id] = $subCategory->name[app()->getLocale()];
+//        }
+//        dd( $arr );
 
         return [
 
@@ -99,8 +104,11 @@ class Product extends Resource
                             2 => 'Deleted',
                         ])->displayUsingLabels()
                         ->sortable(),
-                    BelongsTo::make('category', 'category', 'App\Nova\Category')
+                    BelongsTo::make('Category', 'category', 'App\Nova\Category')
                         ->nullable()
+                        ->relatableQueryUsing(function (NovaRequest $request, Builder $query) {
+                            $query->whereNot('category_id', null);
+                        })
                         ->display(function ($category) {
                             return $category->name[app()->getLocale()] ?? '';
                         }),

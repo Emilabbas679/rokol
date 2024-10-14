@@ -46,6 +46,7 @@ RUN echo "server {\
         server_name ${NGINX_SERVER_NAME};\
         root /var/www/html/public;\
         index index.php index.html index.htm;\
+        client_max_body_size 100M;\
         location / {\
             try_files \$uri \$uri/ /index.php?\$query_string;\
         }\

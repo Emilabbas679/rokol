@@ -444,7 +444,7 @@
                                     @include('partials.products')
                                 </div>
 
-                                @if(count($products) == 20)
+                                @if($products->hasMorePages())
                                     <div class="sect_footer clearfix" id="more">
                                         <a href="javascripti:void(0)" class="more">
                                             Daha çox
@@ -462,8 +462,6 @@
                         </div>
 
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -603,7 +601,7 @@
             });
             $.ajax({
                 type: "POST",
-                url: "{{route('category', $category['id'])}}",
+                url: "{{$products->nextPageUrl()}}",
             data: data
         }).done(function(data) {
             if (data.status == true) {

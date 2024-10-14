@@ -38,8 +38,8 @@ Route::post('/phone/verify', [RegisterController::class, 'verifyNumber'])->name(
 //Route::get('/register', [SiteController::class, 'register'])->name('register');
 Route::middleware([AuthenticateFrontUser::class])->group(function () {
     Route::prefix("/carts")->name('carts.')->group(function () {
-        Route::get('/', [CartController::class, 'index'])->name('index');
-        Route::post('add', [CartController::class, 'addProduct'])->name('add');
+        Route::get('/', [CartController::class, 'index'])->name('index')->withoutMiddleware([AuthenticateFrontUser::class]);
+        Route::post('add', [CartController::class, 'addProduct'])->name('add')->withoutMiddleware([AuthenticateFrontUser::class]);
         Route::get('address', [CartController::class, 'selectAddress'])->name('address');
         Route::delete('{id}', [CartController::class, 'destroy'])->name('destroy');
         Route::post('complete', [CartController::class, 'completeCart'])->name('complete');
@@ -52,6 +52,7 @@ Route::middleware([AuthenticateFrontUser::class])->group(function () {
 });
 
 Route::get('/forgot_password', [SiteController::class, 'forgot_password'])->name('forgot_password');
+Route::delete('/carts/session/delete/{id}', [CartController::class, 'deleteFromSessionByProductId'])->name('carts.session.delete');
 Route::get('/new_password', [SiteController::class, 'new_password'])->name('new_password');
 //Route::get('/settings', [SiteController::class, 'settings'])->name('settings');
 Route::get('/news', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.index');
@@ -67,4 +68,7 @@ Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
 Route::post('/messages', [\App\Http\Controllers\MessageController::class, 'store'])->name('messages.store');
 Route::get('/catalog', [\App\Http\Controllers\CatalogController::class, 'index'])->name('catalogs.index');
 
+Route::get('/offers', function(){
+    return view('offers');
+})->name('offers.index');
 

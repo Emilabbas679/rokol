@@ -20,6 +20,7 @@ class Blog extends Model implements HasMedia
     const CATEGORY_CAMPAIGNS = 2;
     const CATEGORY_MEETS_AND_SEMINARS = 3;
     const TYPE_NEWS = 1;
+    const TYPE_BLOG = 2;
     const STATUS_ACTIVE = 1;
 
     protected $guarded = [];

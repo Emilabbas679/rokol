@@ -6,11 +6,11 @@ use App\Http\Requests\CartAddProductRequest;
 use App\Http\Requests\CartCompleteRequest;
 use App\Models\Address;
 use App\Models\Cart;
+use App\Models\Product;
 use App\Models\ProductOrder;
 use App\Models\ProductOrderItem;
 use App\Models\ProductPrice;
 use App\Rules\ArrayKeysExists;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -22,56 +22,39 @@ class CartController extends
      */
     public function index()
     {
-        $carts = Cart::query()
-            ->with( [ 'product',
-                      'productPrice.color',
-                      'productPrice.weight' ] )
-            ->where( 'user_id', auth()->id() )
-            ->where( 'status', Cart::STATUS_UNCOMPLETED )
-            ->paginate( 20 );
+        if ( is_null( fUser() ) ) {
 
-        return view( 'cart', compact( 'carts' ) );
-    }
+            $cookieCarts = \request()->cookie( 'carts' );
+            if ( !$cookieCarts ) {
+                return view( 'cart' );
+            }
+            if ( is_string( $cookieCarts ) ) {
+                $cookieCarts = collect( json_decode( $cookieCarts, true ) );
+            }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+            $ids      = $cookieCarts->keys();
+            $products = Product::query()
+                               ->with( [
+                                           'prices' => fn( $query ) => $query->whereIn( 'id', $cookieCarts->pluck( 'product_price_id' ) ),
+                                       ] )
+                               ->whereIn( 'id', $ids->toArray() )->get();
+            $compact  = compact( 'products', 'cookieCarts' );
+        }
+        else {
+            $carts   = Cart::query()
+                           ->with( [
+                                       'product',
+                                       'productPrice.color',
+                                       'productPrice.weight'
+                                   ] )
+                           ->where( 'user_id', auth()->id() )
+                           ->where( 'status', Cart::STATUS_UNCOMPLETED )
+                           ->get();
+            $compact = compact( 'carts' );
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store( Request $request )
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show( string $id )
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit( string $id )
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update( Request $request,
-                            string  $id )
-    {
-        //
+        return view( 'cart', $compact );
     }
 
     /**
@@ -91,67 +74,95 @@ class CartController extends
      */
     public function addProduct( CartAddProductRequest $request )
     {
-        $validated = collect( $request->validated() );
+        $validated      = collect( $request->validated() );
+        $productId      = $validated->get( 'product_id' );
         $productPriceId = ProductPrice::query()
-            ->select( 'id' )
-            ->where( 'product_id', $validated->get( 'product_id' ) )
-            ->where( 'color_id', $validated->get( 'color_id' ) )
-            ->where( 'weight_id', $validated->get( 'weight_id' ) )
-            ->first()->id;
+                                      ->select( 'id' )
+                                      ->where( 'product_id', $productId )
+                                      ->where( 'color_id', $validated->get( 'color_id' ) )
+                                      ->where( 'weight_id', $validated->get( 'weight_id' ) )
+                                      ->first()->id;
 
-        Cart::query()
-            ->updateOrCreate( [ 'user_id'          => fUserId(),
-                                'product_id'       => $validated->get( 'product_id' ),
-                                'product_price_id' => $productPriceId,
-                                'status'           => Cart::STATUS_UNCOMPLETED ],
-                              [
-                                  'count' => DB::raw( 'count + ' . $validated->get( 'count' ) ),
-                              ] );
+        if ( is_null( fUser() ) ) {
+            $carts = $request->cookie( 'carts', collect() );
+            if ( is_string( $carts ) ) {
+                $carts = collect( json_decode( $carts, true ) );
+            }
+            $cartsProduct                     = $carts->get( $productId, [] );
+            $cartsProduct['product_price_id'] = $productPriceId;
+            $cartsProduct['count']            = (int) ( $cartsProduct['count'] ?? 0 ) + $validated->get( 'count' );
+            $carts->put( $productId, $cartsProduct );
+
+            $cookie = cookie( 'carts', $carts );
+            return response()->json( [
+                                         'status' => 'success',
+                                     ] )->cookie( $cookie );
+        }
+
+        Cart::query()->updateOrCreate( [
+                                           'user_id'          => fUserId(),
+                                           'product_id'       => $productId,
+                                           'product_price_id' => $productPriceId,
+                                           'status'           => Cart::STATUS_UNCOMPLETED
+                                       ],
+                                       [
+                                           'count' => DB::raw( 'count + ' . $validated->get( 'count' ) ),
+                                       ] );
 
     }
 
     public function selectAddress()
     {
+        if ( !\request()->filled( 'counters' ) || !is_array( \request()->input( 'counters' ) ) ) {
+            return redirect()->route( 'carts.index' );
+        }
         $validated = Validator::make( \request()->all(), [
             'counters'   => [ 'required', 'array', new ArrayKeysExists( \request()->input( 'counters' ) ) ],
             'counters.*' => [ 'required', 'numeric', 'min:1', 'max:15' ],
         ] )->validated();
         DB::beginTransaction();
         try {
-            $this->updateCountsAllCartElements( $validated[ 'counters' ] );
+            $this->updateCountsAllCartElements( $validated['counters'] );
         } catch ( \Exception $e ) {
-            dd( $e->getMessage() );
             return redirect()->back()->withInput( $validated );
         }
         DB::commit();
         $addresses = Address::query()
-            ->where( 'user_id', fUserId() )
-            ->get();
-        $carts = Cart::query()
-            ->with( [ 'product',
-                      'productPrice.color',
-                      'productPrice.weight' ] )
-            ->where( 'user_id', auth()->id() )
-            ->where( 'status', Cart::STATUS_UNCOMPLETED )
-            ->paginate( 20 );
+                            ->where( 'user_id', fUserId() )
+                            ->get();
+        $carts     = Cart::query()
+                         ->with( [
+                                     'product',
+                                     'productPrice.color',
+                                     'productPrice.weight'
+                                 ] )
+                         ->where( 'user_id', auth()->id() )
+                         ->where( 'status', Cart::STATUS_UNCOMPLETED )
+                         ->paginate( 20 );
 
         return view( 'checkout_address', compact( 'addresses', 'carts' ) );
     }
 
     public function completeCart( CartCompleteRequest $request )
     {
-        $validated = collect( $request->validated() );
-        $deliveryPrice = $validated->has( 'select_address' ) && $validated->get( 'select_address' ) === 'address' ? 5 : 0;
-        $carts = Cart::query()
-            ->with( [ 'product',
-                      'productPrice.color',
-                      'productPrice.weight' ] )
-            ->where( 'user_id', auth()->id() )
-            ->where( 'status', Cart::STATUS_UNCOMPLETED )
-            ->get();
-        $amount = $carts->sum( fn( $cart ) => $cart->productPrice->price * $cart->count );
-        $totalDiscount = $amount - ( $carts->sum( fn( $cart ) => $cart->productPrice->sale_price > 0 ? $cart->productPrice->sale_price * $cart->count : $cart->productPrice->price * $cart->count ) );
-        $itemsCount = $carts->sum( fn( $cart ) => $cart->count );
+        $validated     = collect( $request->validated() );
+        $deliveryPrice = $validated->has( 'select_address' ) && $validated->get( 'select_address' ) === 'address'
+            ? 5
+            : 0;
+        $carts         = Cart::query()
+                             ->with( [
+                                         'product',
+                                         'productPrice.color',
+                                         'productPrice.weight'
+                                     ] )
+                             ->where( 'user_id', auth()->id() )
+                             ->where( 'status', Cart::STATUS_UNCOMPLETED )
+                             ->get();
+        $amount        = $carts->sum( fn( $cart ) => $cart->productPrice->price * $cart->count );
+        $totalDiscount = $amount - ( $carts->sum( fn( $cart ) => $cart->productPrice->sale_price > 0
+                ? $cart->productPrice->sale_price * $cart->count
+                : $cart->productPrice->price * $cart->count ) );
+        $itemsCount    = $carts->sum( fn( $cart ) => $cart->count );
 
         DB::beginTransaction();
 
@@ -200,5 +211,18 @@ class CartController extends
                               'count' => $value
                           ] );
         }
+    }
+
+    public function deleteFromSessionByProductId( int $productId )
+    {
+        $cookieCarts = \request()->cookie( 'carts' );
+        if ( is_string( $cookieCarts ) ) {
+            $cookieCarts = collect( json_decode( $cookieCarts, true ) );
+        }
+
+        $cookieCarts->forget( $productId );
+        $cookie = cookie( 'carts', $cookieCarts );
+        return redirect()->back()->cookie( $cookie );
+
     }
 }

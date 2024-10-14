@@ -18,6 +18,9 @@
 
 				<div class="wrap_left">
 					<div class="adrs_container">
+                        @if($errors->any())
+                            {{ implode('', $errors->all('<div>:message</div>')) }}
+                        @endif
 						<form action="{!! route('carts.complete') !!}" method="post" id="checkout_address_form">
 							@csrf
 							<div class="cr_adr_row">
@@ -90,13 +93,16 @@
 									AZN
 								</div>
 							</div>
-							<div class="bsk_itm_row">
-								<div class="bsk_itm_name">@lang('Çatıdırılma'):</div>
-								<div class="bsk_itm_val">5 AZN</div>
-							</div>
+                            @if(\App\Models\ProductOrder::DELIVERY_PRICE > 0)
+                                <div class="bsk_itm_row">
+                                    <div class="bsk_itm_name">@lang('Çatıdırılma'):</div>
+                                    <div class="bsk_itm_val">{!! \App\Models\ProductOrder::DELIVERY_PRICE !!}AZN
+                                    </div>
+                                </div>
+                            @endif
 							<div class="bsk_itm_row total_price">
 								<div class="bsk_itm_name">@lang('Ödəniləcək məbləğ'):</div>
-								<div class="bsk_itm_val">{!! $totalPriceWithDiscount + 5 !!}
+								<div class="bsk_itm_val">{!! $totalPriceWithDiscount + \App\Models\ProductOrder::DELIVERY_PRICE !!}
 									AZN
 								</div>
 							</div>
@@ -232,7 +238,7 @@
                     dataType: 'JSON',
                     success: function (data) {
                         // console.log(data);
-                        window.location.href = "{!! route('carts.address') !!}";
+                        window.location.href = "{!! route('carts.address', request()->all()) !!}";
                         // $(`<div class="my_adress_item" id="my_address">
 						// 					<input name="address_id" class="address-btn" type="radio"
 						// 					       style="display: none" value="${data.id}">

@@ -45,6 +45,7 @@ class Order extends Resource
      */
     public function fields(NovaRequest $request)
     {
+
         return [
             ID::make()->sortable(),
             BelongsTo::make('User', 'user')
@@ -59,6 +60,12 @@ class Order extends Resource
                 ->withMeta(['extraAttributes' => [
                     'readonly' => true
                 ]]),
+            BelongsTo::make('Address', 'address')
+                     ->display('phone')
+                     ->showOnPreview()
+                     ->withMeta(['extraAttributes' => [
+                         'readonly' => true
+                     ]]),
             Text::make('Amount')
                 ->showOnPreview()
                 ->withMeta(['extraAttributes' => [

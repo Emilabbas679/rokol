@@ -10,37 +10,36 @@
 
 @section('content')
 
-
     <!-- Main Slider -->
     <div class="section_wrap wrap_slider wrap_main_slider main_slider">
         <div class="sect_body slider_container clearfix">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     @foreach($sliders as $slider)
-                    <div class="swiper-slide">
-                        <div class="swiper-link clearfix">
-                            <div class="col_in">
-                                <div class="item_img">
-                                    <img src="{{asset('img/main.png?v3')}}" alt="Main slider Image" >
-                                </div>
-                                <div class="main_slider_content">
-                                    <div class="main_center clearfix">
-                                        <div class="main_slider_inner clearfix">
-                                            <h4 class="itm_title">
-                                                {{ $slider->header[app()->getLocale()] }}
-                                            </h4>
-                                            <p class="itm_info">
-                                                {{ $slider->content[app()->getLocale()] }}
-                                            </p>
-                                            <div class="go_product">
-                                                <a href="{{ $slider->url }}">@lang('Ətraflı')</a>
+                        <div class="swiper-slide">
+                            <div class="swiper-link clearfix">
+                                <div class="col_in">
+                                    <div class="item_img">
+                                        <img src="{{asset('storage/'.$slider->image)}}" alt="{{ $slider->header[app()->getLocale()] }}">
+                                    </div>
+                                    <div class="main_slider_content">
+                                        <div class="main_center clearfix">
+                                            <div class="main_slider_inner clearfix">
+                                                <h4 class="itm_title">
+                                                    {{ $slider->header[app()->getLocale()] }}
+                                                </h4>
+                                                <p class="itm_info">
+                                                    {{ $slider->content[app()->getLocale()] }}
+                                                </p>
+                                                <div class="go_product">
+                                                    <a href="{{ $slider->url }}">@lang('Ətraflı')</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
             </div>
@@ -48,10 +47,12 @@
                 <div class="swiper-pagination"></div>
             </div>
             <!-- Add Arrows -->
-            <div class="swiper_arrows clearfix">
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-            </div>
+            @if($sliders->count() - 1)
+                <div class="swiper_arrows clearfix">
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            @endif
         </div>
     </div>
     <!-- Main Slider -->
@@ -68,7 +69,7 @@
                         <div class="swiper-slide">
                             <a href="./category/1" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/product1.png')}}" alt="Daxili məkan boyaları" >
+                                    <img src="{{asset('img/product1.png')}}" alt="Daxili məkan boyaları">
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -87,7 +88,7 @@
                         <div class="swiper-slide">
                             <a href="./category/2" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/product2.png')}}" alt="Fasad Boyaları" >
+                                    <img src="{{asset('img/product2.png')}}" alt="Fasad Boyaları">
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -106,7 +107,7 @@
                         <div class="swiper-slide">
                             <a href="./category/3" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/product3.png')}}" alt="Yol Cizgi Boyaları" >
+                                    <img src="{{asset('img/product3.png')}}" alt="Yol Cizgi Boyaları">
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -125,7 +126,7 @@
                         <div class="swiper-slide">
                             <a href="./category/6" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/product1.png')}}" alt="Boya, Dolğu və Laklar" >
+                                    <img src="{{asset('img/product1.png')}}" alt="Boya, Dolğu və Laklar">
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -144,7 +145,7 @@
                         <div class="swiper-slide">
                             <a href="./category/7" class="atg_item">
                                 <div class="atg_img">
-                                    <img src="{{asset('img/product2.png')}}" alt="Sənaye Boyaları" >
+                                    <img src="{{asset('img/product2.png')}}" alt="Sənaye Boyaları">
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
@@ -300,14 +301,17 @@
                     </p>
 
                     <p>
-                        Sizə yetər ki, Rokoldan ilham alın! Daxili boya üçün seçdiyiniz rənglərə uyğun olacaq digər tonları
+                        Sizə yetər ki, Rokoldan ilham alın! Daxili boya üçün seçdiyiniz rənglərə uyğun olacaq digər
+                        tonları
                         öyrənmək və onları otağınızda istifadə etmək üçün Polisanın rəng seçimlərinə nəzər salın.
                     </p>
                     <p>
-                        İnteryer dizaynerlərinin tətbiq etdiyi 60-30-10 qaydasına uyğun olaraq divarlarınızda istifadə etdiyiniz açıq tonlar yaşayış məkanınıza parlaq bir görünüş verəcək.
+                        İnteryer dizaynerlərinin tətbiq etdiyi 60-30-10 qaydasına uyğun olaraq divarlarınızda istifadə
+                        etdiyiniz açıq tonlar yaşayış məkanınıza parlaq bir görünüş verəcək.
                     </p>
                     <p>
-                        Bu rənglərlə birləşdirildikdə möcüzələr yaradan orta tonları əlavə etməklə sakit atmosferin davamlılığını təmin edə bilərsiniz.
+                        Bu rənglərlə birləşdirildikdə möcüzələr yaradan orta tonları əlavə etməklə sakit atmosferin
+                        davamlılığını təmin edə bilərsiniz.
                     </p>
                 </div>
                 <div class="more_color">
@@ -354,7 +358,7 @@
     <!-- Full image color porpover -->
 
 
-    <!-- Main Slider -->
+    @if($videoNews->count())
     <div class="section_wrap wrap_advantage video_items wrap_slider  ">
         <div class="main_center clearfix">
             <div class="sect_header clearfix">
@@ -365,103 +369,21 @@
             <div class="sect_body slider_container clearfix">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-
-                        <div class="swiper-slide">
-                            <a href="#" class="atg_item">
-                                <div class="atg_img">
-                                    <img src="{{asset('img/item1.png?v2')}}" alt="Rokol Parlaq Boya" >
-                                </div>
-                                <div class="atg_content">
-                                    <div class="row_inner">
-                                        <h5 class="itm_title">Rokol Parlaq Boya</h5>
+                        @foreach($videoNews as $video)
+                            <div class="swiper-slide">
+                                <a href="{!! route('news.show', $video) !!}" class="atg_item">
+                                    <div class="atg_img">
+                                        <img src="{{asset('storage/'.$video->image)}}"
+                                             alt="{{ $video->title[app()->getLocale()] }}">
                                     </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" class="atg_item">
-                                <div class="atg_img">
-                                    <img src="{{asset('img/item1.png?v2')}}" alt="Rokol Parlaq Boya" >
-                                </div>
-                                <div class="atg_content">
-                                    <div class="row_inner">
-                                        <h5 class="itm_title">Rokol Parlaq Boya</h5>
+                                    <div class="atg_content">
+                                        <div class="row_inner">
+                                            <h5 class="itm_title">{{ $video->title[app()->getLocale()] }}</h5>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" class="atg_item">
-                                <div class="atg_img">
-                                    <img src="{{asset('img/item1.png?v2')}}" alt="Rokol Parlaq Boya" >
-                                </div>
-                                <div class="atg_content">
-                                    <div class="row_inner">
-                                        <h5 class="itm_title">Rokol Parlaq Boya</h5>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" class="atg_item">
-                                <div class="atg_img">
-                                    <img src="{{asset('img/item2.png?v2')}}" alt="Rokol Parlaq Boya" >
-                                </div>
-                                <div class="atg_content">
-                                    <div class="row_inner">
-                                        <h5 class="itm_title">Rokol Parlaq Boya</h5>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" class="atg_item">
-                                <div class="atg_img">
-                                    <img src="{{asset('img/item3.png?v2')}}" alt="Rokol Parlaq Boya" >
-                                </div>
-                                <div class="atg_content">
-                                    <div class="row_inner">
-                                        <h5 class="itm_title">Rokol Parlaq Boya</h5>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" class="atg_item">
-                                <div class="atg_img">
-                                    <img src="{{asset('img/item2.png?v2')}}" alt="Rokol Parlaq Boya" >
-                                </div>
-                                <div class="atg_content">
-                                    <div class="row_inner">
-                                        <h5 class="itm_title">Rokol Parlaq Boya</h5>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" class="atg_item">
-                                <div class="atg_img">
-                                    <img src="{{asset('img/item1.png?v2')}}" alt="Rokol Parlaq Boya" >
-                                </div>
-                                <div class="atg_content">
-                                    <div class="row_inner">
-                                        <h5 class="itm_title">Rokol Parlaq Boya</h5>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" class="atg_item">
-                                <div class="atg_img">
-                                    <img src="{{asset('img/item3.png?v2')}}" alt="Rokol Parlaq Boya" >
-                                </div>
-                                <div class="atg_content">
-                                    <div class="row_inner">
-                                        <h5 class="itm_title">Rokol Parlaq Boya</h5>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -470,7 +392,7 @@
             </div>
         </div>
     </div>
-
+    @endif
 @endsection
 
 @push('js')

@@ -7,12 +7,12 @@ use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\DB;
 
-class ArrayKeysExists implements
-    ValidationRule
+class ArrayKeysExists implements ValidationRule
 {
-
-    public function __construct( private readonly array $keys )
+    private array $keys;
+    public function __construct( $keys )
     {
+        $this->keys = $keys;
     }
 
     /**

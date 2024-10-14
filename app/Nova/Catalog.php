@@ -3,19 +3,17 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\File;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Weight extends Resource
+class Catalog extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\Weight>
+     * @var class-string<\App\Models\Catalog>
      */
-    public static $model = \App\Models\Weight::class;
+    public static $model = \App\Models\Catalog::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -36,31 +34,21 @@ class Weight extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->sortable(),
-            Number::make('weight')->min(0)->max(1000000)->step(0.01),
-            Select::make('Weight type')->options([
-                '0' => 'Q',
-                '1' => 'Kg',
-            ])->sortable()->rules('required')->displayUsingLabels(),
-
-            Select::make('Status')->options([
-                '0' => 'Deaktiv',
-                '1' => 'Aktiv',
-                '2' => 'Silinib',
-            ])->sortable()->rules('required')->displayUsingLabels(),
+            File::make('File', 'path')
+                ->disk('public')
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
     public function cards(NovaRequest $request)
@@ -71,7 +59,7 @@ class Weight extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
     public function filters(NovaRequest $request)
@@ -82,7 +70,7 @@ class Weight extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
     public function lenses(NovaRequest $request)
@@ -93,11 +81,23 @@ class Weight extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+
+    public static function authorizedToCreate(Request $request)
+    {
+        return !\App\Models\Catalog::query()->count();
+    }
+
+
+    public function authorizedToReplicate(Request $request)
+    {
+        return false;
     }
 }

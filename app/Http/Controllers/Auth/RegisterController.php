@@ -7,6 +7,7 @@ use App\Http\Requests\RegisterUserRequest;
 use App\Jobs\SendVerifyPhoneSmsJob;
 use App\Models\PhoneVerification;
 use App\Models\User;
+use App\Services\SmsService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\JsonResponse;
@@ -22,7 +23,7 @@ class RegisterController extends Controller
     protected $redirectTo = '/';
 
 
-    public function __construct()
+    public function __construct( private SmsService $smsService = new SmsService() )
     {
         $this->middleware( 'guest' );
     }
@@ -40,18 +41,18 @@ class RegisterController extends Controller
 
     public function register( RegisterUserRequest $request ): JsonResponse
     {
-        $validated = $request->validated();
-        $phone = str_replace( [ '+', '(', ')', ' ' ], '', $validated['phone'] );
+        $validated         = $request->validated();
+        $phone             = str_replace( [ '+', '(', ')', ' ' ], '', $validated['phone'] );
         $phoneVerification = PhoneVerification::query()
-            ->where( 'phone', $phone )
-            ->where('verified', true)
-            ->first();
+                                              ->where( 'phone', $phone )
+                                              ->where( 'verified', true )
+                                              ->first();
 
-        if (is_null($phoneVerification)) {
+        if ( is_null( $phoneVerification ) ) {
             return response()
-                ->json([
-                    'status' => 'fail'
-                ]);
+                ->json( [
+                            'status' => 'fail'
+                        ] );
         }
 
         event( new Registered( $user = $this->create( $validated ) ) );
@@ -62,77 +63,101 @@ class RegisterController extends Controller
 
         $phoneVerification->delete();
 
-        session()->flash('success_register');
+        session()->flash( 'success_register' );
 
         return new JsonResponse( [
-            'status'  => 'success',
-            'message' => 'User created successfully.'
-        ], 201 );
+                                     'status' => 'success',
+                                                                                                                                                                                                                                                                                                                                                                                                                      'message' => 'User created successfully.'
+                                 ], 201 );
     }
 
 
     protected function create( array $data ): User
     {
         return User::create( [
-            'full_name' => $data[ 'full_name' ],
-            'email'     => $data[ 'email' ],
-            'phone'     => $data[ 'phone' ],
-            'password'  => Hash::make( $data[ 'password' ] )
-        ] );
+                                 'full_name' => $data['full_name'],
+                                 'email'     => $data['email'],
+                                 'phone'     => $data['phone'],
+                                 'password'  => Hash::make( $data['password'] )
+                             ] );
     }
 
     public function sendPhoneVerificationCode( RegisterUserRequest $request )
     {
-        $phone = $request->validated( 'phone' );
-        $phone = str_replace( [ '+', '(', ')', ' ' ], '', $phone );
-        $phoneVerification = $this->getRetry( $phone, 2 );
+        $phone             = $request->validated( 'phone' );
+        $phone             = str_replace( [ '+', '(', ')', ' ' ], '', $phone );
+        $phoneVerification = $this->getRetry( $phone, 1 );
         if ( !is_null( $phoneVerification ) ) {
             return response()->json( [
-                'status' => 'fail', 'message' => __( 'You can\'t try now' )
-            ] );
+                                         'status' => 'fail', 'message' => __( 'You can\'t try now' )
+                                     ] );
         }
-        dispatch( new SendVerifyPhoneSmsJob( $phone ) );
+        $this->sendCode($phone);
         return response()->json( [
-            'status' => 'success'
-        ] );
+                                     'status' => 'success'
+                                 ] );
+    }
+
+    public function sendCode( $phone )
+    {
+        $phoneVerificationCode = rand( 1000, 9999 );
+        $this->smsService
+            ->setMsgBody( __( 'Təsdiqləmə kodu: ' . $phoneVerificationCode ) )
+            ->setMsisdn( $phone )
+            ->send();
+
+        if ( empty( $this->smsService->json()['errorCode'] ) ) {
+            PhoneVerification::query()
+                             ->updateOrCreate(
+                                 [
+                                     'phone' => $phone
+                                 ],
+                                 [
+                                     'code'       => $phoneVerificationCode,
+                                     'created_at' => now(),
+                                     'verified'   => false
+                                 ]
+                             );
+        }
     }
 
     public function verifyNumber( RegisterUserRequest $request )
     {
-        $codes = Validator::make( \request()->all(), [
+        $codes           = Validator::make( \request()->all(), [
             'code'   => [ 'required', 'array', 'min:4', 'max:4' ],
             'code.*' => [ 'required', 'numeric', 'digits:1' ]
-        ] )->validated()[ 'code' ];
-        $phone = $request->validated( 'phone' );
-        $phone = str_replace( [ '+', '(', ')', ' ' ], '', $phone );
-        $code = implode( '', $codes );
+        ] )->validated()['code'];
+        $phone           = $request->validated( 'phone' );
+        $phone           = str_replace( [ '+', '(', ')', ' ' ], '', $phone );
+        $code            = implode( '', $codes );
         $phoneValidation = PhoneVerification::query()
-            ->where( 'phone', $phone )
-            ->where( 'code', $code )
-            ->where( 'created_at', '>', now()->subMinutes( 10 )->format( 'Y-m-d H:i:s' ) )
-            ->where( 'verified', false )
-            ->first();
+                                            ->where( 'phone', $phone )
+                                            ->where( 'code', $code )
+                                            ->where( 'created_at', '>', now()->subMinutes( 10 )
+                                                                             ->format( 'Y-m-d H:i:s' ) )
+                                            ->where( 'verified', false )
+                                            ->first();
         if ( is_null( $phoneValidation ) ) {
             return response()->json( [
-                'status'  => 'fail',
-                'message' => 'Given code is incorrect'
-            ] );
+                                         'status'  => 'fail',
+                                         'message' => 'Given code is incorrect'
+                                     ] );
         }
         $phoneValidation->update( [
-            'verified' => true
-        ] );
+                                      'verified' => true
+                                  ] );
         return response()->json( [
-            'status'  => 'success',
-            'message' => __( 'Telefon nömrəsi uğurla təsdiqləndi' )
-        ] );
+                                     'status'  => 'success',
+                                     'message' => __( 'Telefon nömrəsi uğurla təsdiqləndi' )
+                                 ] );
     }
 
     private function getRetry( $phone, int $minutes )
     {
         $time = now()->subMinutes( $minutes )->format( 'Y-m-d H:i:s' );
         return PhoneVerification::query()
-            ->where( 'phone', $phone )
-            ->where( 'created_at', '>', $time )
-            ->first();
+                                ->where( 'phone', $phone )
+                                ->where( 'created_at', '>', $time )
+                                ->first();
     }
 }

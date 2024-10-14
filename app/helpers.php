@@ -32,7 +32,7 @@ if (!function_exists('menu_categories')) {
     function menu_categories()
     {
         $categories = Cache::remember('categories', 1200, function () {
-            return $categories = Category::where('status', 1)->where('category_id', null)->with('children')->get();
+            return Category::where('status', 1)->where('category_id', null)->with('children')->get();
         });
         return $categories;
     }

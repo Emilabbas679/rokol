@@ -14,13 +14,13 @@
     <div class="section_wrap wrap_sign_page">
 
         <div class="section_wrap wrap_sign_items">
-            @if(session()->has('success_register'))
-                <div class="reg_text" style="display:none">
-            <span>
-                @lang('Qeydiyyat uğurla tamamlandı daxil ola bilərsiniz')
-            </span>
+
+                <div class="reg_text" style="@if(!session()->has('success_register')) display:none @endif">
+                    <span>
+                        @lang('Qeydiyyat uğurla tamamlandı daxil ola bilərsiniz')
+                    </span>
                 </div>
-            @endif
+
             <div class="section_wrap wrap_sign_content ">
                 <div class="benefit_tabs">
                     <div class="sign_header">

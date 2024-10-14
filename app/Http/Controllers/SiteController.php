@@ -16,20 +16,26 @@ class SiteController extends Controller
 {
     public function index()
     {
-        $sliders = Slider::query()
+        $videoNews = Blog::query()
+            ->where('type', Blog::TYPE_NEWS)
+            ->where('status', Blog::STATUS_ACTIVE)
+            ->where('is_video', true)
+            ->take(15)
+            ->get();
+        $sliders   = Slider::query()
             ->where('status', Slider::STATUS_ACTIVE)
             ->get();
-        return view('index', compact('sliders'));
+        return view('index', compact('sliders', 'videoNews'));
     }
 
 
     public function getSubCategories(Request $request)
     {
-        $id = $request->id ?? 0;
+        $id          = $request->id ?? 0;
         $category_id = $request->category_id ?? 0;
-        $subs = Category::where('status', 1)->where('category_id', $id)->get();
-        $html = '';
-        $html .= "<option value='" . $id . "'>" . translate('all') . '</option>';
+        $subs        = Category::where('status', 1)->where('category_id', $id)->get();
+        $html        = '';
+        $html        .= "<option value='" . $id . "'>" . translate('all') . '</option>';
         foreach ($subs as $item) {
 
             $selected = '';
@@ -40,12 +46,12 @@ class SiteController extends Controller
 
         return response()->json([
             'status' => true,
-            'html' => $html
+            'html'   => $html
         ]);
 
     }
 
-    public function category(Request $request, $id = 0)
+    public function category( $id = 0)
     {
         $categories = Cache::rememberForever('main_categories', function () {
             return $categories = Category::where('status', 1)->where('category_id', null)->get();
@@ -53,9 +59,9 @@ class SiteController extends Controller
 
         if ($id == 0) {
             $category_ids = [];
-            $category = [
-                'name' => [app()->getLocale() => translate('products')],
-                'id' => 0,
+            $category     = [
+                'name'        => [app()->getLocale() => translate('products')],
+                'id'          => 0,
                 'category_id' => 0
             ];
         } else {
@@ -63,23 +69,23 @@ class SiteController extends Controller
 
 
             $sub_category_ids = Cache::rememberForever("sub_categories:" . $id, function () use ($id) {
-                $sub_categories = Category::where('status', 1)->where('category_id', $id)->select('id', 'status', 'category_id')->get()->toArray();
+                $sub_categories   = Category::where('status', 1)->where('category_id', $id)->select('id', 'status', 'category_id')->get()->toArray();
                 $sub_category_ids = array_column($sub_categories, 'id');
                 return $sub_category_ids;
             });
-            $category_ids = $sub_category_ids;
-            $category_ids[] = $id;
+            $category_ids     = $sub_category_ids;
+            $category_ids[]   = $id;
         }
 
 
-        $selected = [];
+        $selected              = [];
         $selected['min_price'] = $minPrice = 0;
         $selected['max_price'] = $maxPrice = 10000;
 
-        if ($request->has('min_price') and ((int)$request->min_price) > 0)
-            $selected['min_price'] = $minPrice = (int)$request->min_price;
-        if ($request->has('max_price') and ((int)$request->max_price) <= 10000)
-            $selected['max_price'] = $maxPrice = (int)$request->max_price;
+        if (request()->has('min_price') and ((int)request()->min_price) > 0)
+            $selected['min_price'] = $minPrice = (int)request()->min_price;
+        if (request()->has('max_price') and ((int)request()->max_price) <= 10000)
+            $selected['max_price'] = $maxPrice = (int)request()->max_price;
 
 
         $query = Product::query()
@@ -100,16 +106,16 @@ class SiteController extends Controller
             $query->with(['favorite']);
         }
         $query->join(DB::raw('(select product_id, min(price) as price, max(sale_price) as sale_price from product_prices group by product_id) as pp'), 'pp.product_id', '=', 'products.id');
-        $query->when($request->has('min_price') || $request->has('max_price'), function (Builder $query) use ($request) {
-            if ($request->has('min_price')) {
-                $minPrice = $request->input('min_price');
+        $query->when(request()->has('min_price') || request()->has('max_price'), function (Builder $query) {
+            if (request()->has('min_price')) {
+                $minPrice = request()->input('min_price');
                 $query->where(function (Builder $query) use ($minPrice) {
                     $query->where('price', '>=', $minPrice)
                         ->orWhere('sale_price', '>=', $minPrice);
                 });
             }
-            if ($request->has('max_price')) {
-                $maxPrice = $request->input('max_price');
+            if (request()->has('max_price')) {
+                $maxPrice = request()->input('max_price');
                 $query->where(function (Builder $query) use ($maxPrice) {
                     $query->where('price', '<=', $maxPrice)
                         ->orWhere('sale_price', '<=', $maxPrice)
@@ -117,9 +123,9 @@ class SiteController extends Controller
                 });
             }
         })
-            ->when($request->filled('q'), function (Builder $builder) use ($request) {
-                $builder->where(function (Builder $builder) use ($request) {
-                    $q = mb_strtolower($request->get('q'));
+            ->when(request()->filled('q'), function (Builder $builder) {
+                $builder->where(function (Builder $builder) {
+                    $q = mb_strtolower(request()->get('q'));
                     $builder->whereRaw('LOWER(JSON_UNQUOTE(JSON_EXTRACT(`name`, \'$.' . (app()->getLocale()) . '\'))) LIKE \'%' . ($q) . '%\'')
                         ->orWhereRaw('LOWER(JSON_UNQUOTE(JSON_EXTRACT(`about`, \'$.' . (app()->getLocale()) . '\'))) LIKE \'%' . ($q) . '%\'');
 
@@ -129,7 +135,7 @@ class SiteController extends Controller
         if ($category['id'] != 0) {
             $query->whereIn('category_id', $category_ids);
         }
-//        if ($request->has('min_price') || $request->has('max_price')) {
+//        if (request()->has('min_price') || request()->has('max_price')) {
 //            $query->whereHas('prices', function ($query) use ($minPrice, $maxPrice) {
 //                $query->where(function ($query) use ($minPrice, $maxPrice) {
 //                    $query->where(function ($query) use ($minPrice) {
@@ -142,49 +148,49 @@ class SiteController extends Controller
 //                });
 //            });
 //        }
-        if ($request->has('properties')) {
-            if (is_array($request->properties)) {
-                $selected['properties'] = $request->properties;
+        if (request()->has('properties')) {
+            if (is_array(request()->properties)) {
+                $selected['properties'] = request()->properties;
                 $query->whereHas('refProperties', function ($query) use ($selected) {
                     $query->whereIn('property_id', $selected['properties']);
                 });
             }
         }
-        if ($request->has('types')) {
-            if (is_array($request->types)) {
-                $selected['types'] = $request->types;
+        if (request()->has('types')) {
+            if (is_array(request()->types)) {
+                $selected['types'] = request()->types;
                 $query->whereHas('types', function ($query) use ($selected) {
                     $query->whereIn('type_id', $selected['types']);
                 });
             }
         }
-        if ($request->has('applicationAreas')) {
-            if (is_array($request->applicationAreas)) {
-                $selected['applicationAreas'] = $request->applicationAreas;
+        if (request()->has('applicationAreas')) {
+            if (is_array(request()->applicationAreas)) {
+                $selected['applicationAreas'] = request()->applicationAreas;
                 $query->whereHas('applicationAreas', function ($query) use ($selected) {
                     $query->whereIn('application_area_id', $selected['applicationAreas']);
                 });
             }
         }
-        if ($request->has('appearances')) {
-            if (is_array($request->appearances)) {
-                $selected['appearances'] = $request->appearances;
+        if (request()->has('appearances')) {
+            if (is_array(request()->appearances)) {
+                $selected['appearances'] = request()->appearances;
                 $query->whereHas('appearances', function ($query) use ($selected) {
                     $query->whereIn('appearance_id', $selected['appearances']);
                 });
             }
         }
-        if ($request->has('weights')) {
-            if (is_array($request->weights)) {
-                $selected['weights'] = $request->weights;
+        if (request()->has('weights')) {
+            if (is_array(request()->weights)) {
+                $selected['weights'] = request()->weights;
                 $query->whereHas('prices', function ($query) use ($selected) {
                     $query->whereIn('weight_id', $selected['weights']);
                 });
             }
         }
 
-        if ($request->filled('sort_by')) {
-            $exploded = explode(',', $request->input('sort_by'));
+        if (request()->filled('sort_by')) {
+            $exploded = explode(',', request()->input('sort_by'));
             if (is_array($exploded) && count($exploded) == 2 && in_array($exploded[1], ['asc', 'desc'])) {
                 if ($exploded[0] == 'price') {
                     $query->orderBy('pp.' . $exploded[0], $exploded[1]);
@@ -194,14 +200,16 @@ class SiteController extends Controller
                 }
             }
         }
+
+        $query->orderBy('category_id');
         $products = $query->paginate(40);
 
 
-        if ($request->ajax()) {
+        if (\request()->ajax()) {
             return response()->json([
                 'status' => 1,
-                'html' => view('partials.products', compact('products'))->render(),
-                'count' => count($products)
+                'html'   => view('partials.products', compact('products'))->render(),
+                'count'  => count($products)
             ]);
         }
 
@@ -211,23 +219,23 @@ class SiteController extends Controller
 
     public function product(Request $request, $id)
     {
-        $product = Product::where('id', $id)->where('status', 1)->with('category', 'prices', 'types', 'appearances', 'refProperties', 'applicationAreas')->firstorfail();
-        $locale = app()->getLocale();
-        $product->name = $product->name[$locale] ?? '';
-        $product->about = $product->about[$locale] ?? '';
-        $product->usage = $product->usage[$locale] ?? '';
-        $product->advantage = $product->advantage[$locale] ?? '';
-        $product->properties = $product->properties[$locale] ?? '';
+        $product              = Product::where('id', $id)->where('status', 1)->with('category', 'prices', 'types', 'appearances', 'refProperties', 'applicationAreas')->firstorfail();
+        $locale               = app()->getLocale();
+        $product->name        = $product->name[$locale] ?? '';
+        $product->about       = $product->about[$locale] ?? '';
+        $product->usage       = $product->usage[$locale] ?? '';
+        $product->advantage   = $product->advantage[$locale] ?? '';
+        $product->properties  = $product->properties[$locale] ?? '';
         $product->consumption = $product->consumption[$locale] ?? '';
-        $product->retention = $product->retention[$locale] ?? '';
-        $product->warning = $product->warning[$locale] ?? '';
-        $product->guarantee = $product->guarantee[$locale] ?? '';
-        $product->apply = $product->apply[$locale] ?? '';
+        $product->retention   = $product->retention[$locale] ?? '';
+        $product->warning     = $product->warning[$locale] ?? '';
+        $product->guarantee   = $product->guarantee[$locale] ?? '';
+        $product->apply       = $product->apply[$locale] ?? '';
         $product->usage_rules = $product->usage_rules[$locale] ?? '';
-        $color_id = 0;
-        $weight_id = 0;
-        $colors = [];
-        $weights = [];
+        $color_id             = 0;
+        $weight_id            = 0;
+        $colors               = [];
+        $weights              = [];
         if ($request->has('color') and ((int)$request->color) != 0)
             $color_id = (int)$request->color;
         if ($request->has('weight') and ((int)$request->weight) != 0)
@@ -265,11 +273,11 @@ class SiteController extends Controller
 
     public function productPrice(Request $request, $product_id)
     {
-        $product = Product::where('id', $product_id)->with('prices')->firstorfail();
-        $color_id = 0;
+        $product   = Product::where('id', $product_id)->with('prices')->firstorfail();
+        $color_id  = 0;
         $weight_id = 0;
-        $colors = [];
-        $weights = [];
+        $colors    = [];
+        $weights   = [];
         if ($request->has('color_id') and ((int)$request->color_id) != 0)
             $color_id = (int)$request->color_id;
         if ($request->has('weight_id') and ((int)$request->weight_id) != 0)
@@ -293,8 +301,8 @@ class SiteController extends Controller
             if (!isset($item[$item['color_id']]))
                 $colors[$item->color_id] = $item;
         }
-        $price = $prices[0] ?? [];
-        $returnHTML = view('partials.product_color_weights', compact('weights', 'colors', 'price'))->render();
+        $price       = $prices[0] ?? [];
+        $returnHTML  = view('partials.product_color_weights', compact('weights', 'colors', 'price'))->render();
         $returnPrice = view('partials.product_price', compact('price'))->render();
 
         return response()->json(array('success' => true, 'html' => $returnHTML, 'price' => $returnPrice));

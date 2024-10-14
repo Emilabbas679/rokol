@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "218aa67143739563c75cce742c71a2a5",
+    "content-hash": "8f1901eedf64b47f203bde4090d2dd56",
     "packages": [
         {
             "name": "acme/color-picker",
@@ -41,6 +41,53 @@
             "transport-options": {
                 "relative": true
             }
+        },
+        {
+            "name": "alvinhu/nova-child-select",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alvinhu/nova-child-select.git",
+                "reference": "4b8be3e6dde4097ea498244ceeea4d17926f6f5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alvinhu/nova-child-select/zipball/4b8be3e6dde4097ea498244ceeea4d17926f6f5f",
+                "reference": "4b8be3e6dde4097ea498244ceeea4d17926f6f5f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Alvinhu\\ChildSelect\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Alvinhu\\ChildSelect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Laravel nova child field.",
+            "keywords": [
+                "laravel",
+                "nova",
+                "select"
+            ],
+            "support": {
+                "issues": "https://github.com/alvinhu/nova-child-select/issues",
+                "source": "https://github.com/alvinhu/nova-child-select/tree/1.0.5"
+            },
+            "abandoned": true,
+            "time": "2019-05-06T13:50:47+00:00"
         },
         {
             "name": "benjacho/belongs-to-many-field",
@@ -1848,6 +1895,69 @@
                 }
             ],
             "time": "2022-05-21T17:30:32+00:00"
+        },
+        {
+            "name": "kalnoy/nestedset",
+            "version": "v6.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lazychaser/laravel-nestedset.git",
+                "reference": "d81102c980b9962516c0fd8fda21dd916a23a3d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lazychaser/laravel-nestedset/zipball/d81102c980b9962516c0fd8fda21dd916a23a3d7",
+                "reference": "d81102c980b9962516c0fd8fda21dd916a23a3d7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/events": "^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/support": "^7.0|^8.0|^9.0|^10.0|^11.0",
+                "php": "^7.2.5|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "7.*|8.*|9.*|^10.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "v5.0.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Kalnoy\\Nestedset\\NestedSetServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kalnoy\\Nestedset\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Kalnoy",
+                    "email": "lazychaser@gmail.com"
+                }
+            ],
+            "description": "Nested Set Model for Laravel 5.7 and up",
+            "keywords": [
+                "database",
+                "hierarchy",
+                "laravel",
+                "nested sets",
+                "nsm"
+            ],
+            "support": {
+                "issues": "https://github.com/lazychaser/laravel-nestedset/issues",
+                "source": "https://github.com/lazychaser/laravel-nestedset/tree/v6.0.4"
+            },
+            "time": "2024-04-08T06:10:42+00:00"
         },
         {
             "name": "laravel/framework",
@@ -7664,6 +7774,54 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "zakariatlilani/nova-nested-tree",
+            "version": "0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ZakariaTlilani/nova-nested-tree.git",
+                "reference": "4f134a6a54b769aa441e0c6adb71ef374cb65ddc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ZakariaTlilani/nova-nested-tree/zipball/4f134a6a54b769aa441e0c6adb71ef374cb65ddc",
+                "reference": "4f134a6a54b769aa441e0c6adb71ef374cb65ddc",
+                "shasum": ""
+            },
+            "require": {
+                "kalnoy/nestedset": "^6.0",
+                "php": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ZakariaTlilani\\NovaNestedTree\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ZakariaTlilani\\NovaNestedTree\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Nova vue-tree-select field for management nested category relations.",
+            "keywords": [
+                "belongs-to-many",
+                "laravel",
+                "nested-sets",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/ZakariaTlilani/nova-nested-tree/issues",
+                "source": "https://github.com/ZakariaTlilani/nova-nested-tree/tree/0.0.3"
+            },
+            "time": "2024-05-01T21:56:51+00:00"
         }
     ],
     "packages-dev": [

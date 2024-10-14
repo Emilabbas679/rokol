@@ -3,8 +3,11 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\URL;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Eminiarts\Tabs\Traits\HasTabs;
 use Eminiarts\Tabs\Tabs;
@@ -81,10 +84,23 @@ class Blog extends Resource
                             \App\Models\Blog::CATEGORY_CAMPAIGNS => __('Kampaniyalar'),
                             \App\Models\Blog::CATEGORY_MEETS_AND_SEMINARS => __('Görüş və seminarlar'),
                         ])->displayUsingLabels()
+                        ->rules(function (NovaRequest $request) {
+                            return [Rule::requiredIf($request->input('type') == 1)];
+                        })
                         ->sortable(),
-                    File::make('Image')->disk('public'),
+                    File::make('Image')->disk('public')->rules(['required', 'mimes:jpg,bmp,png'])->acceptedTypes('.jpg,.bmp,.png'),
                     Images::make('Images', 'images')->fullSize()->hideFromIndex()->singleImageRules('dimensions:min_width=100'),
-
+                    Boolean::make('Video', 'is_video')
+                        ->trueValue(true)
+                        ->falseValue(false),
+                    URL::make('Video URL', 'video')
+                        ->rules(function (NovaRequest $request){
+                            $rule = [Rule::prohibitedIf(!$request->filled('is_video') || !$request->input('is_video'))];
+                            if ($request->filled('is_video') && $request->input('is_video')) {
+                                $rule[] = 'url:http,https';
+                            }
+                            return $rule;
+                        }),
                 ]),
 
 

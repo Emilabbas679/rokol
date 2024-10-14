@@ -27,7 +27,7 @@ class CartCompleteRequest extends
         return [
             'select_address' => [ 'required', 'string' ],
             'address_id'     => [
-                Rule::requiredIf( $this->input( 'select_address' ) === 'office' ),
+                Rule::requiredIf( $this->input( 'select_address' ) == 'address' ),
                 'string',
                 'numeric',
                 Rule::exists( Address::class, 'id' )->where( 'user_id', fUserId() )
