@@ -72,8 +72,11 @@
 								</div>
 							</div>
 							@foreach($order->items as $item)
+								@if(is_null($item->product))
+									@continue
+								@endif
 								<div class="col_in list_items">
-									<a href="{!! route('product', $item->product) !!}" class="item_img">
+									<a href="{!! route('product', ['product_id' => $item->product->id]) !!}" class="item_img">
 										<img src="{{asset('storage/'.$item->product->image)}}"
 										     alt="{!! $item->product->name[app()->getLocale()] !!}">
 									</a>
@@ -83,7 +86,7 @@
 												<span class="itm_name">{!! $item->product->name[app()->getLocale()] !!}</span>
 												<span class="itm_weight">{!! ($weight = $item->price?->weight)?->weight . " " . ($weight?->weight_type == 1 ? 'Kq' : 'Q') !!}</span>
 											</h4>
-{{--											<div class="itm_info">Sellülozik Boya</div>--}}
+											<div class="itm_info">{{ $item->product->category->name[app()->getLocale()] }}</div>
 										</div>
 										<div class="list_right_itm">
 											<div class="itm_price">

@@ -14,7 +14,9 @@
     <div class="section_wrap wrap_basket_page">
         <div class="main_center">
 
-
+            @if($errors->any() && app()->environment('local'))
+                {{ implode('', $errors->all('<div>:message</div>')) }}
+            @endif
             <div class="sect_body clearfix">
                 @if((!isset($carts) || !$carts->count()) && (!isset($products) || !$products->count()))
                     <div class="empty_basket_section clearfix">
@@ -94,7 +96,7 @@
 
                 saleTotal += count * price;
             });
-            return saleTotal;
+            return saleTotal.toFixed(2);
 
         }
 
@@ -110,7 +112,7 @@
         calculateGrandTotal();
         saleCalculateGrandTotal();
         calculateDifference()
-        $('.total-basket').text(saleCalculateGrandTotal() + {!! \App\Models\ProductOrder::DELIVERY_PRICE !!} + ' AZN');
+        $('.total-basket').text((parseFloat(saleCalculateGrandTotal()) + {!! \App\Models\ProductOrder::DELIVERY_PRICE !!}).toFixed(2) + ' AZN');
         updatePrices('.pr_number', '.old-main-price', '.old-price');
         updatePrices('.pr_number', '.main-price', '.new-price');
         $(document).ready(function () {
@@ -136,7 +138,7 @@
                 calculateGrandTotal();
                 saleCalculateGrandTotal();
                 calculateDifference()
-                $('.total-basket').text(saleCalculateGrandTotal() + {!! \App\Models\ProductOrder::DELIVERY_PRICE !!} + ' AZN');
+                $('.total-basket').text((parseFloat(saleCalculateGrandTotal()) + {!! \App\Models\ProductOrder::DELIVERY_PRICE !!}).toFixed(2) + ' AZN');
             });
 
             $('.pr_minus').click(function () {
@@ -157,7 +159,7 @@
                 calculateGrandTotal();
                 saleCalculateGrandTotal();
                 calculateDifference()
-                $('.total-basket').text(saleCalculateGrandTotal() + {!! \App\Models\ProductOrder::DELIVERY_PRICE !!} + ' AZN');
+                $('.total-basket').text((parseFloat(saleCalculateGrandTotal()) + {!! \App\Models\ProductOrder::DELIVERY_PRICE !!}).toFixed(2) + ' AZN');
             });
 
 

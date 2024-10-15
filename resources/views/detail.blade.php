@@ -270,6 +270,7 @@
                                             </div>
 
 
+
                                         @endif
                                         @if(!empty(trim($product->properties)))
                                             <div class="indicators_items">
@@ -278,12 +279,14 @@
                                             </div>
 
 
+
                                         @endif
                                         @if(!empty(trim($product->properties)))
                                             <div class="indicators_items">
                                                 <h6 class="indicator_title">Zəmanət:</h6>
                                                 <div>{!! $product->guarantee !!}</div>
                                             </div>
+
 
 
                                         @endif -->
@@ -502,7 +505,12 @@
                 },
                 dataType: 'JSON',
                 success: function (data) {
-                    console.log(data);
+                    if (data.status == 'success') {
+                        let cartIcon = $('.icon_backet');
+                        cartIcon.html('');
+                        cartIcon.append(`<span class="cart_count">${data.totalProductCount}</span>`)
+
+                    }
                 },
                 error: function (data) {
 

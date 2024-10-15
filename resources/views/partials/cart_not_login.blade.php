@@ -60,7 +60,7 @@
                             <div class="pr_slct_left">
                                 <div class="filter_check_items">
                                     <div class="product_counter">
-                                        <input type="hidden"
+                                        <input type="hidden" name="counters[{!! $product->id !!}]"
                                                form="cart_form"
                                                value="{!! $cookieCarts->get($product->id)['count'] !!}">
                                         <button type="button" class="pr_btn_counter pr_minus"

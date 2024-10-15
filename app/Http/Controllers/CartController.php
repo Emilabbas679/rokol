@@ -95,7 +95,8 @@ class CartController extends
 
             $cookie = cookie( 'carts', $carts );
             return response()->json( [
-                                         'status' => 'success',
+                                         'status'            => 'success',
+                                         'totalProductCount' => $carts->count()
                                      ] )->cookie( $cookie );
         }
 
@@ -108,7 +109,19 @@ class CartController extends
                                        [
                                            'count' => DB::raw( 'count + ' . $validated->get( 'count' ) ),
                                        ] );
-
+//        DB::enableQueryLog();
+        $carts = Cart::query()
+            ->select( DB::raw( 'count(id) as cart_product_count' ) )
+            ->where( 'status', Cart::STATUS_UNCOMPLETED )
+            ->where( 'user_id', fUserId() )
+            ->groupBy( [ 'product_id' ] )
+            ->get();
+//        dd( $cartttt->sum('cart_product_count') );
+//        dd( DB::getQueryLog() );
+        return response()->json( [
+                                     'status'            => 'success',
+                                     'totalProductCount' => $carts->sum( 'cart_product_count' )
+                                 ] );
     }
 
     public function selectAddress()
