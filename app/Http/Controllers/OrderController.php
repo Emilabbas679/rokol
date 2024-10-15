@@ -19,7 +19,8 @@ class OrderController extends
             ->when(\request()->filled('status'), function (Builder $builder) {
                 $builder->where('delivered_status', \request()->input('status'));
             })
-            ->paginate( 10 );
+            ->orderByDesc('created_at')
+            ->paginate( 40 );
         return view( 'orders', compact('orders') );
     }
 }

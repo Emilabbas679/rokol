@@ -47,7 +47,7 @@
                                 <div class="product_info_table">
 
                                     <div class="pr_tbl_left">
-                                        <h1 class="product_title">Sellülozik Boya</h1>
+                                        <h1 class="product_title">{{ $product->name }}</h1>
                                         <p class="pr_short_info">Məhsulun kodu: {{$product->code}}</p>
 
                                         <div class="price_section">
@@ -208,7 +208,7 @@
                             <div class="bf_tb_hd">
                                 <div class="bt_tb_title clicked_tab_btn active" data-id="0">Məhsul haqqında</div>
                                 <div class="bt_tb_title clicked_tab_btn" data-id="1">Texniki göstəricilər</div>
-                                <div class="bt_tb_title clicked_tab_btn" data-id="2">Zəmanət</div>
+                                <div class="bt_tb_title clicked_tab_btn" data-id="2">Zəmanət və texniki dəstək</div>
                             </div>
                             <div class="bf_tb_content">
                                 <div class="bf_tb_items " data-id="0">
@@ -263,24 +263,49 @@
                                 </div>
                                 <div class="bf_tb_items " data-id="2">
                                     <div class="indicators_content">
-                                        @if(!empty(trim($product->properties)))
+                                        <!-- @if(!empty(trim($product->properties)))
                                             <div class="indicators_items">
                                                 <h6 class="indicator_title">Saxlama müddəti:</h6>
                                                 <div>{!! $product->retention !!}</div>
                                             </div>
+
+
                                         @endif
                                         @if(!empty(trim($product->properties)))
                                             <div class="indicators_items">
                                                 <h6 class="indicator_title">Xəbərdarlıqlar:</h6>
                                                 <div>{!! $product->warning !!}</div>
                                             </div>
+
+
                                         @endif
                                         @if(!empty(trim($product->properties)))
                                             <div class="indicators_items">
                                                 <h6 class="indicator_title">Zəmanət:</h6>
                                                 <div>{!! $product->guarantee !!}</div>
                                             </div>
-                                        @endif
+
+
+                                        @endif -->
+                                        <ul style="list-style: none;margin: 0">
+                                            <li>- Texniki göstəricilərdə qeyd edilmiş məlumatlar elmi ve təcrübi
+                                                biliklərə əsaslanir;
+                                            </li>
+                                            <li>- "Matanat A" şirkəti məhsulun müvafiq texniki şərt və dövlət
+                                                standartlarına uyğunluğuna zəmanət verir.
+                                            </li>
+                                            <li>- Şirkətin mütəxəssislərinin rəhbərliyi altında görülən işlər istisna
+                                                olmaqla, digər istifadəçilər tərəfindən təlimatdan kənar istifadə
+                                                halları zamanı yarana biləcək problemlərə görə "Matanat A" şirkəti
+                                                məsuliyyət daşımır;
+                                            </li>
+                                            <li>- Şirkət elmi-texniki inkişafla bağlı məhsulda dəyişiklik etmə hüququnu
+                                                özündə saxlayır;
+                                            </li>
+                                            <li>- Texniki dəstək va ya daha geniş məlumat almaq üçün "Matanat A"
+                                                şirkətinə müraciat edin!
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -288,175 +313,71 @@
                     </div>
                 </div>
                 <!-- Product tab content -->
+                @if($similarProducts->count())
+                    <!-- Product similar items -->
+                    <div class="section_wrap wrap_category wrap_similar_product">
+                        <div class="sect_header clearfix">
+                            <h2 class="sect_title">
+                                <a href="{!! route('category', $product->category_id) !!}">@lang('Oxşar məhsullar')</a>
+                            </h2>
+                        </div>
+                        <div class="sect_body clearfix product detail_product">
+                            <div class="row">
+                                @foreach($similarProducts as $similarProduct)
+                                    <div class="col item_col clearfix">
+                                        <div class="col_in">
+                                            <div class="fav_sect">
+                                                <!-- <div class="offer-tag">
+                                                <p class="offer_val">Həftənin təklifi</p>
+                                            </div> -->
+                                                <!-- click after addclass "dofav" -->
+                                                @auth()
+                                                    <span class="favotites @if($similarProduct->favorite) dofav @endif"
+                                                          data-product-id="{!! $similarProduct->id !!}"></span>
+                                                @else
+                                                    <span class="favotites dologin"></span>
+                                                @endauth
+                                            </div>
+                                            <a href="{!! route('product', $similarProduct) !!}" class="item_img">
+                                                <img src="{{asset('storage/'.$product->image)}}" alt="product">
+                                            </a>
+                                            <div class="item_content">
+                                                <h4 class="itm_title">
+                                        <span class="itm_name">
+                                            {{ $similarProduct->name[app()->getLocale()] }}
+                                        </span>
+                                                    <span class="itm_weight">
+                                            2.5 kq
+                                        </span>
+                                                </h4>
+                                                <div class="itm_info">
+                                                    {{ $similarProduct->category->name[app()->getLocale()] }}
+                                                </div>
+                                                <div class="itm_price">
+                                                    @php $price = $similarProduct->prices->first(); @endphp
 
-                <!-- Product similar items -->
-                <div class="section_wrap wrap_category wrap_similar_product">
-                    <div class="sect_header clearfix">
-                        <h2 class="sect_title">
-                            <a href="">Oxşar məhsullar</a>
-                        </h2>
-                    </div>
-                    <div class="sect_body clearfix">
-                        <div class="row">
+                                                    <span class="new-price">{!! $price->price !!} AZN</span>
 
-                            <div class="col item_col clearfix">
-                                <div class="col_in">
-                                    <div class="fav_sect">
-                                        <!-- <div class="offer-tag">
-                                        <p class="offer_val">Həftənin təklifi</p>
-                                    </div> -->
-                                        <!-- click after addclass "dofav" -->
-                                        <span class="favotites "></span>
-                                    </div>
-                                    <a href="#" class="item_img">
-                                        <img src="{{asset('img/item.png')}}" alt="product">
-                                    </a>
-                                    <div class="item_content">
-                                        <h4 class="itm_title">
-                                        <span class="itm_name">
-                                            Rokol
-                                        </span>
-                                            <span class="itm_weight">
-                                            2.5 kq
-                                        </span>
-                                        </h4>
-                                        <div class="itm_info">
-                                            Sellülozik Boya
-                                        </div>
-                                        <div class="itm_price">
-                                            <span class="new-price">4.50 AZN</span>
-                                            <span class="old-price">5.00 AZN</span>
-                                        </div>
-                                        <!-- stocked, unstocked -->
-                                        <div class="itm_stock stocked">
-                                            <span class="stock_text">Stokda: 25 ədəd</span>
-                                        </div>
-                                        <div class="itm_more">
-                                            Səbətə əlavə et
+                                                    @if($price->sale_price > 0 )
+                                                        <span class="old-price">{!! $price->sale_price !!} AZN</span>
+                                                    @endif
+                                                </div>
+                                                <!-- stocked, unstocked -->
+                                                <div class="itm_stock stocked">
+                                                    <span class="stock_text">Stokda: 25 ədəd</span>
+                                                </div>
+                                                <div class="itm_more">
+                                                    Səbətə əlavə et
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
-                            <div class="col item_col clearfix">
-                                <div class="col_in">
-                                    <div class="fav_sect">
-                                        <!-- <div class="offer-tag">
-                                        <p class="offer_val">Həftənin təklifi</p>
-                                    </div> -->
-                                        <!-- click after addclass "dofav" -->
-                                        <span class="favotites "></span>
-                                    </div>
-                                    <a href="#" class="item_img">
-                                        <img src="{{asset('img/item.png')}}" alt="product">
-                                    </a>
-                                    <div class="item_content">
-                                        <h4 class="itm_title">
-                                        <span class="itm_name">
-                                            Rokol
-                                        </span>
-                                            <span class="itm_weight">
-                                            2.5 kq
-                                        </span>
-                                        </h4>
-                                        <div class="itm_info">
-                                            Sellülozik Boya
-                                        </div>
-                                        <div class="itm_price">
-                                            <span class="new-price">4.50 AZN</span>
-                                            <span class="old-price">5.00 AZN</span>
-                                        </div>
-                                        <!-- stocked, unstocked -->
-                                        <div class="itm_stock stocked">
-                                            <span class="stock_text">Stokda: 25 ədəd</span>
-                                        </div>
-                                        <div class="itm_more">
-                                            Səbətə əlavə et
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col item_col clearfix">
-                                <div class="col_in">
-                                    <div class="fav_sect">
-                                        <!-- <div class="offer-tag">
-                                        <p class="offer_val">Həftənin təklifi</p>
-                                    </div> -->
-                                        <!-- click after addclass "dofav" -->
-                                        <span class="favotites "></span>
-                                    </div>
-                                    <a href="#" class="item_img">
-                                        <img src="{{asset('img/item.png')}}" alt="product">
-                                    </a>
-                                    <div class="item_content">
-                                        <h4 class="itm_title">
-                                        <span class="itm_name">
-                                            Rokol
-                                        </span>
-                                            <span class="itm_weight">
-                                            2.5 kq
-                                        </span>
-                                        </h4>
-                                        <div class="itm_info">
-                                            Sellülozik Boya
-                                        </div>
-                                        <div class="itm_price">
-                                            <span class="new-price">6.90 AZN</span>
-                                            <span class="old-price"></span>
-                                        </div>
-                                        <!-- stocked, unstocked -->
-                                        <div class="itm_stock unstocked">
-                                            <span class="stock_text">Stokda yoxdur </span>
-                                        </div>
-                                        <div class="itm_more disabled">
-                                            Səbətə əlavə et
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col item_col clearfix">
-                                <div class="col_in">
-                                    <div class="fav_sect">
-                                        <!-- <div class="offer-tag">
-                                        <p class="offer_val">Həftənin təklifi</p>
-                                    </div> -->
-                                        <!-- click after addclass "dofav" -->
-                                        <span class="favotites "></span>
-                                    </div>
-                                    <a href="#" class="item_img">
-                                        <img src="{{asset('img/item.png')}}" alt="product">
-                                    </a>
-                                    <div class="item_content">
-                                        <h4 class="itm_title">
-                                        <span class="itm_name">
-                                            Rokol
-                                        </span>
-                                            <span class="itm_weight">
-                                            2.5 kq
-                                        </span>
-                                        </h4>
-                                        <div class="itm_info">
-                                            Sellülozik Boya
-                                        </div>
-                                        <div class="itm_price">
-                                            <span class="new-price">4.50 AZN</span>
-                                            <span class="old-price">5.00 AZN</span>
-                                        </div>
-                                        <!-- stocked, unstocked -->
-                                        <div class="itm_stock stocked">
-                                            <span class="stock_text">Stokda: 25 ədəd</span>
-                                        </div>
-                                        <div class="itm_more">
-                                            Səbətə əlavə et
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
-                </div>
-                <!-- Product similar items -->
-
+                    <!-- Product similar items -->
+                @endif
 
             </div>
         </div>
@@ -529,24 +450,6 @@
 
 
     <script>
-        $(document).ready(function () {
-            // *Favorites
-            $(".favotites").click(function (e) {
-                e.preventDefault();
-                e.stopPropagation()
-                $(this).toggleClass("dofav");
-            });
-            // *Favorites
-            // *Favorites
-            // $(".btn_fav").click(function(e) {
-            //     e.preventDefault();
-            //     e.stopPropagation()
-            //     $(this).toggleClass("dofav");
-            // });
-            // *Favorites
-
-        });
-
 
         var color_id = 0;
         var weight_id = 0;
@@ -608,5 +511,35 @@
         }
 
 
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".favotites").on('click', function (e) {
+                let productId = $(this).data('productId');
+                let el = $(this);
+                let route = '{!! route('favorites.store') !!}';
+                let method = 'post'
+                if (el.hasClass('dofav')) {
+                    method = 'delete'
+                    route = '{!! url('favorites') !!}/' + productId;
+                }
+                $.ajax({
+                    url: route,
+                    type: method,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        product_id: productId
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status === 'success') {
+                            el.toggleClass("dofav");
+                        }
+                    },
+                });
+            });
+        });
     </script>
 @endpush

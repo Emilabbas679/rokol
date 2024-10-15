@@ -24,7 +24,6 @@
                             Filterlər
                             <span class="close_filter"></span>
                         </h2>
-
                         @php $route = route('category', $category['id']);
                     if ($category['id'] == 0) {$route = route('products');}
                         @endphp
@@ -200,8 +199,8 @@
 
                                 <div class="bf_tb_hd grid_button_items">
                                     <div class="sort_count">230 məhsul tapıldı</div>
-                                    <div class="grid_button clicked_tab_btn btn_list " data-id="0"></div>
-                                    <div class="grid_button clicked_tab_btn btn_grid active" data-id="1"></div>
+                                    <div class="grid_button clicked_tab_btn btn_list {!! getViewCookie() == 'list' ? 'active' : '' !!}" data-id="0"></div>
+                                    <div class="grid_button clicked_tab_btn btn_grid {!! getViewCookie() == 'grid' ? 'active' : '' !!}" data-id="1"></div>
                                 </div>
                             </div>
                         </div>
@@ -211,223 +210,11 @@
 
                             <div class="bf_tb_items " data-id="0">
                                 <div class="row_list" id="product_list">
-
-                                    <div class="col_in list_items">
-                                        <a href="https://rokol.ain.az/product/16" class="item_img">
-                                            <img
-                                                    src="https://rokol.ain.az/storage/OywOT0xeK1Vv5e35zugqSDWZCiZsICIMKk1JeWGe.png"
-                                                    alt="product">
-                                        </a>
-                                        <div class="item_content">
-
-                                            <div class="list_left_itm">
-                                                <h4 class="itm_title">
-                                                    <span class="itm_name">Rokol plus paint</span>
-                                                    <span class="itm_weight">10 Kq </span>
-                                                </h4>
-                                                <div class="itm_info">Sellülozik Boya</div>
-                                            </div>
-                                            <div class="list_right_itm">
-                                                <div class="itm_price">
-                                                    <span class="new-price">4.50 AZN</span>
-                                                    <span class="old-price">5.00 AZN</span>
-                                                </div>
-                                                <div class="itm_more_sect">
-                                                    <div class="itm_more">
-                                                        Səbətə əlavə et
-                                                    </div>
-                                                    <div class="itm_stock stocked">
-                                                        <span class="stock_text">Stokda: 25 ədəd</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="fav_sect">
-                                                    <span class="favotites "></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col_in list_items">
-                                        <a href="https://rokol.ain.az/product/16" class="item_img">
-                                            <img
-                                                    src="https://rokol.ain.az/storage/OywOT0xeK1Vv5e35zugqSDWZCiZsICIMKk1JeWGe.png"
-                                                    alt="product">
-                                        </a>
-                                        <div class="item_content">
-
-                                            <div class="list_left_itm">
-                                                <h4 class="itm_title">
-                                                    <span class="itm_name">Rokol plus paint</span>
-                                                    <span class="itm_weight">10 Kq </span>
-                                                </h4>
-                                                <div class="itm_info">Sellülozik Boya</div>
-                                            </div>
-                                            <div class="list_right_itm">
-                                                <div class="itm_price">
-                                                    <span class="new-price">4.50 AZN</span>
-                                                    <span class="old-price">5.00 AZN</span>
-                                                </div>
-                                                <div class="itm_more_sect">
-                                                    <div class="itm_more">
-                                                        Səbətə əlavə et
-                                                    </div>
-                                                    <div class="itm_stock stocked">
-                                                        <span class="stock_text">Stokda: 25 ədəd</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="fav_sect">
-                                                    <span class="favotites "></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col_in list_items">
-                                        <a href="https://rokol.ain.az/product/16" class="item_img">
-                                            <img
-                                                    src="https://rokol.ain.az/storage/OywOT0xeK1Vv5e35zugqSDWZCiZsICIMKk1JeWGe.png"
-                                                    alt="product">
-                                        </a>
-                                        <div class="item_content">
-
-                                            <div class="list_left_itm">
-                                                <h4 class="itm_title">
-                                                    <span class="itm_name">Rokol plus paint</span>
-                                                    <span class="itm_weight">10 Kq </span>
-                                                </h4>
-                                                <div class="itm_info">Sellülozik Boya</div>
-                                            </div>
-                                            <div class="list_right_itm">
-                                                <div class="itm_price">
-                                                    <span class="new-price">4.50 AZN</span>
-                                                    <span class="old-price">5.00 AZN</span>
-                                                </div>
-                                                <div class="itm_more_sect">
-                                                    <div class="itm_more">
-                                                        Səbətə əlavə et
-                                                    </div>
-                                                    <div class="itm_stock stocked">
-                                                        <span class="stock_text">Stokda: 25 ədəd</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="fav_sect">
-                                                    <span class="favotites "></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col_in list_items">
-                                        <a href="https://rokol.ain.az/product/16" class="item_img">
-                                            <img
-                                                    src="https://rokol.ain.az/storage/OywOT0xeK1Vv5e35zugqSDWZCiZsICIMKk1JeWGe.png"
-                                                    alt="product">
-                                        </a>
-                                        <div class="item_content">
-
-                                            <div class="list_left_itm">
-                                                <h4 class="itm_title">
-                                                    <span class="itm_name">Rokol plus paint</span>
-                                                    <span class="itm_weight">10 Kq </span>
-                                                </h4>
-                                                <div class="itm_info">Sellülozik Boya</div>
-                                            </div>
-                                            <div class="list_right_itm">
-                                                <div class="itm_price">
-                                                    <span class="new-price">4.50 AZN</span>
-                                                    <span class="old-price">5.00 AZN</span>
-                                                </div>
-                                                <div class="itm_more_sect">
-                                                    <div class="itm_more">
-                                                        Səbətə əlavə et
-                                                    </div>
-                                                    <div class="itm_stock stocked">
-                                                        <span class="stock_text">Stokda: 25 ədəd</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="fav_sect">
-                                                    <span class="favotites "></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col_in list_items">
-                                        <a href="https://rokol.ain.az/product/16" class="item_img">
-                                            <img
-                                                    src="https://rokol.ain.az/storage/OywOT0xeK1Vv5e35zugqSDWZCiZsICIMKk1JeWGe.png"
-                                                    alt="product">
-                                        </a>
-                                        <div class="item_content">
-
-                                            <div class="list_left_itm">
-                                                <h4 class="itm_title">
-                                                    <span class="itm_name">Rokol plus paint</span>
-                                                    <span class="itm_weight">10 Kq </span>
-                                                </h4>
-                                                <div class="itm_info">Sellülozik Boya</div>
-                                            </div>
-                                            <div class="list_right_itm">
-                                                <div class="itm_price">
-                                                    <span class="new-price">4.50 AZN</span>
-                                                    <span class="old-price">5.00 AZN</span>
-                                                </div>
-                                                <div class="itm_more_sect">
-                                                    <div class="itm_more">
-                                                        Səbətə əlavə et
-                                                    </div>
-                                                    <div class="itm_stock stocked">
-                                                        <span class="stock_text">Stokda: 25 ədəd</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="fav_sect">
-                                                    <span class="favotites "></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col_in list_items">
-                                        <a href="https://rokol.ain.az/product/16" class="item_img">
-                                            <img
-                                                    src="https://rokol.ain.az/storage/OywOT0xeK1Vv5e35zugqSDWZCiZsICIMKk1JeWGe.png"
-                                                    alt="product">
-                                        </a>
-                                        <div class="item_content">
-
-                                            <div class="list_left_itm">
-                                                <h4 class="itm_title">
-                                                    <span class="itm_name">Rokol plus paint</span>
-                                                    <span class="itm_weight">10 Kq </span>
-                                                </h4>
-                                                <div class="itm_info">Sellülozik Boya</div>
-                                            </div>
-                                            <div class="list_right_itm">
-                                                <div class="itm_price">
-                                                    <span class="new-price">4.50 AZN</span>
-                                                    <span class="old-price">5.00 AZN</span>
-                                                </div>
-                                                <div class="itm_more_sect">
-                                                    <div class="itm_more">
-                                                        Səbətə əlavə et
-                                                    </div>
-                                                    <div class="itm_stock stocked">
-                                                        <span class="stock_text">Stokda: 25 ədəd</span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="fav_sect">
-                                                    <span class="favotites "></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    @include('partials.products-list')
                                 </div>
-
-                                @if(count($products) == 20)
-                                    <div class="sect_footer clearfix" id="more">
-                                        <a href="javascripti:void(0)" class="more">
+                                @if($products->hasMorePages())
+                                    <div class="sect_footer clearfix" id="more-list">
+                                        <a class="more">
                                             Daha çox
                                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24"
                                                  viewBox="0 0 25 24" fill="none">
@@ -446,7 +233,7 @@
 
                                 @if($products->hasMorePages())
                                     <div class="sect_footer clearfix" id="more">
-                                        <a href="javascripti:void(0)" class="more">
+                                        <a href="javascript:void(0)" class="more">
                                             Daha çox
                                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24"
                                                  viewBox="0 0 25 24" fill="none">
@@ -574,8 +361,10 @@
 
     <script>
         var page = 0;
-        $("#more").click(function () {
-            $("#more").hide()
+        let nextPageUrl = "{{ $products->nextPageUrl() }}";
+        $(".more").on('click', function () {
+            let parent = $(this).parent();
+            parent.hide();
             event.preventDefault();
             let form = document.getElementById('formData');
             let formData = new FormData(form);
@@ -591,8 +380,6 @@
                     data[key] = value;
                 }
             });
-            page = page + 1;
-            data['page'] = page;
 
             $.ajaxSetup({
                 headers: {
@@ -600,20 +387,26 @@
                 }
             });
             $.ajax({
-                type: "POST",
-                url: "{{$products->nextPageUrl()}}",
-            data: data
-        }).done(function(data) {
-            if (data.status == true) {
-                $("#product_grid").append(data.html)
-                if (data.count == 20) {
-                    $("#more").show()
+                type: "GET",
+                url: nextPageUrl,
+                dataType: 'JSON',
+                data
+            }).done(function (data) {
+                if (data.status) {
+                    $("#product_grid").append(data.htmlGrid)
+                    $("#product_list").append(data.htmlList)
+                    console.log(data.hasMorePages)
+                    if (data.hasMorePages === true) {
+                        parent.show();
+                        nextPageUrl = data.nextPageUrl;
+                    } else {
+                        parent.hide();
+                    }
                 }
-            }
-        })
+            })
 
-    })
-</script>
+        })
+    </script>
 
     <script>
         $('#sort_main').on('change', function () {

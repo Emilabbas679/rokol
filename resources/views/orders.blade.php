@@ -81,13 +81,13 @@
 										<div class="list_left_itm">
 											<h4 class="itm_title">
 												<span class="itm_name">{!! $item->product->name[app()->getLocale()] !!}</span>
-												<span class="itm_weight">{!! ($weight = $item->price->weight)->weight . " " . ($weight->weight_type == 1 ? 'Kq' : 'Q') !!}</span>
+												<span class="itm_weight">{!! ($weight = $item->price?->weight)?->weight . " " . ($weight?->weight_type == 1 ? 'Kq' : 'Q') !!}</span>
 											</h4>
 {{--											<div class="itm_info">Sellülozik Boya</div>--}}
 										</div>
 										<div class="list_right_itm">
 											<div class="itm_price">
-												<span class="new-price">{!! $item->price->price * $item->count !!} AZN</span>
+												<span class="new-price">{!! $item->price?->price * $item->count !!} AZN</span>
 											</div>
 										</div>
 									</div>

@@ -138,7 +138,11 @@ class CartController extends
                                  ] )
                          ->where( 'user_id', auth()->id() )
                          ->where( 'status', Cart::STATUS_UNCOMPLETED )
-                         ->paginate( 20 );
+                         ->get();
+
+        if ( !$carts->count() ) {
+            return redirect()->route( 'products' );
+        }
 
         return view( 'checkout_address', compact( 'addresses', 'carts' ) );
     }
@@ -147,7 +151,7 @@ class CartController extends
     {
         $validated     = collect( $request->validated() );
         $deliveryPrice = $validated->has( 'select_address' ) && $validated->get( 'select_address' ) === 'address'
-            ? 5
+            ? ProductOrder::DELIVERY_PRICE
             : 0;
         $carts         = Cart::query()
                              ->with( [

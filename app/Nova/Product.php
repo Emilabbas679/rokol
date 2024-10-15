@@ -210,7 +210,7 @@ class Product extends Resource
                             $usage_rules['en'] = $request->$requestAttribute;
                             $model->usage_rules = $usage_rules;
                         })->hideFromIndex(),
-                    CKEditor::make(__('Usage rules (Azerbaijan)'), 'usage_az')->hideFromIndex()
+                    CKEditor::make(__('Usage rules (Azerbaijan)'), 'usage_rules_en')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->usage_rules['az'] ?? '';
                         })
@@ -219,7 +219,7 @@ class Product extends Resource
                             $usage_rules['az'] = $request->$requestAttribute;
                             $model->usage_rules = $usage_rules;
                         }),
-                    CKEditor::make(__('Usage rules (Russian)'), 'usage_ru')->hideFromIndex()
+                    CKEditor::make(__('Usage rules (Russian)'), 'usage_rules_en')->hideFromIndex()
                         ->resolveUsing(function ($value, $resource) {
                             return $resource->usage_rules['ru'] ?? '';
                         })

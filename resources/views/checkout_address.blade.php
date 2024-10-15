@@ -18,23 +18,23 @@
 
 				<div class="wrap_left">
 					<div class="adrs_container">
-                        @if($errors->any())
+                        @if($errors->any() && app()->environment('local'))
                             {{ implode('', $errors->all('<div>:message</div>')) }}
                         @endif
 						<form action="{!! route('carts.complete') !!}" method="post" id="checkout_address_form">
 							@csrf
 							<div class="cr_adr_row">
-								<label class="address_label">
-									<input type="radio" name="select_address" checked value="office">
+								<label class="address_label {{ old('select_address') == 'office' ? 'select_label' : '' }}">
+									<input type="radio" name="select_address" {{ old('select_address') == 'office' ? 'checked' : '' }} value="office">
 									<span class="label_disk"></span>
 									<span class="address_title">Təhvil məntəqəsindən alma</span>
 									<span class="address_info">Bakı-Sumqayıt yolu, 13,5 km AZ0123 Bakı, Azərbaycan
 									</span>
 								</label>
 							</div>
-							<div class="cr_adr_row">
+							<div class="cr_adr_row {{ old('select_address') == 'address' ? 'select_label' : '' }}">
 								<label class="address_label">
-									<input type="radio" name="select_address" value="address">
+									<input type="radio" name="select_address" {{ old('select_address') == 'address' ? 'checked' : '' }} value="address">
 									<span class="label_disk"></span>
 									<span class="address_title">Ünvan</span>
 									<span class="address_info">Aşağıdan ünvan seçin və ya yeni ünvan əlavə edin</span>
@@ -43,6 +43,7 @@
 									@foreach($addresses ?? [] as $address)
 										<div class="my_adress_item" id="my_address_{!! $loop->index !!}">
 											<input name="address_id" class="address-btn" type="radio"
+                                                   {!! old('address_id') == $address->id ? 'checked' : ''  !!}
 											       style="display: none" value="{!! $address->id !!}">
 											<div class="my_adress_content">
 												<div class="my_adrs_title">{!! $address->title !!}</div>
@@ -205,8 +206,9 @@
         $('.address_label').click(function () {
             $(this).parents(".adrs_container").find(".cr_adr_row").removeClass("select_label");
             $(this).parents(".cr_adr_row").addClass("select_label");
-            $(this).siblings(".my_adress_sect").find(".my_adress_item").removeClass("select_my_address");
-            $(this).siblings(".my_adress_sect").find("#my_address_1").addClass("select_my_address");
+            @if(old('address_id'))
+                $(this).siblings(".my_adress_sect").find("#my_address_{{ old('address_id') }}").addClass("select_my_address");
+            @endif
         });
 
         $('.my_adress_item').click(function () {
