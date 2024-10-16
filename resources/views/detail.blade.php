@@ -18,10 +18,16 @@
                     <a href="{{route('category', $product->category_id)}}">Məhsullar</a>
                     <a href="javascript:void(0)">{{$product->name}}</a>
                 </div>
-                <!-- <div class="pr_like_button">
-                    <span class="favotites "></span>
-                    <a href="#" class="share_product"></a>
-                </div> -->
+
+                    <div class="pr_like_button">
+                        @auth()
+                            <span class="favotites @if($product->favorite) dofav @endif"
+                                  data-product-id="{!! $product->id !!}"></span>
+                        @else
+                            <span class="favotites dologin"></span>
+                        @endauth
+{{--                        <a href="#" class="share_product"></a>--}}
+                    </div>
 
 
             </div>
@@ -271,6 +277,7 @@
 
 
 
+
                                         @endif
                                         @if(!empty(trim($product->properties)))
                                             <div class="indicators_items">
@@ -280,12 +287,14 @@
 
 
 
+
                                         @endif
                                         @if(!empty(trim($product->properties)))
                                             <div class="indicators_items">
                                                 <h6 class="indicator_title">Zəmanət:</h6>
                                                 <div>{!! $product->guarantee !!}</div>
                                             </div>
+
 
 
 

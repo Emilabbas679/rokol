@@ -225,7 +225,14 @@ class SiteController extends Controller
     public function product( Request $request, $id )
     {
         $product              = Product::where( 'id', $id )->where( 'status', 1 )
-                                       ->with( 'category', 'prices', 'types', 'appearances', 'refProperties', 'applicationAreas' )
+                                       ->with( ['category',
+                                                'prices',
+                                                'types',
+                                                'appearances',
+                                                'refProperties',
+                                                'applicationAreas',
+                                                'favorite'
+                                               ] )
                                        ->firstorfail();
         $locale               = app()->getLocale();
         $product->name        = $product->name[$locale] ?? '';
