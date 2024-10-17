@@ -53,8 +53,9 @@ class SiteController extends Controller
 
     public function category( $id = 0 )
     {
+        Cache::forget( 'main_categories' );
         $categories = Cache::rememberForever( 'main_categories', function () {
-            return $categories = Category::where( 'status', 1 )->where( 'category_id', null )->get();
+            return $categories = Category::query()->with(['children'])->where( 'status', 1 )->where( 'category_id', null )->get();
         } );
 
         if ( $id == 0 ) {
@@ -107,7 +108,7 @@ class SiteController extends Controller
         if ( auth( 'web' )->check() ) {
             $query->with( [ 'favorite' ] );
         }
-        $query->join( DB::raw( '(select product_id, min(price) as price, max(sale_price) as sale_price from product_prices group by product_id) as pp' ), 'pp.product_id', '=', 'products.id' );
+        $query->join( DB::raw( 'product_prices as pp' ), 'pp.product_id', '=', 'products.id' );
         $query->when( request()->has( 'min_price' ) || request()->has( 'max_price' ), function ( Builder $query ) {
             if ( request()->has( 'min_price' ) ) {
                 $minPrice = request()->input( 'min_price' );

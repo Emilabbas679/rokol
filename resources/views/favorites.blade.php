@@ -10,96 +10,103 @@
 
 @section('content')
 
-<!-- Wrap Profile section -->
-<!-- Breadcrumb -->
-@include('partials.breadcrumbs')
-<!-- Breadcrumb -->
+    <!-- Wrap Profile section -->
+    <!-- Breadcrumb -->
+    @include('partials.breadcrumbs')
+    <!-- Breadcrumb -->
 
 
-<div class="section_wrap wrap_category wrap_profile_sect">
-    <div class="main_center clearfix">
-        <div class="sect_header clearfix">
-            <h2 class="sect_title">Seçilmişlərim </h2>
-        </div>
-        <div class="sect_body clearfix">
-            <div class="row">
-                @php
-                $locale = app()->getLocale()
-                @endphp
-               @foreach($favorites as $favorite)
-                   @php
-                   $product = $favorite->product
-                   @endphp
-                    @if($product->prices and isset( $product->prices[0]))
-                        @php $price = $product->prices[0]; $weight = $price->weight; @endphp
-                    @else
-                        @php $price = []; $weight = [] @endphp
-                    @endif
-                    <div class="col item_col clearfix">
-                        <div class="col_in">
-                            <div class="fav_sect">
-                                <!-- <div class="offer-tag">
-                                        <p class="offer_val">Həftənin təklifi</p>
-                                    </div> -->
-                                <!-- click after addclass "dofav" -->
-                                <span class="favotites dofav" data-product-id="{!! $product->id !!}"></span>
-                            </div>
-                            <a href="{!! route('product', $product) !!}">
-                                <div class="item_img">
-                                    <img src="{{asset('img/item.png')}}" alt="product" >
+    <div class="section_wrap wrap_category wrap_profile_sect">
+        <div class="main_center clearfix">
+            <div class="sect_header clearfix">
+                <h2 class="sect_title">Seçilmişlərim </h2>
+            </div>
+            <div class="sect_body clearfix">
+                <div class="row">
+                    @php
+                        $locale = app()->getLocale()
+                    @endphp
+                    @foreach($favorites as $favorite)
+                        @php
+                            if(is_null($favorite->product)){
+                                continue;
+                            }
+                            $product = $favorite->product
+                        @endphp
+                        @if($product->prices and isset($product->prices[0]))
+                            @php $price = $product->prices[0]; $weight = $price->weight; @endphp
+                        @else
+                            @php $price = []; $weight = [] @endphp
+                        @endif
+                        <div class="col item_col clearfix">
+                            <div class="col_in">
+                                <div class="fav_sect">
+                                    <!-- <div class="offer-tag">
+                                            <p class="offer_val">Həftənin təklifi</p>
+                                        </div> -->
+                                    <!-- click after addclass "dofav" -->
+                                    <span class="favotites dofav" data-product-id="{!! $product->id !!}"></span>
                                 </div>
-                                <div class="item_content">
-                                    <h4 class="itm_title">
+                                <a href="{!! route('product', $product) !!}">
+                                    <div class="item_img">
+                                        <img src="{{asset('img/item.png')}}" alt="product">
+                                    </div>
+                                    <div class="item_content">
+                                        <h4 class="itm_title">
                                         <span class="itm_name">
                                             {!! $product->name[$locale] !!}
                                         </span>
-                                        <span class="itm_weight">
+                                            <span class="itm_weight">
                                             @if(isset($weight['weight']))
-                                                <span class="itm_weight">{{$weight->weight}} @if($weight->weight_type == 0) Q @else Kq @endif</span>
-                                            @endif
+                                                    <span class="itm_weight">{{$weight->weight}} @if($weight->weight_type == 0)
+                                                            Q
+                                                        @else
+                                                            Kq
+                                                        @endif</span>
+                                                @endif
                                         </span>
-                                    </h4>
-                                   <div class="itm_info">
-                                       Sellülozik Boya
+                                        </h4>
+                                        <div class="itm_info">
+                                            Sellülozik Boya
+                                        </div>
+                                        <div class="itm_price">
+                                            @include('partials.product_price')
+                                        </div>
+                                        <!-- stocked, unstocked -->
+                                        <!-- <div class="itm_stock stocked">
+                                           <span class="stock_text">Stokda: 25 ədəd</span>
+                                        </div> -->
+                                        <div class="itm_more">
+                                            Səbətə əlavə et
+                                        </div>
                                     </div>
-                                    <div class="itm_price">
-                                        @include('partials.product_price')
-                                    </div>
-                                    <!-- stocked, unstocked -->
-                                    <!-- <div class="itm_stock stocked">
-                                       <span class="stock_text">Stokda: 25 ədəd</span>
-                                    </div> -->
-                                    <div class="itm_more">
-                                       Səbətə əlavə et
-                                   </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-               @endforeach
+                    @endforeach
+                </div>
             </div>
+
         </div>
-
     </div>
-</div>
-<!-- Product similar items -->
+    <!-- Product similar items -->
 
-<!-- Wrap Profile section -->
+    <!-- Wrap Profile section -->
 
 @endsection
 
 @push('js')
 
-<script>
-$(document).ready(function() {
-    $(".favotites").click(function(e) {
-        let productId = $(this).data('productId');
-        let el = $(this);
-        let route = '{!! route('favorites.store') !!}';
-        let method = 'post'
-        if (el.hasClass('dofav')){
-            method = 'delete'
-            route =  '{!! url('favorites') !!}/' + productId;
+    <script>
+        $(document).ready(function () {
+            $(".favotites").click(function (e) {
+                let productId = $(this).data('productId');
+                let el = $(this);
+                let route = '{!! route('favorites.store') !!}';
+                let method = 'post'
+                if (el.hasClass('dofav')) {
+                    method = 'delete'
+                    route = '{!! url('favorites') !!}/' + productId;
         }
         $.ajax({
             url: route,

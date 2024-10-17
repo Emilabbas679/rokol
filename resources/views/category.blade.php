@@ -25,7 +25,7 @@
                             <span class="close_filter"></span>
                         </h2>
                         @php $route = route('category', $category['id']);
-                    if ($category['id'] == 0) {$route = route('products');}
+                        if ($category['id'] == 0) {$route = route('products');}
                         @endphp
                         <form action="{{$route}}" id="formData">
                             <div class="filter_items">
@@ -182,15 +182,15 @@
                                     </div>
 
                                     <div class="sort_seletc_item">
-                                        <span>Sort by:</span>
+                                        <span>Sırala:</span>
                                         <div class="form_item">
                                             <select name="sort_category_id" class="js-example-basic-single "
                                                     id="sort_main" data-placeholder="Most popular">
-                                                <option value="0">@lang('Sırala')</option>
-                                                <option value="{!! request()->fullUrlWithQuery(['sort_by' => 'price,desc']) !!}" {!! request()->input('sort_by') == 'price,desc' ? 'selected' : '' !!}>@lang('Most expensive')</option>
-                                                <option value="{!! request()->fullUrlWithQuery(['sort_by' => 'price,asc']) !!}" {!! request()->input('sort_by') == 'price,asc' ? 'selected' : '' !!}>@lang('Most cheap')</option>
-                                                <option value="{!! request()->fullUrlWithQuery(['sort_by' => 'name,asc']) !!}" {!! request()->input('sort_by') == 'name,asc' ? 'selected' : '' !!}>@lang('By name A-Z')</option>
-                                                <option value="{!! request()->fullUrlWithQuery(['sort_by' => 'name,desc']) !!}" {!! request()->input('sort_by') == 'name,desc' ? 'selected' : '' !!}>@lang('By name Z-A')</option>
+                                                <option value="0">@lang('Hamısı')</option>
+                                                <option value="{!! request()->fullUrlWithQuery(['sort_by' => 'price,desc']) !!}" {!! request()->input('sort_by') == 'price,desc' ? 'selected' : '' !!}>@lang('Ən bahalı')</option>
+                                                <option value="{!! request()->fullUrlWithQuery(['sort_by' => 'price,asc']) !!}" {!! request()->input('sort_by') == 'price,asc' ? 'selected' : '' !!}>@lang('Ən ucuz')</option>
+                                                <option value="{!! request()->fullUrlWithQuery(['sort_by' => 'name,asc']) !!}" {!! request()->input('sort_by') == 'name,asc' ? 'selected' : '' !!}>@lang('Adına görə A-Z')</option>
+                                                <option value="{!! request()->fullUrlWithQuery(['sort_by' => 'name,desc']) !!}" {!! request()->input('sort_by') == 'name,desc' ? 'selected' : '' !!}>@lang('Adına görə Z-A')</option>
                                             </select>
                                             <span class="customDrop customDrop-sort"></span>
                                         </div>
@@ -209,7 +209,7 @@
 
 
                             <div class="bf_tb_items " data-id="0">
-                                <div class="row_list" id="product_list">
+                                <div class="row_list listed_products" id="product_list">
                                     @include('partials.products-list')
                                 </div>
                                 @if($products->hasMorePages())
@@ -403,9 +403,17 @@
                         parent.hide();
                     }
                 }
+                equalHeight();
             })
 
         })
+        function equalHeight(event) {
+
+            $('.wrap_category .bf_tb_items.active .col_in').matchHeight({property: 'min-height'});
+            $('.item_content_btm .itm_title').matchHeight({property: 'min-height'});;
+            $('.itm_name.card_head').matchHeight({property: 'min-height'});
+            $('.img_cover').matchHeight({property: 'min-height'});
+        }
     </script>
 
     <script>

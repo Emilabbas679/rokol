@@ -31,7 +31,7 @@
                     </div>
                     <div class="form_item ">
                         <input type="text" name="phone" placeholder="@lang('Telefon nömrəsi (+994)')"
-                               class="item_input phone" required>
+                               class="item_input phone" value="994" required>
                         @error('phone')
                         <div class="error_type">{{ $message }}</div>
                         @enderror
@@ -160,13 +160,11 @@
 
 @push('js')
 
-    <script>
+<script>
         $(document).ready(function () {
-
             $(".phone").inputmask({
-                "mask": "+(999) 99 999 99 99",
+                mask: "+(999) 99 999 99 99",
             });
-
         });
     </script>
     <script>
@@ -204,7 +202,7 @@
         });
 
         function sendCode(isFirst) {
-            let phoneNumber = $('input[name="phone"]').val().replaceAll(/\(|\)/gi, '');
+            let phoneNumber = $('input[name="phone"]').val().replaceAll(/\(|\)|_/gi, '');
             let data = $('#register_form').serialize();
             let validationNumber = phoneNumber.replaceAll(' ', '');
             if (validationNumber.trim() !== '' && validationNumber.length === 13) {
@@ -230,6 +228,9 @@
                         })
                     },
                 });
+            }
+            else {
+                $(`<div class="error_type">@lang('Phone number not valid')</div>`).insertAfter(`input[name='phone']`);
             }
         }
 

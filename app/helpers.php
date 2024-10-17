@@ -31,8 +31,9 @@ if ( !function_exists( 'translate' ) ) {
 if ( !function_exists( 'menu_categories' ) ) {
     function menu_categories()
     {
+        Cache::forget('categories');
         $categories = Cache::remember( 'categories', 1200, function () {
-            return Category::where( 'status', 1 )->where( 'category_id', null )->with( 'children' )->get();
+            return Category::query()->with(['children'])->where( 'status', 1 )->where( 'category_id', null )->with( 'children' )->get();
         } );
         return $categories;
     }

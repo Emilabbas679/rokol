@@ -259,12 +259,12 @@
                                                 <div>{!! $product->properties !!}</div>
                                             </div>
                                         @endif
-                                        @if(!empty(trim($product->consumption)))
-                                            <div class="indicators_items">
-                                                <h6 class="indicator_title">{{translate('product_consumption')}}:</h6>
-                                                <div>{!! $product->consumption !!}</div>
-                                            </div>
-                                        @endif
+{{--                                        @if(!empty(trim($product->consumption)))--}}
+{{--                                            <div class="indicators_items">--}}
+{{--                                                <h6 class="indicator_title">{{translate('product_consumption')}}:</h6>--}}
+{{--                                                <div>{!! $product->consumption !!}</div>--}}
+{{--                                            </div>--}}
+{{--                                        @endif--}}
                                     </div>
                                 </div>
                                 <div class="bf_tb_items " data-id="2">

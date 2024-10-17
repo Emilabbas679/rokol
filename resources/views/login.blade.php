@@ -15,23 +15,23 @@
 
         <div class="section_wrap wrap_sign_items">
 
-                <div class="reg_text" style="@if(!session()->has('success_register')) display:none @endif">
+            <div class="reg_text" style="@if(!session()->has('success_register')) display:none @endif">
                     <span>
                         @lang('Qeydiyyat uğurla tamamlandı daxil ola bilərsiniz')
                     </span>
-                </div>
+            </div>
 
             <div class="section_wrap wrap_sign_content ">
                 <div class="benefit_tabs">
                     <div class="sign_header">
-                        <div class="sign_title">Şəxsi kabinetə xoş gəlmisiniz</div>
-                        <div class="sign_info">Giriş məlumatlarını daxil edin</div>
+                        <div class="sign_title">@lang('Şəxsi kabinetə xoş gəlmisiniz')</div>
+                        <div class="sign_info">@lang('Giriş məlumatlarını daxil edin')</div>
                     </div>
                     <div class="sign_tab_sect">
                         <div class="bf_tb_hd">
                             <span class="glider "></span>
-                            <div class="bt_tb_title clicked_tab_btn " data-id="0"><span>E-poçt ünvanı</span></div>
-                            <div class="bt_tb_title clicked_tab_btn " data-id="1"><span>Telefon nömrəsi</span></div>
+                            <div class="bt_tb_title clicked_tab_btn " data-id="0"><span>@lang('E-poçt ünvanı')</span></div>
+                            <div class="bt_tb_title clicked_tab_btn " data-id="1"><span>@lang('Telefon nömrəsi')</span></div>
                         </div>
                     </div>
                     <div class="bf_tb_content clearfix">
@@ -41,14 +41,18 @@
                             <form action="{!! route('login') !!}" method="post">
                                 @csrf
                                 <div class="form_item ">
-                                    <input type="text" name="email" placeholder="E-poçt ünvanı" value=""
+                                    <input type="text" name="email" placeholder="@lang('E-poçt ünvanı')" value=""
                                            class="item_input">
-                                    <!-- <div class="error_type">Supporting text</div> -->
+                                    @error('email')
+                                    <div class="error_type">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form_item">
-                                    <input type="password" name="password" placeholder="Şifrə" value=""
+                                    <input type="password" name="password" placeholder="@lang('Şifrə')" value=""
                                            class="item_input ">
-                                    <!-- <div class="error_type">Supporting text</div> -->
+                                    @error('password')
+                                    <div class="error_type">{{ $message }}</div>
+                                    @enderror
                                     <div class="pass_eye">
                                     <span class="password-showhide">
                                         <span class="show-password"> </span>
@@ -56,12 +60,14 @@
                                     </span>
                                     </div>
                                 </div>
-                                <a href="#" class="forgot_password">Şifrəni unutmusan? </a>
+                                <a href="{!! route('password.phone') !!}"
+                                   class="forgot_password">@lang('Şifrəni unutmusan?')</a>
                                 <div class="form_item">
-                                    <button type="submit" class="btn_sign submit_btn">Daxil ol</button>
+                                    <button type="submit" class="btn_sign submit_btn">@lang('Daxil ol')</button>
                                 </div>
                                 <div class="form_item">
-                                    <a href="{!! route('register') !!}" class="btn_sign link_btn">Qeydiyyatdan keç</a>
+                                    <a href="{!! route('register') !!}"
+                                       class="btn_sign link_btn">@lang('Qeydiyyatdan keç')</a>
                                 </div>
                             </form>
 
@@ -71,14 +77,19 @@
                             <form action="{!! route('login') !!}" method="post">
                                 @csrf
                                 <div class="form_item ">
-                                    <input type="text" name="phone" placeholder="Telefon nömrəsi (+994)" value=""
+                                    <input type="text" name="phone" placeholder="@lang('Telefon nömrəsi') (+994)"
+                                           value=""
                                            class="item_input phone">
-                                    <!-- <div class="error_type">Supporting text</div> -->
+                                    @error('phone')
+                                    <div class="error_type">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form_item ">
-                                    <input type="password" name="password" placeholder="Şifrə" value=""
+                                    <input type="password" name="password" placeholder="@lang('Şifrə')" value=""
                                            class="item_input ">
-                                    <!-- <div class="error_type">Supporting text</div> -->
+                                    @error('password')
+                                    <div class="error_type">{{ $message }}</div>
+                                    @enderror
                                     <div class="pass_eye">
                                     <span class="password-showhide">
                                         <span class="show-password"> </span>
@@ -86,12 +97,14 @@
                                     </span>
                                     </div>
                                 </div>
-                                <a href="#" class="forgot_password">Şifrəni unutmusan? </a>
+                                <a href="{!! route('password.phone') !!}"
+                                   class="forgot_password">@lang('Şifrəni unutmusan?')</a>
                                 <div class="form_item">
-                                    <button type="submit" class="btn_sign submit_btn">Daxil ol</button>
+                                    <button type="submit" class="btn_sign submit_btn">@lang('Daxil ol')</button>
                                 </div>
                                 <div class="form_item">
-                                    <a href="{!! route('register') !!}" class="btn_sign link_btn">Qeydiyyatdan keç</a>
+                                    <a href="{!! route('register') !!}"
+                                       class="btn_sign link_btn">@lang('Qeydiyyatdan keç')</a>
                                 </div>
                             </form>
 

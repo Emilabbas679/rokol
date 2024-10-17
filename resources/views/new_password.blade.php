@@ -17,13 +17,18 @@
 
         <div class="section_wrap wrap_sign_content ">
 
+            @if($errors->any() && app()->environment('local'))
+                {{ implode('', $errors->all('<div>:message</div>')) }}
+            @endif
+
             <div class="sign_header">
                 <div class="sign_title">Yeni şifrə yarat</div>
                 <!-- <div class="sign_info">Telefon nömrənizi daxil edin</div> -->
             </div>
-            <form action="#" method="post">
+            <form action="{!! route('password.reset.do') !!}" method="post">
+                @csrf
                 <div class="form_item">
-                    <input type="password" name="password" placeholder="Şifrə" value="" class="item_input " >
+                    <input type="password" name="password" placeholder="Şifrə" class="item_input">
                     <!-- <div class="error_type">Warning text</div> -->
                     <div class="pass_eye">
                         <span class="password-showhide">
@@ -33,8 +38,8 @@
                     </div>
                 </div>
                 <div class="form_item">
-                    <input type="password" name="password" placeholder="Şifrə təkrar" value="" class="item_input " >
-                    <div class="error_type">Warning text</div>
+                    <input type="password" name="password_confirmation" placeholder="Şifrə təkrar" class="item_input" >
+{{--                    <div class="error_type">Warning text</div>--}}
                     <div class="pass_eye">
                         <span class="password-showhide">
                             <span class="show-password"> </span>

@@ -98,7 +98,7 @@ class RegisterController extends Controller
                                  ] );
     }
 
-    public function sendCode( $phone )
+    private function sendCode( $phone )
     {
         $phoneVerificationCode = rand( 1000, 9999 );
         $this->smsService

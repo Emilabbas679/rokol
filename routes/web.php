@@ -22,7 +22,7 @@ use App\Http\Controllers\SiteController;
 |
 */
 
-Auth::routes();
+Auth::routes(['reset' => false]);
 
 Route::get('/', [SiteController::class, 'index'])->name('home');
 Route::match(['get', 'post'],'/category/{category_id}', [SiteController::class, 'category'])->name('category');
@@ -51,7 +51,11 @@ Route::middleware([AuthenticateFrontUser::class])->group(function () {
     Route::resource('favorites', FavoriteController::class);
 });
 
-Route::get('/forgot_password', [SiteController::class, 'forgot_password'])->name('forgot_password');
+Route::get('/password/phone', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.phone');
+Route::post('/password/code', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendPhoneCode'])->name('password.code.send');
+Route::post('/password/code/verify', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'verifyPhoneCode'])->name('password.code.verify');
+Route::get('/password/reset', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset.page');
+Route::post('/password/reset', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])->name('password.reset.do');
 Route::delete('/carts/session/delete/{id}', [CartController::class, 'deleteFromSessionByProductId'])->name('carts.session.delete');
 Route::get('/new_password', [SiteController::class, 'new_password'])->name('new_password');
 //Route::get('/settings', [SiteController::class, 'settings'])->name('settings');
