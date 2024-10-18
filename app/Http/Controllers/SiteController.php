@@ -55,7 +55,8 @@ class SiteController extends Controller
     {
         Cache::forget( 'main_categories' );
         $categories = Cache::rememberForever( 'main_categories', function () {
-            return $categories = Category::query()->with(['children'])->where( 'status', 1 )->where( 'category_id', null )->get();
+            return $categories = Category::query()->with( [ 'children' ] )->where( 'status', 1 )
+                                         ->where( 'category_id', null )->get();
         } );
 
         if ( $id == 0 ) {
@@ -97,18 +98,24 @@ class SiteController extends Controller
                                       'products.status',
                                       'products.category_id',
                                       'products.image',
-                                      'products.name'
+                                      'products.name',
+                                      'pp.sale_price',
+                                      'pp.price',
+                                      'pp.weight_id',
+                                      'w.weight_type',
+                                      'w.weight'
                                   ] )
                         ->with( [
                                     'category'
                                 ] )
-                        ->where( 'status', 1 );
+                        ->where( 'products.status', 1 );
 
 
         if ( auth( 'web' )->check() ) {
             $query->with( [ 'favorite' ] );
         }
         $query->join( DB::raw( 'product_prices as pp' ), 'pp.product_id', '=', 'products.id' );
+        $query->join( DB::raw( 'weights as w' ), 'w.id', '=', 'pp.weight_id' );
         $query->when( request()->has( 'min_price' ) || request()->has( 'max_price' ), function ( Builder $query ) {
             if ( request()->has( 'min_price' ) ) {
                 $minPrice = request()->input( 'min_price' );
@@ -186,9 +193,7 @@ class SiteController extends Controller
         if ( request()->has( 'weights' ) ) {
             if ( is_array( request()->weights ) ) {
                 $selected['weights'] = request()->weights;
-                $query->whereHas( 'prices', function ( $query ) use ( $selected ) {
-                    $query->whereIn( 'weight_id', $selected['weights'] );
-                } );
+                $query->whereIn( 'w.id', $selected['weights'] );
             }
         }
 
@@ -205,14 +210,15 @@ class SiteController extends Controller
         }
 
         $query->orderBy( 'category_id' );
-        $products = $query->paginate( 30 );
+        $query->orderBy( 'products.id' );
+        $products = $query->paginate( 32 );
 
 
         if ( \request()->ajax() ) {
             return response()->json( [
                                          'status'       => 1,
-                                         'htmlGrid'         => view( 'partials.products', compact( 'products' ) )->render(),
-                                         'htmlList'         => view( 'partials.products-list', compact( 'products' ) )->render(),
+                                         'htmlGrid'     => view( 'partials.products', compact( 'products' ) )->render(),
+                                         'htmlList'     => view( 'partials.products-list', compact( 'products' ) )->render(),
                                          'count'        => count( $products ),
                                          'nextPageUrl'  => $products->nextPageUrl(),
                                          'hasMorePages' => $products->hasMorePages()
@@ -226,13 +232,14 @@ class SiteController extends Controller
     public function product( Request $request, $id )
     {
         $product              = Product::where( 'id', $id )->where( 'status', 1 )
-                                       ->with( ['category',
-                                                'prices',
-                                                'types',
-                                                'appearances',
-                                                'refProperties',
-                                                'applicationAreas',
-                                                'favorite'
+                                       ->with( [
+                                                   'category',
+                                                   'prices',
+                                                   'types',
+                                                   'appearances',
+                                                   'refProperties',
+                                                   'applicationAreas',
+                                                   'favorite'
                                                ] )
                                        ->firstorfail();
         $locale               = app()->getLocale();

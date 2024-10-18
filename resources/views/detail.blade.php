@@ -259,63 +259,43 @@
                                                 <div>{!! $product->properties !!}</div>
                                             </div>
                                         @endif
-{{--                                        @if(!empty(trim($product->consumption)))--}}
-{{--                                            <div class="indicators_items">--}}
-{{--                                                <h6 class="indicator_title">{{translate('product_consumption')}}:</h6>--}}
-{{--                                                <div>{!! $product->consumption !!}</div>--}}
-{{--                                            </div>--}}
-{{--                                        @endif--}}
+                                        @if(!empty(trim($product->consumption)))
+                                            <div class="indicators_items">
+                                                <div>{!! $product->consumption !!}</div>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="bf_tb_items " data-id="2">
                                     <div class="indicators_content">
-                                        <!-- @if(!empty(trim($product->properties)))
+                                         @if(!empty(trim($product->properties)))
                                             <div class="indicators_items">
                                                 <h6 class="indicator_title">Saxlama müddəti:</h6>
                                                 <div>{!! $product->retention !!}</div>
                                             </div>
-
-
-
-
                                         @endif
                                         @if(!empty(trim($product->properties)))
                                             <div class="indicators_items">
                                                 <h6 class="indicator_title">Xəbərdarlıqlar:</h6>
                                                 <div>{!! $product->warning !!}</div>
                                             </div>
-
-
-
-
                                         @endif
                                         @if(!empty(trim($product->properties)))
                                             <div class="indicators_items">
                                                 <h6 class="indicator_title">Zəmanət:</h6>
                                                 <div>{!! $product->guarantee !!}</div>
                                             </div>
-
-
-
-
-                                        @endif -->
+                                        @endif
                                         <ul style="list-style: none;margin: 0">
-                                            <li>- Texniki göstəricilərdə qeyd edilmiş məlumatlar elmi ve təcrübi
-                                                biliklərə əsaslanir;
+                                            <li>- @lang('Texniki göstəricilərdə qeyd edilmiş məlumatlar elmi ve təcrübi biliklərə əsaslanir');
                                             </li>
-                                            <li>- "Matanat A" şirkəti məhsulun müvafiq texniki şərt və dövlət
-                                                standartlarına uyğunluğuna zəmanət verir.
+                                            <li>- @lang('"Matanat A" şirkəti məhsulun müvafiq texniki şərt və dövlət standartlarına uyğunluğuna zəmanət verir').
                                             </li>
-                                            <li>- Şirkətin mütəxəssislərinin rəhbərliyi altında görülən işlər istisna
-                                                olmaqla, digər istifadəçilər tərəfindən təlimatdan kənar istifadə
-                                                halları zamanı yarana biləcək problemlərə görə "Matanat A" şirkəti
-                                                məsuliyyət daşımır;
+                                            <li>- @lang('Şirkətin mütəxəssislərinin rəhbərliyi altında görülən işlər istisna olmaqla, digər istifadəçilər tərəfindən təlimatdan kənar istifadə halları zamanı yarana biləcək problemlərə görə "Matanat A" şirkəti məsuliyyət daşımır');
                                             </li>
-                                            <li>- Şirkət elmi-texniki inkişafla bağlı məhsulda dəyişiklik etmə hüququnu
-                                                özündə saxlayır;
+                                            <li>- @lang('Şirkət elmi-texniki inkişafla bağlı məhsulda dəyişiklik etmə hüququnu özündə saxlayır');
                                             </li>
-                                            <li>- Texniki dəstək va ya daha geniş məlumat almaq üçün "Matanat A"
-                                                şirkətinə müraciat edin!
+                                            <li>- @lang('Texniki dəstək va ya daha geniş məlumat almaq üçün "Matanat A" şirkətinə müraciat edin')!
                                             </li>
                                         </ul>
                                     </div>

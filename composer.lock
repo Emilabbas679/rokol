@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8f1901eedf64b47f203bde4090d2dd56",
+    "content-hash": "c0d3b5d6da6224f2017145dc10a82292",
     "packages": [
         {
             "name": "acme/color-picker",
@@ -1191,6 +1191,57 @@
                 "source": "https://github.com/eminiarts/nova-tabs/tree/2.2.3"
             },
             "time": "2022-10-25T19:58:02+00:00"
+        },
+        {
+            "name": "fourstacks/nova-checkboxes",
+            "version": "v0.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fourstacks/nova-checkboxes.git",
+                "reference": "73de263bfb500e5ab9159dba120818995f4605dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fourstacks/nova-checkboxes/zipball/73de263bfb500e5ab9159dba120818995f4605dc",
+                "reference": "73de263bfb500e5ab9159dba120818995f4605dc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "laravel/nova": "^1.0",
+                "orchestra/testbench": "3.7.*",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Fourstacks\\NovaCheckboxes\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fourstacks\\NovaCheckboxes\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel Nova field.",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/fourstacks/nova-checkboxes/issues",
+                "source": "https://github.com/fourstacks/nova-checkboxes/tree/v0.1.7"
+            },
+            "abandoned": true,
+            "time": "2019-12-17T14:42:38+00:00"
         },
         {
             "name": "fruitcake/php-cors",

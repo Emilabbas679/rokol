@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Benjacho\BelongsToManyField\HasBelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -12,55 +13,57 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasBelongsToMany;
 
     protected $guarded = [];
 
     protected $casts = [
-        'name' => 'array',
-        'about' => 'array',
-        'usage' => 'array',
-        'advantage' => 'array',
-        'properties' => 'array',
+        'name'        => 'array',
+        'about'       => 'array',
+        'usage'       => 'array',
+        'advantage'   => 'array',
+        'properties'  => 'array',
         'consumption' => 'array',
-        'retention' => 'array',
-        'warning' => 'array',
-        'guarantee' => 'array',
-        'apply' => 'array',
+        'retention'   => 'array',
+        'warning'     => 'array',
+        'guarantee'   => 'array',
+        'apply'       => 'array',
         'usage_rules' => 'array',
     ];
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo( Category::class, 'category_id' );
     }
 
     public function types()
     {
-        return $this->belongsToMany(Type::class, 'product_types', 'product_id', 'type_id');
+        return $this->belongsToMany( Type::class, 'product_types', 'product_id', 'type_id' );
     }
+
     public function appearances()
     {
-        return $this->belongsToMany(Appearance::class, 'product_appearances', 'product_id', 'appearance_id');
+        return $this->belongsToMany( Appearance::class, 'product_appearances', 'product_id', 'appearance_id' );
     }
 
     public function refProperties()
     {
-        return $this->belongsToMany(Property::class, 'product_properties', 'product_id', 'property_id');
+        return $this->belongsToMany( Property::class, 'product_properties', 'product_id', 'property_id' );
     }
+
     public function applicationAreas()
     {
-        return $this->belongsToMany(ApplicationArea::class, 'product_application_areas', 'product_id', 'application_area_id');
+        return $this->belongsToMany( ApplicationArea::class, 'product_application_areas', 'product_id', 'application_area_id' );
     }
 
     public function prices()
     {
-        return $this->hasMany(ProductPrice::class);
+        return $this->hasMany( ProductPrice::class );
     }
 
     public function weights(): BelongsToMany
     {
-        return $this->belongsToMany(Weight::class, 'product_prices');
+        return $this->belongsToMany( Weight::class, 'product_prices' );
     }
 
 
@@ -68,6 +71,12 @@ class Product extends Model
     {
         return $this->hasOne( Favorite::class )->where( 'user_id', fUserId() );
     }
+
+    public function similar(): BelongsToMany
+    {
+        return $this->belongsToMany( self::class, SimilarProduct::class, 'product_id', 'similar_product_id', null, null, 'products' );
+    }
+
 
 
 }

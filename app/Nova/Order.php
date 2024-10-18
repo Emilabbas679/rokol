@@ -43,83 +43,107 @@ class Order extends Resource
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function fields(NovaRequest $request)
+    public function fields( NovaRequest $request )
     {
 
         return [
             ID::make()->sortable(),
-            BelongsTo::make('User', 'user')
-                ->display('full_name')
-                ->showOnPreview()
-                ->withMeta(['extraAttributes' => [
-                    'readonly' => true
-                ]]),
-            BelongsTo::make('Address', 'address')
-                ->display('address')
-                ->showOnPreview()
-                ->withMeta(['extraAttributes' => [
-                    'readonly' => true
-                ]]),
-            BelongsTo::make('Address', 'address')
-                     ->display('phone')
+            BelongsTo::make( 'User', 'user' )
+                     ->display( 'full_name' )
                      ->showOnPreview()
-                     ->withMeta(['extraAttributes' => [
-                         'readonly' => true
-                     ]]),
-            Text::make('Amount')
+                     ->withMeta( [
+                                     'extraAttributes' => [
+                                         'readonly' => true
+                                     ]
+                                 ] ),
+            BelongsTo::make( 'Address', 'address' )
+                     ->display( 'address' )
+                     ->showOnPreview()
+                     ->withMeta( [
+                                     'extraAttributes' => [
+                                         'readonly' => true
+                                     ]
+                                 ] ),
+            BelongsTo::make( 'Address', 'address' )
+                     ->display( 'phone' )
+                     ->showOnPreview()
+                     ->withMeta( [
+                                     'extraAttributes' => [
+                                         'readonly' => true
+                                     ]
+                                 ] ),
+            Text::make( 'Amount' )
                 ->showOnPreview()
-                ->withMeta(['extraAttributes' => [
-                    'readonly' => true
-                ]]),
-            Text::make('Discount', 'total_discount')
+                ->withMeta( [
+                                'extraAttributes' => [
+                                    'readonly' => true
+                                ]
+                            ] ),
+            Text::make( 'Discount', 'total_discount' )
                 ->showOnPreview()
-                ->withMeta(['extraAttributes' => [
-                    'readonly' => true
-                ]]),
-            Text::make('Method', 'payment_method')
-                ->withMeta(['extraAttributes' => [
-                    'readonly' => true
-                ]])
+                ->withMeta( [
+                                'extraAttributes' => [
+                                    'readonly' => true
+                                ]
+                            ] ),
+            Text::make( 'Method', 'payment_method' )
+                ->withMeta( [
+                                'extraAttributes' => [
+                                    'readonly' => true
+                                ]
+                            ] )
                 ->showOnPreview()
-                ->displayUsing(function ($value) {
-                    if ($value === ProductOrder::PAYMENT_METHOD_CASH) {
-                        return __('Cash');
-                    } elseif ($value === ProductOrder::PAYMENT_METHOD_ONLINE) {
-                        return __('Online');
-                    } else {
-                        return __('Bank');
+                ->displayUsing( function ( $value ) {
+                    if ( $value === ProductOrder::PAYMENT_METHOD_CASH ) {
+                        return __( 'Cash' );
                     }
-                }),
-            Select::make('Status', 'delivered_status')
-                ->options([
-                    ProductOrder::DELIVERED_STATUS_COMPLETED => ProductOrder::DELIVERED_STATUS_COMPLETED,
-                    ProductOrder::DELIVERED_STATUS_PREPARING => ProductOrder::DELIVERED_STATUS_PREPARING,
-                    ProductOrder::DELIVERED_STATUS_CANCELED => ProductOrder::DELIVERED_STATUS_CANCELED
-                ])
-                ->showOnPreview()
-                ->displayUsing(function ($value) {
-                    if ($value === ProductOrder::DELIVERED_STATUS_COMPLETED) {
-                        return __('Completed');
-                    } elseif ($value === ProductOrder::DELIVERED_STATUS_PREPARING) {
-                        return __('Preparing');
-                    } else {
-                        return __('Canceled');
+                    elseif ( $value === ProductOrder::PAYMENT_METHOD_ONLINE ) {
+                        return __( 'Online' );
                     }
-                }),
-            HasMany::make('Items', 'items', OrderItem::class)
-                ->withMeta(['extraAttributes' => [
-                    'readonly' => true
-                ]]),
-            Text::make('Delivery price')->showOnPreview()
-                ->withMeta(['extraAttributes' => [
-                    'readonly' => true
-                ]]),
-            DateTime::make('Created at')
-                ->withMeta(['extraAttributes' => [
-                    'readonly' => true
-                ]])
-                ->showOnPreview()
-                ->displayUsing(fn($value) => $value ? $value->format('d.m.Y H:i') : '')
+                    else {
+                        return __( 'Bank' );
+                    }
+                } ),
+            Select::make( 'Status', 'delivered_status' )
+                  ->options( [
+                                 ProductOrder::DELIVERED_STATUS_COMPLETED => ProductOrder::DELIVERED_STATUS_COMPLETED,
+                                 ProductOrder::DELIVERED_STATUS_PREPARING => ProductOrder::DELIVERED_STATUS_PREPARING,
+                                 ProductOrder::DELIVERED_STATUS_CANCELED  => ProductOrder::DELIVERED_STATUS_CANCELED
+                             ] )
+                  ->showOnPreview()
+                  ->displayUsing( function ( $value ) {
+                      if ( $value === ProductOrder::DELIVERED_STATUS_COMPLETED ) {
+                          return __( 'Completed' );
+                      }
+                      elseif ( $value === ProductOrder::DELIVERED_STATUS_PREPARING ) {
+                          return __( 'Preparing' );
+                      }
+                      else {
+                          return __( 'Canceled' );
+                      }
+                  } ),
+            HasMany::make( 'Items', 'items', OrderItem::class )
+                   ->withMeta( [
+                                   'extraAttributes' => [
+                                       'readonly' => true
+                                   ]
+                               ] ),
+            Text::make( 'Delivery price' )->showOnPreview()
+                ->withMeta( [
+                                'extraAttributes' => [
+                                    'readonly' => true
+                                ]
+                            ] ),
+            DateTime::make( 'Created at' )
+                    ->withMeta( [
+                                    'extraAttributes' => [
+                                        'readonly' => true
+                                    ]
+                                ] )
+                    ->showOnPreview()
+                    ->displayUsing( fn( $value ) => $value
+                        ? $value->format( 'd.m.Y H:i' )
+                        : '' )
         ];
     }
 
@@ -129,7 +153,7 @@ class Order extends Resource
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function cards(NovaRequest $request)
+    public function cards( NovaRequest $request )
     {
         return [];
     }
@@ -140,7 +164,7 @@ class Order extends Resource
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function filters(NovaRequest $request)
+    public function filters( NovaRequest $request )
     {
         return [];
     }
@@ -151,7 +175,7 @@ class Order extends Resource
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function lenses(NovaRequest $request)
+    public function lenses( NovaRequest $request )
     {
         return [];
     }
@@ -162,17 +186,17 @@ class Order extends Resource
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function actions(NovaRequest $request)
+    public function actions( NovaRequest $request )
     {
         return [];
     }
 
-    public function authorizedToReplicate(Request $request)
+    public function authorizedToReplicate( Request $request )
     {
         return false;
     }
 
-    public static function authorizedToCreate(Request $request)
+    public static function authorizedToCreate( Request $request )
     {
         return false;
     }

@@ -2,7 +2,9 @@
 
 namespace App\Nova;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Select;
@@ -121,5 +123,13 @@ class Appearance extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public static function afterCreate( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'appearances' );
+        Cache::rememberForever( 'appearances', function () {
+            return \App\Models\Appearance::query()->where( 'status', 1 )->get();
+        } );
     }
 }

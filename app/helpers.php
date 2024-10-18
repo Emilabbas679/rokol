@@ -68,10 +68,9 @@ if ( !function_exists( 'applicationAreas' ) ) {
 if ( !function_exists( 'appearances' ) ) {
     function appearances()
     {
-        $appearances = Cache::remember( 'appearances', 1200, function () {
-            return $appearances = Appearance::where( 'status', 1 )->get();
+        return Cache::rememberForever( 'appearances', function () {
+            return Appearance::query()->where( 'status', 1 )->get();
         } );
-        return $appearances;
     }
 }
 if ( !function_exists( 'weights' ) ) {
