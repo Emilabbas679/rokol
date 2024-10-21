@@ -53,14 +53,13 @@ class SiteController extends Controller
 
     public function category( $id = 0 )
     {
-        Cache::forget( 'main_categories' );
         $categories = Cache::rememberForever( 'main_categories', function () {
-            return $categories = Category::query()->with( [ 'children' ] )->where( 'status', 1 )
+            return Category::query()->with( [ 'children' ] )->where( 'status', 1 )
                                          ->where( 'category_id', null )->get();
         } );
 
         if ( $id == 0 ) {
-            $category_ids = [];
+            $categoryIds = [];
             $category     = [
                 'name'        => [ app()->getLocale() => translate( 'products' ) ],
                 'id'          => 0,
@@ -68,28 +67,30 @@ class SiteController extends Controller
             ];
         }
         else {
-            $category = Category::where( 'status', 1 )->where( 'id', $id )->firstorfail();
+            $category = Category::query()
+                                ->where( 'status', 1 )
+                                ->where( 'id', $id )
+                                ->firstOrFail();
 
 
-            $sub_category_ids = Cache::rememberForever( "sub_categories:" . $id, function () use ( $id ) {
-                $sub_categories   = Category::where( 'status', 1 )->where( 'category_id', $id )
+            $subCategoryIds = Cache::rememberForever( "sub_categories:" . $id, function () use ( $id ) {
+                $subCategories   = Category::where( 'status', 1 )->where( 'category_id', $id )
                                             ->select( 'id', 'status', 'category_id' )->get()->toArray();
-                $sub_category_ids = array_column( $sub_categories, 'id' );
-                return $sub_category_ids;
+                return array_column( $subCategories, 'id' );
             } );
-            $category_ids     = $sub_category_ids;
-            $category_ids[]   = $id;
+            $categoryIds   = $subCategoryIds;
+            $categoryIds[] = $id;
         }
 
 
         $selected              = [];
-        $selected['min_price'] = $minPrice = 0;
-        $selected['max_price'] = $maxPrice = 10000;
+        $selected['min_price'] = 0;
+        $selected['max_price'] = 10000;
 
         if ( request()->has( 'min_price' ) and ( (int) request()->min_price ) > 0 )
-            $selected['min_price'] = $minPrice = (int) request()->min_price;
+            $selected['min_price'] = (int) request()->min_price;
         if ( request()->has( 'max_price' ) and ( (int) request()->max_price ) <= 10000 )
-            $selected['max_price'] = $maxPrice = (int) request()->max_price;
+            $selected['max_price'] = (int) request()->max_price;
 
 
         $query = Product::query()
@@ -143,7 +144,7 @@ class SiteController extends Controller
               } );
 
         if ( $category['id'] != 0 ) {
-            $query->whereIn( 'category_id', $category_ids );
+            $query->whereIn( 'category_id', $categoryIds );
         }
 //        if (request()->has('min_price') || request()->has('max_price')) {
 //            $query->whereHas('prices', function ($query) use ($minPrice, $maxPrice) {

@@ -77,3 +77,8 @@ Route::get('/offers', function(){
     return view('offers');
 })->name('offers.index');
 
+
+Route::get('/cache/clear', function(){
+    \Illuminate\Support\Facades\Artisan::call('cache:clear');
+})->name('cache.clear');
+
