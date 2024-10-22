@@ -198,6 +198,15 @@
                                         </ul>
                                     </div>
 
+                                    <div class="in_detail">
+                                        <p class="pr_select_title">
+                                            200 AZN-dən yuxarı çatdırılma pulsuzdur yazılsın
+                                        </p>
+                                        <!-- <span class="pr_cat_name open_pop">
+                                            Ətraflı
+                                        </span> -->
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -305,7 +314,7 @@
                     </div>
                 </div>
                 <!-- Product tab content -->
-                @if($similarProducts->count())
+                @if($product->similar->count())
                     <!-- Product similar items -->
                     <div class="section_wrap wrap_category wrap_similar_product">
                         <div class="sect_header clearfix">
@@ -315,7 +324,7 @@
                         </div>
                         <div class="sect_body clearfix product detail_product">
                             <div class="row">
-                                @foreach($similarProducts as $similarProduct)
+                                @foreach($product->similar as $similarProduct)
                                     <div class="col item_col clearfix">
                                         <div class="col_in">
                                             <div class="fav_sect">
@@ -370,7 +379,20 @@
                     </div>
                     <!-- Product similar items -->
                 @endif
-
+                <div class="modal" id="new_address_modal" data-id="create_address_modal">
+                    <div class="modal_section">
+                        <div class="modal_container">
+                            <div class="modal_header">
+                                <h5 class="modal_title">Ətraflı məlumat</h5>
+                                <span class="close_modal"></span>
+                            </div>
+                            <div class="modal_body">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi at iusto similique delectus, quos nemo sunt porro vero ipsum sint nihil, voluptatum eaque accusantium culpa inventore, pariatur labore debitis voluptates.
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio excepturi architecto possimus aspernatur explicabo. Similique, commodi. Est a tempore perspiciatis nisi nemo quidem consequuntur officia ratione? Obcaecati, nobis? Ad, minima?
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -400,6 +422,9 @@
                     $('.radio_btn input[type="checkbox"]').not(this).prop('checked', false);
                 }
             });
+            $(".open_pop").click(function () {
+                $(".modal").addClass("opened")
+            })
         });
     </script>
 

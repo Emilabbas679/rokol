@@ -40,7 +40,7 @@
                 @foreach($articles as $article)
                 <div class="col">
                     <div class="col_in">
-                        <a href="{!! route('news.show', $article) !!}" target="_blank" title="" class="stat_item_link">
+                        <a href="{!! route('news.show', $article) !!}" title="" class="stat_item_link">
                             <div class="stat_img">
                                 <img src="{{asset('storage/'.$article->image)}}" alt="{{ $article->title[app()->getLocale()] }}">
                             </div>

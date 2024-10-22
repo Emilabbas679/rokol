@@ -75,9 +75,9 @@
                                             <div class="progress" style="left: 21.34%; right: 54.09%;"></div>
                                         </div>
                                         <div class="range-input price-field">
-                                            <input type="range" name="min_price" class="range-min" min="0" max="10000"
+                                            <input type="range" name="min_price" class="range-min" min="0" max="1000"
                                                    value="{{$selected['min_price']}}" step="1">
-                                            <input type="range" name="max_price" class="range-max" min="0" max="10000"
+                                            <input type="range" name="max_price" class="range-max" min="0" max="1000"
                                                    value="{{$selected['max_price']}}" step="1">
                                         </div>
                                         <div class="price-wrap">
@@ -95,13 +95,13 @@
                                                 <div class="col item_col">
                                                     <div class="col_in">
                                                         <input type="number" class="custom-min" placeholder="min"
-                                                               min="0" max="10000" value="{{$selected['min_price']}}">
+                                                               min="0" max="1000" value="{{$selected['min_price']}}">
                                                     </div>
                                                 </div>
                                                 <div class="col item_col">
                                                     <div class="col_in">
                                                         <input type="number" class="custom-max" placeholder="max"
-                                                               min="0" max="10000" value="{{$selected['max_price']}}">
+                                                               min="0" max="1000" value="{{$selected['max_price']}}">
                                                     </div>
                                                 </div>
                                             </div>

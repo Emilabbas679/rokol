@@ -68,7 +68,7 @@
                         </div>
                     </div>
                     <div class="security_content">
-                        Siz davam et düyməsini sıxmaqla <a href="#">İstifadəçi şərtlərini</a> və <a href="#">Məxfilik
+                        Siz davam et düyməsini sıxmaqla <a href="javascrivt:void(0)" style="text-decoration:underline;">Məxfilik
                             siyasətini</a> qəbul etmiş olursunuz.
                     </div>
                     <div class="form_item">
@@ -156,6 +156,72 @@
         </div>
     </div>
 
+    <div class="modal" id="privacy_modal" data-id="privacy_modal">
+        <div class="modal_section">
+            <div class="modal_container privacy_modal">
+                <div class="modal_header">
+                    <h5 class="modal_title">Məxfilik Siyasəti</h5>
+                    <span class="close_modal"></span>
+                </div>
+                <div class="modal_body modal_text">
+                    <p>
+                        “Mətanət-A” Şirkəti (rokol.az saytı) tərəfdaşlarının, müştərilərinin, həmçinin vebsayt vasitəsilə məlumatlarını təqdim edən istifadəçilərin məxfiliyinin qorunmasına dair öhdəlik daşıyır.
+                        “Mətanət-A” Şirkətinin biznes prosesləri və şirkət fəaliyyəti əsasən müvafiq ISO standartlarına ISO 9001:2015 İdarəetmə sistemi və “Fərdi məlumatlar haqqında” Azərbaycan Respublikasının Qanununa uyğun həyata keçirilir.
+                        Bu Məxfilik Siyasətini diqqətlə oxuyun və edilə biləcək hər hansı dəyişiklikləri nəzərdən keçirmək üçün vaxtaşırı səhifəyə yenidən daxil olun. 
+                        MƏLUMATLARIN TOPLANILMASI VƏ İSTİFADƏSİ
+                        “Rokol.az” saytı istifadəçinin könüllü olaraq “rokol.az” vebsaytına ötürdüyü, aşağıdakı qeyd edilən məlumatları toplaya bilər:
+                    </p>
+                    <ul>
+                        <li>İstifadəçinin adı</li>
+                        <li>İstifadəçinin soyadı</li>
+                        <li>Əlaqə nömrəsi</li>
+                        <li>Elektron poçt ünvanı</li>
+                    </ul>
+                    <p>
+
+                        Toplanılan məlumatlar yalnız bu Məxfilik Siyasətində müəyyən edilən hallarda toplana bilər. Həmin hallar aşağıdakılardır:
+                    </p>
+                    <ul>
+                        <li>
+                            Vebsayt vasitəsilə “rokol.az” saytına sorğu göndərərkən
+                        </li>
+                    </ul>
+                    <p>
+                        Toplanan məlumatlar aşağıdakı məqsədlər üçün istifadə oluna bilər:
+                    </p>
+                    <ul>
+                        <li>İstifadəçinin sorğusuna cavab hazırlayan zaman</li>
+                        <li>Bazar araşdırması, analitik məqalələr hazırlanarkən, həmçinin, proses, xidmət və məhsulların təkmilləşdirilməsi üçün</li>
+                        <li>Tədbirlərimiz, xidmətlərimiz, məhsullarımız və yeniliklərimiz barədə məlumat vermək üçün</li>
+                    </ul>	
+                    <p>
+                        İstifadəçi hər zaman gələcəkdə oxşar məlumatlar almaqdan imtina edə və ya bütün fərdi məlumatlarının silinməsinə dair sorğu göndərə bilər.
+                        İstifadəçilərin “rokol.az” saytında saxlanılan məlumatları onların razılığı olmadan satıla və ya üçüncü şəxslə paylaşıla bilməz.
+                        “COOKİE” SİYASƏTİ
+                    </p>
+                    <p>
+                        Kukilər kompüteriniz, planşetiniz və ya mobil telefonunuzda saxlanılan kiçik mətn fayllarıdır. Bu fayllarda sizin IP adresiniz, istifadə olunan brauzer proqramının növü, saytdan istifadənin tarixi və müddəti, saytın istifadə etdiyiniz bölmələri və sairə haqqında məlumatlar saxlanılır. “rokol.az” bir çox veb saytlarda olduğu kimi veb sayt istifadəçiləri üçün xidmət səviyyəsinin artırılması məqsədilə kukilərdən və digər texnologiyalardan faydalanır.
+                    </p>
+                    <p>
+                        Kukilərdən istifadə olunmasını qəbul etmirsinizsə, veb saytı tərk etməli və ya kuki seçimlərinizi hazırkı Məxfilik Siyasətində göstərilən qaydada dəyişdirməlisiniz. Kukilərə icazə verilmədiyi halda veb saytdakı bəzi funksiyaların öz funksiyonallığını itirə biləcəyini nəzərə almağınızı xahiş edirik.
+                        Əlavə olaraq “rokol.az” statistik məqsədlər üçün üçüncü tərəflərin kukiləri vasitəsilə məlumatı toplayır. 
+                        Kukilərin istifadəsini özünüz tənzimləyə bilərsiniz. Belə ki, brauzerinizin tənzimləmələri vasitəsilə kukilərin deaktiv edilməsini və ya əvvəlcədən razılığınız olmadığı halda kompüterinizdə, mobil cihazınızda saxlanılmamasını təmin edə bilərsiniz. Kukiləri qəbul etmədiyiniz halda, azintelecom.az veb saytını daha effektiv edən bir çox xüsusiyyətləri istifadə edə bilməyəcəksiniz və bəzi xidmətlərimiz tam işləməyəcək.
+                        MƏLUMATLARIN QORUNMASI
+                    </p>
+                    <p>
+                        “rokol.az” sizin məlumatlarınızı qorumaq üçün çalışır. Bunun üçün biz müxtəlif təhlükəsizlik texnologiyalarından və informasiyanın icazəsiz girişdən, istifadədən və ya açıqlanmasından qorunmasına yönələn tədbirlər həyata keçiririk. İstifadə etdiyimiz tədbirlər sizin məlumatlarınızın emalı riskinə uyğun təhlükəsizlik səviyyəsini təmin etmək üçün nəzərdə tutulub.
+                        “rokol.az” öz qəsdi və ya kobud səhvindən yaranan birbaşa zərərlər istisna olmaqla, veb saytın istifadəsi nəticəsində meydana gələ biləcək birbaşa və ya dolayı zərərə görə heç bir halda məsuliyyət daşımır.
+                        Bu məxfilik siyasəti ilə bağlı, həmçinin rokol.az saytının fəaliyyəti ilə bağlı aşağıdakı əlaqə vasitələrindən bizə müraciət edə bilərsiniz:
+                        Ünvan: Azərbaycan, Abşeron, Masazır-2, AZ0123
+                        E-mail: info@matanata.com
+                        Telefon: +994 10 260 30 30
+                        *3030
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @push('js')
@@ -200,6 +266,9 @@
                 $(this).parents(".col").prev('.col').find(".item_input").focus();
             }
         });
+        $(".security_content a").click(function(){
+            $("#privacy_modal").addClass("opened")
+        })
 
         function sendCode(isFirst) {
             let phoneNumber = $('input[name="phone"]').val().replaceAll(/\(|\)|_/gi, '');

@@ -430,9 +430,9 @@ class Product extends Resource
                                 $model->guarantee = $guarantees;
                             } ),
                 ] ),
-                Tab::make( 'Oxşarlar', [
-                    BelongsToMany::make('Similar', 'similar', SimilarProduct::class),
-                ] ),
+//                Tab::make( 'Oxşarlar', [
+//                    BelongsToMany::make('Similar', 'similar', SimilarProduct::class),
+//                ] ),
             ] ),
         ];
     }

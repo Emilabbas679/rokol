@@ -52,6 +52,13 @@
                                 </div>
                                 <ul class="socials">
                                     <li>
+                                        <a href="https://wa.me/+994102603030" class="social_icon" target="_blank">
+                                            <span class="scl_icn">
+                                                <img src="{{asset('img/icons/wp_w.svg?v1')}}" alt="Whatsapp">
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="https://www.facebook.com/RokolBoyalari" class="social_icon"
                                            target="_blank">
                                         <span class="scl_icn">

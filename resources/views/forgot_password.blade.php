@@ -22,7 +22,7 @@
             <form method="post" id="forgot_password_form">
                 @csrf
                 <div class="form_item ">
-                    <input type="text" name="phone" placeholder="@lang('Telefon nömrəsi') (+994)" value="" class="item_input phone" >
+                    <input type="text" name="phone" placeholder="@lang('Telefon nömrəsi') (+994)" class="item_input phone" value="994" required>
                     @error('phone')
                         <div class="error_type">{{ $message }}</div>
                     @enderror
@@ -137,6 +137,24 @@ $(".show-password, .hide-password").on('click', function() {
         $(this).parent().find(".show-password").show();
     }
 });
+$('.phone_modal input').on('input', function () {
+    if ($(this).val().trim() !== '') {
+        $(this).addClass('filled');
+    } else {
+        $(this).removeClass('filled');
+    }
+});
+$('.phone_modal input').on('input', function () {
+    this.value = this.value.replace(/[^0-9]/g, '');
+    if (this.value.length === 1) {
+        $(this).parents(".col").next('.col').find(".item_input").focus();
+    }
+});
+$('.phone_modal input').on('keydown', function (e) {
+    if (e.key === 'Backspace' && this.value.length === 0) {
+        $(this).parents(".col").prev('.col').find(".item_input").focus();
+    }
+});
 
 function sendCode(isFirst) {
     let phoneEl = $('input[name="phone"]');
@@ -177,7 +195,11 @@ function sendCode(isFirst) {
 $(".submit_btn").click(function (e) {
     console.log("asdasdjknasdkjnasd");
     e.preventDefault();
-    sendCode(true);
+    if ($(".submit_btn").hasClass('added')) {
+        return;
+    }else{
+        sendCode(true);
+    }
 })
 $(".submit_code").click(function (e) {
     e.preventDefault();
@@ -207,6 +229,13 @@ $(".submit_code").click(function (e) {
     });
 });
 
+
+$('.submit_btn').click(function () {
+    $(".submit_btn").addClass("added")
+    setTimeout(function () {
+        $(".submit_btn").removeClass("added")
+    }, 10000)
+});
 
 
 var countdownInterval;

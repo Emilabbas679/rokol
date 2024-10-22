@@ -232,7 +232,9 @@ class SiteController extends Controller
 
     public function product( Request $request, $id )
     {
-        $product              = Product::where( 'id', $id )->where( 'status', 1 )
+        $product              = Product::query()
+                                       ->where( 'id', $id )
+                                       ->where( 'status', 1 )
                                        ->with( [
                                                    'category',
                                                    'prices',
@@ -240,7 +242,8 @@ class SiteController extends Controller
                                                    'appearances',
                                                    'refProperties',
                                                    'applicationAreas',
-                                                   'favorite'
+                                                   'favorite',
+                                                   'similar'
                                                ] )
                                        ->firstorfail();
         $locale               = app()->getLocale();

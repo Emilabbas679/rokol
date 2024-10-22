@@ -5,7 +5,9 @@
         "dev": "vite",
         "build": "vite build",
         "build-color-picker": "cd nova-components/ColorPicker && npm run dev",
-        "build-color-picker-prod": "cd nova-components/ColorPicker && npm run prod"
+        "build-color-picker-prod": "cd nova-components/ColorPicker && npm run prod",
+        "build-analytics": "cd nova-components/Analytics && npm run dev",
+        "build-analytics-prod": "cd nova-components/Analytics && npm run prod"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
