@@ -6,6 +6,7 @@ use Benjacho\BelongsToManyField\HasBelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 //use App\Models\Type;
@@ -67,9 +68,9 @@ class Product extends Model
     }
 
 
-    public function favorite(): HasOne
+    public function favorites(): HasMany
     {
-        return $this->hasOne( Favorite::class )->where( 'user_id', fUserId() );
+        return $this->hasMany( Favorite::class )->where( 'user_id', fUserId() );
     }
 
     public function similar(): BelongsToMany

@@ -11,28 +11,13 @@
 @section('content')
     <div class="section_wrap wrap_product">
         <div class="main_center clearfix">
-            <!-- Product detail section -->
             <div class="section_wrap wrap_breadcrumb">
                 <div class="breadcrumb">
                     <a href="{{route('home')}}">Əsas səhifə</a>
                     <a href="{{route('category', $product->category_id)}}">Məhsullar</a>
                     <a href="javascript:void(0)">{{$product->name}}</a>
                 </div>
-
-                    <div class="pr_like_button">
-                        @auth()
-                            <span class="favotites @if($product->favorite) dofav @endif"
-                                  data-product-id="{!! $product->id !!}"></span>
-                        @else
-                            <span class="favotites dologin"></span>
-                        @endauth
-{{--                        <a href="#" class="share_product"></a>--}}
-                    </div>
-
-
             </div>
-
-            <!-- Product detail section -->
             <div class="section_wrap wrap_category wrap_detail_product">
                 <div class="sect_body product_container clearfix">
                     <div class="wrap_left">
@@ -173,10 +158,12 @@
                                         </span>
                                         </div>
                                         <!-- click after addclass "dofav" -->
-                                        <div class="btn_detail btn_fav">
-                                        <span>
-                                            Seçilmişlərdə saxla
-                                        </span>
+
+                                        <div class="btn_detail btn_fav @if(!is_null($product->favorites?->where('price_id', $price->id)->first())) dofav @endif"
+                                             data-product-id="{!! $product->id !!}" data-price-id="{!! $price->id !!}">
+                                            <span>
+                                                Seçilmişlərdə saxla
+                                            </span>
                                         </div>
 
                                     </div>
@@ -200,7 +187,7 @@
 
                                     <div class="in_detail">
                                         <p class="pr_select_title">
-                                            200 AZN-dən yuxarı çatdırılma pulsuzdur yazılsın
+                                            200 AZN-dən yuxarı çatdırılma pulsuzdur.
                                         </p>
                                         <!-- <span class="pr_cat_name open_pop">
                                             Ətraflı
@@ -273,11 +260,7 @@
                                                 <div>{!! $product->consumption !!}</div>
                                             </div>
                                         @endif
-                                    </div>
-                                </div>
-                                <div class="bf_tb_items " data-id="2">
-                                    <div class="indicators_content">
-                                         @if(!empty(trim($product->properties)))
+                                        @if(!empty(trim($product->properties)))
                                             <div class="indicators_items">
                                                 <h6 class="indicator_title">Saxlama müddəti:</h6>
                                                 <div>{!! $product->retention !!}</div>
@@ -289,22 +272,36 @@
                                                 <div>{!! $product->warning !!}</div>
                                             </div>
                                         @endif
-                                        @if(!empty(trim($product->properties)))
+                                        {{-- @if(!empty(trim($product->properties)))
                                             <div class="indicators_items">
                                                 <h6 class="indicator_title">Zəmanət:</h6>
                                                 <div>{!! $product->guarantee !!}</div>
                                             </div>
-                                        @endif
+                                        @endif --}}
+                                    </div>
+                                </div>
+                                <div class="bf_tb_items " data-id="2">
+                                    <div class="indicators_content">
                                         <ul style="list-style: none;margin: 0">
-                                            <li>- @lang('Texniki göstəricilərdə qeyd edilmiş məlumatlar elmi ve təcrübi biliklərə əsaslanir');
+                                            <li>
+                                                - @lang('Texniki göstəricilərdə qeyd edilmiş məlumatlar elmi ve təcrübi biliklərə əsaslanir')
+                                                ;
                                             </li>
-                                            <li>- @lang('"Matanat A" şirkəti məhsulun müvafiq texniki şərt və dövlət standartlarına uyğunluğuna zəmanət verir').
+                                            <li>
+                                                - @lang('"Matanat A" şirkəti məhsulun müvafiq texniki şərt və dövlət standartlarına uyğunluğuna zəmanət verir')
+                                                .
                                             </li>
-                                            <li>- @lang('Şirkətin mütəxəssislərinin rəhbərliyi altında görülən işlər istisna olmaqla, digər istifadəçilər tərəfindən təlimatdan kənar istifadə halları zamanı yarana biləcək problemlərə görə "Matanat A" şirkəti məsuliyyət daşımır');
+                                            <li>
+                                                - @lang('Şirkətin mütəxəssislərinin rəhbərliyi altında görülən işlər istisna olmaqla, digər istifadəçilər tərəfindən təlimatdan kənar istifadə halları zamanı yarana biləcək problemlərə görə "Matanat A" şirkəti məsuliyyət daşımır')
+                                                ;
                                             </li>
-                                            <li>- @lang('Şirkət elmi-texniki inkişafla bağlı məhsulda dəyişiklik etmə hüququnu özündə saxlayır');
+                                            <li>
+                                                - @lang('Şirkət elmi-texniki inkişafla bağlı məhsulda dəyişiklik etmə hüququnu özündə saxlayır')
+                                                ;
                                             </li>
-                                            <li>- @lang('Texniki dəstək va ya daha geniş məlumat almaq üçün "Matanat A" şirkətinə müraciat edin')!
+                                            <li>
+                                                - @lang('Texniki dəstək va ya daha geniş məlumat almaq üçün "Matanat A" şirkətinə müraciat edin')
+                                                !
                                             </li>
                                         </ul>
                                     </div>
@@ -387,8 +384,12 @@
                                 <span class="close_modal"></span>
                             </div>
                             <div class="modal_body">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi at iusto similique delectus, quos nemo sunt porro vero ipsum sint nihil, voluptatum eaque accusantium culpa inventore, pariatur labore debitis voluptates.
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio excepturi architecto possimus aspernatur explicabo. Similique, commodi. Est a tempore perspiciatis nisi nemo quidem consequuntur officia ratione? Obcaecati, nobis? Ad, minima?
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi at iusto similique
+                                delectus, quos nemo sunt porro vero ipsum sint nihil, voluptatum eaque accusantium culpa
+                                inventore, pariatur labore debitis voluptates.
+                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio excepturi architecto
+                                possimus aspernatur explicabo. Similique, commodi. Est a tempore perspiciatis nisi nemo
+                                quidem consequuntur officia ratione? Obcaecati, nobis? Ad, minima?
                             </div>
                         </div>
                     </div>
@@ -536,11 +537,13 @@
     </script>
     <script>
         $(document).ready(function () {
-            $(".favotites").on('click', function (e) {
+            $(".btn_fav").on('click', function (e) {
                 let productId = $(this).data('productId');
+                let priceId = $(this).data('priceId');
                 let el = $(this);
                 let route = '{!! route('favorites.store') !!}';
-                let method = 'post'
+                let method = 'post';
+                console.log(el.hasClass('dofav'))
                 if (el.hasClass('dofav')) {
                     method = 'delete'
                     route = '{!! url('favorites') !!}/' + productId;
@@ -552,11 +555,34 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     data: {
-                        product_id: productId
+                        product_id: productId,
+                        price_id: priceId
                     },
                     dataType: 'JSON',
                     success: function (data) {
                         if (data.status === 'success') {
+                            let favoriteCountEl = $('.favorite_count');
+
+                            if (favoriteCountEl.length) {
+                                let count = favoriteCountEl[0].innerText;
+                                if (!isNaN(parseFloat(count)) && isFinite(count)) {
+                                    if (!el.hasClass('dofav')) {
+                                        count = parseInt(count) + 1;
+                                    } else {
+                                        count = parseInt(count) - 1;
+                                    }
+                                }
+
+                                if (count === 0) {
+                                    $('.favorite_count').remove();
+                                } else if(count > 99) {
+                                    favoriteCountEl[0].innerText = '99+';
+                                } else {
+                                    favoriteCountEl[0].innerText = count;
+                                }
+                            } else {
+                                $('.icon_fav').after(`<span class="favorite_count">1</span>`)
+                            }
                             el.toggleClass("dofav");
                         }
                     },

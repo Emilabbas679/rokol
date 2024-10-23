@@ -105,9 +105,9 @@
                                                 <div class="drop_section drop_two">
                                                     <ul class="drop_list">
                                                         @foreach($category->children as $child)
-                                                        <li>
-                                                            <a href="{{ route('category', $child->id) }}">{{ $child->name[app()->getLocale()] }}</a>
-                                                        </li>
+                                                            <li>
+                                                                <a href="{{ route('category', $child->id) }}">{{ $child->name[app()->getLocale()] }}</a>
+                                                            </li>
                                                         @endforeach
                                                     </ul>
                                                 </div>
@@ -141,13 +141,7 @@
                         <div class="seacrh_mobile_icon"></div>
                         <ul class="shop_icons_list">
                             @include('partials.cart_icon')
-                            <li class="desk_show">
-                                @auth()
-                                    <a href="{!! route('favorites.index') !!}" class="shop_icon icon_fav"></a>
-                                @else
-                                    <a href="{!! route('favorites.index') !!}" class="shop_icon icon_fav dologin"></a>
-                                @endauth
-                            </li>
+                            @include('partials.fav_icon')
                             <li>
                                 <a href="" class="shop_icon icon_calc"></a>
                             </li>
@@ -226,14 +220,17 @@
             <!-- <ul class="langs">
                 <li @if(app()->getLocale() == 'az')
                 class="active"
+
             @endif><a href="{{route('locale', 'az')}}">Az</a>
                 </li>
                 <li @if(app()->getLocale() == 'en')
                 class="active"
+
             @endif><a href="{{route('locale', 'en')}}">En</a>
                 </li>
                 <li @if(app()->getLocale() == 'ru')
                 class="active"
+
             @endif><a href="{{route('locale', 'ru')}}">Ru</a>
                 </li>
             </ul> -->
@@ -395,11 +392,9 @@
             } else if ($(this).hasClass('dofav')) {
                 message = "<?php echo translate( 'remove_fav' ); ?>";
                 $('body').append('<div id="dynamic-message" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); padding:10px; background-color:#006072; color:#fff; border-radius:5px; z-index:9999;">' + message + '</div>');
-                $(this).toggleClass("dofav");
             } else {
                 message = "<?php echo translate( 'add_fav' ); ?>";
                 $('body').append('<div id="dynamic-message" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); padding:10px; background-color:#006072; color:#fff; border-radius:5px; z-index:9999;">' + message + '</div>');
-                $(this).toggleClass("dofav");
             }
 
 

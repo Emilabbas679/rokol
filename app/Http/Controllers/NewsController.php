@@ -18,7 +18,7 @@ class NewsController extends Controller
                 function ( Builder $builder ) {
                     $builder->where( 'category', \request()->input( 'category_id' ) );
                 } )
-            ->get();
+            ->paginate(20);
 
         return view( 'news', compact( 'articles' ) );
     }

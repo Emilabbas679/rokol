@@ -33,11 +33,6 @@
                             }
                             $product = $favorite->product
                         @endphp
-                        @if($product->prices and isset($product->prices[0]))
-                            @php $price = $product->prices[0]; $weight = $price->weight; @endphp
-                        @else
-                            @php $price = []; $weight = [] @endphp
-                        @endif
                         <div class="col item_col clearfix">
                             <div class="col_in">
                                 <div class="fav_sect">
@@ -45,9 +40,11 @@
                                             <p class="offer_val">Həftənin təklifi</p>
                                         </div> -->
                                     <!-- click after addclass "dofav" -->
-                                    <span class="favotites dofav" data-product-id="{!! $product->id !!}"></span>
+                                    <span class="favotites dofav @if(!is_null($product->favorites?->where('price_id', $favorite->productPrice->id)->first())) dofav @endif"
+                                          data-product-id="{!! $product->id !!}"
+                                          data-price-id="{!! $favorite->productPrice->id !!}"></span>
                                 </div>
-                                <a href="{!! route('product', $product) !!}">
+                                <a href="{!! route('product', [$product, 'price_id' => $favorite->productPrice->id]) !!}">
                                     <div class="item_img">
                                         <img src="{{asset('img/item.png')}}" alt="product">
                                     </div>
@@ -57,8 +54,8 @@
                                             {!! $product->name[$locale] !!}
                                         </span>
                                             <span class="itm_weight">
-                                            @if(isset($weight['weight']))
-                                                    <span class="itm_weight">{{$weight->weight}} @if($weight->weight_type == 0)
+                                            @if($favorite->productPrice->weight)
+                                                    <span class="itm_weight">{{$favorite->productPrice->weight->weight}} @if($favorite->productPrice->weight->weight_type == 0)
                                                             Q
                                                         @else
                                                             Kq
@@ -70,7 +67,7 @@
                                             Sellülozik Boya
                                         </div>
                                         <div class="itm_price">
-                                            @include('partials.product_price')
+                                            @include('partials.product_price', ['price' => $favorite->productPrice])
                                         </div>
                                         <!-- stocked, unstocked -->
                                         <!-- <div class="itm_stock stocked">
@@ -85,6 +82,7 @@
                         </div>
                     @endforeach
                 </div>
+                {!! $favorites->links() !!}
             </div>
 
         </div>
@@ -99,31 +97,58 @@
 
     <script>
         $(document).ready(function () {
-            $(".favotites").click(function (e) {
+            $(".favotites").on('click', function (e) {
                 let productId = $(this).data('productId');
+                let priceId = $(this).data('priceId');
                 let el = $(this);
                 let route = '{!! route('favorites.store') !!}';
-                let method = 'post'
+                let method = 'post';
+                console.log(el.hasClass('dofav'))
                 if (el.hasClass('dofav')) {
                     method = 'delete'
                     route = '{!! url('favorites') !!}/' + productId;
-        }
-        $.ajax({
-            url: route,
-            type: method,
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data: {
-                product_id: productId
-            },
-            dataType: 'JSON',
-            success: function (data) {
-                if (data.status === 'success') {
-                    el.toggleClass("dofav");
                 }
-            },
-        })
-    });
-});
-</script>
+                $.ajax({
+                    url: route,
+                    type: method,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        product_id: productId,
+                        price_id: priceId
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status === 'success') {
+                            let favoriteCountEl = $('.favorite_count');
+
+                            if (favoriteCountEl.length) {
+                                let count = favoriteCountEl[0].innerText;
+                                if (!isNaN(parseFloat(count)) && isFinite(count)) {
+                                    if (!el.hasClass('dofav')) {
+                                        count = parseInt(count) + 1;
+                                    } else {
+                                        count = parseInt(count) - 1;
+                                    }
+                                }
+
+                                if (count === 0) {
+                                    $('.favorite_count').remove();
+                                } else if(count > 99) {
+                                    favoriteCountEl[0].innerText = '99+';
+                                } else {
+                                    favoriteCountEl[0].innerText = count;
+                                }
+                            } else {
+                                $('.icon_fav').after(`<span class="favorite_count">1</span>`)
+                            }
+                            el.toggleClass("dofav");
+                        }
+                    },
+                });
+            });
+        });
+    </script>
 
 @endpush

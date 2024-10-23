@@ -326,34 +326,34 @@
     <div class="wrap_full_color">
         <img src="{{asset('img/full_colors.png?v2')}}" alt="Fullcolor">
         <div class="item_color_hov how_1">
-            <!-- <a href="https://rokol.az/product/64"> -->
+            <a href="https://rokol.az/product/74">
                 <div class="hov_item"><span>1</span></div>
                 <div class="hov_content">
                     <img src="{{asset('img/h-1.png?v1')}}" alt="Emulsiya">
                     <h6 class="hov_title"></h6>
                     <p class="hov_info">Rapid Boya</p>
                 </div>
-            <!-- </a> -->
+            </a>
         </div>
         <div class="item_color_hov how_2">
-            <!-- <a href="https://rokol.az/product/64"> -->
+            <a href="https://rokol.az/product/16">
                 <div class="hov_item"><span>2</span></div>
                 <div class="hov_content">
-                    <img src="{{asset('img/h-3.png?v1')}}" alt="Emulsiya">
+                    <img src="{{asset('img/h-2.png?v1')}}" alt="Emulsiya">
                     <h6 class="hov_title"></h6>
                     <p class="hov_info">Plus Boya</p>
                 </div>
-            <!-- </a> -->
+            </a>
         </div>
         <div class="item_color_hov how_3">
-            <!-- <a href="https://rokol.az/product/64"> -->
+            <a href="https://rokol.az/product/69">
                 <div class="hov_item"><span>3</span></div>
                 <div class="hov_content">
                     <img src="{{asset('img/h-3.png?v1')}}" alt="Emulsiya">
                     <h6 class="hov_title"></h6>
                     <p class="hov_info">Selluzik Boya</p>
                 </div>
-            <!-- </a> -->
+            </a>
         </div>
     </div>
     <!-- Full image color porpover -->

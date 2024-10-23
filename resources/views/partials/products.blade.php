@@ -3,13 +3,13 @@
 		<div class="col_in">
 			<div class="fav_sect">
 				@auth()
-					<span class="favotites @if($product->favorite) dofav @endif"
-					      data-product-id="{!! $product->id !!}"></span>
+					<span class="favotites @if(!is_null($product->favorites?->where('price_id', $product->price_id)->first())) dofav @endif"
+					      data-product-id="{!! $product->id !!}" data-price-id="{!! $product->price_id !!}"></span>
 				@else
 					<span class="favotites dologin"></span>
 				@endauth
 			</div>
-			<a href="{{route('product', $product->id)}}">
+			<a href="{{route('product', [$product->id, 'price_id' => $product->price_id ])}}">
 				<div class="item_img">
 					<img src="{{asset('storage/'.$product->image)}}" alt="product">
 				</div>

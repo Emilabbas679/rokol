@@ -258,7 +258,7 @@ footer .scl_icn {
     float: left;
 }
 
-.footer_menu > li {
+.footer_menu>li {
     display: block;
     padding-top: 20px;
 }
@@ -274,7 +274,8 @@ footer .scl_icn {
     opacity: 1;
 }
 
-.footer_menu li a {
+.footer_menu li a,
+.footer_menu li span {
     text-align: left;
     position: relative;
     text-align: left;
@@ -457,7 +458,7 @@ footer .scl_icn {
         margin: 0 16px 0 0;
     }
 
-    .ftr_menu_sect .footer_menu > li {
+    .ftr_menu_sect .footer_menu>li {
         padding: 0 0 20px 0;
     }
 

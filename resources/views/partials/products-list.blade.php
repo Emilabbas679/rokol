@@ -33,8 +33,8 @@
 
 				<div class="fav_sect">
 					@auth()
-						<span class="favotites @if($product->favorite) dofav @endif"
-							  data-product-id="{!! $product->id !!}"></span>
+						<span class="favotites @if(!is_null($product->favorites?->where('price_id', $product->price_id)->first())) dofav @endif"
+							  data-product-id="{!! $product->id !!}" data-price-id="{!! $product->price_id !!}"></span>
 					@else
 						<span class="favotites dologin"></span>
 					@endauth

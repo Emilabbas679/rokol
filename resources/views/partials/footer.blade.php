@@ -11,21 +11,27 @@
                             </div>
                         </a>
                     </div>
-                    <!-- <ul class="footer_menu">
+                    <ul class="footer_menu">
                         <li>
-                            <a href="" class="">Baş oﬁs </a>
+                            <span>Ünvan:</span>
+                            <a href="https://maps.app.goo.gl/bEMzV6iHnRnKD1uh8" target="_blank" class="">Azərbaycan, Abşeron, Masazır-2, AZ0123 </a>
                         </li>
                         <li>
-                            <a href="" class="">Fabrik ünvanı</a>
+                            <span>E-mail:</span>
+                            <a href="mailTo:info@matanata.com" class="">info@matanata.com</a>
                         </li>
-                    </ul> -->
+                        <li>
+                            <span>Telefon:</span>
+                            <a href="tel:+994102603030" class="">+994 10 260 30 30</a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="ftr_right">
 
                     <div class="ftr_menu_sect">
                         <ul class="footer_menu">
                             <li>
-                                <span class="fm_hd">Menular </span>
+                                <span class="fm_hd">Menyular </span>
                             </li>
                             <li>
                                 <a href="{!! route('about') !!}" class="">{{translate('header_about')}} </a>
@@ -37,7 +43,7 @@
                                 <a href="{!! route('colors') !!}" class="">{{translate('header_colors')}} </a>
                             </li>
                             <li>
-                                <a href="" class="">{{translate('header_offers')}} </a>
+                                <a href="{!! route('offers.index') !!}" class="">{{translate('header_offers')}} </a>
                             </li>
                             <li>
                                 <a href="{!! route('news.index') !!}" class="">{{translate('header_news')}} </a>
@@ -77,6 +83,13 @@
                                         Sosial şəbəkələrimiz:
                                     </div>
                                     <ul class="socials ftr_desk">
+                                        <li>
+                                            <a href="https://wa.me/+994102603030" class="social_icon" target="_blank">
+                                                <span class="scl_icn">
+                                                    <img src="{{asset('img/icons/wp_w.svg?v1')}}" alt="Whatsapp">
+                                                </span>
+                                            </a>
+                                        </li>
                                         <li>
                                             <a href="https://www.facebook.com/RokolBoyalari" class="social_icon" target="_blank">
                                                 <span class="scl_icn">

@@ -199,8 +199,10 @@
 
                                 <div class="bf_tb_hd grid_button_items">
                                     <div class="sort_count">230 məhsul tapıldı</div>
-                                    <div class="grid_button clicked_tab_btn btn_list {!! getViewCookie() == 'list' ? 'active' : '' !!}" data-id="0"></div>
-                                    <div class="grid_button clicked_tab_btn btn_grid {!! getViewCookie() == 'grid' ? 'active' : '' !!}" data-id="1"></div>
+                                    <div class="grid_button clicked_tab_btn btn_list {!! getViewCookie() == 'list' ? 'active' : '' !!}"
+                                         data-id="0"></div>
+                                    <div class="grid_button clicked_tab_btn btn_grid {!! getViewCookie() == 'grid' ? 'active' : '' !!}"
+                                         data-id="1"></div>
                                 </div>
                             </div>
                         </div>
@@ -292,9 +294,11 @@
         $(document).ready(function () {
             $(".favotites").on('click', function (e) {
                 let productId = $(this).data('productId');
+                let priceId = $(this).data('priceId');
                 let el = $(this);
                 let route = '{!! route('favorites.store') !!}';
-                let method = 'post'
+                let method = 'post';
+                console.log(el.hasClass('dofav'))
                 if (el.hasClass('dofav')) {
                     method = 'delete'
                     route = '{!! url('favorites') !!}/' + productId;
@@ -306,11 +310,34 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     data: {
-                        product_id: productId
+                        product_id: productId,
+                        price_id: priceId
                     },
                     dataType: 'JSON',
                     success: function (data) {
                         if (data.status === 'success') {
+                            let favoriteCountEl = $('.favorite_count');
+
+                            if (favoriteCountEl.length) {
+                                let count = favoriteCountEl[0].innerText;
+                                if (!isNaN(parseFloat(count)) && isFinite(count)) {
+                                    if (!el.hasClass('dofav')) {
+                                        count = parseInt(count) + 1;
+                                    } else {
+                                        count = parseInt(count) - 1;
+                                    }
+                                }
+
+                                if (count === 0) {
+                                    $('.favorite_count').remove();
+                                } else if(count > 99) {
+                                    favoriteCountEl[0].innerText = '99+';
+                                } else {
+                                    favoriteCountEl[0].innerText = count;
+                                }
+                            } else {
+                                $('.icon_fav').after(`<span class="favorite_count">1</span>`)
+                            }
                             el.toggleClass("dofav");
                         }
                     },
@@ -407,10 +434,12 @@
             })
 
         })
+
         function equalHeight(event) {
 
             $('.wrap_category .bf_tb_items.active .col_in').matchHeight({property: 'min-height'});
-            $('.item_content_btm .itm_title').matchHeight({property: 'min-height'});;
+            $('.item_content_btm .itm_title').matchHeight({property: 'min-height'});
+            ;
             $('.itm_name.card_head').matchHeight({property: 'min-height'});
             $('.img_cover').matchHeight({property: 'min-height'});
         }

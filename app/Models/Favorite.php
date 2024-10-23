@@ -11,12 +11,21 @@ class Favorite extends Model
 
     protected $fillable = [
         'user_id',
-        'product_id'
+        'product_id',
+        'price_id'
     ];
 
     public function product(): BelongsTo
     {
         return $this->belongsTo( Product::class );
     }
+
+
+    public function productPrice(): BelongsTo
+    {
+        return $this->belongsTo( ProductPrice::class, 'price_id', 'id' );
+    }
+
+
 
 }
