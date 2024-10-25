@@ -8,7 +8,7 @@
 
 @endpush
 
-<!-- t -->
+
 @section('content')
     <div class="section_wrap wrap_product">
         <div class="main_center clearfix">
