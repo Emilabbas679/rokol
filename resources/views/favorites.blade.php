@@ -46,7 +46,7 @@
                                 </div>
                                 <a href="{!! route('product', [$product, 'price_id' => $favorite->productPrice->id]) !!}">
                                     <div class="item_img">
-                                        <img src="{{asset('img/item.png')}}" alt="product">
+                                        <img src="{{asset('storage/'.$product->image)}}" alt="product">
                                     </div>
                                     <div class="item_content">
                                         <h4 class="itm_title">

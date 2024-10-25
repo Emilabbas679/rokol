@@ -23,7 +23,7 @@ class FavoriteController extends Controller
                                      ] )
                              ->where( 'user_id', fUserId() )
                              ->orderByDesc( 'created_at' )
-                             ->paginate( 1 );
+                             ->paginate( 20 );
 
         return view( 'favorites', compact( 'favorites' ) );
     }

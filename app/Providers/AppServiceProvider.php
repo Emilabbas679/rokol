@@ -59,6 +59,8 @@ class AppServiceProvider extends ServiceProvider
                 });
 
                 $view->with( 'favoritesCount', $favoritesCount );
+            } else {
+                $view->with( 'favoritesCount', 0 );
             }
 
         } );
