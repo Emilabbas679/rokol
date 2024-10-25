@@ -58,7 +58,6 @@ class Blog extends Resource
      */
     public function fields(NovaRequest $request)
     {
-
         return [
             Tabs::make('Product', [
 

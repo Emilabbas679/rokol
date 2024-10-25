@@ -31,6 +31,21 @@ class NovaExtension {
       ),
     }
 
+    webpackConfig.resolve.fallback = {
+      "fs": false,
+      "tls": false,
+      "net": false,
+      "path": false,
+      "zlib": false,
+      "http": false,
+      "https": false,
+      "stream": false,
+      "crypto": false,
+      "buffer": false
+    };
+
+    webpackConfig.resolve.extensions = [".*",".wasm",".mjs",".js",".jsx",".json",".vue"];
+
     webpackConfig.output = {
       uniqueName: this.name,
     }
