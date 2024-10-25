@@ -99,7 +99,7 @@
                                 @endphp
                                 <div class="drop_section">
                                     <ul class="drop_list">
-                                        @foreach($headerCategories->first() as $category)
+                                        @foreach($headerCategories->first() ?? [] as $category)
                                             <li>
                                                 <a href="{{route('category', $category->id)}}">{{$category->name[app()->getLocale()]}}</a>
                                                 <div class="drop_section drop_two">
@@ -245,7 +245,7 @@
                 <li>
                     <a href="" class="">{{translate('header_products')}}</a>
                     <ul>
-                        @foreach($headerCategories->first() as $category)
+                        @foreach($headerCategories->first() ?? [] as $category)
                             <li>
                                 <a href="{{route('category', $category->id)}}">{{$category->name[app()->getLocale()]}}</a>
                                 <ul>

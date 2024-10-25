@@ -113,12 +113,12 @@
                                             <a href="#" target="_blank" class="pr_buttons">
                                                 <img src="{{asset('img/icons/pr_calc.svg?v1')}}" alt="calculator">
                                             </a>
-                                            <a href="#" target="_blank" class="pr_buttons">
+                                            <!-- <a href="#" target="_blank" class="pr_buttons">
                                                 <img src="{{asset('img/icons/pr_tpdf.svg?v1')}}" alt="pdf">
                                             </a>
                                             <a href="#" target="_blank" class="pr_buttons">
                                                 <img src="{{asset('img/icons/pr_mpdf.svg?v1')}}" alt="pdf">
-                                            </a>
+                                            </a> -->
                                             <a href="#" target="_blank" class="pr_buttons">
                                                 <img src="{{asset('img/icons/pr_video.svg?v1')}}" alt="video">
                                             </a>
@@ -170,16 +170,16 @@
                                     <div class="share_section">
                                         <span class="sh_name">Paylaş:</span>
                                         <ul>
-                                            <li>
-                                                <a href=""><img src="{{asset('img/icons/s_fb.svg')}}" alt="fb"></a>
+                                            <li class="sh_fb">
+                                                <a href="javascript:void(0)"><img src="{{asset('img/icons/s_fb.svg')}}" alt="fb"></a>
                                             </li>
-                                            <li>
-                                                <a href=""><img src="{{asset('img/icons/s_twt.svg')}}" alt="twt"></a>
+                                            <li class="sh_tw">
+                                                <a href="javascript:void(0)"><img src="{{asset('img/icons/s_twt.svg')}}" alt="twt"></a>
                                             </li>
-                                            <li>
-                                                <a href=""><img src="{{asset('img/icons/s_msg.svg')}}" alt="msg"></a>
-                                            </li>
-                                            <li>
+                                            <!-- <li class="sh_ms">
+                                                <a href="javascript:void(0)"><img src="{{asset('img/icons/s_msg.svg')}}" alt="msg"></a>
+                                            </li> -->
+                                            <li class="sh_wp">
                                                 <a href=""><img src="{{asset('img/icons/s_wp.svg')}}" alt="wp"></a>
                                             </li>
                                         </ul>
@@ -426,6 +426,29 @@
             $(".open_pop").click(function () {
                 $(".modal").addClass("opened")
             })
+            $('.sh_fb').on('click', function(e) {
+                e.preventDefault();
+                const currentUrl = encodeURIComponent(window.location.href); 
+                const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
+                window.open(shareUrl, '_blank');
+            });
+            $('.sh_tw').on('click', function(e) {
+                e.preventDefault();
+                const currentUrl = encodeURIComponent(window.location.href);
+                const shareUrl = `https://twitter.com/intent/tweet?url=${currentUrl}`;
+                window.open(shareUrl, '_blank');
+            });
+            // $('.sh_ms').on('click', function(e) {
+            //     const currentUrl = encodeURIComponent(window.location.href);
+            //     const shareUrl = `https://www.facebook.com/dialog/send?link=${currentUrl}`;
+            //     window.open(shareUrl, '_blank');
+            // });
+            $('.sh_wp').on('click', function(e) {
+                e.preventDefault(); 
+                const currentUrl = encodeURIComponent(window.location.href); 
+                const shareUrl = `https://api.whatsapp.com/send?text=${currentUrl}`;
+                window.open(shareUrl, '_blank'); 
+            });
         });
     </script>
 
