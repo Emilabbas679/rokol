@@ -149,7 +149,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="btn_detail btn_basket"
+                                        <div class="btn_detail btn_basket @guest() dologin @endguest"
                                              onclick="addToCart({!! $product->id !!})">
                                         <span class="add_basket">
                                             Səbətə əlavə et
@@ -355,7 +355,7 @@
                                                 <div class="itm_price">
                                                     @php $price = $similarProduct->prices->first(); @endphp
 
-                                                    <span class="new-price">{!! $price->price !!} AZN</span>
+                                                    <span class="new-price">@if($price->price > 0) {{$price->price}} AZN @else *** @endif</span>
 
                                                     @if($price->sale_price > 0 )
                                                         <span class="old-price">{!! $price->sale_price !!} AZN</span>
@@ -567,7 +567,7 @@
                 let el = $(this);
                 let route = '{!! route('favorites.store') !!}';
                 let method = 'post';
-                console.log(el.hasClass('dofav'))
+
                 if (el.hasClass('dofav')) {
                     method = 'delete'
                     route = '{!! url('favorites') !!}/' + productId;

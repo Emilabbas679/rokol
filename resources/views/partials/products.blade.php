@@ -32,7 +32,7 @@
 								<span class="new-price">{{$product->sale_price}} AZN</span>
 								<span class="old-price">{{$product->price}} AZN</span>
 							@else
-								<span class="new-price">{{$product->price}} AZN</span>
+								<span class="new-price">@if($product->price > 0) {{$product->price}} AZN @else *** @endif</span>
 							@endif
 						@endif
 
