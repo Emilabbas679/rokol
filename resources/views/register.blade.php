@@ -37,8 +37,8 @@
                         @enderror
                     </div>
                     <div class="form_item ">
-                        <input type="text" name="email" placeholder="@lang('E-poçt ünvanı')" class="item_input"
-                               required>
+                        <input type="text" name="email" placeholder="@lang('E-poçt ünvanı (zəruri deyil)')" class="item_input"
+                               >
                         @error('email')
                         <div class="error_type">{{ $message }}</div>
                         @enderror
