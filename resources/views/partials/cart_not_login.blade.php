@@ -93,7 +93,7 @@
 													</span>
                                 @else
                                     <span class="main-price">
-														{!! $price->price !!} AZN
+                                          @if($price->price > 0) {{ $price->price }} AZN @else *** @endif
 													</span>
                                     <span class="new-price">
 
