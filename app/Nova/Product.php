@@ -53,13 +53,6 @@ class Product extends Resource
     public function fields( NovaRequest $request )
     {
 
-//        $subCategories = \App\Models\Category::query()->whereNot('category_id', null)->get();
-//        $parentCategories = \App\Models\Category::query()->where('category_id', null)->get();
-//        $arr = [];
-//        foreach ( $subCategories as $subCategory ) {
-//            $arr[$parentCategories->where('id', 5)->first()->name[app()->getLocale()]][$subCategory->id] = $subCategory->name[app()->getLocale()];
-//        }
-//        dd( $arr );
         return [
 
             Tabs::make( 'Product', [
@@ -430,9 +423,9 @@ class Product extends Resource
                                 $model->guarantee = $guarantees;
                             } ),
                 ] ),
-//                Tab::make( 'Oxşarlar', [
-//                    BelongsToMany::make('Similar', 'similar', SimilarProduct::class),
-//                ] ),
+                Tab::make( 'Video', [
+                    Text::make( 'Video' )->rules( 'nullable' ),
+                ] ),
             ] ),
         ];
     }
