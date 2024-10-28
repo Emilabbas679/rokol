@@ -24,7 +24,7 @@
 				<div class="list_right_itm">
 					<div class="itm_price web_price">
 
-						<span class="new-price">{{ $product->price }} AZN</span>
+						<span class="new-price">@if($product->price > 0) {{$product->price}} AZN @else *** @endif</span>
 						@if($product->sale_price > 0)
 							<span class="old-price">{{ $product->sale_price }} AZN</span>
 						@endif
