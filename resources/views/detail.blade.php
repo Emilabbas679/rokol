@@ -405,7 +405,7 @@
                                     <span class="close_modal"></span>
                                 </div>
                                 @if($product->video)
-                                    <iframe width="560" height="315" src="{{ str_replace('watch?v=', 'embed/', $product->video ) }}" title="{!! $product->name[app()->getLocale()] !!}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    <iframe width="560" height="315" src="{{ str_replace('watch?v=', 'embed/', $product->video ) }}" title="{!! $product->name !!}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                 @endif
                             </div>
                         </div>
