@@ -23,7 +23,7 @@
                 <form action="{!! route('register') !!}" method="post" id="register_form">
                     @csrf
                     <div class="form_item ">
-                        <input type="text" name="full_name" placeholder="@lang('Ad, Soyad')" class="item_input"
+                        <input type="text" name="full_name" placeholder="@lang('Ad, Soyad *')" class="item_input"
                                required>
                         @error('full_name')
                         <div class="error_type">{{ $message }}</div>
@@ -44,7 +44,7 @@
                         @enderror
                     </div>
                     <div class="form_item">
-                        <input type="password" name="password" placeholder="@lang('Şifrə')" class="item_input "
+                        <input type="password" name="password" placeholder="@lang('Şifrə *')" class="item_input "
                                required>
                         @error('password')
                         <div class="error_type">{{ $message }}</div>
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="form_item">
-                        <input type="password" name="password_confirmation" placeholder="@lang('Şifrə təkrar')"
+                        <input type="password" name="password_confirmation" placeholder="@lang('Şifrə təkrar *')"
                                class="item_input ">
                         <!-- <div class="error_type">Supporting text</div> -->
                         <div class="pass_eye">
