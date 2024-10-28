@@ -54,9 +54,15 @@ class User extends Resource
 
             Text::make('Email')
                 ->sortable()
-                ->rules('required', 'email', 'max:254')
+                ->rules('nullable', 'email', 'max:254')
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
+
+            Text::make('Phone')
+                ->sortable()
+                ->rules('nullable', 'email', 'max:254')
+                ->creationRules('unique:users,phone')
+                ->updateRules('unique:users,phone,{{resourceId}}'),
 
             Password::make('Password')
                 ->onlyOnForms()
@@ -107,5 +113,16 @@ class User extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public function authorizedToUpdate(Request $request)
+    {
+        // Add your condition here. For example, if the resource has a 'status' field:
+        if (!$this->is_admin) {
+            return false;
+        }
+
+        // Otherwise, use the default authorization logic
+        return parent::authorizedToUpdate($request);
     }
 }
