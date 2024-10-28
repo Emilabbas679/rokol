@@ -325,7 +325,7 @@
     <!-- Full image color porpover -->
     <div class="wrap_full_color">
         <img src="{{asset('img/full_colors.png?v2')}}" alt="Fullcolor">
-        <div class="item_color_hov how_1">
+        <!-- <div class="item_color_hov how_1">
             <a href="https://rokol.az/product/74">
                 <div class="hov_item"><span>1</span></div>
                 <div class="hov_content">
@@ -354,7 +354,7 @@
                     <p class="hov_info">Selluzik Boya</p>
                 </div>
             </a>
-        </div>
+        </div> -->
     </div>
     <!-- Full image color porpover -->
 
