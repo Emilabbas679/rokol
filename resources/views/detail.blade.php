@@ -120,7 +120,7 @@
                                             <a href="#" target="_blank" class="pr_buttons">
                                                 <img src="{{asset('img/icons/pr_mpdf.svg?v1')}}" alt="pdf">
                                             </a> -->
-                                            <a href="#" target="_blank" class="pr_buttons">
+                                            <a href="javascript:void(0)" class="pr_buttons video_button">
                                                 <img src="{{asset('img/icons/pr_video.svg?v1')}}" alt="video">
                                             </a>
                                             <a href="#" target="_blank" class="pr_buttons">
@@ -377,7 +377,7 @@
                     </div>
                     <!-- Product similar items -->
                 @endif
-                <div class="modal" id="new_address_modal" data-id="create_address_modal">
+                <div class="modal detail_modal" id="new_address_modal" data-id="create_address_modal">
                     <div class="modal_section">
                         <div class="modal_container">
                             <div class="modal_header">
@@ -391,6 +391,18 @@
                                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio excepturi architecto
                                 possimus aspernatur explicabo. Similique, commodi. Est a tempore perspiciatis nisi nemo
                                 quidem consequuntur officia ratione? Obcaecati, nobis? Ad, minima?
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal video_modal" id="new_address_modal" data-id="create_address_modal">
+                    <div class="modal_section">
+                        <div class="modal_container">
+                            <div class="modal_body">
+                                <div class="close_modal_block">
+                                    <span class="close_modal"></span>
+                                </div>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/RhSd3sWwGe4?si=oTp5I9-Ii26hRVwd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
@@ -425,7 +437,10 @@
                 }
             });
             $(".open_pop").click(function () {
-                $(".modal").addClass("opened")
+                $(".modal.detail_modal").addClass("opened")
+            })
+            $(".video_button").click(function () {
+                $(".modal.video_modal").addClass("opened")
             })
             $('.sh_fb').on('click', function(e) {
                 e.preventDefault();

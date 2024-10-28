@@ -1769,11 +1769,20 @@ main {
     font-size: 36px;
   }
 
+  .video_modal .close_modal_block {
+    right: 0 !important;
+    top: 0 !important;
+  }
 }
 
 @media only screen and (min-width: 0px) and (max-width: 560px) {
   .main_center {
     padding: 0px;
+  }
+
+  .video_modal .close_modal_block {
+    right: 0 !important;
+    top: 0 !important;
   }
 
   .row {
@@ -10216,10 +10225,77 @@ img.product_gallery_images_upload {
   .itm_price.mob_price {
     display: flex !important;
   }
+
+  .video_modal .close_modal_block {
+    right: 0 !important;
+    top: 0 !important;
+  }
 }
 
 .mob_price {
   display: none !important;
+}
+
+.video_modal .modal_container {
+  max-width: 800px;
+}
+
+.video_modal .modal_body {
+  position: relative;
+  padding: 0;
+}
+
+.video_modal iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  object-fit: cover;
+  transition: all .25s ease-in-out;
+  -webkit-transition: all .25s ease-in-out;
+  -moz-transition: all .25s ease-in-out;
+  -ms-transition: all .25s ease-in-out;
+  -o-transition: all .25s ease-in-out;
+}
+
+.video_modal .close_modal_block {
+  padding: 5px;
+  position: absolute;
+  right: -33px;
+  top: -33px;
+  background: #fff;
+  border-radius: 4px;
+  z-index: 9999;
+}
+
+.video_modal .modal_container {
+  overflow: visible;
+}
+
+.video_modal .modal_section {
+  overflow: visible;
+  padding: 40px;
+}
+
+.video_modal .modal_body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  overflow: visible;
+}
+
+.video_modal .modal_body::before {
+  content: "";
+  display: block;
+  width: 100%;
+  position: relative;
+  padding-top: 72%;
 }
 
 /*! ====  ALL PAGES CSS FINISH  ===== */
