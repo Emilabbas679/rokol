@@ -120,9 +120,11 @@
                                             <a href="#" target="_blank" class="pr_buttons">
                                                 <img src="{{asset('img/icons/pr_mpdf.svg?v1')}}" alt="pdf">
                                             </a> -->
+                                            @if($product->video)
                                             <a href="javascript:void(0)" class="pr_buttons video_button">
                                                 <img src="{{asset('img/icons/pr_video.svg?v1')}}" alt="video">
                                             </a>
+                                            @endif
                                             <a href="#" target="_blank" class="pr_buttons">
                                                 <img src="{{asset('img/icons/pr_print.svg?v1')}}" alt="print">
                                             </a>
@@ -402,7 +404,9 @@
                                 <div class="close_modal_block">
                                     <span class="close_modal"></span>
                                 </div>
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/RhSd3sWwGe4?si=oTp5I9-Ii26hRVwd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                @if($product->video)
+                                    <iframe width="560" height="315" src="{{ str_replace('watch?v=', 'embed/', $product->video ) }}" title="{!! $product->name[app()->getLocale()] !!}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                @endif
                             </div>
                         </div>
                     </div>
