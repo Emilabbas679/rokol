@@ -47,6 +47,7 @@ class Weight extends Resource
             Select::make('Weight type')->options([
                 '0' => 'Q',
                 '1' => 'Kg',
+                '2' => 'L',
             ])->sortable()->rules('required')->displayUsingLabels(),
 
             Select::make('Status')->options([

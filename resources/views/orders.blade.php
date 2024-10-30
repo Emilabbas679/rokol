@@ -84,7 +84,7 @@
 										<div class="list_left_itm">
 											<h4 class="itm_title">
 												<span class="itm_name">{!! $item->product->name[app()->getLocale()] !!}</span>
-												<span class="itm_weight">{!! ($weight = $item->price?->weight)?->weight . " " . ($weight?->weight_type == 1 ? 'Kq' : 'Q') !!}</span>
+												<span class="itm_weight">{!! ($weight = $item->price?->weight)?->weight . " " . productWeightUnit($weight?->weight_type) !!}</span>
 											</h4>
 											<div class="itm_info">{{ $item->product->category->name[app()->getLocale()] }}</div>
 										</div>

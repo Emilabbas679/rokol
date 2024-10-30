@@ -17,11 +17,7 @@
 					<h4 class="itm_title">
 						<span class="itm_name card_head">{{$product->name[app()->getLocale()] ?? ''}}</span>
 						@if(isset($product->weight))
-							<span class="itm_weight">{{$product->weight}} @if($product->weight_type == 0)
-									Q
-								@else
-									Kq
-								@endif</span>
+							<span class="itm_weight">{{$product->weight}} {!! productWeightUnit($product->weight_type) !!}</span>
 						@endif
 					</h4>
 					<div class="itm_info">{!! $product->category->name[app()->getLocale()] !!}</div>

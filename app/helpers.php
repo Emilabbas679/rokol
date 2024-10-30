@@ -116,4 +116,18 @@ if ( !function_exists( 'getViewCookie' ) ) {
     }
 }
 
+if ( !function_exists( 'productWeightUnit' ) ) {
+    function productWeightUnit(int $weightType): string
+    {
+        if ($weightType === 1){
+            return 'Kq';
+        }
+        else if ( $weightType === 2 ) {
+            return 'L';
+        } else {
+            return 'Q';
+        }
+    }
+}
+
 

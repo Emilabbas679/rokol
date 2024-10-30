@@ -11,7 +11,7 @@
 				<div class="list_left_itm">
 					<h4 class="itm_title">
 						<span class="itm_name">{{ $product->name[app()->getLocale()] }}</span>
-						<span class="itm_weight">{{ $product->weight }} {{ $product->weight_type == 1 ? 'Kq' : 'q' }}</span>
+						<span class="itm_weight">{{ $product->weight }} {{ productWeightUnit($product->weight_type) }}</span>
 					</h4>
 					<div class="itm_info">{{ $product->category->name[app()->getLocale()] }}</div>
 					<div class="itm_price mob_price">

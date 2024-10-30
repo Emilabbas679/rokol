@@ -16,7 +16,7 @@
         @foreach($weights as $item)
             <label class="f_check_type radio_btn">
                 <input type="radio" name="weight" value="{{$item->weight_id}}" @if($price->weight_id == $item->weight_id) checked @endif>
-                <span>{{$item->weight->weight}} @if($item->weight->weight_type == 1) Kq @else Q @endif</span>
+                <span>{{$item->weight->weight}} {!! productWeightUnit($item->weight->weight_type) !!}</span>
             </label>
         @endforeach
     </div>

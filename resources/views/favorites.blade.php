@@ -55,11 +55,7 @@
                                         </span>
                                             <span class="itm_weight">
                                             @if($favorite->productPrice->weight)
-                                                    <span class="itm_weight">{{$favorite->productPrice->weight->weight}} @if($favorite->productPrice->weight->weight_type == 0)
-                                                            Q
-                                                        @else
-                                                            Kq
-                                                        @endif</span>
+                                                    <span class="itm_weight">{{$favorite->productPrice->weight->weight}} {!! productWeightUnit($favorite->productPrice->weight->weight_type) !!} </span>
                                                 @endif
                                         </span>
                                         </h4>
