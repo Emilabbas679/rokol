@@ -3,6 +3,6 @@
         <span class="new-price">{{$price->sale_price}} AZN</span>
         <span class="old-price">{{$price->price}} AZN</span>
     @else
-        <span class="new-price">@if($product->price > 0) {{$product->price}} AZN @else *** @endif</span>
+        <span class="new-price">@if($price->price > 0) {{$price->price}} AZN @else *** @endif</span>
     @endif
 @endif
