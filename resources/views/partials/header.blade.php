@@ -143,9 +143,77 @@
                             @include('partials.cart_icon')
                             @include('partials.fav_icon')
                             <li>
-                                <a href="" class="shop_icon icon_calc"></a>
+                                <a href="javascript:void(0)" class="shop_icon icon_calc open_calc"></a>
                             </li>
                         </ul>
+                        <div class="modal calculator_modal" id="calculatorModal" data-id="calculatorModal">
+                            <div class="modal_section" style="overflow: visible;">
+                                <div class="modal_container" style="overflow: visible;">
+                                    <div class="modal_header">
+                                        <h5 class="modal_title">Kalkulyator</h5>
+                                        <span class="close_modal"></span>
+                                    </div>
+                                    <div class="modal_body">
+                                        <div class="select_item" style="width: 100%">
+                                            <div class="form_item">
+                                                <select name="parent_category_id" class="js-example-basic-single "
+                                                        id="products_main_calc" data-placeholder="">
+                                                    <option value="">Seçiniz...</option>
+                                                    <option value="1">Seçenek 1</option>
+                                                    <option value="2">Seçenek 2</option>
+                                                    <option value="3">Seçenek 3</option>
+                                                </select>
+                                                <span class="customDrop customDrop-main_calc"></span>
+                                            </div>
+                                            <div class="form_item">
+                                                <select name="category_id" class="js-example-basic-single " id="products_other_calc"
+                                                        data-placeholder="">
+                                                    <option value="">Seçiniz...</option>
+                                                    <option value="1">Seçenek 1</option>
+                                                    <option value="2">Seçenek 2</option>
+                                                    <option value="3">Seçenek 3</option>
+                                                </select>
+                                                <span class="customDrop customDrop-other_calc"></span>
+                                            </div>
+                                            <div class="form_item">
+                                                <select name="category_id" class="js-example-basic-single " id="this_product"
+                                                        data-placeholder="">
+                                                    <option value="">Seçiniz...</option>
+                                                    <option value="1">Seçenek 1</option>
+                                                    <option value="2">Seçenek 2</option>
+                                                    <option value="3">Seçenek 3</option>
+                                                </select>
+                                                <span class="customDrop customDrop-this_calc"></span>
+                                            </div>
+                                            <div id="hiddenDiv">
+                                                <div class="calc_inputs" method="post">
+                                                    <input type="hidden" name="_token" value="MuTkOmmxq9J5Ne7d8lcsASMeSWu0rIEGA56H4i6d" autocomplete="off">                                
+                                                    <div class="form_item">
+                                                        <label for="">Səthin eni (m):</label>
+                                                        <input type="text" name="email" placeholder="Səthin eni (m):" value="" class="item_input">
+                                                    </div>
+                                                    <div class="form_item">
+                                                        <label for="">Səthin uzunluğu (m):</label>
+                                                        <input type="text" name="email" placeholder="Səthin uzunluğu (m):" value="" class="item_input">
+                                                    </div>
+                                                    <div class="form_item">
+                                                        <label for="">Tətbiq qalınlığı (mm):</label>
+                                                        <input type="text" name="email" placeholder="Tətbiq qalınlığı (mm):" value="" class="item_input">
+                                                    </div>
+                                                    <div class="form_item">
+                                                        <label for="">1 mm üçün sərfiyyat norması (kq/m²):</label>
+                                                        <input type="text" name="email" placeholder="1 mm üçün sərfiyyat norması (kq/m²):" value="" class="item_input">
+                                                    </div>
+                                                    <div class="form_item">
+                                                        <button type="submit" class="btn_sign submit_btn">Hesabla</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="prof_items_sect">
                         @guest()
@@ -338,6 +406,25 @@
                 console.log(this);
             }
         });
+        $('#products_main_calc').select2({
+                minimumResultsForSearch: Infinity,
+                dropdownParent: $('.customDrop-main_calc')
+            });
+        $('#products_other_calc').select2({
+            minimumResultsForSearch: Infinity,
+            dropdownParent: $('.customDrop-other_calc')
+        });
+        $('#this_product').select2({
+            minimumResultsForSearch: Infinity,
+            dropdownParent: $('.customDrop-this_calc')
+        });
+        $('#products_main_calc, #products_other_calc, #this_product').on('change', function() {
+            if ($('#products_main_calc').val() && $('#products_other_calc').val() && $('#this_product').val()) {
+                $('#hiddenDiv').css('display', 'block');
+            } else {
+                $('#hiddenDiv').css('display', 'none');
+            }
+        });
         $('.favotites').click(function () {
             if ($('#dynamic-message').length) {
                 $('#dynamic-message').stop(true, true).remove();
@@ -359,6 +446,10 @@
             });
 
         });
+        $(".open_calc").click(function () {
+            $(".calculator_modal").addClass("opened")
+        })
+        
         $('.btn_basket ').click(function () {
             if ($('#dynamic-message').length) {
                 $('#dynamic-message').stop(true, true).remove();

@@ -10298,4 +10298,22 @@ img.product_gallery_images_upload {
   padding-top: 72%;
 }
 
+#hiddenDiv {
+  display: none;
+}
+
+.calc_inputs {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.calc_inputs input {
+  width: 100%;
+}
+
+.calc_inputs label {
+  margin-bottom: 4px;
+}
+
 /*! ====  ALL PAGES CSS FINISH  ===== */

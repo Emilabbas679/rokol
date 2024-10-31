@@ -16,8 +16,8 @@
         <div class="main_center clearfix">
             <div class="sect_body clearfix">
                 <div class="static_container clearfix">
-                    <img src="{{asset('img/offers.png')}}" alt="Main slider Image">
                     <h1 style="text-align:center"> Həftənin təklifləri tezliklə burada!</h1>
+                    <img src="{{asset('img/offers.png')}}" alt="Main slider Image">
                   
 
                 </div>
