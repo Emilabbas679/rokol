@@ -149,11 +149,7 @@
                                         <label class="f_check_type">
                                             <input type="checkbox" name="weights[]" value="{{$item->id}}"
                                                    @if(isset($selected['weights']) and in_array($item->id, $selected['weights'])) checked @endif>
-                                            <span>{{$item->weight}} @if($item->weight_type == 0)
-                                                    Q
-                                                @else
-                                                    Kq
-                                                @endif</span>
+                                            <span>{{$item->weight}} {!! productWeightUnit($item->weight_type) !!}</span>
                                         </label>
                                     @endforeach
                                 </div>

@@ -53,7 +53,7 @@
                         <div class="bsk_row_list">
                             <span class="bck_itm_name">@lang('Weight'):</span>
                             <span
-                                    class="bck_itm_val">{!! $cart->productPrice->weight->weight . " " . ($cart->productPrice->weight->weight_type == 1 ? 'Kq' : 'q') !!}
+                                    class="bck_itm_val">{!! $cart->productPrice->weight->weight . " " . productWeightUnit($cart->productPrice->weight->weight_type) !!}
 											</span>
                         </div>
                         <div class="bsk_row_list">
