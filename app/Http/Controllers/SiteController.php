@@ -85,7 +85,7 @@ class SiteController extends Controller
 
         $selected              = [];
         $selected['min_price'] = 0;
-        $selected['max_price'] = 10000;
+        $selected['max_price'] = 1000;
 
         if ( request()->has( 'min_price' ) and ( (int) request()->min_price ) > 0 )
             $selected['min_price'] = (int) request()->min_price;
