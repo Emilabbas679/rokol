@@ -95,12 +95,14 @@
                                                 <div class="col item_col">
                                                     <div class="col_in">
                                                         <input type="number" class="custom-min" placeholder="min"
+                                                               name="min_price"
                                                                min="0" max="1000" value="{{$selected['min_price']}}">
                                                     </div>
                                                 </div>
                                                 <div class="col item_col">
                                                     <div class="col_in">
                                                         <input type="number" class="custom-max" placeholder="max"
+                                                               name="max_price"
                                                                min="0" max="1000" value="{{$selected['max_price']}}">
                                                     </div>
                                                 </div>
