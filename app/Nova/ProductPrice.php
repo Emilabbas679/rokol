@@ -36,47 +36,47 @@ class ProductPrice extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function fields(NovaRequest $request)
+    public function fields( NovaRequest $request )
     {
         return [
             ID::make()->sortable(),
 
-            BelongsTo::make('Product')->display(function ($item) {
+            BelongsTo::make( 'Product' )->display( function ( $item ) {
                 return $item->name[app()->getLocale()] ?? '';
-            }),
+            } ),
 
-            BelongsTo::make('Color')->display(function ($item) {
+            BelongsTo::make( 'Color' )->display( function ( $item ) {
                 return $item->name[app()->getLocale()] ?? '';
-            }),
+            } ),
 
-            BelongsTo::make('Weight')->display(function ($item) {
+            BelongsTo::make( 'Weight' )->display( function ( $item ) {
 
                 $weight = $item->weight ?? '';
-                $type = ($item->weight_type == 0) ? 'Q' : 'Kq';
+                $type   = productWeightUnit( $item->weight_type );
 
-                return $weight.' '.$type;
-            }),
+                return $weight . ' ' . $type;
+            } ),
 
-            Number::make('Price')
-                ->step(0.01)
-                ->rules('required', 'numeric', 'min:0'),
+            Number::make( 'Price' )
+                  ->step( 0.01 )
+                  ->rules( 'required', 'numeric', 'min:0' ),
 
-            Number::make('Sale Price')
-                ->step(0.01)
-                ->rules('nullable', 'numeric', 'min:0')->default(0),
+            Number::make( 'Sale Price' )
+                  ->step( 0.01 )
+                  ->rules( 'nullable', 'numeric', 'min:0' )->default( 0 ),
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function cards(NovaRequest $request)
+    public function cards( NovaRequest $request )
     {
         return [];
     }
@@ -84,10 +84,10 @@ class ProductPrice extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function filters(NovaRequest $request)
+    public function filters( NovaRequest $request )
     {
         return [];
     }
@@ -95,10 +95,10 @@ class ProductPrice extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function lenses(NovaRequest $request)
+    public function lenses( NovaRequest $request )
     {
         return [];
     }
@@ -106,10 +106,10 @@ class ProductPrice extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function actions(NovaRequest $request)
+    public function actions( NovaRequest $request )
     {
         return [];
     }
