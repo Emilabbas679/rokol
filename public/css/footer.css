@@ -362,9 +362,7 @@ footer .scl_icn {
     align-items: center;
     /* flex-wrap: wrap; */
     width: 100%;
-    margin-bottom: 32px;
     padding-bottom: 32px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .adrs_head {
@@ -400,6 +398,16 @@ footer .scl_icn {
     display: block;
     width: 100%;
     /* max-width: 265px; */
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    padding: 32px 0;
+}
+
+.copyrite img {
+    max-width: 100px;
+}
+
+.copyrite a {
+    display: block;
 }
 
 .copyrite_inner {
@@ -412,6 +420,7 @@ footer .scl_icn {
     letter-spacing: 0.5px;
     color: #fff;
     opacity: 1;
+    text-align: center;
 }
 
 .copyrite_text::before {

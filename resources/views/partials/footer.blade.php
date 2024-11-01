@@ -135,13 +135,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="copyrite">
-                            <div class="copyrite_inner">{{translate('footer_copyrite')}}</div>
-                        </div>
 
                     </div>
                 </div>
-
+            </div>
+            <div class="copyrite">
+                <div class="copyrite_inner"><a target="_blank" href="https://matanata.com/"><img src="{{asset('img/matanat-a-l.png')}}" alt="Logo" ></a> 2024 © MATANAT A</div>
             </div>
         </div>
     </div>
