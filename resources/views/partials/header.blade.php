@@ -190,22 +190,40 @@
                                                     <input type="hidden" name="_token" value="MuTkOmmxq9J5Ne7d8lcsASMeSWu0rIEGA56H4i6d" autocomplete="off">                                
                                                     <div class="form_item">
                                                         <label for="">Səthin eni (m):</label>
-                                                        <input type="text" name="email" placeholder="Səthin eni (m):" value="" class="item_input">
+                                                        <input type="text" id="width" name="email" placeholder="Səthin eni (m):" value="" class="item_input">
                                                     </div>
                                                     <div class="form_item">
                                                         <label for="">Səthin uzunluğu (m):</label>
-                                                        <input type="text" name="email" placeholder="Səthin uzunluğu (m):" value="" class="item_input">
+                                                        <input type="text" name="email" id="length" placeholder="Səthin uzunluğu (m):" value="" class="item_input">
                                                     </div>
                                                     <div class="form_item">
                                                         <label for="">Tətbiq qalınlığı (mm):</label>
-                                                        <input type="text" name="email" placeholder="Tətbiq qalınlığı (mm):" value="" class="item_input">
+                                                        <input type="text" name="email" id="layers" placeholder="Tətbiq qalınlığı (mm):" value="" class="item_input">
                                                     </div>
                                                     <div class="form_item disable_input">
                                                         <label for="">1 mm üçün sərfiyyat norması (kq/m²):</label>
-                                                        <input disabled type="text" name="email" placeholder="1 mm üçün sərfiyyat norması (kq/m²):" value="" class="item_input">
+                                                        <input disabled type="text" name="email" id="consumption" placeholder="1 mm üçün sərfiyyat norması (kq/m²):" value="7" class="item_input">
                                                     </div>
                                                     <div class="form_item">
-                                                        <button type="submit" class="btn_sign submit_btn">Hesabla</button>
+                                                        <button type="submit" class="btn_sign submit_btn" id="calculateBtn">Hesabla</button>
+                                                    </div>
+                                                    <div class="modal answer_modal">
+                                                        <div class="modal_section" style="overflow: visible;">
+                                                            <div class="modal_container" style="overflow: visible;">
+                                                                <div class="modal_header">
+                                                                    <h5 class="modal_title">Hesablama nəticəsi</h5>
+                                                                    <span class="close_modal"></span>
+                                                                </div>
+                                                                <div class="modal_body">                                                                    
+                                                                    <p>
+                                                                        <strong>Hesablama nəticəsi: </strong>
+                                                                        <span id="result">
+                
+                                                                        </span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -228,7 +246,7 @@
                                 <div class="profile_setting clearfix">
                                     <ul class="profile_list clearfix">
                                         <li class="prof_icon icon_prof">
-                                            <a href="" class="clearfix">
+                                            <a href="{!! route('settings.edit') !!}" class="clearfix">
                                                 <span class="prof_icon_name">{!! fUser()->full_name !!} </span>
                                             </a>
                                         </li>
@@ -399,6 +417,48 @@
 </header>
 @push('js')
     <script>
+        $(document).ready(function() {
+            $('#calculateBtn').click(function(event) {
+                $(".answer_modal").addClass("opened")
+                event.preventDefault();
+
+                $('#result').text('');
+
+                var width = $('#width').val().trim();
+                var length = $('#length').val().trim();
+                var layers = $('#layers').val().trim();
+                var consumption = $('#consumption').val().trim();
+
+                var errors = []; 
+
+                if (width === "" || isNaN(width) || parseFloat(width) <= 0) {
+                    errors.push("Səthin eni düzgün daxil edilməyib.");
+                }
+
+                if (length === "" || isNaN(length) || parseFloat(length) <= 0) {
+                    errors.push("Səthin uzunluğu düzgün daxil edilməyib.");
+                }
+
+                if (layers === "" || isNaN(layers) || parseFloat(layers) <= 0) {
+                    errors.push("Qat sayı düzgün daxil edilməyib.");
+                }
+
+                if (errors.length > 0) {
+                    $('#result').html(errors.join("<br>"));
+                    return;
+                }
+
+                width = parseFloat(width);
+                length = parseFloat(length);
+                layers = parseFloat(layers);
+                consumption = parseFloat(consumption);
+
+                var adjustedConsumption = parseFloat((1 / consumption).toFixed(3));
+                var result = width * length * layers * adjustedConsumption;
+
+                $('#result').text(result.toFixed(2) + "kq"); 
+            });
+        });
 
         $(".new-price").each(function () {
             if ($(this).parent().find("span").hasClass("old-price")) {
