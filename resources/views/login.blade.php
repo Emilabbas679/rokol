@@ -30,8 +30,8 @@
                     <div class="sign_tab_sect">
                         <div class="bf_tb_hd">
                             <span class="glider "></span>
-                            <div class="bt_tb_title clicked_tab_btn " data-id="0"><span>@lang('E-poçt ünvanı')</span></div>
                             <div class="bt_tb_title clicked_tab_btn " data-id="1"><span>@lang('Telefon nömrəsi')</span></div>
+                            <div class="bt_tb_title clicked_tab_btn " data-id="0"><span>@lang('E-poçt ünvanı')</span></div>
                         </div>
                     </div>
                     <div class="bf_tb_content clearfix">
