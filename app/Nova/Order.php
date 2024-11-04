@@ -56,14 +56,6 @@ class Order extends Resource
                                          'readonly' => true
                                      ]
                                  ] ),
-            BelongsTo::make( 'Phone', 'user' )
-                     ->display( 'phone' )
-                     ->showOnPreview()
-                     ->withMeta( [
-                                     'extraAttributes' => [
-                                         'readonly' => true
-                                     ]
-                                 ] ),
             BelongsTo::make( 'Address', 'address' )
                      ->display( 'address' )
                      ->showOnPreview()
