@@ -591,7 +591,7 @@
                 dataType: 'JSON',
                 success: function (response) {
                     $('select[name="product_id"]').html(
-                        ['<option value="">Seçiniz...</option>'].concat(response.data.map((product) => `<option value="${product.id}">${product.name}</option>`))
+                        ['<option value="">Seçiniz...</option>'].concat(response.data.map((product) => `<option value="${product.id}">${product.name.{{app()->getLocale()}}}</option>`))
                     );
                 }
             });

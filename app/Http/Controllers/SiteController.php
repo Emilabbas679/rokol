@@ -440,12 +440,18 @@ class SiteController extends Controller
 
     public function getProductsByCategoryId( $id )
     {
-        return response()->json( [ 'data' => Product::query()->select(['id', DB::raw("name->'$.".app()->getLocale()."' as name")])->where( 'category_id', $id )->get()->toArray() ] );
+        return response()->json( [
+                                     'data' => Product::query()->select( [ 'id', "name" ] )->where( 'category_id', $id )
+                                                      ->get()->toArray()
+                                 ] );
     }
 
     public function getConsumptionByProductId( $id )
     {
-        return response()->json( [ 'data' => Product::query()->select(['consumption_norm'])->where( 'id', $id )->first()->toArray() ] );
+        return response()->json( [
+                                     'data' => Product::query()->select( [ 'consumption_norm' ] )->where( 'id', $id )
+                                                      ->first()->toArray()
+                                 ] );
     }
 }
 
