@@ -131,6 +131,7 @@ class Product extends Resource
                                  } ),
 
                     HasMany::make( 'Variations', 'prices', ProductPrice::class ),
+                    Number::make('Consumption norm', 'consumption_norm')
 
                 ] ),
                 Tab::make( 'Haqqında', [

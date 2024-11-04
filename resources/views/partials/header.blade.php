@@ -155,57 +155,64 @@
                                     </div>
                                     <div class="modal_body">
                                         <div class="select_item" style="width: 100%">
-                                            <div class="form_item">
-                                                <select name="parent_category_id" class="js-example-basic-single "
-                                                        id="products_main_calc" data-placeholder="">
-                                                    <option value="">Seçiniz...</option>
-                                                    <option value="1">Seçenek 1</option>
-                                                    <option value="2">Seçenek 2</option>
-                                                    <option value="3">Seçenek 3</option>
-                                                </select>
-                                                <span class="customDrop customDrop-main_calc"></span>
+                                            <div id="{!! isset($product) && !is_null($product->consumption_norm) ? 'hiddenDiv' : '' !!}">
+                                                <div class="form_item">
+                                                    <select name="parent_category_id" class="js-example-basic-single "
+                                                            id="products_main_calc" data-placeholder="">
+                                                        <option value="">Seçiniz...</option>
+                                                        @foreach(menu_categories() as $cat)
+                                                            <option value="{!! $cat->id !!}">{!! $cat->name[app()->getLocale()] !!}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <span class="customDrop customDrop-main_calc"></span>
+                                                </div>
+                                                <div class="form_item">
+                                                    <select name="category_id" class="js-example-basic-single "
+                                                            id="products_other_calc"
+                                                            data-placeholder="">
+                                                        <option value="">Seçiniz...</option>
+                                                    </select>
+                                                    <span class="customDrop customDrop-other_calc"></span>
+                                                </div>
+                                                <div class="form_item">
+                                                    <select name="product_id" class="js-example-basic-single "
+                                                            id="this_product"
+                                                            data-placeholder="">
+                                                        <option value="">Seçiniz...</option>
+                                                    </select>
+                                                    <span class="customDrop customDrop-this_calc"></span>
+                                                </div>
                                             </div>
-                                            <div class="form_item">
-                                                <select name="category_id" class="js-example-basic-single " id="products_other_calc"
-                                                        data-placeholder="">
-                                                    <option value="">Seçiniz...</option>
-                                                    <option value="1">Seçenek 1</option>
-                                                    <option value="2">Seçenek 2</option>
-                                                    <option value="3">Seçenek 3</option>
-                                                </select>
-                                                <span class="customDrop customDrop-other_calc"></span>
-                                            </div>
-                                            <div class="form_item">
-                                                <select name="category_id" class="js-example-basic-single " id="this_product"
-                                                        data-placeholder="">
-                                                    <option value="">Seçiniz...</option>
-                                                    <option value="1">Seçenek 1</option>
-                                                    <option value="2">Seçenek 2</option>
-                                                    <option value="3">Seçenek 3</option>
-                                                </select>
-                                                <span class="customDrop customDrop-this_calc"></span>
-                                            </div>
-                                            <div id="hiddenDiv">
-                                                <div class="calc_inputs" method="post">
-                                                    <input type="hidden" name="_token" value="MuTkOmmxq9J5Ne7d8lcsASMeSWu0rIEGA56H4i6d" autocomplete="off">                                
+                                            <div id="{!! isset($product) && !is_null($product->consumption_norm) ? '' : 'hiddenDiv' !!}">
+                                                <div class="calc_inputs">
                                                     <div class="form_item">
                                                         <label for="">Səthin eni (m):</label>
-                                                        <input type="text" id="width" name="email" placeholder="Səthin eni (m):" value="" class="item_input">
+                                                        <input type="text" id="width" name="email"
+                                                               placeholder="Səthin eni (m):" value=""
+                                                               class="item_input">
                                                     </div>
                                                     <div class="form_item">
                                                         <label for="">Səthin uzunluğu (m):</label>
-                                                        <input type="text" name="email" id="length" placeholder="Səthin uzunluğu (m):" value="" class="item_input">
+                                                        <input type="text" name="email" id="length"
+                                                               placeholder="Səthin uzunluğu (m):" value=""
+                                                               class="item_input">
                                                     </div>
                                                     <div class="form_item">
                                                         <label for="">Tətbiq qalınlığı (mm):</label>
-                                                        <input type="text" name="email" id="layers" placeholder="Tətbiq qalınlığı (mm):" value="" class="item_input">
+                                                        <input type="text" name="email" id="layers"
+                                                               placeholder="Tətbiq qalınlığı (mm):" value=""
+                                                               class="item_input">
                                                     </div>
                                                     <div class="form_item disable_input">
                                                         <label for="">1 mm üçün sərfiyyat norması (kq/m²):</label>
-                                                        <input disabled type="text" name="email" id="consumption" placeholder="1 mm üçün sərfiyyat norması (kq/m²):" value="7" class="item_input">
+                                                        <input disabled type="text" name="email" id="consumption"
+                                                               placeholder="1 mm üçün sərfiyyat norması (kq/m²):"
+                                                               value="{!! isset($product) && !is_null($product->consumption_norm) ? $product->consumption_norm : '' !!}" class="item_input">
                                                     </div>
                                                     <div class="form_item">
-                                                        <button type="submit" class="btn_sign submit_btn" id="calculateBtn">Hesabla</button>
+                                                        <button type="submit" class="btn_sign submit_btn"
+                                                                id="calculateBtn">Hesabla
+                                                        </button>
                                                     </div>
                                                     <div class="modal answer_modal">
                                                         <div class="modal_section" style="overflow: visible;">
@@ -214,7 +221,7 @@
                                                                     <h5 class="modal_title">Hesablama nəticəsi</h5>
                                                                     <span class="close_modal"></span>
                                                                 </div>
-                                                                <div class="modal_body">                                                                    
+                                                                <div class="modal_body">
                                                                     <p>
                                                                         <strong>Hesablama nəticəsi: </strong>
                                                                         <span id="result">
@@ -307,15 +314,24 @@
                 <li @if(app()->getLocale() == 'az')
                 class="active"
 
+
+
+
             @endif><a href="{{route('locale', 'az')}}">Az</a>
                 </li>
                 <li @if(app()->getLocale() == 'en')
                 class="active"
 
+
+
+
             @endif><a href="{{route('locale', 'en')}}">En</a>
                 </li>
                 <li @if(app()->getLocale() == 'ru')
                 class="active"
+
+
+
 
             @endif><a href="{{route('locale', 'ru')}}">Ru</a>
                 </li>
@@ -417,8 +433,8 @@
 </header>
 @push('js')
     <script>
-        $(document).ready(function() {
-            $('#calculateBtn').click(function(event) {
+        $(document).ready(function () {
+            $('#calculateBtn').click(function (event) {
                 $(".answer_modal").addClass("opened")
                 event.preventDefault();
 
@@ -429,7 +445,7 @@
                 var layers = $('#layers').val().trim();
                 var consumption = $('#consumption').val().trim();
 
-                var errors = []; 
+                var errors = [];
 
                 if (width === "" || isNaN(width) || parseFloat(width) <= 0) {
                     errors.push("Səthin eni düzgün daxil edilməyib.");
@@ -456,7 +472,7 @@
                 var adjustedConsumption = parseFloat((1 / consumption).toFixed(3));
                 var result = width * length * layers * adjustedConsumption;
 
-                $('#result').text(result.toFixed(2) + "kq"); 
+                $('#result').text(result.toFixed(2) + "kq");
             });
         });
 
@@ -467,9 +483,9 @@
             }
         });
         $('#products_main_calc').select2({
-                minimumResultsForSearch: Infinity,
-                dropdownParent: $('.customDrop-main_calc')
-            });
+            minimumResultsForSearch: Infinity,
+            dropdownParent: $('.customDrop-main_calc')
+        });
         $('#products_other_calc').select2({
             minimumResultsForSearch: Infinity,
             dropdownParent: $('.customDrop-other_calc')
@@ -478,7 +494,7 @@
             minimumResultsForSearch: Infinity,
             dropdownParent: $('.customDrop-this_calc')
         });
-        $('#products_main_calc, #products_other_calc, #this_product').on('change', function() {
+        $('#products_main_calc, #products_other_calc, #this_product').on('change', function () {
             if ($('#products_main_calc').val() && $('#products_other_calc').val() && $('#this_product').val()) {
                 $('#hiddenDiv').css('display', 'block');
             } else {
@@ -509,7 +525,7 @@
         $(".open_calc").click(function () {
             $(".calculator_modal").addClass("opened")
         })
-        
+
         $('.detail_basket_btn ').click(function () {
             if ($('#dynamic-message').length) {
                 $('#dynamic-message').stop(true, true).remove();
@@ -554,6 +570,49 @@
             });
 
         });
+    </script>
+
+    <script>
+        let children = @json(menu_categories()->pluck('children')->flatten()->groupBy('category_id'));
+
+        $('select[name="parent_category_id"]').on('change', function () {
+            let parentId = this.value;
+
+            $('select[name="category_id"]').html(
+                ['<option value="">Seçiniz...</option>'].concat(children[parentId].map((child) => `<option value="${child.id}">${child.name.{{app()->getLocale()}}}</option>`))
+            )
+        });
+
+        $('select[name="category_id"]').on('change', function () {
+            let categoryId = this.value;
+            $.ajax({
+                url: '{!! url('getProductsByCategoryId') !!}/' + categoryId,
+                method: 'GET',
+                dataType: 'JSON',
+                success: function (response) {
+                    $('select[name="product_id"]').html(
+                        ['<option value="">Seçiniz...</option>'].concat(response.data.map((product) => `<option value="${product.id}">${product.name}</option>`))
+                    );
+                }
+            });
+        });
+
+        $('select[name="product_id"]').on('change', function () {
+            let productId = this.value;
+            $.ajax({
+                url: '{!! url('getConsumptionByProductId') !!}/' + productId,
+                method: 'GET',
+                dataType: 'JSON',
+                success: function (response) {
+                    $('#consumption').val(response.data.consumption_norm);
+                }
+            });
+        });
+
+
+
+
+
     </script>
     <!--Start of Tawk.to Script-->
     {{--    <script type="text/javascript">--}}
