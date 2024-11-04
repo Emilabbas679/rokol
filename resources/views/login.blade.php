@@ -30,17 +30,17 @@
                     <div class="sign_tab_sect">
                         <div class="bf_tb_hd">
                             <span class="glider "></span>
-                            <div class="bt_tb_title clicked_tab_btn " data-id="0"><span>@lang('Telefon nömrəsi')</span></div>
-                            <div class="bt_tb_title clicked_tab_btn " data-id="1"><span>@lang('E-poçt ünvanı')</span></div>
+                            <div class="bt_tb_title clicked_tab_btn" data-id="0"><span>@lang('Telefon nömrəsi')</span></div>
+                            <div class="bt_tb_title clicked_tab_btn" data-id="1"><span>@lang('E-poçt ünvanı')</span></div>
                         </div>
                     </div>
                     <div class="bf_tb_content clearfix">
 
-                        <div class="bf_tb_items" data-id="1">
+                        <div class="bf_tb_items" data-id="0">
 
                             <form action="{!! route('login') !!}" method="post">
                                 @csrf
-                                <div class="form_item ">
+                                <div class="form_item">
                                     <input type="text" name="email" placeholder="@lang('E-poçt ünvanı')" value=""
                                            class="item_input">
                                     @error('email')
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="form_item">
                                     <input type="password" name="password" placeholder="@lang('Şifrə')" value=""
-                                           class="item_input ">
+                                           class="item_input">
                                     @error('password')
                                     <div class="error_type">{{ $message }}</div>
                                     @enderror
@@ -72,11 +72,11 @@
                             </form>
 
                         </div>
-                        <div class="bf_tb_items active" data-id="0">
+                        <div class="bf_tb_items active" data-id="1">
 
                             <form action="{!! route('login') !!}" method="post">
                                 @csrf
-                                <div class="form_item ">
+                                <div class="form_item">
                                     <input type="text" name="phone" placeholder="@lang('Telefon nömrəsi') (+994)"
                                            value=""
                                            class="item_input phone">
@@ -84,9 +84,9 @@
                                     <div class="error_type">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="form_item ">
+                                <div class="form_item">
                                     <input type="password" name="password" placeholder="@lang('Şifrə')" value=""
-                                           class="item_input ">
+                                           class="item_input">
                                     @error('password')
                                     <div class="error_type">{{ $message }}</div>
                                     @enderror
