@@ -151,14 +151,14 @@
 
                                             </div>
                                         </div>
-                                        <div class="btn_detail btn_basket @guest() dologin @endguest"
+                                        <div class="btn_detail btn_basket"
                                              onclick="addToCart({!! $product->id !!})">
-                                        <span class="add_basket detail_basket_btn">
-                                            Səbətə əlavə et
-                                        </span>
+                                            <span class="add_basket detail_basket_btn">
+                                                Səbətə əlavə et
+                                            </span>
                                             <span class="added_basket">
                                             Səbətə əlavə edildi
-                                        </span>
+                                            </span>
                                         </div>
                                         <!-- click after addclass "dofav" -->
 
@@ -549,9 +549,6 @@
         }
 
         function addToCart(productId) {
-            if ($(".btn_basket").hasClass('added')) {
-                return;
-            }
             let colorId = $("input[name='color']:checked").val();
             let weightId = $('input[name="weight"]:checked').val();
             let count = $('input[name="counter"]').val();

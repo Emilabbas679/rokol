@@ -64,14 +64,16 @@ class Order extends Resource
                                          'readonly' => true
                                      ]
                                  ] ),
-            BelongsTo::make( 'Phone', 'address' )
-                     ->display( 'phone' )
-                     ->showOnPreview()
-                     ->withMeta( [
-                                     'extraAttributes' => [
-                                         'readonly' => true
-                                     ]
-                                 ] ),
+            Text::make( 'Phone', function ( $order ) {
+                return $order->address
+                    ? $order->address->phone
+                    : 'N/A';
+            } )->showOnPreview()
+                ->withMeta( [
+                                'extraAttributes' => [
+                                    'readonly' => true
+                                ]
+                            ] ),
             Text::make( 'Amount' )
                 ->showOnPreview()
                 ->withMeta( [
