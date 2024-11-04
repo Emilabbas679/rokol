@@ -7,7 +7,64 @@
                 <span style="background-color: {{$item->color->hex}};"></span>
             </label>
         @endforeach
+        <button class="f_check_type radio_btn color_btn"><span>Kataloqa bax</span></button>
+        <div class="modal color_modal" id="new_address_modal" data-id="create_address_modal">
+            <div class="modal_section">
+                <div class="modal_container">
+                    <div class="modal_header">
+                        <h5 class="modal_title">Rəng Kataloqu</h5>
+                        <span class="close_modal"></span>
+                    </div>
+                    <div class="modal_body">
+                        <div class="row catalog_row_main">
+                            <div class="col item_col clearfix">
+                                <div class="row catalog_row_inner">
+                                    <label class="col item_col clearfix">
+                                        <input name="modal_color" type="radio">
+                                        <div class="catalog_color" style="background: #ffd500;"></div>
+                                        <div class="catalog_name">Limon ana rəng</div>
+                                    </label>
+                                    <label class="col item_col clearfix">
+                                        <input name="modal_color" type="radio">
+                                        <div class="catalog_color" style="background: #fff79f;"></div>
+                                        <div class="catalog_name">Limon ton 1</div>
+                                    </label>
+                                    <label class="col item_col clearfix">
+                                        <input name="modal_color" type="radio">
+                                        <div class="catalog_color" style="background: #fffcb6;"></div>
+                                        <div class="catalog_name">Limon ton 2</div>
+                                    </label>
+                                    <label class="col item_col clearfix">
+                                        <input name="modal_color" type="radio">
+                                        <div class="catalog_color" style="background: #ffffc7;"></div>
+                                        <div class="catalog_name">Limon ton 3</div>
+                                    </label>
+                                    <label class="col item_col clearfix">
+                                        <input name="modal_color" type="radio">
+                                        <div class="catalog_color" style="background: #feffda;"></div>
+                                        <div class="catalog_name">Limon ton 4</div>
+                                    </label>
+                                    <label class="col item_col clearfix">
+                                        <input name="modal_color" type="radio">
+                                        <div class="catalog_color" style="background: #ffffe3;"></div>
+                                        <div class="catalog_name">Limon ton 5</div>
+                                    </label>
+                                </div>
+                            </div>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate aut placeat, nemo culpa eveniet ducimus? Iure assumenda tempore accusantium numquam optio ratione sit dolorum, libero, cupiditate quam praesentium earum soluta.
+                            </p>
+                            <div class="btn_detail btn_basket modal_select_btn">
+                                <span class="add_basket">
+                                    Əlavə et
+                                </span>
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="choose_weight">

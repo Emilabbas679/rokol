@@ -10310,10 +10310,66 @@ img.product_gallery_images_upload {
 
 .calc_inputs input {
   width: 100%;
+  background: #fff;
+}
+
+.disable_input input {
+  background: #EBEEF2;
+  cursor: no-drop;
 }
 
 .calc_inputs label {
   margin-bottom: 4px;
 }
+
+.color_modal input {
+  display: none;
+}
+
+.color_modal .modal_container {
+  max-width: 800px;
+}
+
+.color_modal .catalog_row_main>.item_col {
+  width: 100%;
+  padding: 0 30px 20px 30px;
+}
+
+.color_modal p {
+  padding: 0 20px 20px 20px;
+}
+
+.color_modal label {
+  cursor: pointer;
+}
+
+.color_modal input:checked~.catalog_color {
+  box-shadow: 0px 0px 0px 2px #1A1E26;
+  border: 2px solid #FFF;
+}
+
+.color_btn span {
+  width: auto !important;
+  height: auto !important;
+}
+
+.color_modal .btn_basket {
+  max-width: 200px;
+}
+
+.color_modal .row.catalog_row_main {
+  justify-content: center;
+}
+
+.color_modal .btn_basket span::before {
+  background: none;
+  width: 0;
+  height: 0;
+}
+
+.color_modal .btn_detail span {
+  padding-left: 0;
+}
+
 
 /*! ====  ALL PAGES CSS FINISH  ===== */

@@ -200,9 +200,9 @@
                                                         <label for="">Tətbiq qalınlığı (mm):</label>
                                                         <input type="text" name="email" placeholder="Tətbiq qalınlığı (mm):" value="" class="item_input">
                                                     </div>
-                                                    <div class="form_item">
+                                                    <div class="form_item disable_input">
                                                         <label for="">1 mm üçün sərfiyyat norması (kq/m²):</label>
-                                                        <input type="text" name="email" placeholder="1 mm üçün sərfiyyat norması (kq/m²):" value="" class="item_input">
+                                                        <input disabled type="text" name="email" placeholder="1 mm üçün sərfiyyat norması (kq/m²):" value="" class="item_input">
                                                     </div>
                                                     <div class="form_item">
                                                         <button type="submit" class="btn_sign submit_btn">Hesabla</button>
@@ -450,7 +450,7 @@
             $(".calculator_modal").addClass("opened")
         })
         
-        $('.btn_basket ').click(function () {
+        $('.detail_basket_btn ').click(function () {
             if ($('#dynamic-message').length) {
                 $('#dynamic-message').stop(true, true).remove();
             }

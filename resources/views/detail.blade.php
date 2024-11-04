@@ -153,7 +153,7 @@
                                         </div>
                                         <div class="btn_detail btn_basket @guest() dologin @endguest"
                                              onclick="addToCart({!! $product->id !!})">
-                                        <span class="add_basket">
+                                        <span class="add_basket detail_basket_btn">
                                             Səbətə əlavə et
                                         </span>
                                             <span class="added_basket">
@@ -431,6 +431,12 @@
                 minimumResultsForSearch: Infinity,
                 dropdownParent: $('.customDrop-other')
             });
+            $(".color_btn").click(function(){
+                $(".color_modal").addClass("opened")
+            })
+            $(".modal_select_btn").click(function(){
+                $(".color_modal").removeClass("opened")
+            })
         });
     </script>
     <script>
