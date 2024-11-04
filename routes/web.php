@@ -72,6 +72,8 @@ Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
 Route::post('/messages', [\App\Http\Controllers\MessageController::class, 'store'])->name('messages.store');
 Route::get('/catalog', [\App\Http\Controllers\CatalogController::class, 'index'])->name('catalogs.index');
 Route::get('/view', [\App\Http\Controllers\SiteController::class, 'setView'])->name('view.set');
+Route::get('/getProductsByCategoryId/{id}', [\App\Http\Controllers\SiteController::class, 'getProductsByCategoryId']);
+Route::get('/getConsumptionByProductId/{id}', [\App\Http\Controllers\SiteController::class, 'getConsumptionByProductId']);
 
 Route::get('/offers', function(){
     return view('offers');

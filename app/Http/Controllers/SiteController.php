@@ -55,12 +55,12 @@ class SiteController extends Controller
     {
         $categories = Cache::rememberForever( 'main_categories', function () {
             return Category::query()->with( [ 'children' ] )->where( 'status', 1 )
-                                         ->where( 'category_id', null )->get();
+                           ->where( 'category_id', null )->get();
         } );
 
         if ( $id == 0 ) {
             $categoryIds = [];
-            $category     = [
+            $category    = [
                 'name'        => [ app()->getLocale() => translate( 'products' ) ],
                 'id'          => 0,
                 'category_id' => 0
@@ -74,12 +74,12 @@ class SiteController extends Controller
 
 
             $subCategoryIds = Cache::rememberForever( "sub_categories:" . $id, function () use ( $id ) {
-                $subCategories   = Category::where( 'status', 1 )->where( 'category_id', $id )
-                                            ->select( 'id', 'status', 'category_id' )->get()->toArray();
+                $subCategories = Category::where( 'status', 1 )->where( 'category_id', $id )
+                                         ->select( 'id', 'status', 'category_id' )->get()->toArray();
                 return array_column( $subCategories, 'id' );
             } );
-            $categoryIds   = $subCategoryIds;
-            $categoryIds[] = $id;
+            $categoryIds    = $subCategoryIds;
+            $categoryIds[]  = $id;
         }
 
 
@@ -100,7 +100,7 @@ class SiteController extends Controller
                                       'products.category_id',
                                       'products.image',
                                       'products.name',
-                                      DB::raw('pp.id as price_id'),
+                                      DB::raw( 'pp.id as price_id' ),
                                       'pp.sale_price',
                                       'pp.price',
                                       'pp.weight_id',
@@ -234,20 +234,20 @@ class SiteController extends Controller
     public function product( Request $request, $id )
     {
         $priceId = $request->get( 'price_id' );
-        $product              = Product::query()
-                                       ->where( 'id', $id )
-                                       ->where( 'status', 1 )
-                                       ->with( [
-                                                   'category',
-                                                   'prices',
-                                                   'types',
-                                                   'appearances',
-                                                   'refProperties',
-                                                   'applicationAreas',
-                                                   'favorites',
-                                                   'similar'
-                                               ] )
-                                       ->firstorfail();
+        $product = Product::query()
+                          ->where( 'id', $id )
+                          ->where( 'status', 1 )
+                          ->with( [
+                                      'category',
+                                      'prices',
+                                      'types',
+                                      'appearances',
+                                      'refProperties',
+                                      'applicationAreas',
+                                      'favorites',
+                                      'similar'
+                                  ] )
+                          ->firstorfail();
 
         $locale               = app()->getLocale();
         $product->name        = $product->name[$locale] ?? '';
@@ -288,7 +288,7 @@ class SiteController extends Controller
         }
 
 
-        $price = collect($prices)->where('id', $priceId)->first() ?? ($prices[0] ?? []);
+        $price = collect( $prices )->where( 'id', $priceId )->first() ?? ( $prices[0] ?? [] );
         if ( isset( $price['color_id'] ) ) {
             $price_weights = ProductPrice::where( 'product_id', $product->id )->where( 'color_id', $price->color_id )
                                          ->get();
@@ -436,6 +436,16 @@ class SiteController extends Controller
 
         $cookie = cookie( 'view', \request()->input( 'view', 'grid' ) );
         return response()->json( [ 'status' => 'success' ] )->cookie( $cookie );
+    }
+
+    public function getProductsByCategoryId( $id )
+    {
+        return response()->json( [ 'data' => Product::query()->select(['id', DB::raw("name->'$.".app()->getLocale()."' as name")])->where( 'category_id', $id )->get()->toArray() ] );
+    }
+
+    public function getConsumptionByProductId( $id )
+    {
+        return response()->json( [ 'data' => Product::query()->select(['consumption_norm'])->where( 'id', $id )->first()->toArray() ] );
     }
 }
 
