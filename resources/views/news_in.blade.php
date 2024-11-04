@@ -69,28 +69,28 @@
                                         PAYLAŞ:
                                     </div>
                                     <ul class="nw_socials">
-                                        <li>
-                                            <a target="_blank" href="">
+                                        <li class="sh_fb">
+                                            <a href="javascript:void(0)">
                                                 <img src="{{asset('img/icons/fb_sh.svg?v2')}}" alt="Facebook">
                                             </a>
                                         </li>
-                                        <li>
-                                            <a target="_blank" href="">
+                                        <li class="sh_tg">
+                                            <a href="javascript:void(0)">
                                                 <img src="{{asset('img/icons/tlg_sh.svg?v2')}}" alt="Telegram">
                                             </a>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <a target="_blank" href="">
                                                 <img src="{{asset('img/icons/msg_sh.svg?v2')}}" alt="Mesenger">
                                             </a>
-                                        </li>
-                                        <li>
-                                            <a target="_blank" href="">
+                                        </li> -->
+                                        <li class="sh_ln">
+                                            <a href="javascript:void(0)">
                                                 <img src="{{asset('img/icons/lnk_sh.svg?v2')}}" alt="Linkedn">
                                             </a>
                                         </li>
-                                        <li>
-                                            <a target="_blank" href="">
+                                        <li class="sh_wp">
+                                            <a href="javascript:void(0)">
                                                 <img src="{{asset('img/icons/wp_sh.svg?v2')}}" alt="Whatsapp">
                                             </a>
                                         </li>
@@ -150,29 +150,65 @@
 @push('js')
 
 <script>
-  $('.scaleplus').click(function () {
-    $('.font_scale *').each(function () {
-      if($(this).attr('rfont') === undefined)
-        $(this).attr('rfont', $(this).css('font-size'));
-      $(this).css('font-size', parseInt($(this).css('font-size')) + 2);
+    $('.scaleplus').click(function () {
+      $('.font_scale *').each(function () {
+        if($(this).attr('rfont') === undefined)
+          $(this).attr('rfont', $(this).css('font-size'));
+        $(this).css('font-size', parseInt($(this).css('font-size')) + 2);
+      });
+      return false;
     });
-    return false;
-  });
 
-  $('.scaleminus').click(function () {
-    $('.font_scale *').each(function () {
-      if($(this).attr('rfont') === undefined)
-        $(this).attr('rfont', $(this).css('font-size'));
-      $(this).css('font-size', parseInt($(this).css('font-size')) - 2);
+    $('.scaleminus').click(function () {
+      $('.font_scale *').each(function () {
+        if($(this).attr('rfont') === undefined)
+          $(this).attr('rfont', $(this).css('font-size'));
+        $(this).css('font-size', parseInt($(this).css('font-size')) - 2);
+      });
+      return false;
     });
-    return false;
-  });
 
-  $(".font_scale *").css("font-size", "");
-  $(".text_reset").click(function () {
-    var article = $(".font_scale *");
-    article.css("font-size", "");
-  });
+    $(".font_scale *").css("font-size", "");
+    $(".text_reset").click(function () {
+        var article = $(".font_scale *");
+        article.css("font-size", "");
+    });
+    $('.sh_fb').on('click', function(e) {
+        e.preventDefault();
+        const currentUrl = encodeURIComponent(window.location.href); 
+        const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
+        window.open(shareUrl, '_blank');
+    });
+    $('.sh_tw').on('click', function(e) {
+        e.preventDefault();
+        const currentUrl = encodeURIComponent(window.location.href);
+        const shareUrl = `https://twitter.com/intent/tweet?url=${currentUrl}`;
+        window.open(shareUrl, '_blank');
+    });
+    // $('.sh_ms').on('click', function(e) {
+    //     const currentUrl = encodeURIComponent(window.location.href);
+    //     const shareUrl = `https://www.facebook.com/dialog/send?link=${currentUrl}`;
+    //     window.open(shareUrl, '_blank');
+    // });
+    $('.sh_wp').on('click', function(e) {
+        e.preventDefault(); 
+        const currentUrl = encodeURIComponent(window.location.href); 
+        const shareUrl = `https://api.whatsapp.com/send?text=${currentUrl}`;
+        window.open(shareUrl, '_blank'); 
+    });
+    $('.sh_tg').on('click', function(e) {
+        e.preventDefault(); 
+        const currentUrl = encodeURIComponent(window.location.href); 
+        const shareUrl = `https://t.me/share/url?url=${currentUrl}`;
+        window.open(shareUrl, '_blank'); 
+    });
+
+    $('.sh_ln').on('click', function(e) {
+        e.preventDefault(); 
+        const currentUrl = encodeURIComponent(window.location.href); 
+        const shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}`;
+        window.open(shareUrl, '_blank'); 
+    });
 </script>
 
 
