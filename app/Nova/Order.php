@@ -64,7 +64,7 @@ class Order extends Resource
                                          'readonly' => true
                                      ]
                                  ] ),
-            BelongsTo::make( 'Address', 'address' )
+            BelongsTo::make( 'Phone', 'address' )
                      ->display( 'phone' )
                      ->showOnPreview()
                      ->withMeta( [
