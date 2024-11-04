@@ -442,7 +442,8 @@ footer .scl_icn {
     -o-border-radius: 50%;
 }
 
-.copyrite_text {
+.copyrite_text,
+.copyrite_text a {
     display: flex;
     align-items: center;
     position: relative;
@@ -457,6 +458,11 @@ footer .scl_icn {
     line-height: 1.5;
     color: #fff;
     opacity: 1;
+}
+
+.copyrite_text a {
+    padding-left: 0;
+    margin-left: 0;
 }
 
 @media only screen and (min-width: 1025px) and (max-width: 1400px) {
