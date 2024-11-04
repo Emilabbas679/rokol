@@ -36,7 +36,7 @@
                     </div>
                     <div class="bf_tb_content clearfix">
 
-                        <div class="bf_tb_items active" data-id="0">
+                        <div class="bf_tb_items active" data-id="1">
 
                             <form action="{!! route('login') !!}" method="post">
                                 @csrf
@@ -72,7 +72,7 @@
                             </form>
 
                         </div>
-                        <div class="bf_tb_items" data-id="1">
+                        <div class="bf_tb_items" data-id="0">
 
                             <form action="{!! route('login') !!}" method="post">
                                 @csrf
