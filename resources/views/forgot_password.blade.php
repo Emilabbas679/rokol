@@ -31,7 +31,7 @@
                     <button type="submit" class="btn_sign submit_btn">@lang('Davam et')</button>
                 </div>
                 <div class="form_item">
-                    <button type="submit" class="btn_sign link_btn"><span class="back_link"></span>@lang('Geri qayıt') </button>
+                    <a href="{!! back()->getTargetUrl() !!}" class="btn_sign link_btn"><span class="back_link"></span>@lang('Geri qayıt') </a>
                 </div>
             </form>
         </div>
