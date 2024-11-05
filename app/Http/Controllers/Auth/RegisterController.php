@@ -55,7 +55,7 @@ class RegisterController extends Controller
                         ] );
         }
 
-        event( new Registered( $user = $this->create( $validated ) ) );
+        $user = $this->create( $validated );
 
         if ( $response = $this->registered( $request, $user ) ) {
             return $response;
@@ -67,7 +67,7 @@ class RegisterController extends Controller
 
         return new JsonResponse( [
                                      'status' => 'success',
-                                                                                                                                                                                                                                                                                                                                                                                                                      'message' => 'User created successfully.'
+                                                                                                                                                                                                                                                                                                                                                                                                                   'message' => 'User created successfully.'
                                  ], 201 );
     }
 
@@ -92,7 +92,7 @@ class RegisterController extends Controller
                                          'status' => 'fail', 'message' => __( 'You can\'t try now' )
                                      ] );
         }
-        $this->sendCode($phone);
+        $this->sendCode( $phone );
         return response()->json( [
                                      'status' => 'success'
                                  ] );
