@@ -104,68 +104,20 @@ class Blog extends Resource
 
 
                 Tab::make('Azərbaycanca', [
-                    Text::make(__('Title (Azerbaijan)'), 'title_az')->hideFromIndex()
-                        ->resolveUsing(function ($value, $resource) {
-                            return $resource->title['az'] ?? '';
-                        })
-                        ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                            $titles = $model->title ?? [];
-                            $titles['az'] = $request->$requestAttribute;
-                            $model->title = $titles;
-                        }),
-                    CKEditor::make(__('Description (Azerbaijan)'), 'description_az')->hideFromIndex()
-                        ->resolveUsing(function ($value, $resource) {
-                            return $resource->description['az'] ?? '';
-                        })
-                        ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                            $descriptions = $model->description ?? [];
-                            $descriptions['az'] = $request->$requestAttribute;
-                            $model->description = $descriptions;
-                        }),
+                    Text::make(__('Title (Azerbaijan)'), 'title->az'),
+                    CKEditor::make(__('Description (Azerbaijan)'), 'description->az')->hideFromIndex(),
                 ]),
 
 
 
                 Tab::make('English', [
-                    Text::make(__('Title (English)'), 'title_en')
-                        ->resolveUsing(function ($value, $resource) {
-                            return $resource->title['en'] ?? '';
-                        })
-                        ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                            $titles = $model->title ?? [];
-                            $titles['en'] = $request->$requestAttribute;
-                            $model->title = $titles;
-                        }),
-                    CKEditor::make(__('Description (English)'), 'description_en')->hideFromIndex()
-                        ->resolveUsing(function ($value, $resource) {
-                            return $resource->description['en'] ?? '';
-                        })
-                        ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                            $descriptions = $model->description ?? [];
-                            $descriptions['en'] = $request->$requestAttribute;
-                            $model->description = $descriptions;
-                        }),
+                    Text::make(__('Title (English)'), 'title->en')->hideFromIndex(),
+                    CKEditor::make(__('Description (English)'), 'description->en')->hideFromIndex(),
                 ]),
 
                 Tab::make('Russian', [
-                    Text::make(__('Title (Russian)'), 'title_ru')->hideFromIndex()
-                        ->resolveUsing(function ($value, $resource) {
-                            return $resource->title['ru'] ?? '';
-                        })
-                        ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                            $titles = $model->title ?? [];
-                            $titles['ru'] = $request->$requestAttribute;
-                            $model->title = $titles;
-                        }),
-                    CKEditor::make(__('Description (Russian)'), 'description_ru')->hideFromIndex()
-                        ->resolveUsing(function ($value, $resource) {
-                            return $resource->description['ru'] ?? '';
-                        })
-                        ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                            $descriptions = $model->about ?? [];
-                            $descriptions['ru'] = $request->$requestAttribute;
-                            $model->description = $descriptions;
-                        }),
+                    Text::make(__('Title (Russian)'), 'title->ru')->hideFromIndex(),
+                    CKEditor::make(__('Description (Russian)'), 'description->ru')->hideFromIndex(),
                 ]),
 
 
