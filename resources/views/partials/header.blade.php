@@ -198,9 +198,9 @@
                                                                class="item_input">
                                                     </div>
                                                     <div class="form_item">
-                                                        <label for="">Tətbiq qalınlığı (mm):</label>
+                                                        <label for="">Tövsiyyə olunan qatın sayı:</label>
                                                         <input type="text" name="email" id="layers"
-                                                               placeholder="Tətbiq qalınlığı (mm):" value=""
+                                                               placeholder="Tövsiyyə olunan qatın sayı" value=""
                                                                class="item_input">
                                                     </div>
                                                     <div class="form_item disable_input">
