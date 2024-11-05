@@ -155,7 +155,7 @@
                                     </div>
                                     <div class="modal_body">
                                         <div class="select_item" style="width: 100%">
-                                            <div id="{!! isset($product) && !is_null($product->consumption_norm) ? 'hiddenDiv' : '' !!}">
+                                            <div id="{!! isset($product) && !is_null($product->consumption_norm) ? 'hiddenDiv' : '' !!}" class="select-section">
                                                 <div class="form_item">
                                                     <select name="parent_category_id" class="js-example-basic-single "
                                                             id="products_main_calc" data-placeholder="">
@@ -183,7 +183,7 @@
                                                     <span class="customDrop customDrop-this_calc"></span>
                                                 </div>
                                             </div>
-                                            <div id="{!! isset($product) && !is_null($product->consumption_norm) ? '' : 'hiddenDiv' !!}">
+                                            <div id="{!! isset($product) && !is_null($product->consumption_norm) ? '' : 'hiddenDiv' !!}" class="input-section">
                                                 <div class="calc_inputs">
                                                     <div class="form_item">
                                                         <label for="">Səthin eni (m):</label>
@@ -516,7 +516,21 @@
 
         });
         $(".open_calc").click(function () {
-            $(".calculator_modal").addClass("opened")
+            let consumptionNorm = $(this).data('consumptionNorm');
+            console.log(consumptionNorm);
+            $('.select-section').css('display', 'block');
+            $('.input-section').css('display', 'none');
+            if (consumptionNorm) {
+                consumptionNorm = parseFloat($(this).data('consumptionNorm'));
+                if (consumptionNorm > 0) {
+                    $('.select-section').css('display', 'none');
+                    $('.input-section').css('display', 'block');
+                    $('#consumption').val(consumptionNorm)
+                }
+                $(".calculator_modal").addClass("opened")
+            } else {
+                $(".calculator_modal").addClass("opened")
+            }
         })
 
         $('.detail_basket_btn ').click(function () {
