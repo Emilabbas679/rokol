@@ -151,22 +151,26 @@
 
 <script>
     $('.scaleplus').click(function () {
-      $('.font_scale *').each(function () {
-        if($(this).attr('rfont') === undefined)
-          $(this).attr('rfont', $(this).css('font-size'));
-        $(this).css('font-size', parseInt($(this).css('font-size')) + 2);
-      });
-      return false;
+        $('.news_hd *,.nw_in_text *').each(function () {
+            if($(this).attr('rfont') === undefined) {
+                $(this).attr('rfont', $(this).css('font-size'));
+            }
+            $(this).css('font-size', parseInt($(this).css('font-size')) + 2);
+        });
+        return false;
     });
 
+
     $('.scaleminus').click(function () {
-      $('.font_scale *').each(function () {
-        if($(this).attr('rfont') === undefined)
-          $(this).attr('rfont', $(this).css('font-size'));
-        $(this).css('font-size', parseInt($(this).css('font-size')) - 2);
-      });
-      return false;
+        $('.news_hd *,.nw_in_text *').each(function () {
+            if ($(this).attr('rfont') === undefined) {
+                $(this).attr('rfont', $(this).css('font-size'));
+            }
+            $(this).css('font-size', parseInt($(this).css('font-size')) - 2);
+        });
+        return false;
     });
+
 
     $(".font_scale *").css("font-size", "");
     $(".text_reset").click(function () {
