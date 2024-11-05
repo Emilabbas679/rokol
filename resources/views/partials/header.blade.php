@@ -602,7 +602,7 @@
 
         $('select[name="product_id"]').on('change', function () {
             let productId = this.value;
-            $('.input-section').css('display', 'block');
+            $('.input-section').css('display', 'none');
             $.ajax({
                 url: '{!! url('getConsumptionByProductId') !!}/' + productId,
                 method: 'GET',
