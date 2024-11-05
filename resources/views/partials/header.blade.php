@@ -579,7 +579,7 @@
             let parentId = this.value;
 
             $('select[name="category_id"]').html(
-                ['<option selected disabled value="0">Seçiniz...</option>'].concat(children[parentId].map((child) => `<option value="${child.id}">${child.name.{{app()->getLocale()}}}</option>`))
+                ['<option selected disabled value="0">Seçim edin</option>'].concat(children[parentId].map((child) => `<option value="${child.id}">${child.name.{{app()->getLocale()}}}</option>`))
             )
         });
 
@@ -591,7 +591,7 @@
                 dataType: 'JSON',
                 success: function (response) {
                     $('select[name="product_id"]').html(
-                        ['<option selected disabled value="0">Seçiniz...</option>'].concat(response.data.map((product) => `<option value="${product.id}">${product.name.{{app()->getLocale()}}}</option>`))
+                        ['<option selected disabled value="0">Seçim edin</option>'].concat(response.data.map((product) => `<option value="${product.id}">${product.name.{{app()->getLocale()}}}</option>`))
                     );
                 }
             });
