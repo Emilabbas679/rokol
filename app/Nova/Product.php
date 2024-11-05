@@ -129,10 +129,9 @@ class Product extends Resource
                                  ->display( function ( $item ) {
                                      return $item->name[app()->getLocale()] ?? '';
                                  } ),
-
                     HasMany::make( 'Variations', 'prices', ProductPrice::class ),
-                    Number::make('Consumption norm', 'consumption_norm')
-
+                    Number::make( 'Recommended Layers', 'recommended_layers' ),
+                    Number::make( 'Consumption norm', 'consumption_norm' ),
                 ] ),
                 Tab::make( 'Haqqında', [
                     CKEditor::make( __( 'About (English)' ), 'about_en' )
