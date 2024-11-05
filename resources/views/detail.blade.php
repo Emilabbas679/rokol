@@ -111,9 +111,12 @@
                                     </div>
                                     <div class="pr_tbl_right">
                                         <div class="pr_main_buttons">
-                                            <a href="#" target="_blank" class="pr_buttons">
-                                                <img src="{{asset('img/icons/pr_calc.svg?v1')}}" alt="calculator">
-                                            </a>
+                                            @if($product->consumption_norm)
+                                                <a href="javascript:void(0)" class="pr_buttons open_calc"
+                                                   data-consumption-norm="{!! $product->consumption_norm !!}">
+                                                    <img src="{{asset('img/icons/pr_calc.svg?v1')}}" alt="calculator">
+                                                </a>
+                                            @endif
                                             <!-- <a href="#" target="_blank" class="pr_buttons">
                                                 <img src="{{asset('img/icons/pr_tpdf.svg?v1')}}" alt="pdf">
                                             </a>
@@ -121,9 +124,9 @@
                                                 <img src="{{asset('img/icons/pr_mpdf.svg?v1')}}" alt="pdf">
                                             </a> -->
                                             @if($product->video)
-                                            <a href="javascript:void(0)" class="pr_buttons video_button">
-                                                <img src="{{asset('img/icons/pr_video.svg?v1')}}" alt="video">
-                                            </a>
+                                                <a href="javascript:void(0)" class="pr_buttons video_button">
+                                                    <img src="{{asset('img/icons/pr_video.svg?v1')}}" alt="video">
+                                                </a>
                                             @endif
                                             <a href="#" target="_blank" class="pr_buttons">
                                                 <img src="{{asset('img/icons/pr_print.svg?v1')}}" alt="print">
@@ -174,10 +177,12 @@
                                         <span class="sh_name">Paylaş:</span>
                                         <ul>
                                             <li class="sh_fb">
-                                                <a href="javascript:void(0)"><img src="{{asset('img/icons/s_fb.svg')}}" alt="fb"></a>
+                                                <a href="javascript:void(0)"><img src="{{asset('img/icons/s_fb.svg')}}"
+                                                                                  alt="fb"></a>
                                             </li>
                                             <li class="sh_tw">
-                                                <a href="javascript:void(0)"><img src="{{asset('img/icons/s_twt.svg')}}" alt="twt"></a>
+                                                <a href="javascript:void(0)"><img src="{{asset('img/icons/s_twt.svg')}}"
+                                                                                  alt="twt"></a>
                                             </li>
                                             <!-- <li class="sh_ms">
                                                 <a href="javascript:void(0)"><img src="{{asset('img/icons/s_msg.svg')}}" alt="msg"></a>
@@ -357,7 +362,11 @@
                                                 <div class="itm_price">
                                                     @php $price = $similarProduct->prices->first(); @endphp
 
-                                                    <span class="new-price">@if($price->price > 0) {{$price->price}} AZN @else *** @endif</span>
+                                                    <span class="new-price">@if($price->price > 0)
+                                                            {{$price->price}} AZN
+                                                        @else
+                                                            ***
+                                                        @endif</span>
 
                                                     @if($price->sale_price > 0 )
                                                         <span class="old-price">{!! $price->sale_price !!} AZN</span>
@@ -405,7 +414,11 @@
                                     <span class="close_modal"></span>
                                 </div>
                                 @if($product->video)
-                                    <iframe width="560" height="315" src="{{ str_replace('watch?v=', 'embed/', $product->video ) }}" title="{!! $product->name !!}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    <iframe width="560" height="315"
+                                            src="{{ str_replace('watch?v=', 'embed/', $product->video ) }}"
+                                            title="{!! $product->name !!}" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                 @endif
                             </div>
                         </div>
@@ -431,10 +444,10 @@
                 minimumResultsForSearch: Infinity,
                 dropdownParent: $('.customDrop-other')
             });
-            $(".color_btn").click(function(){
+            $(".color_btn").click(function () {
                 $(".color_modal").addClass("opened")
             })
-            $(".modal_select_btn").click(function(){
+            $(".modal_select_btn").click(function () {
                 $(".color_modal").removeClass("opened")
             })
         });
@@ -452,13 +465,13 @@
             $(".video_button").click(function () {
                 $(".modal.video_modal").addClass("opened")
             })
-            $('.sh_fb').on('click', function(e) {
+            $('.sh_fb').on('click', function (e) {
                 e.preventDefault();
-                const currentUrl = encodeURIComponent(window.location.href); 
+                const currentUrl = encodeURIComponent(window.location.href);
                 const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
                 window.open(shareUrl, '_blank');
             });
-            $('.sh_tw').on('click', function(e) {
+            $('.sh_tw').on('click', function (e) {
                 e.preventDefault();
                 const currentUrl = encodeURIComponent(window.location.href);
                 const shareUrl = `https://twitter.com/intent/tweet?url=${currentUrl}`;
@@ -469,11 +482,11 @@
             //     const shareUrl = `https://www.facebook.com/dialog/send?link=${currentUrl}`;
             //     window.open(shareUrl, '_blank');
             // });
-            $('.sh_wp').on('click', function(e) {
-                e.preventDefault(); 
-                const currentUrl = encodeURIComponent(window.location.href); 
+            $('.sh_wp').on('click', function (e) {
+                e.preventDefault();
+                const currentUrl = encodeURIComponent(window.location.href);
                 const shareUrl = `https://api.whatsapp.com/send?text=${currentUrl}`;
-                window.open(shareUrl, '_blank'); 
+                window.open(shareUrl, '_blank');
             });
         });
     </script>
@@ -621,7 +634,7 @@
 
                                 if (count === 0) {
                                     $('.favorite_count').remove();
-                                } else if(count > 99) {
+                                } else if (count > 99) {
                                     favoriteCountEl[0].innerText = '99+';
                                 } else {
                                     favoriteCountEl[0].innerText = count;
