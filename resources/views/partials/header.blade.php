@@ -602,12 +602,12 @@
 
         $('select[name="product_id"]').on('change', function () {
             let productId = this.value;
+            $('.input-section').css('display', 'block');
             $.ajax({
                 url: '{!! url('getConsumptionByProductId') !!}/' + productId,
                 method: 'GET',
                 dataType: 'JSON',
                 success: function (response) {
-                    console.log(response);
                     if (response.data.consumption_norm > 0) {
                         $('.input-section').css('display', 'block');
                         $('#consumption').val(response.data.consumption_norm);
