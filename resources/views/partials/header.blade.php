@@ -159,7 +159,7 @@
                                                 <div class="form_item">
                                                     <select name="parent_category_id" class="js-example-basic-single "
                                                             id="products_main_calc" data-placeholder="">
-                                                        <option value="">Seçiniz...</option>
+                                                        <option selected disabled value="0">Seçim edin</option>
                                                         @foreach(menu_categories() as $cat)
                                                             <option value="{!! $cat->id !!}">{!! $cat->name[app()->getLocale()] !!}</option>
                                                         @endforeach
@@ -170,7 +170,7 @@
                                                     <select name="category_id" class="js-example-basic-single "
                                                             id="products_other_calc"
                                                             data-placeholder="">
-                                                        <option value="">Seçiniz...</option>
+                                                        <option selected disabled value="0">Seçim edin</option>
                                                     </select>
                                                     <span class="customDrop customDrop-other_calc"></span>
                                                 </div>
@@ -178,7 +178,7 @@
                                                     <select name="product_id" class="js-example-basic-single "
                                                             id="this_product"
                                                             data-placeholder="">
-                                                        <option value="">Seçiniz...</option>
+                                                        <option selected disabled value="0">Seçim edin</option>
                                                     </select>
                                                     <span class="customDrop customDrop-this_calc"></span>
                                                 </div>
@@ -484,15 +484,15 @@
         });
         $('#products_main_calc').select2({
             minimumResultsForSearch: Infinity,
-            dropdownParent: $('.customDrop-main_calc')
+            dropdownParent: $('.customDrop-main_calc'),
         });
         $('#products_other_calc').select2({
             minimumResultsForSearch: Infinity,
-            dropdownParent: $('.customDrop-other_calc')
+            dropdownParent: $('.customDrop-other_calc'),
         });
         $('#this_product').select2({
             minimumResultsForSearch: Infinity,
-            dropdownParent: $('.customDrop-this_calc')
+            dropdownParent: $('.customDrop-this_calc'),
         });
         $('#products_main_calc, #products_other_calc, #this_product').on('change', function () {
             if ($('#products_main_calc').val() && $('#products_other_calc').val() && $('#this_product').val()) {
