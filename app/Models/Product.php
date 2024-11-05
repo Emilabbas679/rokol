@@ -78,6 +78,9 @@ class Product extends Model
         return $this->belongsToMany( self::class, SimilarProduct::class, 'product_id', 'similar_product_id', null, null, 'products' );
     }
 
-
+    public function colors(): BelongsToMany
+    {
+        return $this->belongsToMany( Color::class, 'product_colors' );
+    }
 
 }

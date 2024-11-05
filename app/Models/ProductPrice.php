@@ -17,11 +17,6 @@ class ProductPrice extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function color()
-    {
-        return $this->belongsTo(Color::class);
-    }
-
     public function weight()
     {
         return $this->belongsTo(Weight::class);
