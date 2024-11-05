@@ -448,9 +448,15 @@ class SiteController extends Controller
 
     public function getConsumptionByProductId( $id )
     {
+        $consumption = Product::query()
+                              ->select( [ 'consumption_norm' ] )
+                              ->where( 'id', $id )
+                              ->first()->consumption_norm;
         return response()->json( [
-                                     'data' => Product::query()->select( [ 'consumption_norm' ] )->where( 'id', $id )
-                                                      ->first()->toArray()
+                                     'status'          => 'success',
+                                     'data'            => [
+                                         'consumption_norm' => $consumption
+                                     ]
                                  ] );
     }
 }

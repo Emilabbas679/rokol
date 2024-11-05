@@ -494,13 +494,6 @@
             minimumResultsForSearch: Infinity,
             dropdownParent: $('.customDrop-this_calc'),
         });
-        $('#products_main_calc, #products_other_calc, #this_product').on('change', function () {
-            if ($('#products_main_calc').val() && $('#products_other_calc').val() && $('#this_product').val()) {
-                $('#hiddenDiv').css('display', 'block');
-            } else {
-                $('#hiddenDiv').css('display', 'none');
-            }
-        });
         $('.favotites').click(function () {
             if ($('#dynamic-message').length) {
                 $('#dynamic-message').stop(true, true).remove();
@@ -599,12 +592,16 @@
 
         $('select[name="product_id"]').on('change', function () {
             let productId = this.value;
+            $('#hiddenDiv').css('display', 'none');
             $.ajax({
                 url: '{!! url('getConsumptionByProductId') !!}/' + productId,
                 method: 'GET',
                 dataType: 'JSON',
                 success: function (response) {
-                    $('#consumption').val(response.data.consumption_norm);
+                    if (response.data.consumption_norm > 0) {
+                        $('#hiddenDiv').css('display', 'block');
+                        $('#consumption').val(response.data.consumption_norm);
+                    }
                 }
             });
         });
