@@ -584,6 +584,7 @@
             $('select[name="category_id"]').html(
                 ['<option selected disabled value="0">Məhsul qrupu</option>'].concat(children[parentId].map((child) => `<option value="${child.id}">${child.name.{{app()->getLocale()}}}</option>`))
             )
+            $('select[name="product_id"]').html('<option selected disabled value="0">Məhsul</option>')
         });
 
         $('select[name="category_id"]').on('change', function () {
