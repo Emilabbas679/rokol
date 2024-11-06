@@ -1224,6 +1224,11 @@ main {
   color: rgba(65, 71, 82, 0.38);
 }
 
+.sended_btn .sended {
+  background: rgba(65, 71, 82, 0.12);
+  color: rgba(65, 71, 82, 0.38);
+}
+
 .collapse_btn {
   display: flex;
   align-items: flex-start;
@@ -6758,7 +6763,7 @@ img.product_gallery_images_upload {
   background-color: #F0F2F7;
 }
 
-.btn_sign:hover:not(.added) {
+.btn_sign:hover:not(.added, .sended_btn .sended) {
   background-color: #0C8299;
 }
 
@@ -8932,6 +8937,18 @@ img.product_gallery_images_upload {
   display: none !important;
 }
 
+.sended_btn .send {
+  display: none !important;
+}
+
+.sended_btn .sended {
+  display: block !important;
+}
+
+.sended {
+  display: none !important;
+}
+
 .added .added_basket {
   display: block !important;
 }
@@ -9070,6 +9087,7 @@ img.product_gallery_images_upload {
 } */
 
 /*! ---Popup Part --- */
+
 
 
 
@@ -9746,7 +9764,11 @@ img.product_gallery_images_upload {
 
 }
 
-@media only screen and (min-width: 0px) and (max-width: 560px) {
+@media only screen and (min-width: 0px) and (max-width: 565px) {
+
+  .reg_modal .phone_modal .row {
+    justify-content: space-between;
+  }
 
   /* Profile Page */
   .wrap_address_page {

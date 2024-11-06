@@ -129,7 +129,10 @@
                         </div>
 
                         <div class="error_type" id="code_error" style="display:none">Kod düzgün daxil edilməyib</div>
-                        <button type="submit" class="btn_sign submit_btn submit_code">@lang('Göndər')</button>
+                        <div>
+                            <button type="submit" class="btn_sign submit_btn submit_code send">@lang('Göndər')</button>
+                            <button type="submit" class="btn_sign submit_btn sended">@lang('Göndərildi')</button>
+                        </div>
 
                         <a href="javascript:void(0)"
                            class="security_content modal_little_content modal_centered resend_code">
@@ -308,6 +311,10 @@
             sendCode(true);
         })
         $(".submit_code").click(function (e) {
+            $(this).parent("div").addClass("sended_btn")
+            setTimeout(function () {
+                $(".submit_code").parent("div").removeClass("sended_btn")
+            }, 2000)
             e.preventDefault();
             $('#code_error').css('display', 'none');
             let code = $('#code_form').serialize();

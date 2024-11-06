@@ -155,11 +155,12 @@
                                     </div>
                                     <div class="modal_body">
                                         <div class="select_item" style="width: 100%">
-                                            <div id="{!! isset($product) && !is_null($product->consumption_norm) ? 'hiddenDiv' : '' !!}" class="select-section">
+                                            <div id="{!! isset($calcProduct) && !is_null($calcProduct->consumption_norm) ? 'hiddenDiv' : '' !!}"
+                                                 class="select-section">
                                                 <div class="form_item">
                                                     <select name="parent_category_id" class="js-example-basic-single "
                                                             id="products_main_calc" data-placeholder="">
-                                                        <option selected disabled value="0">Seçim edin</option>
+                                                        <option selected disabled value="0">Məhsul sistemi</option>
                                                         @foreach(menu_categories() as $cat)
                                                             <option value="{!! $cat->id !!}">{!! $cat->name[app()->getLocale()] !!}</option>
                                                         @endforeach
@@ -170,7 +171,7 @@
                                                     <select name="category_id" class="js-example-basic-single "
                                                             id="products_other_calc"
                                                             data-placeholder="">
-                                                        <option selected disabled value="0">Seçim edin</option>
+                                                        <option selected disabled value="0">Məhsul qrupu</option>
                                                     </select>
                                                     <span class="customDrop customDrop-other_calc"></span>
                                                 </div>
@@ -178,37 +179,50 @@
                                                     <select name="product_id" class="js-example-basic-single "
                                                             id="this_product"
                                                             data-placeholder="">
-                                                        <option selected disabled value="0">Seçim edin</option>
+                                                        <option selected disabled value="0">Məhsul</option>
                                                     </select>
                                                     <span class="customDrop customDrop-this_calc"></span>
                                                 </div>
                                             </div>
-                                            <div id="{!! isset($product) && !is_null($product->consumption_norm) ? '' : 'hiddenDiv' !!}" class="input-section">
+                                            <div id="{!! isset($calcProduct) && !is_null($calcProduct->consumption_norm) ? '' : 'hiddenDiv' !!}"
+                                                 class="input-section">
                                                 <div class="calc_inputs">
-                                                    <div class="form_item">
-                                                        <label for="">Səthin eni (m):</label>
-                                                        <input type="text" id="width" name="email"
-                                                               placeholder="Səthin eni (m):" value=""
-                                                               class="item_input">
-                                                    </div>
-                                                    <div class="form_item">
-                                                        <label for="">Səthin uzunluğu (m):</label>
-                                                        <input type="text" name="email" id="length"
-                                                               placeholder="Səthin uzunluğu (m):" value=""
-                                                               class="item_input">
-                                                    </div>
-                                                    <div class="form_item">
-                                                        <label for="">Tətbiq qalınlığı (mm):</label>
-                                                        <input type="text" name="email" id="layers"
-                                                               placeholder="Tətbiq qalınlığı (mm):" value=""
-                                                               class="item_input">
-                                                    </div>
-                                                    <div class="form_item disable_input">
-                                                        <label for="">1 mm üçün sərfiyyat norması (kq/m²):</label>
-                                                        <input disabled type="text" name="email" id="consumption"
-                                                               placeholder="1 mm üçün sərfiyyat norması (kq/m²):"
-                                                               value="{!! isset($product) && !is_null($product->consumption_norm) ? $product->consumption_norm : '' !!}" class="item_input">
-                                                    </div>
+                                                    @if(!$calcProduct->dimension_changeable)
+                                                        <div id="dimensions">
+                                                            <div class="form_item">
+                                                                <label for="" id="width-label">Səthin eni (m):</label>
+                                                                <input type="text" id="width" name="email"
+                                                                       placeholder="Səthin eni (m):" value=""
+                                                                       class="item_input">
+                                                            </div>
+                                                            <div class="form_item">
+                                                                <label for="" id="length-label">Səthin uzunluğu
+                                                                    (m):</label>
+                                                                <input type="text" name="email" id="length"
+                                                                       placeholder="Səthin uzunluğu (m):" value=""
+                                                                       class="item_input">
+                                                            </div>
+                                                            <div class="form_item">
+                                                                <label for="">Tövsiyyə olunan qatın sayı:</label>
+                                                                <input type="text" name="email" id="layers"
+                                                                       placeholder="Tövsiyyə olunan qatın sayı"
+                                                                       value="{!! isset($calcProduct) && !is_null($calcProduct->recommended_layers) ? $calcProduct->recommended_layers : '' !!}"
+                                                                       class="item_input">
+                                                            </div>
+                                                            <div class="form_item disable_input">
+                                                                <label for="">Sərfiyyat norması (kq/kv.m):</label>
+                                                                <input disabled type="text" name="email"
+                                                                       id="consumption"
+                                                                       placeholder="sərfiyyat norması (kq/kv.m):"
+                                                                       value="{!! isset($calcProduct) && !is_null($calcProduct->consumption_norm) ? $calcProduct->consumption_norm : '' !!}"
+                                                                       class="item_input">
+                                                            </div>
+                                                        </div>
+                                                    @else
+                                                        <div id="changeable" style="text-align: center">
+                                                            Dəyişkəndir
+                                                        </div>
+                                                    @endif
                                                     <div class="form_item">
                                                         <button type="submit" class="btn_sign submit_btn"
                                                                 id="calculateBtn">Hesabla
@@ -317,6 +331,8 @@
 
 
 
+
+
             @endif><a href="{{route('locale', 'az')}}">Az</a>
                 </li>
                 <li @if(app()->getLocale() == 'en')
@@ -325,10 +341,14 @@
 
 
 
+
+
             @endif><a href="{{route('locale', 'en')}}">En</a>
                 </li>
                 <li @if(app()->getLocale() == 'ru')
                 class="active"
+
+
 
 
 
@@ -539,7 +559,7 @@
             if ($(this).hasClass('dologin')) {
                 window.location.href = '/login';
             } else {
-                 $(".btn_basket").addClass("added")
+                $(".btn_basket").addClass("added")
                 setTimeout(function () {
                     $(".btn_basket").removeClass("added")
                 }, 2000)
@@ -582,19 +602,22 @@
             let parentId = this.value;
 
             $('select[name="category_id"]').html(
-                ['<option selected disabled value="0">Seçim edin</option>'].concat(children[parentId].map((child) => `<option value="${child.id}">${child.name.{{app()->getLocale()}}}</option>`))
+                ['<option selected disabled value="0">Məhsul qrupu</option>'].concat(children[parentId].map((child) => `<option value="${child.id}">${child.name.{{app()->getLocale()}}}</option>`))
             )
+            $('select[name="product_id"]').html('<option selected disabled value="0">Məhsul</option>');
+            $('.input-section').css('display', 'none');
         });
 
         $('select[name="category_id"]').on('change', function () {
             let categoryId = this.value;
+            $('.input-section').css('display', 'none');
             $.ajax({
                 url: '{!! url('getProductsByCategoryId') !!}/' + categoryId,
                 method: 'GET',
                 dataType: 'JSON',
                 success: function (response) {
                     $('select[name="product_id"]').html(
-                        ['<option selected disabled value="0">Seçim edin</option>'].concat(response.data.map((product) => `<option value="${product.id}">${product.name.{{app()->getLocale()}}}</option>`))
+                        ['<option selected disabled value="0">Məhsul</option>'].concat(response.data.map((product) => `<option value="${product.id}">${product.name.{{app()->getLocale()}}}</option>`))
                     );
                 }
             });
@@ -608,17 +631,23 @@
                 method: 'GET',
                 dataType: 'JSON',
                 success: function (response) {
-                    if (response.data.consumption_norm > 0) {
+                    if (response.data.dimension_changeable) {
                         $('.input-section').css('display', 'block');
+                        $('#dimensions').css('display', 'none');
+                        $('#changeable').css('display', 'block');
+                        return;
+                    }
+                    if (response.data.consumption_norm > 0) {
+                        if (!response.data.dimension_changeable) {
+                            $('#dimensions').css('display', 'block');
+                            $('#changeable').css('display', 'none');
+                        }
                         $('#consumption').val(response.data.consumption_norm);
                         $('#layers').val(response.data.recommended_layers);
                     }
                 }
             });
         });
-
-
-
 
 
     </script>

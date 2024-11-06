@@ -8,6 +8,7 @@ use Eminiarts\Tabs\Traits\HasTabs;
 use Illuminate\Database\Eloquent\Builder;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Number;
@@ -130,8 +131,6 @@ class Product extends Resource
                                      return $item->name[app()->getLocale()] ?? '';
                                  } ),
                     HasMany::make( 'Variations', 'prices', ProductPrice::class ),
-                    Number::make( 'Recommended Layers', 'recommended_layers' ),
-                    Number::make( 'Consumption norm', 'consumption_norm' ),
                 ] ),
                 Tab::make( 'Haqqında', [
                     CKEditor::make( __( 'About (English)' ), 'about_en' )
@@ -335,6 +334,10 @@ class Product extends Resource
                                 $consumptions['ru'] = $request->$requestAttribute;
                                 $model->consumption = $consumptions;
                             } ),
+                    Number::make( 'Recommended Layers', 'recommended_layers' )->hideFromIndex(),
+                    Number::make( 'Consumption norm', 'consumption_norm' )->step('0.01')->hideFromIndex(),
+                    Boolean::make('Dimension changeable', 'dimension_changeable')->hideFromIndex()
+
                 ] ),
                 Tab::make( 'Saxlama müddəti', [
                     CKEditor::make( __( 'Retention (English)' ), 'retention_en' )
