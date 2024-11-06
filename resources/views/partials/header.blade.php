@@ -200,7 +200,7 @@
                                                     <div class="form_item">
                                                         <label for="">Tövsiyyə olunan qatın sayı:</label>
                                                         <input type="text" name="email" id="layers"
-                                                               placeholder="Tövsiyyə olunan qatın sayı" value=""
+                                                               placeholder="Tövsiyyə olunan qatın sayı" value="{!! isset($product) && !is_null($product->recommended_layers) ? $product->recommended_layers : '' !!}"
                                                                class="item_input">
                                                     </div>
                                                     <div class="form_item disable_input">
