@@ -159,7 +159,7 @@
                                                 <div class="form_item">
                                                     <select name="parent_category_id" class="js-example-basic-single "
                                                             id="products_main_calc" data-placeholder="">
-                                                        <option selected disabled value="0">Seçim edin</option>
+                                                        <option selected disabled value="0">Məhsul sistemi</option>
                                                         @foreach(menu_categories() as $cat)
                                                             <option value="{!! $cat->id !!}">{!! $cat->name[app()->getLocale()] !!}</option>
                                                         @endforeach
@@ -170,7 +170,7 @@
                                                     <select name="category_id" class="js-example-basic-single "
                                                             id="products_other_calc"
                                                             data-placeholder="">
-                                                        <option selected disabled value="0">Seçim edin</option>
+                                                        <option selected disabled value="0">Məhsul qrupu</option>
                                                     </select>
                                                     <span class="customDrop customDrop-other_calc"></span>
                                                 </div>
@@ -178,7 +178,7 @@
                                                     <select name="product_id" class="js-example-basic-single "
                                                             id="this_product"
                                                             data-placeholder="">
-                                                        <option selected disabled value="0">Seçim edin</option>
+                                                        <option selected disabled value="0">Məhsul</option>
                                                     </select>
                                                     <span class="customDrop customDrop-this_calc"></span>
                                                 </div>
@@ -582,7 +582,7 @@
             let parentId = this.value;
 
             $('select[name="category_id"]').html(
-                ['<option selected disabled value="0">Seçim edin</option>'].concat(children[parentId].map((child) => `<option value="${child.id}">${child.name.{{app()->getLocale()}}}</option>`))
+                ['<option selected disabled value="0">Məhsul qrupu</option>'].concat(children[parentId].map((child) => `<option value="${child.id}">${child.name.{{app()->getLocale()}}}</option>`))
             )
         });
 
@@ -594,7 +594,7 @@
                 dataType: 'JSON',
                 success: function (response) {
                     $('select[name="product_id"]').html(
-                        ['<option selected disabled value="0">Seçim edin</option>'].concat(response.data.map((product) => `<option value="${product.id}">${product.name.{{app()->getLocale()}}}</option>`))
+                        ['<option selected disabled value="0">Məhsul</option>'].concat(response.data.map((product) => `<option value="${product.id}">${product.name.{{app()->getLocale()}}}</option>`))
                     );
                 }
             });
