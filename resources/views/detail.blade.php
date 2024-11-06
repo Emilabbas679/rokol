@@ -58,7 +58,8 @@
 
                                         <div class="pr_row">
                                             <div class="pr_cat_name">{{translate('product_category')}}:</div>
-                                            <div class="pr_cat_info">{{$product->category->name[app()->getLocale()] ?? ''}}</div>
+                                            <div
+                                                class="pr_cat_info">{{$product->category->name[app()->getLocale()] ?? ''}}</div>
                                         </div>
                                         @if(count($product->types) > 0)
                                             <div class="pr_row">
@@ -115,7 +116,7 @@
                                     <div class="pr_tbl_right">
                                         <div class="pr_main_buttons">
                                             @if($calcProduct->consumption_norm)
-                                                <a href="javascript:void(0)" class="pr_buttons open_calc"
+                                                <a href="javascript:void(0)" class="pr_buttons open_self_calc"
                                                    data-consumption-norm="{!! $calcProduct->consumption_norm !!}">
                                                     <img src="{{asset('img/icons/pr_calc.svg?v1')}}" alt="calculator">
                                                 </a>
@@ -163,13 +164,14 @@
                                                 Səbətə əlavə et
                                             </span>
                                             <span class="added_basket">
-                                            Səbətə əlavə edildi
+                                                Səbətə əlavə edildi
                                             </span>
                                         </div>
                                         <!-- click after addclass "dofav" -->
 
-                                        <div class="btn_detail btn_fav @if(!is_null($product->favorites?->where('price_id', $price->id)->first())) dofav @endif"
-                                             data-product-id="{!! $product->id !!}" data-price-id="{!! $price->id !!}">
+                                        <div
+                                            class="btn_detail btn_fav @if(!is_null($product->favorites?->where('price_id', $price->id)->first())) dofav @endif"
+                                            data-product-id="{!! $product->id !!}" data-price-id="{!! $price->id !!}">
                                             <span>
                                                 Seçilmişlərdə saxla
                                             </span>
@@ -352,12 +354,12 @@
                                             </a>
                                             <div class="item_content">
                                                 <h4 class="itm_title">
-                                        <span class="itm_name">
-                                            {{ $similarProduct->name[app()->getLocale()] }}
-                                        </span>
+                                                    <span class="itm_name">
+                                                        {{ $similarProduct->name[app()->getLocale()] }}
+                                                    </span>
                                                     <span class="itm_weight">
-                                            2.5 kq
-                                        </span>
+                                                        2.5 kq
+                                                    </span>
                                                 </h4>
                                                 <div class="itm_info">
                                                     {{ $similarProduct->category->name[app()->getLocale()] }}
@@ -429,6 +431,80 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="modal self_calculator_modal" id="detailCalculatorModal" data-id="detailCalculatorModal">
+        <div class="modal_section" style="overflow: visible;">
+            <div class="modal_container" style="overflow: visible;">
+                <div class="modal_header">
+                    <h5 class="modal_title">Kalkulyator</h5>
+                    <span class="close_modal"></span>
+                </div>
+                <div class="modal_body">
+                    <div class="select_item" style="width: 100%">
+                        @if(!$product->dimension_changeable)
+                            <div class="calc_inputs">
+                                <div class="form_item">
+                                    <label for="" id="width-label">Səthin eni (m):</label>
+                                    <input type="text" id="selfWidth" name="email"
+                                           placeholder="Səthin eni (m):" value=""
+                                           class="item_input">
+                                </div>
+                                <div class="form_item">
+                                    <label for="" id="length-label">Səthin uzunluğu
+                                        (m):</label>
+                                    <input type="text" name="email" id="selfLength"
+                                           placeholder="Səthin uzunluğu (m):" value=""
+                                           class="item_input">
+                                </div>
+                                <div class="form_item">
+                                    <label for="">Tövsiyyə olunan qatın sayı:</label>
+                                    <input type="text" name="email" id="selfLayers"
+                                           placeholder="Tövsiyyə olunan qatın sayı"
+                                           value="{!! isset($product) && !is_null($product->recommended_layers) ? $product->recommended_layers : '' !!}"
+                                           class="item_input">
+                                </div>
+                                <div class="form_item disable_input">
+                                    <label for="">Sərfiyyat norması (kq/kv.m):</label>
+                                    <input disabled type="text" name="email"
+                                           id="selfConsumption"
+                                           placeholder="sərfiyyat norması (kq/kv.m):"
+                                           value="{!! isset($product) && !is_null($product->consumption_norm) ? $product->consumption_norm : '' !!}"
+                                           class="item_input">
+                                </div>
+                                <div class="form_item">
+                                    <button type="submit" class="btn_sign submit_btn"
+                                            id="selfCalculateBtn">Hesabla
+                                    </button>
+                                </div>
+                                <div class="modal answer_modal">
+                                    <div class="modal_section" style="overflow: visible;">
+                                        <div class="modal_container" style="overflow: visible;">
+                                            <div class="modal_header">
+                                                <h5 class="modal_title">Hesablama nəticəsi</h5>
+                                                <span class="close_modal"></span>
+                                            </div>
+                                            <div class="modal_body">
+                                                <p>
+                                                    <strong>Hesablama nəticəsi: </strong>
+                                                    <span id="selfResult">
+
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            <div style="text-align: center">
+                                Dəyişkəndir
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 @endsection
 
@@ -528,6 +604,50 @@
                 }
             });
 
+            $(".open_self_calc").click(function () {
+                $(".self_calculator_modal").addClass("opened")
+            });
+
+            $('#selfCalculateBtn').click(function (event) {
+                $(".answer_modal").addClass("opened")
+                event.preventDefault();
+
+                $('#selfResult').text('');
+
+                var width = $('#selfWidth').val().trim();
+                var length = $('#selfLength').val().trim();
+                var layers = $('#selfLayers').val().trim();
+                var consumption = $('#selfConsumption').val().trim();
+
+                var errors = [];
+
+                if (width === "" || isNaN(width) || parseFloat(width) <= 0) {
+                    errors.push("Səthin eni düzgün daxil edilməyib.");
+                }
+
+                if (length === "" || isNaN(length) || parseFloat(length) <= 0) {
+                    errors.push("Səthin uzunluğu düzgün daxil edilməyib.");
+                }
+
+                if (layers === "" || isNaN(layers) || parseFloat(layers) <= 0) {
+                    errors.push("Qat sayı düzgün daxil edilməyib.");
+                }
+
+                if (errors.length > 0) {
+                    $('#result').html(errors.join("<br>"));
+                    return;
+                }
+
+                width = parseFloat(width);
+                length = parseFloat(length);
+                layers = parseFloat(layers);
+                consumption = parseFloat(consumption);
+
+                var adjustedConsumption = parseFloat((1 / consumption).toFixed(3));
+                var result = width * length * layers * adjustedConsumption;
+
+                $('#selfResult').text(result.toFixed(2) + "kq");
+            });
         });
     </script>
 
