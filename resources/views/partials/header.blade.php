@@ -187,7 +187,7 @@
                                             <div id="{!! isset($calcProduct) && !is_null($calcProduct->consumption_norm) ? '' : 'hiddenDiv' !!}"
                                                  class="input-section">
                                                 <div class="calc_inputs">
-                                                    @if(!$calcProduct->dimension_changeable)
+                                                    @if(isset($calcProduct) && !$calcProduct->dimension_changeable)
                                                         <div id="dimensions">
                                                             <div class="form_item">
                                                                 <label for="" id="width-label">Səthin eni (m):</label>
@@ -239,7 +239,7 @@
                                                                     <p>
                                                                         <strong>Hesablama nəticəsi: </strong>
                                                                         <span id="result">
-                
+
                                                                         </span>
                                                                     </p>
                                                                 </div>
