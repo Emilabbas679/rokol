@@ -518,7 +518,7 @@
         $(".open_calc").click(function () {
             let consumptionNorm = $(this).data('consumptionNorm');
             $('.select-section').css('display', 'block');
-            $('.input-section').css('display', 'none');
+            // $('.input-section').css('display', 'none');
             if (consumptionNorm) {
                 consumptionNorm = parseFloat($(this).data('consumptionNorm'));
                 if (consumptionNorm > 0) {
