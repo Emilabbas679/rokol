@@ -545,7 +545,7 @@
         });
         $(".open_calc").click(function () {
             $(".calculator_modal").addClass("opened")
-
+            $('#hiddenDiv').css('display', 'none');
         })
 
         $('.detail_basket_btn ').click(function () {
@@ -596,17 +596,19 @@
 
         $('select[name="parent_category_id"]').on('change', function () {
             let parentId = this.value;
-
+            $('#hiddenDiv').css('display', 'none');
+            $('#changeable').css('display', 'none');
             $('select[name="category_id"]').html(
                 ['<option selected disabled value="0">Məhsul qrupu</option>'].concat(children[parentId].map((child) => `<option value="${child.id}">${child.name.{{app()->getLocale()}}}</option>`))
             )
             $('select[name="product_id"]').html('<option selected disabled value="0">Məhsul</option>');
-            $('.input-section').css('display', 'none');
+
         });
 
         $('select[name="category_id"]').on('change', function () {
             let categoryId = this.value;
-            $('.input-section').css('display', 'none');
+            $('#hiddenDiv').css('display', 'none');
+            $('#changeable').css('display', 'none');
             $.ajax({
                 url: '{!! url('getProductsByCategoryId') !!}/' + categoryId,
                 method: 'GET',
@@ -621,21 +623,20 @@
 
         $('select[name="product_id"]').on('change', function () {
             let productId = this.value;
+            $('#hiddenDiv').css('display', 'none');
+            $('#changeable').css('display', 'none');
             $.ajax({
                 url: '{!! url('getConsumptionByProductId') !!}/' + productId,
                 method: 'GET',
                 dataType: 'JSON',
                 success: function (response) {
                     if (response.data.dimension_changeable) {
-
-                        $('#hiddenDiv').css('display', 'none');
                         $('#changeable').css('display', 'block');
                         return;
                     }
                     if (response.data.consumption_norm > 0) {
                         if (!response.data.dimension_changeable) {
                             $('#hiddenDiv').css('display', 'block');
-                            $('#changeable').css('display', 'none');
                         }
                         $('#consumption').val(response.data.consumption_norm);
                         $('#layers').val(response.data.recommended_layers);
