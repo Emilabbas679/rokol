@@ -331,6 +331,7 @@
 
 
 
+
             @endif><a href="{{route('locale', 'az')}}">Az</a>
                 </li>
                 <li @if(app()->getLocale() == 'en')
@@ -346,10 +347,12 @@
 
 
 
+
             @endif><a href="{{route('locale', 'en')}}">En</a>
                 </li>
                 <li @if(app()->getLocale() == 'ru')
                 class="active"
+
 
 
 
@@ -546,6 +549,15 @@
         $(".open_calc").click(function () {
             $(".calculator_modal").addClass("opened")
             $('#hiddenDiv').css('display', 'none');
+
+            $('#products_main_calc').val(0).trigger('change');
+            if ($('#products_other_calc > option').length > 1 ) {
+                $('#products_other_calc').val(0).trigger('change');
+            }
+
+            if ($('#this_product > option').length > 1 ) {
+                $('#this_product').val(0).trigger('change');
+            }
         })
 
         $('.detail_basket_btn ').click(function () {
@@ -598,9 +610,10 @@
             let parentId = this.value;
             $('#hiddenDiv').css('display', 'none');
             $('#changeable').css('display', 'none');
-            $('select[name="category_id"]').html(
-                ['<option selected disabled value="0">Məhsul qrupu</option>'].concat(children[parentId].map((child) => `<option value="${child.id}">${child.name.{{app()->getLocale()}}}</option>`))
-            )
+            if (parentId > 0)
+                $('select[name="category_id"]').html(
+                    ['<option selected disabled value="0">Məhsul qrupu</option>'].concat(children[parentId].map((child) => `<option value="${child.id}">${child.name.{{app()->getLocale()}}}</option>`))
+                )
             $('select[name="product_id"]').html('<option selected disabled value="0">Məhsul</option>');
 
         });
