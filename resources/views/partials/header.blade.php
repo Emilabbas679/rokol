@@ -206,7 +206,7 @@
                                                     <div class="form_item disable_input">
                                                         <label for="">1 mm üçün sərfiyyat norması (kq/m²):</label>
                                                         <input disabled type="text" name="email" id="consumption"
-                                                               placeholder="1 mm üçün sərfiyyat norması (kq/m²):"
+                                                               placeholder="sərfiyyat norması (kq/kv.m):"
                                                                value="{!! isset($product) && !is_null($product->consumption_norm) ? $product->consumption_norm : '' !!}" class="item_input">
                                                     </div>
                                                     <div class="form_item">
