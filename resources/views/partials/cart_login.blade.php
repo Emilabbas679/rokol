@@ -12,7 +12,7 @@
         </div>
         <div class="basket_btn_mob">
             <button type="submit" class="filter_btn btn_send"
-                    form="cart_form">@lang('Checkout')</button>
+                    form="cart_form" id="mobileCheck">@lang('Checkout')</button>
         </div>
     </div>
 </div>
@@ -154,3 +154,10 @@
         </div>
     </div>
 </div>
+@push('js')
+<script>
+    $("#mobileCheck").click(function(){
+        $("#cart_form").submit()
+    })
+</script>
+@endpush
