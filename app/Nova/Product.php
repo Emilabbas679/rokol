@@ -131,7 +131,7 @@ class Product extends Resource
                                  } ),
                     HasMany::make( 'Variations', 'prices', ProductPrice::class ),
                     Number::make( 'Recommended Layers', 'recommended_layers' ),
-                    Number::make( 'Consumption norm', 'consumption_norm' ),
+                    Number::make( 'Consumption norm', 'consumption_norm' )->step('0.02'),
                 ] ),
                 Tab::make( 'Haqqında', [
                     CKEditor::make( __( 'About (English)' ), 'about_en' )
