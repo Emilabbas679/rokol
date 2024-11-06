@@ -19,6 +19,9 @@
                     <a href="javascript:void(0)">{{$product->name}}</a>
                 </div>
             </div>
+            @php
+                $calcProduct = $product
+            @endphp
             <div class="section_wrap wrap_category wrap_detail_product">
                 <div class="sect_body product_container clearfix">
                     <div class="wrap_left">

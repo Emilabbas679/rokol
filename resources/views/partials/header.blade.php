@@ -155,7 +155,7 @@
                                     </div>
                                     <div class="modal_body">
                                         <div class="select_item" style="width: 100%">
-                                            <div id="{!! isset($product) && !is_null($product->consumption_norm) ? 'hiddenDiv' : '' !!}" class="select-section">
+                                            <div id="{!! isset($calcProduct) && !is_null($calcProduct->consumption_norm) ? 'hiddenDiv' : '' !!}" class="select-section">
                                                 <div class="form_item">
                                                     <select name="parent_category_id" class="js-example-basic-single "
                                                             id="products_main_calc" data-placeholder="">
@@ -183,7 +183,7 @@
                                                     <span class="customDrop customDrop-this_calc"></span>
                                                 </div>
                                             </div>
-                                            <div id="{!! isset($product) && !is_null($product->consumption_norm) ? '' : 'hiddenDiv' !!}" class="input-section">
+                                            <div id="{!! isset($calcProduct) && !is_null($calcProduct->consumption_norm) ? '' : 'hiddenDiv' !!}" class="input-section">
                                                 <div class="calc_inputs">
                                                     <div class="form_item">
                                                         <label for="">Səthin eni (m):</label>
@@ -200,14 +200,14 @@
                                                     <div class="form_item">
                                                         <label for="">Tövsiyyə olunan qatın sayı:</label>
                                                         <input type="text" name="email" id="layers"
-                                                               placeholder="Tövsiyyə olunan qatın sayı" value="{!! isset($product) && !is_null($product->recommended_layers) ? $product->recommended_layers : '' !!}"
+                                                               placeholder="Tövsiyyə olunan qatın sayı" value="{!! isset($calcProduct) && !is_null($calcProduct->recommended_layers) ? $calcProduct->recommended_layers : '' !!}"
                                                                class="item_input">
                                                     </div>
                                                     <div class="form_item disable_input">
                                                         <label for="">Sərfiyyat norması (kq/kv.m):</label>
                                                         <input disabled type="text" name="email" id="consumption"
                                                                placeholder="sərfiyyat norması (kq/kv.m):"
-                                                               value="{!! isset($product) && !is_null($product->consumption_norm) ? $product->consumption_norm : '' !!}" class="item_input">
+                                                               value="{!! isset($calcProduct) && !is_null($calcProduct->consumption_norm) ? $calcProduct->consumption_norm : '' !!}" class="item_input">
                                                     </div>
                                                     <div class="form_item">
                                                         <button type="submit" class="btn_sign submit_btn"
@@ -518,7 +518,7 @@
         $(".open_calc").click(function () {
             let consumptionNorm = $(this).data('consumptionNorm');
             $('.select-section').css('display', 'block');
-            // $('.input-section').css('display', 'none');
+            $('.input-section').css('display', 'none');
             if (consumptionNorm) {
                 consumptionNorm = parseFloat($(this).data('consumptionNorm'));
                 if (consumptionNorm > 0) {
