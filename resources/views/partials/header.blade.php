@@ -184,10 +184,11 @@
                                                     <span class="customDrop customDrop-this_calc"></span>
                                                 </div>
                                             </div>
-                                            <div id="{!! isset($calcProduct) && !is_null($calcProduct->consumption_norm) ? '' : 'hiddenDiv' !!}"
+                                            <div id="{!! !isset($calcProduct) || is_null($calcProduct->consumption_norm) ? '' : 'hiddenDiv' !!}"
                                                  class="input-section">
                                                 <div class="calc_inputs">
-                                                    @if(isset($calcProduct) && !$calcProduct->dimension_changeable)
+
+                                                    @if(!isset($calcProduct) || !$calcProduct->dimension_changeable)
                                                         <div id="dimensions">
                                                             <div class="form_item">
                                                                 <label for="" id="width-label">Səthin eni (m):</label>
@@ -625,20 +626,19 @@
 
         $('select[name="product_id"]').on('change', function () {
             let productId = this.value;
-            $('.input-section').css('display', 'none');
             $.ajax({
                 url: '{!! url('getConsumptionByProductId') !!}/' + productId,
                 method: 'GET',
                 dataType: 'JSON',
                 success: function (response) {
                     if (response.data.dimension_changeable) {
-                        $('.input-section').css('display', 'block');
                         $('#dimensions').css('display', 'none');
                         $('#changeable').css('display', 'block');
                         return;
                     }
                     if (response.data.consumption_norm > 0) {
                         if (!response.data.dimension_changeable) {
+                            $('.input-section').css('display', 'block');
                             $('#dimensions').css('display', 'block');
                             $('#changeable').css('display', 'none');
                         }
