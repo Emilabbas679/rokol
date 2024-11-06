@@ -114,9 +114,9 @@
                                     </div>
                                     <div class="pr_tbl_right">
                                         <div class="pr_main_buttons">
-                                            @if($product->consumption_norm)
+                                            @if($calcProduct->consumption_norm)
                                                 <a href="javascript:void(0)" class="pr_buttons open_calc"
-                                                   data-consumption-norm="{!! $product->consumption_norm !!}">
+                                                   data-consumption-norm="{!! $calcProduct->consumption_norm !!}">
                                                     <img src="{{asset('img/icons/pr_calc.svg?v1')}}" alt="calculator">
                                                 </a>
                                             @endif

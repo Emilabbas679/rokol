@@ -449,17 +449,16 @@ class SiteController extends Controller
     public function getConsumptionByProductId( $id )
     {
         $product = Product::query()
-                              ->select( [ 'consumption_norm', 'recommended_layers' ] )
-                              ->where( 'id', $id )
-                              ->first();
-        $consumption = $product->consumption_norm;
-        $recommendedLayers = $product->recommended_layers;
+                          ->select( [ 'consumption_norm', 'recommended_layers', 'dimension_changeable' ] )
+                          ->where( 'id', $id )
+                          ->first();
         return response()->json( [
-                                     'status'          => 'success',
-                                     'data'            => [
-                                         'consumption_norm' => $consumption,
-                                         'recommended_layers' => $recommendedLayers
-                                     ]
+                                     'status' => 'success',
+                                     'data'   => $product->only( [
+                                                                     'consumption_norm',
+                                                                     'recommended_layers',
+                                                                     'dimension_changeable'
+                                                                 ] )
                                  ] );
     }
 }
