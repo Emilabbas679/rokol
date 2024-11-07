@@ -74,11 +74,11 @@
                             <div class="lang_btn" style="text-transform: capitalize">{{app()->getLocale()}}</div>
                             <ul class="langs">
                                 <li @if(app()->getLocale() == 'az') class="active" @endif><a
-                                            href="{{route('locale', 'az')}}">Az</a></li>
+                                        href="{{route('locale', 'az')}}">Az</a></li>
                                 <li @if(app()->getLocale() == 'en') class="active" @endif><a
-                                            href="{{route('locale', 'en')}}">En</a></li>
+                                        href="{{route('locale', 'en')}}">En</a></li>
                                 <li @if(app()->getLocale() == 'ru') class="active" @endif><a
-                                            href="{{route('locale', 'ru')}}">Ru</a></li>
+                                        href="{{route('locale', 'ru')}}">Ru</a></li>
                             </ul>
                         </div>
                     </div>
@@ -155,14 +155,14 @@
                                     </div>
                                     <div class="modal_body">
                                         <div class="select_item" style="width: 100%">
-                                            <div id="{!! isset($calcProduct) && !is_null($calcProduct->consumption_norm) ? 'hiddenDiv' : '' !!}"
-                                                 class="select-section">
+                                            <div>
                                                 <div class="form_item">
                                                     <select name="parent_category_id" class="js-example-basic-single "
                                                             id="products_main_calc" data-placeholder="">
                                                         <option selected disabled value="0">Məhsul sistemi</option>
                                                         @foreach(menu_categories() as $cat)
-                                                            <option value="{!! $cat->id !!}">{!! $cat->name[app()->getLocale()] !!}</option>
+                                                            <option
+                                                                value="{!! $cat->id !!}">{!! $cat->name[app()->getLocale()] !!}</option>
                                                         @endforeach
                                                     </select>
                                                     <span class="customDrop customDrop-main_calc"></span>
@@ -184,47 +184,37 @@
                                                     <span class="customDrop customDrop-this_calc"></span>
                                                 </div>
                                             </div>
-                                            <div id="{!! isset($calcProduct) && !is_null($calcProduct->consumption_norm) ? '' : 'hiddenDiv' !!}"
-                                                 class="input-section">
+                                            <div
+                                                id="hiddenDiv">
                                                 <div class="calc_inputs">
-                                                    @if(!$calcProduct->dimension_changeable)
-                                                        <div id="dimensions">
-                                                            <div class="form_item">
-                                                                <label for="" id="width-label">Səthin eni (m):</label>
-                                                                <input type="text" id="width" name="email"
-                                                                       placeholder="Səthin eni (m):" value=""
-                                                                       class="item_input">
-                                                            </div>
-                                                            <div class="form_item">
-                                                                <label for="" id="length-label">Səthin uzunluğu
-                                                                    (m):</label>
-                                                                <input type="text" name="email" id="length"
-                                                                       placeholder="Səthin uzunluğu (m):" value=""
-                                                                       class="item_input">
-                                                            </div>
-                                                            <div class="form_item">
-                                                                <label for="">Tövsiyyə olunan qatın sayı:</label>
-                                                                <input type="text" name="email" id="layers"
-                                                                       placeholder="Tövsiyyə olunan qatın sayı"
-                                                                       value="{!! isset($calcProduct) && !is_null($calcProduct->recommended_layers) ? $calcProduct->recommended_layers : '' !!}"
-                                                                       class="item_input">
-                                                            </div>
-                                                            <div class="form_item disable_input">
-                                                                <label for="">Sərfiyyat norması (kq/kv.m):</label>
-                                                                <input disabled type="text" name="email"
-                                                                       id="consumption"
-                                                                       placeholder="sərfiyyat norması (kq/kv.m):"
-                                                                       value="{!! isset($calcProduct) && !is_null($calcProduct->consumption_norm) ? $calcProduct->consumption_norm : '' !!}"
-                                                                       class="item_input">
-                                                            </div>
-                                                        </div>
-                                                    @else
-                                                        <div id="changeable" style="text-align: center">
-                                                            Dəyişkəndir
-                                                        </div>
-                                                    @endif
                                                     <div class="form_item">
-                                                        <button type="submit" class="btn_sign submit_btn"
+                                                        <label for="" id="width-label">Səthin eni (m):</label>
+                                                        <input type="text" id="width" name="email"
+                                                               placeholder="Səthin eni (m):" value=""
+                                                               class="item_input">
+                                                    </div>
+                                                    <div class="form_item">
+                                                        <label for="" id="length-label">Səthin uzunluğu
+                                                            (m):</label>
+                                                        <input type="text" name="email" id="length"
+                                                               placeholder="Səthin uzunluğu (m):" value=""
+                                                               class="item_input">
+                                                    </div>
+                                                    <div class="form_item">
+                                                        <label for="">Tövsiyyə olunan qatın sayı:</label>
+                                                        <input type="text" name="email" id="layers"
+                                                               placeholder="Tövsiyyə olunan qatın sayı"
+                                                               class="item_input">
+                                                    </div>
+                                                    <div class="form_item disable_input">
+                                                        <label for="">Sərfiyyat norması (kq/kv.m):</label>
+                                                        <input disabled type="text" name="email"
+                                                               id="consumption"
+                                                               placeholder="sərfiyyat norması (kq/kv.m):"
+                                                               class="item_input">
+                                                    </div>
+                                                    <div class="form_item">
+                                                        <button type="button" class="btn_sign submit_btn"
                                                                 id="calculateBtn">Hesabla
                                                         </button>
                                                     </div>
@@ -239,7 +229,7 @@
                                                                     <p>
                                                                         <strong>Hesablama nəticəsi: </strong>
                                                                         <span id="result">
-                
+
                                                                         </span>
                                                                     </p>
                                                                 </div>
@@ -247,6 +237,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div id="changeable" class="hidden" style="text-align: center">
+                                                Dəyişkəndir
                                             </div>
                                         </div>
                                     </div>
@@ -333,6 +326,12 @@
 
 
 
+
+
+
+
+
+
             @endif><a href="{{route('locale', 'az')}}">Az</a>
                 </li>
                 <li @if(app()->getLocale() == 'en')
@@ -343,10 +342,22 @@
 
 
 
+
+
+
+
+
+
             @endif><a href="{{route('locale', 'en')}}">En</a>
                 </li>
                 <li @if(app()->getLocale() == 'ru')
                 class="active"
+
+
+
+
+
+
 
 
 
@@ -536,19 +547,16 @@
 
         });
         $(".open_calc").click(function () {
-            let consumptionNorm = $(this).data('consumptionNorm');
-            $('.select-section').css('display', 'block');
-            $('.input-section').css('display', 'none');
-            if (consumptionNorm) {
-                consumptionNorm = parseFloat($(this).data('consumptionNorm'));
-                if (consumptionNorm > 0) {
-                    $('.select-section').css('display', 'none');
-                    $('.input-section').css('display', 'block');
-                    $('#consumption').val(consumptionNorm)
-                }
-                $(".calculator_modal").addClass("opened")
-            } else {
-                $(".calculator_modal").addClass("opened")
+            $(".calculator_modal").addClass("opened")
+            $('#hiddenDiv').css('display', 'none');
+
+            $('#products_main_calc').val(0).trigger('change');
+            if ($('#products_other_calc > option').length > 1 ) {
+                $('#products_other_calc').val(0).trigger('change');
+            }
+
+            if ($('#this_product > option').length > 1 ) {
+                $('#this_product').val(0).trigger('change');
             }
         })
 
@@ -600,17 +608,20 @@
 
         $('select[name="parent_category_id"]').on('change', function () {
             let parentId = this.value;
-
-            $('select[name="category_id"]').html(
-                ['<option selected disabled value="0">Məhsul qrupu</option>'].concat(children[parentId].map((child) => `<option value="${child.id}">${child.name.{{app()->getLocale()}}}</option>`))
-            )
+            $('#hiddenDiv').css('display', 'none');
+            $('#changeable').css('display', 'none');
+            if (parentId > 0)
+                $('select[name="category_id"]').html(
+                    ['<option selected disabled value="0">Məhsul qrupu</option>'].concat(children[parentId].map((child) => `<option value="${child.id}">${child.name.{{app()->getLocale()}}}</option>`))
+                )
             $('select[name="product_id"]').html('<option selected disabled value="0">Məhsul</option>');
-            $('.input-section').css('display', 'none');
+
         });
 
         $('select[name="category_id"]').on('change', function () {
             let categoryId = this.value;
-            $('.input-section').css('display', 'none');
+            $('#hiddenDiv').css('display', 'none');
+            $('#changeable').css('display', 'none');
             $.ajax({
                 url: '{!! url('getProductsByCategoryId') !!}/' + categoryId,
                 method: 'GET',
@@ -625,22 +636,20 @@
 
         $('select[name="product_id"]').on('change', function () {
             let productId = this.value;
-            $('.input-section').css('display', 'none');
+            $('#hiddenDiv').css('display', 'none');
+            $('#changeable').css('display', 'none');
             $.ajax({
                 url: '{!! url('getConsumptionByProductId') !!}/' + productId,
                 method: 'GET',
                 dataType: 'JSON',
                 success: function (response) {
                     if (response.data.dimension_changeable) {
-                        $('.input-section').css('display', 'block');
-                        $('#dimensions').css('display', 'none');
                         $('#changeable').css('display', 'block');
                         return;
                     }
                     if (response.data.consumption_norm > 0) {
                         if (!response.data.dimension_changeable) {
-                            $('#dimensions').css('display', 'block');
-                            $('#changeable').css('display', 'none');
+                            $('#hiddenDiv').css('display', 'block');
                         }
                         $('#consumption').val(response.data.consumption_norm);
                         $('#layers').val(response.data.recommended_layers);
