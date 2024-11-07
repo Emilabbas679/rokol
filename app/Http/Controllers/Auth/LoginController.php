@@ -89,13 +89,13 @@ class LoginController extends Controller
             $cookie = Cookie::forget( 'carts' );
             $request->session()->regenerate();
 
-            $this->clearLoginAttempts($request);
+            $this->clearLoginAttempts( $request );
 
-            if ($response = $this->authenticated($request, $this->guard()->user())) {
+            if ( $response = $this->authenticated( $request, $this->guard()->user() ) ) {
                 return $response;
             }
 
-            return redirect()->intended($this->redirectPath())->cookie($cookie);
+            return redirect()->intended( $this->redirectPath() )->cookie( $cookie );
         }
 
         $this->incrementLoginAttempts( $request );
@@ -113,20 +113,24 @@ class LoginController extends Controller
             $cookieCarts = collect( json_decode( $cookieCarts, true ) );
         }
         foreach ( $cookieCarts as $key => $value ) {
-            $productId      = $key;
-            $productPriceId = $value['product_price_id'];
-            $count          = $value['count'];
-            Cart::query()->updateOrCreate( [
-                                               'user_id'          => fUserId(),
-                                               'product_id'       => $productId,
-                                               'product_price_id' => $productPriceId,
-                                               'status'           => Cart::STATUS_UNCOMPLETED
-                                           ],
-                                           [
-                                               'count' => DB::raw( 'count + ' . $count ),
-                                           ] );
-        }
+            $productId = $key;
+            foreach ( $value as $val ) {
+                $productPriceId = $val['product_price_id'];
+                $colorId        = $val['color_id'];
+                $count          = $val['count'];
+                Cart::query()->updateOrCreate( [
+                                                   'user_id'          => fUserId(),
+                                                   'product_id'       => $productId,
+                                                   'color_id'         => $colorId,
+                                                   'product_price_id' => $productPriceId,
+                                                   'status'           => Cart::STATUS_UNCOMPLETED
+                                               ],
+                                               [
+                                                   'count' => DB::raw( 'count + ' . $count ),
+                                               ] );
+            }
 
+        }
 
 
     }

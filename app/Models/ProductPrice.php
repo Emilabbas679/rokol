@@ -14,17 +14,12 @@ class ProductPrice extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
-    }
-
-    public function color()
-    {
-        return $this->belongsTo(Color::class);
+        return $this->belongsTo( Product::class );
     }
 
     public function weight()
     {
-        return $this->belongsTo(Weight::class);
+        return $this->belongsTo( Weight::class );
     }
 
 }

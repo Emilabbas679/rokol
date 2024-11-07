@@ -240,6 +240,7 @@ class SiteController extends Controller
                           ->with( [
                                       'category',
                                       'prices',
+                                      'prices.weight',
                                       'types',
                                       'appearances',
                                       'refProperties',
@@ -264,7 +265,7 @@ class SiteController extends Controller
         $color_id             = 0;
         $weight_id            = 0;
         $colors               = [];
-        $weights              = [];
+//        $weights              = [];
         if ( $request->has( 'color' ) and ( (int) $request->color ) != 0 )
             $color_id = (int) $request->color;
         if ( $request->has( 'weight' ) and ( (int) $request->weight ) != 0 )
@@ -289,16 +290,16 @@ class SiteController extends Controller
 
 
         $price = collect( $prices )->where( 'id', $priceId )->first() ?? ( $prices[0] ?? [] );
-        if ( isset( $price['color_id'] ) ) {
-            $price_weights = ProductPrice::where( 'product_id', $product->id )->where( 'color_id', $price->color_id )
-                                         ->get();
-            foreach ( $price_weights as $item ) {
-                if ( !isset( $weights[$item->weight_id] ) )
-                    $weights[$item->weight_id] = $item;
-            }
-        }
+//        if ( isset( $price['color_id'] ) ) {
+//            $price_weights = ProductPrice::where( 'product_id', $product->id )->where( 'color_id', $price->color_id )
+//                                         ->get();
+//            foreach ( $price_weights as $item ) {
+//                if ( !isset( $weights[$item->weight_id] ) )
+//                    $weights[$item->weight_id] = $item;
+//            }
+//        }
 
-        return view( 'detail', compact( 'product', 'price', 'colors', 'weights' ) );
+        return view( 'detail', compact( 'product', 'price', 'colors' ) );
     }
 
     public function productPrice( Request $request, $product_id )

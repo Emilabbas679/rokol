@@ -27,10 +27,17 @@ class CartAddProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_id' => ['required', 'string', Rule::exists(Product::class, 'id')],
-            'color_id' => ['required', 'string', Rule::exists(Color::class, 'id')],
-            'weight_id' => ['required', 'numeric', 'string', Rule::exists(Weight::class, 'id')],
-            'count' => ['required', 'string', 'numeric', 'min:1']
+            'product_id' => [ 'required', 'string', Rule::exists( Product::class, 'id' ) ],
+            'color_id'   => [
+                Rule::requiredIf( function () {
+                    return Product::query()
+                                  ->where( 'id', $this->input( 'product_id' ) )
+                                  ->whereIn( 'has_colors', [ Product::ALL_COLORS, Product::SPEC_COLORS ] )
+                                  ->exists();
+                } ), 'string', Rule::exists( Color::class, 'id' )
+            ],
+            'weight_id'  => [ 'required', 'numeric', 'string', Rule::exists( Weight::class, 'id' ) ],
+            'count'      => [ 'required', 'string', 'numeric', 'min:1' ]
         ];
     }
 }

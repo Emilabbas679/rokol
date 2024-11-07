@@ -46,10 +46,12 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="bsk_row_list">
-                            <span class="bck_itm_name">@lang('Color'):</span>
-                            <span class="bck_itm_val">{!! $cart->productPrice->color->name[app()->getLocale()] !!}</span>
-                        </div>
+                        @if($cart->color)
+                            <div class="bsk_row_list">
+                                <span class="bck_itm_name">@lang('Color'):</span>
+                                <span class="bck_itm_val">{{ $cart->color->name[app()->getLocale()] }}</span>
+                            </div>
+                        @endif
                         <div class="bsk_row_list">
                             <span class="bck_itm_name">@lang('Weight'):</span>
                             <span

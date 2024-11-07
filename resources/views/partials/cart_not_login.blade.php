@@ -1,6 +1,6 @@
 @php
-    $totalPrice = $products->sum(fn ($product) => $product->prices->first()->price * $cookieCarts->get($product->id)['count']);
-    $discount = $totalPrice - ( $totalPriceWithDiscount = $products->sum(fn ($product) => ($price = $product->prices->first())->sale_price > 0 ? $price->sale_price * $cookieCarts->get($product->id)['count'] : $price->price * $cookieCarts->get($product->id)['count'] ) );
+    $totalPrice = $products->sum(fn ($product) => ($product->prices->first()?->price ?? 0) * 0);
+    $discount = $totalPrice - ( $totalPriceWithDiscount = $products->sum(fn ($product) => ($price = $product->prices->first())?->sale_price > 0 ? $price->sale_price * 0 : $price?->price * 0 ) );
 @endphp
         <!-- Mobile basket section -->
 <div class="basket_mob_fix_back"></div>
@@ -26,7 +26,7 @@
         <div class="sect_body clearfix">
             @foreach($products as $product)
                 @php
-                $price = $product->prices->first();
+                    $price = $product->prices->where('id', $product->price_id)->first();
                 @endphp
                 <div class="basket_items">
                     <a href="{!! route('product', $product) !!}" class="item_img">
@@ -46,10 +46,15 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="bsk_row_list">
-                            <span class="bck_itm_name">@lang('Color'):</span>
-                            <span class="bck_itm_val">{{ $price->color->name[app()->getLocale()] }}</span>
-                        </div>
+                        @php
+                            $cookie = collect($cookieCarts->get($product->id))->where('product_price_id', $product->price_id)->first()
+                        @endphp
+                        @if(isset($colors) && !is_null($cookie) && isset($cookie['color_id']))
+                            <div class="bsk_row_list">
+                                <span class="bck_itm_name">@lang('Color'):</span>
+                                <span class="bck_itm_val">{{ $colors->where('id', (int) $cookie['color_id'])->first()->name[app()->getLocale()] }}</span>
+                            </div>
+                        @endif
                         <div class="bsk_row_list">
                             <span class="bck_itm_name">@lang('Weight'):</span>
                             <span
@@ -62,11 +67,11 @@
                                     <div class="product_counter">
                                         <input type="hidden" name="counters[{!! $product->id !!}]"
                                                form="cart_form"
-                                               value="{!! $cookieCarts->get($product->id)['count'] !!}">
+                                               value="{!! $cookie['count'] !!}">
                                         <button type="button" class="pr_btn_counter pr_minus"
                                                 data-cart-id="{!! $product->id !!}"></button>
                                         <div class="pr_number_sect">
-                                            <span class="pr_number">{!! $cookieCarts->get($product->id)['count'] !!}</span>
+                                            <span class="pr_number">{!! $cookie['count'] !!}</span>
                                         </div>
                                         <button type="button" class="pr_btn_counter pr_plus"
                                                 data-cart-id="{!! $product->id !!}"></button>
@@ -93,7 +98,11 @@
 													</span>
                                 @else
                                     <span class="main-price">
-                                          @if($price->price > 0) {{ $price->price }} AZN @else *** @endif
+                                          @if($price->price > 0)
+                                            {{ $price->price }} AZN
+                                        @else
+                                            ***
+                                        @endif
 													</span>
                                     <span class="new-price">
 
@@ -104,11 +113,8 @@
                     </div>
                 </div>
             @endforeach
-
         </div>
-
     </div>
-
 </div>
 <div class="wrap_right mobile_fix_item">
     <div class="basket_info_sect">
@@ -150,7 +156,6 @@
                 </div>
                 <button type="submit" class="filter_btn btn_send">@lang('Checkout')</button>
             </form>
-
         </div>
     </div>
 </div>

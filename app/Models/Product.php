@@ -16,6 +16,10 @@ class Product extends Model
 {
     use HasBelongsToMany;
 
+    const NO_COLORS = 0;
+    const SPEC_COLORS = 1;
+    const ALL_COLORS = 2;
+
     protected $guarded = [];
 
     protected $casts = [
@@ -78,6 +82,9 @@ class Product extends Model
         return $this->belongsToMany( self::class, SimilarProduct::class, 'product_id', 'similar_product_id', null, null, 'products' );
     }
 
-
+    public function colors(): BelongsToMany
+    {
+        return $this->belongsToMany( Color::class, 'product_colors' );
+    }
 
 }
