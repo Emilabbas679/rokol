@@ -16,6 +16,10 @@ class Product extends Model
 {
     use HasBelongsToMany;
 
+    const NO_COLORS = 0;
+    const SPEC_COLORS = 1;
+    const ALL_COLORS = 2;
+
     protected $guarded = [];
 
     protected $casts = [

@@ -48,10 +48,6 @@ class ProductPrice extends Resource
                 return $item->name[app()->getLocale()] ?? '';
             } ),
 
-            BelongsTo::make( 'Color' )->display( function ( $item ) {
-                return $item->name[app()->getLocale()] ?? '';
-            } ),
-
             BelongsTo::make( 'Weight' )->display( function ( $item ) {
 
                 $weight = $item->weight ?? '';

@@ -15,6 +15,7 @@ class ProductOrderItem extends
         'order_id',
         'product_id',
         'product_price_id',
+        'color_id',
         'count'
     ];
 
@@ -31,5 +32,9 @@ class ProductOrderItem extends
     public function price(): BelongsTo
     {
         return $this->belongsTo( ProductPrice::class, 'product_price_id' );
+    }
+    public function color(): BelongsTo
+    {
+        return $this->belongsTo( Color::class );
     }
 }

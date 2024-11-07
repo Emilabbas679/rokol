@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table( 'products', function ( Blueprint $table ) {
-            $table->boolean( 'has_spec_colors' )->default( 0 );
+            $table->tinyInteger( 'has_colors' )->comment('0 is product does not have color, 1 is product has 1 or more colors, 2 is product has all colors.')->default( 0 );
         } );
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table( 'products', function ( Blueprint $table ) {
-            $table->dropColumn( 'has_spec_colors' );
+            $table->dropColumn( 'has_colors' );
         } );
     }
 };

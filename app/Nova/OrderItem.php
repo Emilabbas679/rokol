@@ -48,6 +48,10 @@ class OrderItem extends Resource
                 ->display( function ( $value ) {
                     return $value[ 'name' ][ app()->getLocale() ];
                 } ),
+            BelongsTo::make( "Color", "color", Color::class )->display( function ( $value ) {
+                return $value[ 'name' ][ app()->getLocale() ];
+            } ),
+
             BelongsTo::make( "Price", "price", ProductPrice::class )
                 ->display( "price" ),
             BelongsTo::make( "Sale price", "price", ProductPrice::class )
@@ -56,6 +60,7 @@ class OrderItem extends Resource
                 } ),
 
             Text::make( 'Count' ),
+
             DateTime::make('Created at')
                 ->showOnPreview()
                 ->displayUsing(fn($value) => $value ? $value->format('d.m.Y H:i') : '')

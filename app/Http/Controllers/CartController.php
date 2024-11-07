@@ -6,6 +6,7 @@ use App\Http\Requests\CartAddProductRequest;
 use App\Http\Requests\CartCompleteRequest;
 use App\Models\Address;
 use App\Models\Cart;
+use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductOrder;
 use App\Models\ProductOrderItem;
@@ -23,7 +24,6 @@ class CartController extends
     public function index()
     {
         if ( is_null( fUser() ) ) {
-
             $cookieCarts = \request()->cookie( 'carts' );
             if ( !$cookieCarts ) {
                 return view( 'cart' );
@@ -31,26 +31,41 @@ class CartController extends
             if ( is_string( $cookieCarts ) ) {
                 $cookieCarts = collect( json_decode( $cookieCarts, true ) );
             }
-
             $ids      = $cookieCarts->keys();
             $products = Product::query()
+                               ->select( 'products.name', 'products.image', DB::raw( 'pp.id as price_id' ), 'products.id' )
                                ->with( [
-                                           'prices' => fn( $query ) => $query->whereIn( 'id', $cookieCarts->pluck( 'product_price_id' ) ),
+                                           'prices' => fn( $query ) => $query->whereIn( 'id', $cookieCarts->flatMap( function ( $items ) {
+                                               return array_column( $items, 'product_price_id' );
+                                           } ) ),
                                        ] )
-                               ->whereIn( 'id', $ids->toArray() )->get();
-            $compact  = compact( 'products', 'cookieCarts' );
+                               ->whereIn( 'products.id', $ids->toArray() )
+                               ->join( DB::raw( 'product_prices as pp' ), 'pp.product_id', '=', 'products.id' )
+                               ->whereIntegerInRaw( 'pp.id', $cookieCarts->flatMap( function ( $items ) {
+                                   return array_column( $items, 'product_price_id' );
+                               } ) )
+                               ->get();
+            //TODO colors
+            $colors = Color::query()->get()->keyBy( 'id' );
+
+
+            $compact = compact( 'products', 'cookieCarts', 'colors' );
         }
         else {
-            $carts   = Cart::query()
-                           ->with( [
-                                       'product',
-                                       'productPrice.color',
-                                       'productPrice.weight'
-                                   ] )
-                           ->where( 'user_id', auth()->id() )
-                           ->where( 'status', Cart::STATUS_UNCOMPLETED )
-                           ->get();
-            $compact = compact( 'carts' );
+            $carts  = Cart::query()
+                          ->with( [
+                                      'product',
+                                      'color',
+                                      'productPrice.weight'
+                                  ] )
+                          ->where( 'user_id', auth()->id() )
+                          ->where( 'status', Cart::STATUS_UNCOMPLETED )
+                          ->get();
+            $colors = null;
+            if ( ( $cartColors = $carts->pluck( 'color_id' ) )->count() ) {
+                $colors = Color::query()->whereIntegerInRaw( 'id', $cartColors )->get()->keyBy( 'id' );
+            }
+            $compact = compact( 'carts', 'colors' );
         }
 
 
@@ -76,11 +91,13 @@ class CartController extends
     {
         $validated      = collect( $request->validated() );
         $productId      = $validated->get( 'product_id' );
+        $weightId       = $validated->get( 'weight_id' );
+        $colorId        = $validated->get( 'color_id' );
+        $count          = $validated->get( 'count' );
         $productPriceId = ProductPrice::query()
                                       ->select( 'id' )
                                       ->where( 'product_id', $productId )
-                                      ->where( 'color_id', $validated->get( 'color_id' ) )
-                                      ->where( 'weight_id', $validated->get( 'weight_id' ) )
+                                      ->where( 'weight_id', $weightId )
                                       ->first()->id;
 
         if ( is_null( fUser() ) ) {
@@ -88,11 +105,29 @@ class CartController extends
             if ( is_string( $carts ) ) {
                 $carts = collect( json_decode( $carts, true ) );
             }
-            $cartsProduct                     = $carts->get( $productId, [] );
-            $cartsProduct['product_price_id'] = $productPriceId;
-            $cartsProduct['count']            = (int) ( $cartsProduct['count'] ?? 0 ) + $validated->get( 'count' );
-            $carts->put( $productId, $cartsProduct );
+            $p          = collect( $carts->get( $productId, [] ) );
+            $oldProduct = $p->where( 'product_price_id', $productPriceId )
+                            ->where( 'color_id', $colorId )->first();
+            if ( !is_null( $oldProduct ) ) {
 
+                $p = $p->map( function ( $value, $key ) use ( $productPriceId, $colorId, $count ) {
+                    if ( $value['product_price_id'] == $productPriceId && $value['color_id'] == $colorId ) {
+                        $value['count'] = $value['count'] + $count;
+                        return $value;
+                    }
+                    return $value;
+                } );
+            }
+            else {
+                $cartsProduct                     = [];
+                $cartsProduct['product_price_id'] = $productPriceId;
+                $cartsProduct['weight_id']        = $validated->get( 'weight_id' );
+                $cartsProduct['color_id']         = $validated->get( 'color_id' );
+                $cartsProduct['count']            = $count;
+
+                $p->add( $cartsProduct );
+            }
+            $carts->put( $productId, $p );
             $cookie = cookie( 'carts', $carts );
             return response()->json( [
                                          'status'            => 'success',
@@ -104,20 +139,20 @@ class CartController extends
                                            'user_id'          => fUserId(),
                                            'product_id'       => $productId,
                                            'product_price_id' => $productPriceId,
+                                           'color_id'         => $validated->get( 'color_id' ),
                                            'status'           => Cart::STATUS_UNCOMPLETED
                                        ],
                                        [
                                            'count' => DB::raw( 'count + ' . $validated->get( 'count' ) ),
                                        ] );
-//        DB::enableQueryLog();
+
         $carts = Cart::query()
-            ->select( DB::raw( 'count(id) as cart_product_count' ) )
-            ->where( 'status', Cart::STATUS_UNCOMPLETED )
-            ->where( 'user_id', fUserId() )
-            ->groupBy( [ 'product_id' ] )
-            ->get();
-//        dd( $cartttt->sum('cart_product_count') );
-//        dd( DB::getQueryLog() );
+                     ->select( DB::raw( 'count(id) as cart_product_count' ) )
+                     ->where( 'status', Cart::STATUS_UNCOMPLETED )
+                     ->where( 'user_id', fUserId() )
+                     ->groupBy( [ 'product_id' ] )
+                     ->get();
+
         return response()->json( [
                                      'status'            => 'success',
                                      'totalProductCount' => $carts->sum( 'cart_product_count' )
@@ -146,7 +181,7 @@ class CartController extends
         $carts     = Cart::query()
                          ->with( [
                                      'product',
-                                     'productPrice.color',
+                                     'color',
                                      'productPrice.weight'
                                  ] )
                          ->where( 'user_id', auth()->id() )
@@ -169,7 +204,7 @@ class CartController extends
         $carts         = Cart::query()
                              ->with( [
                                          'product',
-                                         'productPrice.color',
+                                         'color',
                                          'productPrice.weight'
                                      ] )
                              ->where( 'user_id', auth()->id() )
@@ -202,6 +237,7 @@ class CartController extends
                     [
                         'order_id'         => $order->id,
                         'product_id'       => $cart->product_id,
+                        'color_id'         => $cart->color_id,
                         'product_price_id' => $cart->product_price_id,
                         'count'            => $cart->count
                     ]
@@ -212,7 +248,6 @@ class CartController extends
             }
         } catch ( \Exception $e ) {
             DB::rollBack();
-            dd( $e->getMessage() );
         }
         DB::commit();
         return redirect()->route( 'orders.index' );

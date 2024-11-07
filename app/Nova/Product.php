@@ -429,6 +429,15 @@ class Product extends Resource
                 Tab::make( 'Video', [
                     Text::make( 'Video' )->rules( 'nullable' ),
                 ] ),
+                Tab::make( 'Color', [
+                    Select::make( 'Has color', 'has_colors' )
+                          ->options( [
+                                         0 => 'No',
+                                         1 => 'Some colors',
+                                         2 => 'All colors',
+                                     ] )->displayUsingLabels()
+                          ->sortable(),
+                ] ),
             ] ),
         ];
     }

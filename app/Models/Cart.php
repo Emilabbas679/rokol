@@ -13,6 +13,7 @@ class Cart extends Model
         'user_id',
         'product_id',
         'product_price_id',
+        'color_id',
         'count',
         'status'
     ];
@@ -29,5 +30,10 @@ class Cart extends Model
     public function productPrice(): BelongsTo
     {
         return $this->belongsTo(ProductPrice::class);
+    }
+
+    public function color(): BelongsTo
+    {
+        return $this->belongsTo( Color::class );
     }
 }
