@@ -2,8 +2,10 @@
 
 namespace App\Nova;
 
+use App\Rules\PhoneNumberRule;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
@@ -38,46 +40,51 @@ class User extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function fields(NovaRequest $request)
+    public function fields( NovaRequest $request )
     {
         return [
             ID::make()->sortable(),
 
-            Gravatar::make()->maxWidth(50),
+            Gravatar::make()->maxWidth( 50 ),
 
-            Text::make('Name')
+            Text::make( 'Full name', 'full_name' )
                 ->sortable()
-                ->rules('required', 'max:255'),
+                ->rules( 'required', 'max:255' ),
 
-            Text::make('Email')
+            Text::make( 'Email' )
                 ->sortable()
-                ->rules('nullable', 'email', 'max:254')
-                ->creationRules('unique:users,email')
-                ->updateRules('unique:users,email,{{resourceId}}'),
+                ->rules( 'nullable', 'email', 'max:254' )
+                ->creationRules( 'unique:users,email' )
+                ->updateRules( 'unique:users,email,{{resourceId}}' ),
 
-            Text::make('Phone')
+            Text::make( 'Phone' )
                 ->sortable()
-                ->rules('nullable', 'email', 'max:254')
-                ->creationRules('unique:users,phone')
-                ->updateRules('unique:users,phone,{{resourceId}}'),
+                ->rules( 'nullable', 'max:254' )
+                ->creationRules( [ 'unique:users,phone', new PhoneNumberRule() ] )
+                ->placeholder("Nömrə +(994) xx xxx xx xx formatında olmalıdır")
+                ->updateRules( 'unique:users,phone,{{resourceId}}' ),
 
-            Password::make('Password')
-                ->onlyOnForms()
-                ->creationRules('required', Rules\Password::defaults())
-                ->updateRules('nullable', Rules\Password::defaults()),
+            Boolean::make( 'Admin', 'is_admin' )
+                   ->trueValue( '1' )
+                   ->falseValue( '0' ),
+
+            Password::make( 'Password' )
+                    ->onlyOnForms()
+                    ->creationRules( 'required', Rules\Password::defaults() )
+                    ->updateRules( 'nullable', Rules\Password::defaults() ),
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function cards(NovaRequest $request)
+    public function cards( NovaRequest $request )
     {
         return [];
     }
@@ -85,10 +92,10 @@ class User extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function filters(NovaRequest $request)
+    public function filters( NovaRequest $request )
     {
         return [];
     }
@@ -96,10 +103,10 @@ class User extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function lenses(NovaRequest $request)
+    public function lenses( NovaRequest $request )
     {
         return [];
     }
@@ -107,22 +114,22 @@ class User extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function actions(NovaRequest $request)
+    public function actions( NovaRequest $request )
     {
         return [];
     }
 
-    public function authorizedToUpdate(Request $request)
+    public function authorizedToUpdate( Request $request )
     {
         // Add your condition here. For example, if the resource has a 'status' field:
-        if (!$this->is_admin) {
+        if ( !$this->is_admin ) {
             return false;
         }
 
         // Otherwise, use the default authorization logic
-        return parent::authorizedToUpdate($request);
+        return parent::authorizedToUpdate( $request );
     }
 }

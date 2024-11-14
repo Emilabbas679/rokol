@@ -695,11 +695,11 @@
         var color_id = 0;
         var weight_id = 0;
 
-
-        $("body").on("change", "input[name='color']", function () {
-            color_id = $(this).val();
-            priceAjax()
-        })
+        //
+        // $("body").on("change", "input[name='color']", function () {
+        //     color_id = $(this).val();
+        //     priceAjax()
+        // })
 
         // $("body").on("change", "input[name='weight']", function () {
         //     weight_id = $(this).val();
