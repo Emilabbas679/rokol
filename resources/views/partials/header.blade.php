@@ -223,7 +223,7 @@
                                                             <div class="modal_container" style="overflow: visible;">
                                                                 <div class="modal_header">
                                                                     <h5 class="modal_title">Hesablama nəticəsi</h5>
-                                                                    <span class="close_modal"></span>
+                                                                    <span class="close-modal"></span>
                                                                 </div>
                                                                 <div class="modal_body">
                                                                     <p>
@@ -506,7 +506,9 @@
                 $('#result').text(result.toFixed(2) + "kq");
             });
         });
-
+        $(".close-modal").click(function(){
+            $(".answer_modal").removeClass("opened")
+        })
         $(".new-price").each(function () {
             if ($(this).parent().find("span").hasClass("old-price")) {
                 $(this).parent().addClass("sales");

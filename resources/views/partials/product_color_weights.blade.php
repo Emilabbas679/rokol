@@ -1,7 +1,7 @@
 @if($product->has_colors != \App\Models\Product::NO_COLORS)
     <div class="choose_color">
         <div class="pr_select_title">{{translate('choose_color')}}</div>
-        <div class="filter_check_items">
+        <div class="filter_check_items colors">
             @if($product->has_colors == \App\Models\Product::SPEC_COLORS)
                 @foreach($product->colors as $item)
 
@@ -12,58 +12,55 @@
                     </label>
                 @endforeach
             @else
-                <button class="f_check_type radio_btn color_btn"><span>@lang('Kataloqa bax')</span></button>
+                <button class="f_check_type radio_btn color_btn color_open"><span>@lang('Kataloqa bax')</span></button>
 
-                <div class="modal color_modal" id="new_address_modal" data-id="create_address_modal">
-                    <div class="modal_section">
-                        <div class="modal_container">
-                            <div class="modal_header">
-                                <h5 class="modal_title">@lang('Rəng Kataloqu')</h5>
-                                <span class="close_modal"></span>
-                            </div>
-                            <div class="modal_body">
-                                <div class="row catalog_row_main">
-                                    <div class="col item_col clearfix">
-                                        <div class="row catalog_row_inner">
-                                            @foreach(\App\Models\Color::query()->get()->groupBy('code') as $colors)
-                                                <label class="col item_col clearfix">
-                                                    <input name="color" type="radio" value="{{ $colors->first()->id }}">
-                                                    <div class="catalog_color"
-                                                         style="background: {{ $colors->first()->hex }};"></div>
-                                                    <div class="catalog_name">{{ $colors->first()->name[app()->getLocale()] }}</div>
-                                                </label>
-                                                @foreach($colors as $color)
+                @endif
+            </div>
+        </div>
+        <div class="modal color_modal" id="new_address_modal" data-id="create_address_modal">
+            <div class="modal_section">
+                <div class="modal_container">
+                    <div class="modal_header">
+                        <h5 class="modal_title">@lang('Rəng Kataloqu')</h5>
+                        <span class="close_modal"></span>
+                    </div>
+                    <div class="modal_body">
+                        <div class="row catalog_row_main">
+                            <div class="col item_col clearfix">
+                                <div class="row catalog_row_inner">
+                                    @foreach(\App\Models\Color::query()->get()->groupBy('code') as $colors)
+                                        <label class="col item_col clearfix">
+                                            <input name="color" type="radio" value="{{ $colors->first()->id }}">
+                                            <div class="catalog_color"
+                                                 style="background: {{ $colors->first()->hex }};"></div>
+                                            <div class="catalog_name">{{ $colors->first()->name[app()->getLocale()] }}</div>
+                                        </label>
+                                        @foreach($colors as $color)
 
-                                                    <label class="col item_col clearfix">
-                                                        <input name="color" type="radio" value="{{ $color->id }}">
-                                                        <div class="catalog_color"
-                                                             style="background: {{ $color->hex }};"></div>
-                                                        <div class="catalog_name">{{ $color->name[app()->getLocale()] }}</div>
-                                                    </label>
-                                                @endforeach
+                                            <label class="col item_col clearfix">
+                                                <input name="color" type="radio" value="{{ $color->id }}">
+                                                <div class="catalog_color"
+                                                     style="background: {{ $color->hex }};"></div>
+                                                <div class="catalog_name">{{ $color->name[app()->getLocale()] }}</div>
+                                            </label>
+                                        @endforeach
 
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate aut placeat,
-                                        nemo culpa eveniet ducimus? Iure assumenda tempore accusantium numquam optio
-                                        ratione
-                                        sit dolorum, libero, cupiditate quam praesentium earum soluta.
-                                    </p>
-                                    <div class="btn_detail btn_basket modal_select_btn">
-                                <span class="add_basket">
-                                    Əlavə et
-                                </span>
-                                    </div>
+                                    @endforeach
                                 </div>
+                            </div>
+                            <p>
+                                Xəbərdarlıq: Elektron cihazlarda (monitor, planşet, telefon və s.) göstərilən rənglər cihazın ekran ayarlarına və ətraf işıqlandırmaya görə fərqlənə bilər. Əsl rəng təsirini qiymətləndirmək üçün ən yaxın satış məntəqəmizdəki rəng nümunələrinə baxmağınız məsləhətdir. Eyni zamanda, seçdiyiniz rəngin  necə göründüyü təbii gün işığı və istifadə olunan işıqlandırma növünə görə dəyişə bilər.
+                            </p>
+                            <div class="btn_detail btn_basket modal_select_btn">
+                            <span class="add_basket color_save">
+                                Əlavə et
+                            </span>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endif
+            </div>
         </div>
-    </div>
 @endif
 <div class="choose_weight">
     <div class="pr_select_title">{{translate('choose_weight')}}</div>
