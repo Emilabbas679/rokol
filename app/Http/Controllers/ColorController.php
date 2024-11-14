@@ -9,7 +9,7 @@ class ColorController extends Controller
 {
     public function index()
     {
-        $colors = Color::query()->get();
+        $colors = Color::query()->where('is_catalog', true)->get();
 
         return view('colors', compact('colors'));
     }

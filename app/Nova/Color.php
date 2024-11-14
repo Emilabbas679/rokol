@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
@@ -78,6 +79,12 @@ class Color extends Resource
             Number::make('code')->min(0)->max(1000000),
 
             ColorField::make('Color', 'hex'),
+
+            Boolean::make( 'Catalog', 'is_catalog' )
+                   ->trueValue( '1' )
+                   ->falseValue( '0' )
+                ->default(true)
+
 
 
         ];
