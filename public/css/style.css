@@ -8882,7 +8882,8 @@ img.product_gallery_images_upload {
   word-break: break-word;
 }
 
-.close_modal {
+.close_modal,
+.close-modal {
   display: block;
   width: 24px;
   height: 24px;
@@ -10363,6 +10364,8 @@ img.product_gallery_images_upload {
 
 .color_modal p {
   padding: 0 20px 20px 20px;
+  line-height: 20px;
+  font-size: 16px;
 }
 
 .color_modal label {
@@ -10374,9 +10377,18 @@ img.product_gallery_images_upload {
   border: 2px solid #FFF;
 }
 
-.color_btn span {
+.color_btn {
+  border-radius: 8px;
+  padding: 0;
+}
+
+.f_check_type.color_btn span {
   width: auto !important;
   height: auto !important;
+  font-family: "montserrat";
+  padding: 5px 16px !important;
+  display: block;
+  border-radius: 8px;
 }
 
 .color_modal .btn_basket {
@@ -10397,5 +10409,13 @@ img.product_gallery_images_upload {
   padding-left: 0;
 }
 
+.modal_body .catalog_name {
+  margin-bottom: 10px;
+}
+
+.color_modal .catalog_row_inner {
+  overflow-y: scroll;
+  max-height: 405px;
+}
 
 /*! ====  ALL PAGES CSS FINISH  ===== */
