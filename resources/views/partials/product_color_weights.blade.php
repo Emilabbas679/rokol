@@ -28,13 +28,7 @@
                         <div class="row catalog_row_main">
                             <div class="col item_col clearfix">
                                 <div class="row catalog_row_inner">
-                                    @foreach(\App\Models\Color::query()->get()->groupBy('code') as $colors)
-                                        <label class="col item_col clearfix">
-                                            <input name="color" type="radio" value="{{ $colors->first()->id }}">
-                                            <div class="catalog_color"
-                                                 style="background: {{ $colors->first()->hex }};"></div>
-                                            <div class="catalog_name">{{ $colors->first()->name[app()->getLocale()] }}</div>
-                                        </label>
+                                    @foreach($groupedColors as $colors)
                                         @foreach($colors as $color)
 
                                             <label class="col item_col clearfix">
@@ -44,7 +38,6 @@
                                                 <div class="catalog_name">{{ $color->name[app()->getLocale()] }}</div>
                                             </label>
                                         @endforeach
-
                                     @endforeach
                                 </div>
                             </div>
