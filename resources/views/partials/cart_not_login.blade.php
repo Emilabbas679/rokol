@@ -24,95 +24,99 @@
             <div class="basket_count_items">{!! $products->count() !!} @lang('məhsul')</div>
         </div>
         <div class="sect_body clearfix">
-            @foreach($products as $product)
+            @for($i = 0; $i < $products->count(); $i++)
                 @php
-                    $price = $product->prices->where('id', $product->price_id)->first();
+                    $price = $products[$i]->prices->where('id', $products[$i]->price_id)->first();
+                    $cookies = collect($cookieCarts->get($products[$i]->id));
+                    $cookieColors = array_column($cookies->toArray(), 'color_id');
                 @endphp
-                <div class="basket_items">
-                    <a href="{!! route('product', $product) !!}" class="item_img">
-                        <img
-                                src="{!! asset('storage/'.$product->image) !!}"
-                                alt="product">
-                    </a>
-                    <div class="basket_item_content">
-                        <div class="bsk_row_list">
-                            <p class="itm_title"> {{ $product->name[app()->getLocale()] }} </p>
-                            <div class="bsk_icons">
-                                <span class="favotites "></span>
-                                <form action="{!! route('carts.session.delete', $product) !!}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="delete"></button>
-                                </form>
-                            </div>
-                        </div>
-                        @php
-                            $cookie = collect($cookieCarts->get($product->id))->where('product_price_id', $product->price_id)->first()
-                        @endphp
-                        @if(isset($colors) && !is_null($cookie) && isset($cookie['color_id']))
+                @foreach($cookieColors as $col)
+                    @php
+                        $cookie = $cookies->where('color_id', $col)->first();
+                    @endphp
+                    <div class="basket_items">
+                        <a href="{!! route('product', $products[$i]) !!}" class="item_img">
+                            <img
+                                    src="{!! asset('storage/'.$products[$i]->image) !!}"
+                                    alt="product">
+                        </a>
+                        <div class="basket_item_content">
                             <div class="bsk_row_list">
-                                <span class="bck_itm_name">@lang('Color'):</span>
-                                <span class="bck_itm_val">{{ $colors->where('id', (int) $cookie['color_id'])->first()->name[app()->getLocale()] }}</span>
-                            </div>
-                        @endif
-                        <div class="bsk_row_list">
-                            <span class="bck_itm_name">@lang('Weight'):</span>
-                            <span
-                                    class="bck_itm_val">{!! $price->weight->weight . " " . productWeightUnit($price->weight->weight_type) !!}
-											</span>
-                        </div>
-                        <div class="bsk_row_list">
-                            <div class="pr_slct_left">
-                                <div class="filter_check_items">
-                                    <div class="product_counter">
-                                        <input type="hidden" name="counters[{!! $product->id !!}]"
-                                               form="cart_form"
-                                               value="{!! $cookie['count'] !!}">
-                                        <button type="button" class="pr_btn_counter pr_minus"
-                                                data-cart-id="{!! $product->id !!}"></button>
-                                        <div class="pr_number_sect">
-                                            <span class="pr_number">{!! $cookie['count'] !!}</span>
-                                        </div>
-                                        <button type="button" class="pr_btn_counter pr_plus"
-                                                data-cart-id="{!! $product->id !!}"></button>
-                                    </div>
+                                <p class="itm_title"> {{ $products[$i]->name[app()->getLocale()] }} </p>
+                                <div class="bsk_icons">
+                                    <span class="favotites "></span>
+                                    <form action="{!! route('carts.session.delete', $products[$i]) !!}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="delete"></button>
+                                    </form>
                                 </div>
-                                <!-- stocked, unstocked -->
-                                {{--                                                <div class="itm_stock stocked">--}}
-                                {{--                                                    <span class="stock_text">Stokda: 25 ədəd</span>--}}
-                                {{--                                                </div>--}}
                             </div>
-                            <div class="itm_price">
-                                @if($price->sale_price)
-                                    <span class="old-main-price">
+                            @if(!is_null($col) && !is_null($color = $colors->where('id', (int) $col)->first()))
+                                <div class="bsk_row_list">
+                                    <span class="bck_itm_name">@lang('Color'):</span>
+                                    <span class="bck_itm_val">{{ $color->name[app()->getLocale()] }}</span>
+                                </div>
+                            @endif
+                            <div class="bsk_row_list">
+                                <span class="bck_itm_name">@lang('Weight'):</span>
+                                <span
+                                        class="bck_itm_val">{!! $price->weight->weight . " " . productWeightUnit($price->weight->weight_type) !!}
+											</span>
+                            </div>
+                            <div class="bsk_row_list">
+                                <div class="pr_slct_left">
+                                    <div class="filter_check_items">
+                                        <div class="product_counter">
+                                            <input type="hidden" name="counters[{!! $products[$i]->id !!}]"
+                                                   form="cart_form"
+                                                   value="{!! $cookie['count'] !!}">
+                                            <button type="button" class="pr_btn_counter pr_minus"
+                                                    data-cart-id="{!! $products[$i]->id !!}"></button>
+                                            <div class="pr_number_sect">
+                                                <span class="pr_number">{!! $cookie['count'] !!}</span>
+                                            </div>
+                                            <button type="button" class="pr_btn_counter pr_plus"
+                                                    data-cart-id="{!! $products[$i]->id !!}"></button>
+                                        </div>
+                                    </div>
+                                    <!-- stocked, unstocked -->
+                                    {{--                                                <div class="itm_stock stocked">--}}
+                                    {{--                                                    <span class="stock_text">Stokda: 25 ədəd</span>--}}
+                                    {{--                                                </div>--}}
+                                </div>
+                                <div class="itm_price">
+                                    @if($price->sale_price)
+                                        <span class="old-main-price">
 														{!! $price->price !!} AZN
 													</span>
-                                    <span class="old-price">
+                                        <span class="old-price">
 
 													</span>
-                                    <span class="main-price">
+                                        <span class="main-price">
 														{!! $price->sale_price !!} AZN
 													</span>
-                                    <span class="new-price">
+                                        <span class="new-price">
 
 													</span>
-                                @else
-                                    <span class="main-price">
+                                    @else
+                                        <span class="main-price">
                                           @if($price->price > 0)
-                                            {{ $price->price }} AZN
-                                        @else
-                                            ***
-                                        @endif
+                                                {{ $price->price }} AZN
+                                            @else
+                                                ***
+                                            @endif
 													</span>
-                                    <span class="new-price">
+                                        <span class="new-price">
 
 													</span>
-                                @endif
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            @endfor
         </div>
     </div>
 </div>

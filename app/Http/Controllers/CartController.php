@@ -33,7 +33,13 @@ class CartController extends
             }
             $ids      = $cookieCarts->keys();
             $products = Product::query()
-                               ->select( 'products.name', 'products.image', DB::raw( 'pp.id as price_id' ), 'products.id' )
+                               ->select( [
+                                             'products.name',
+                                             'products.image',
+                                             'products.has_colors',
+                                             DB::raw( 'pp.id as price_id' ),
+                                             'products.id'
+                                         ] )
                                ->with( [
                                            'prices' => fn( $query ) => $query->whereIn( 'id', $cookieCarts->flatMap( function ( $items ) {
                                                return array_column( $items, 'product_price_id' );
@@ -43,11 +49,12 @@ class CartController extends
                                ->join( DB::raw( 'product_prices as pp' ), 'pp.product_id', '=', 'products.id' )
                                ->whereIntegerInRaw( 'pp.id', $cookieCarts->flatMap( function ( $items ) {
                                    return array_column( $items, 'product_price_id' );
-                               } ) )
+                               } )->unique() )
                                ->get();
             //TODO colors
-            $colors = Color::query()->get()->keyBy( 'id' );
-
+            $colors = Color::query()->whereIntegerInRaw( 'id', $cookieCarts->flatMap( function ( $items ) {
+                return array_column( $items, 'color_id' );
+            } )->unique() )->get()->keyBy( 'id' );
 
             $compact = compact( 'products', 'cookieCarts', 'colors' );
         }
