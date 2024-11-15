@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Color;
 use App\Models\Slider;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -249,7 +250,6 @@ class SiteController extends Controller
                                       'similar'
                                   ] )
                           ->firstorfail();
-
         $locale               = app()->getLocale();
         $product->name        = $product->name[$locale] ?? '';
         $product->about       = $product->about[$locale] ?? '';
@@ -264,7 +264,7 @@ class SiteController extends Controller
         $product->usage_rules = $product->usage_rules[$locale] ?? '';
         $color_id             = 0;
         $weight_id            = 0;
-        $colors               = [];
+        $groupedColors               = Color::query()->get()->groupBy('code');
 //        $weights              = [];
         if ( $request->has( 'color' ) and ( (int) $request->color ) != 0 )
             $color_id = (int) $request->color;
@@ -283,11 +283,6 @@ class SiteController extends Controller
             $prices = $product->prices ?? [];
 
 
-        foreach ( $product->prices as $item ) {
-            if ( !isset( $item[$item['color_id']] ) )
-                $colors[$item->color_id] = $item;
-        }
-
 
         $price = collect( $prices )->where( 'id', $priceId )->first() ?? ( $prices[0] ?? [] );
 //        if ( isset( $price['color_id'] ) ) {
@@ -299,7 +294,7 @@ class SiteController extends Controller
 //            }
 //        }
 
-        return view( 'detail', compact( 'product', 'price', 'colors' ) );
+        return view( 'detail', compact( 'product', 'price', 'groupedColors' ) );
     }
 
     public function productPrice( Request $request, $product_id )

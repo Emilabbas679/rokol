@@ -28,14 +28,7 @@
                         <div class="row catalog_row_main">
                             <div class="col item_col clearfix">
                                 <div class="row catalog_row_inner">
-                                    @foreach(\App\Models\Color::query()->get()->groupBy('code') as $colors)
-                                        <label class="col item_col clearfix color_block">
-                                            <input name="color" type="checkbox" value="{{ $colors->first()->id }}">
-                                            <span style="display:none;"> {{ $colors->first()->hex }}</span>
-                                            <div class="catalog_color"
-                                                 style="background-color: {{ $colors->first()->hex }};"></div>
-                                            <div class="catalog_name">{{ $colors->first()->name[app()->getLocale()] }}</div>
-                                        </label>
+                                    @foreach($groupedColors as $colors)
                                         @foreach($colors as $color)
 
                                             <label class="col item_col clearfix color_block">
@@ -46,7 +39,6 @@
                                                 <div class="catalog_name">{{ $color->name[app()->getLocale()] }}</div>
                                             </label>
                                         @endforeach
-
                                     @endforeach
                                 </div>
                             </div>

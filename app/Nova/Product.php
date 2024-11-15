@@ -42,7 +42,7 @@ class Product extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'name->az'
     ];
 
     /**
@@ -61,7 +61,7 @@ class Product extends Resource
                 Tab::make( 'Product', [
 
 
-                    Text::make( __( 'Name (English)' ), 'name_en' )
+                    Text::make( __( 'Name (English)' ), 'name_en' )->hideFromIndex()
                         ->resolveUsing( function ( $value, $resource ) {
                             return $resource->name['en'] ?? '';
                         } )
@@ -70,7 +70,8 @@ class Product extends Resource
                             $names['en'] = $request->$requestAttribute;
                             $model->name = $names;
                         } ),
-                    Text::make( __( 'Name (Azerbaijan)' ), 'name_az' )->hideFromIndex()
+                    Text::make( __( 'Name (Azerbaijan)' ), 'name_az' )
+                        ->sortable()
                         ->resolveUsing( function ( $value, $resource ) {
                             return $resource->name['az'] ?? '';
                         } )
@@ -104,7 +105,7 @@ class Product extends Resource
                              ->display( function ( $category ) {
                                  return $category->name[app()->getLocale()] ?? '';
                              } ),
-                    Number::make( 'Stock count', 'stock_count' )->default( 0 ),
+                    Number::make( 'Stock count', 'stock_count' )->default( 0 )->sortable(),
                     File::make( 'Image' )->disk( 'public' ),
 
                     BelongsToMany::make( 'types', 'types', 'App\Nova\Type' )
