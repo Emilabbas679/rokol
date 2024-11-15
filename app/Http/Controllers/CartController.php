@@ -37,19 +37,14 @@ class CartController extends
                                              'products.name',
                                              'products.image',
                                              'products.has_colors',
-                                             DB::raw( 'pp.id as price_id' ),
                                              'products.id'
                                          ] )
                                ->with( [
                                            'prices' => fn( $query ) => $query->whereIn( 'id', $cookieCarts->flatMap( function ( $items ) {
                                                return array_column( $items, 'product_price_id' );
-                                           } ) ),
+                                           } )->unique() ),
                                        ] )
                                ->whereIn( 'products.id', $ids->toArray() )
-                               ->join( DB::raw( 'product_prices as pp' ), 'pp.product_id', '=', 'products.id' )
-                               ->whereIntegerInRaw( 'pp.id', $cookieCarts->flatMap( function ( $items ) {
-                                   return array_column( $items, 'product_price_id' );
-                               } )->unique() )
                                ->get();
             //TODO colors
             $colors = Color::query()->whereIntegerInRaw( 'id', $cookieCarts->flatMap( function ( $items ) {

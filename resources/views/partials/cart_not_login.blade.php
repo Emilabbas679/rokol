@@ -26,13 +26,14 @@
         <div class="sect_body clearfix">
             @for($i = 0; $i < $products->count(); $i++)
                 @php
-                    $price = $products[$i]->prices->where('id', $products[$i]->price_id)->first();
                     $cookies = collect($cookieCarts->get($products[$i]->id));
                     $cookieColors = array_column($cookies->toArray(), 'color_id');
                 @endphp
-                @foreach($cookieColors as $col)
+                @for($j = 0; $j < count($cookieColors); $j++)
                     @php
-                        $cookie = $cookies->where('color_id', $col)->first();
+                        $col = $cookieColors[$j];
+                        $cookie = $cookies->get($j);
+                        $price = $products[$i]->prices->where('id', $cookie['product_price_id'])->first();
                     @endphp
                     <div class="basket_items">
                         <a href="{!! route('product', $products[$i]) !!}" class="item_img">
@@ -115,7 +116,7 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @endfor
             @endfor
         </div>
     </div>
