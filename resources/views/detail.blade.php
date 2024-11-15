@@ -568,44 +568,36 @@
                 window.open(shareUrl, '_blank');
             });
         });
-        $(document).ready(function() {
-            // .color_save butonuna tıklama olayını dinliyoruz
-            $('body').on('click', '.color_save', function() {
-                $('.filter_check_items.colors').empty();
-
-                // Seçili olan radio butonunu alıyoruz
-                let checkedRadio = $('input[name="color"]:checked');
-
-                if (checkedRadio.length) {
-                    // Radio butonunun yanındaki renk divini buluyoruz
-                    let colorDiv = checkedRadio.next('.catalog_color');
-                    
-                    // colorDiv gerçekten mevcut mu kontrol ediyoruz
-                    if (colorDiv.length) {
-                        let hexColor = colorDiv.css('background-color');
-
-                        // Yeni renk etiketini oluşturuyoruz
-                        let colorLabel = `
-                            <label class="f_check_type radio_btn color_open">
-                                <input type="radio" name="color_main" checked value="${checkedRadio.val()}">
-                                <span style="background-color: ${hexColor};"></span>
-                            </label>
-                        `;
-
-                        console.log('Oluşturulan colorLabel:', colorLabel);
-
-                        // Filtre alanını yeni etiketle güncelliyoruz
-                        $('.filter_check_items.colors').html(colorLabel);
-                    } else {
-                        console.log("Renk divi bulunamadı, lütfen HTML yapısını kontrol edin.");
-                    }
-                } else {
-                    console.log("Hata: Lütfen bir renk seçin.");
+        
+        let activeLabel = null;
+        $('body').on('click', '.color_save', function() {
+            $('.catalog_row_inner .color_block').each(function() {
+            
+                if ($(this).hasClass('active')) {
+                    let activeLabel = $(this);
+         
+                    let hexColor = activeLabel.find('.catalog_color').css('background-color');
+                    console.log(hexColor);
+    
+                    let colorLabel = ` 
+                        <label class="f_check_type radio_btn color_open">
+                            <input type="radio" name="color_main" checked value="selected_color_value">
+                            <span style="background-color: ${hexColor};"></span>
+                        </label>
+                    `;
+                    $('.filter_check_items.colors').empty().append(colorLabel);
                 }
             });
         });
 
 
+
+        $(".color_block").click(function () { 
+            $('.color_block').removeClass('active');
+            $(this).siblings().find("input").prop("checked",false)
+            $(this).find("input").prop("checked",true)
+            $(this).addClass('active');
+        });
     </script>
 
     <script>

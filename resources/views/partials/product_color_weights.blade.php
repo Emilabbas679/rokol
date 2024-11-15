@@ -29,18 +29,20 @@
                             <div class="col item_col clearfix">
                                 <div class="row catalog_row_inner">
                                     @foreach(\App\Models\Color::query()->get()->groupBy('code') as $colors)
-                                        <label class="col item_col clearfix">
-                                            <input name="color" type="radio" value="{{ $colors->first()->id }}">
+                                        <label class="col item_col clearfix color_block">
+                                            <input name="color" type="checkbox" value="{{ $colors->first()->id }}">
+                                            <span style="display:none;"> {{ $colors->first()->hex }}</span>
                                             <div class="catalog_color"
-                                                 style="background: {{ $colors->first()->hex }};"></div>
+                                                 style="background-color: {{ $colors->first()->hex }};"></div>
                                             <div class="catalog_name">{{ $colors->first()->name[app()->getLocale()] }}</div>
                                         </label>
                                         @foreach($colors as $color)
 
-                                            <label class="col item_col clearfix">
-                                                <input name="color" type="radio" value="{{ $color->id }}">
+                                            <label class="col item_col clearfix color_block">
+                                                <input name="color" type="checkbox" value="{{ $color->id }}">
+                                                <span style="display:none;"> {{ $color->hex }}</span>
                                                 <div class="catalog_color"
-                                                     style="background: {{ $color->hex }};"></div>
+                                                     style="background-color: {{ $color->hex }};"></div>
                                                 <div class="catalog_name">{{ $color->name[app()->getLocale()] }}</div>
                                             </label>
                                         @endforeach
@@ -51,8 +53,8 @@
                             <p>
                                 Xəbərdarlıq: Elektron cihazlarda (monitor, planşet, telefon və s.) göstərilən rənglər cihazın ekran ayarlarına və ətraf işıqlandırmaya görə fərqlənə bilər. Əsl rəng təsirini qiymətləndirmək üçün ən yaxın satış məntəqəmizdəki rəng nümunələrinə baxmağınız məsləhətdir. Eyni zamanda, seçdiyiniz rəngin  necə göründüyü təbii gün işığı və istifadə olunan işıqlandırma növünə görə dəyişə bilər.
                             </p>
-                            <div class="btn_detail btn_basket modal_select_btn">
-                            <span class="add_basket color_save">
+                            <div class="btn_detail btn_basket modal_select_btn color_save">
+                            <span class="add_basket">
                                 Əlavə et
                             </span>
                             </div>
