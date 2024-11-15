@@ -19,6 +19,7 @@ class Product extends Model
     const NO_COLORS = 0;
     const SPEC_COLORS = 1;
     const ALL_COLORS = 2;
+    const MAIN_COLORS = 3;
 
     protected $guarded = [];
 

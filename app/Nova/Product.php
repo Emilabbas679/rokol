@@ -433,9 +433,10 @@ class Product extends Resource
                 Tab::make( 'Color', [
                     Select::make( 'Has color', 'has_colors' )
                           ->options( [
-                                         0 => 'No',
-                                         1 => 'Some colors',
-                                         2 => 'All colors',
+                                         \App\Models\Product::NO_COLORS => 'No',
+                                         \App\Models\Product::SPEC_COLORS => 'Some colors',
+                                         \App\Models\Product::ALL_COLORS => 'All colors',
+                                         \App\Models\Product::MAIN_COLORS => 'Main colors',
                                      ] )->displayUsingLabels()
                           ->sortable(),
                 ] ),
