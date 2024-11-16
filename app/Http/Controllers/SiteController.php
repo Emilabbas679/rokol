@@ -234,22 +234,22 @@ class SiteController extends Controller
 
     public function product( Request $request, $id )
     {
-        $priceId = $request->get( 'price_id' );
-        $product = Product::query()
-                          ->where( 'id', $id )
-                          ->where( 'status', 1 )
-                          ->with( [
-                                      'category',
-                                      'prices',
-                                      'prices.weight',
-                                      'types',
-                                      'appearances',
-                                      'refProperties',
-                                      'applicationAreas',
-                                      'favorites',
-                                      'similar'
-                                  ] )
-                          ->firstorfail();
+        $priceId              = $request->get( 'price_id' );
+        $product              = Product::query()
+                                       ->where( 'id', $id )
+                                       ->where( 'status', 1 )
+                                       ->with( [
+                                                   'category',
+                                                   'prices',
+                                                   'prices.weight',
+                                                   'types',
+                                                   'appearances',
+                                                   'refProperties',
+                                                   'applicationAreas',
+                                                   'favorites',
+                                                   'similar'
+                                               ] )
+                                       ->firstorfail();
         $locale               = app()->getLocale();
         $product->name        = $product->name[$locale] ?? '';
         $product->about       = $product->about[$locale] ?? '';
@@ -264,7 +264,7 @@ class SiteController extends Controller
         $product->usage_rules = $product->usage_rules[$locale] ?? '';
         $color_id             = 0;
         $weight_id            = 0;
-        $groupedColors               = Color::query()->get()->groupBy('code');
+        $groupedColors        = Color::query()->where( 'is_catalog', false )->get()->groupBy( 'code' );
 //        $weights              = [];
         if ( $request->has( 'color' ) and ( (int) $request->color ) != 0 )
             $color_id = (int) $request->color;
@@ -281,7 +281,6 @@ class SiteController extends Controller
         }
         else
             $prices = $product->prices ?? [];
-
 
 
         $price = collect( $prices )->where( 'id', $priceId )->first() ?? ( $prices[0] ?? [] );
