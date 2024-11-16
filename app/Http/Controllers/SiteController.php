@@ -264,7 +264,7 @@ class SiteController extends Controller
         $product->usage_rules = $product->usage_rules[$locale] ?? '';
         $color_id             = 0;
         $weight_id            = 0;
-        $groupedColors        = Color::query()->where( 'is_catalog', false )->get()->groupBy( 'code' );
+        $groupedColors        = Color::query()->where( 'is_catalog', true )->get()->groupBy( 'code' );
 //        $weights              = [];
         if ( $request->has( 'color' ) and ( (int) $request->color ) != 0 )
             $color_id = (int) $request->color;
