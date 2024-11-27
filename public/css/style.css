@@ -8951,7 +8951,7 @@ img.product_gallery_images_upload {
   display: none !important;
 }
 
-.added .added_basket {
+.added .added_basket:not(.color_sect) {
   display: block !important;
 }
 
@@ -10417,6 +10417,24 @@ img.product_gallery_images_upload {
 .color_modal .catalog_row_inner {
   overflow-y: scroll;
   max-height: 405px;
+}
+
+.color_sect {
+  display: none;
+}
+
+.color_sec .color_sect {
+  display: inline-flex !important;
+}
+
+.color_sec .add_basket {
+  display: none !important;
+}
+
+.address_error {
+  color: #FA2B2B;
+  font-weight: 600;
+  margin-bottom: 12px;
 }
 
 /*! ====  ALL PAGES CSS FINISH  ===== */

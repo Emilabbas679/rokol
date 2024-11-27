@@ -12,7 +12,7 @@
         </div>
         <div class="basket_btn_mob">
             <button type="submit" class="filter_btn btn_send"
-                    form="cart_form" id="mobileCheck">@lang('Checkout')</button>
+                    form="cart_form" id="mobileCheck">@lang('Alışa keç')</button>
         </div>
     </div>
 </div>
@@ -150,7 +150,7 @@
                         AZN
                     </div>
                 </div>
-                <button type="submit" class="filter_btn btn_send">@lang('Checkout')</button>
+                <button type="submit" class="filter_btn btn_send">@lang('Alışa keç')</button>
             </form>
 
         </div>

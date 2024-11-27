@@ -569,10 +569,17 @@
             if ($(this).hasClass('dologin')) {
                 window.location.href = '/login';
             } else {
-                $(".btn_basket").addClass("added")
-                setTimeout(function () {
-                    $(".btn_basket").removeClass("added")
-                }, 2000)
+                if ($(".color_open").hasClass("select_color")) {
+                    $(".btn_basket").addClass("color_sec");
+                    setTimeout(function () {
+                        $(".btn_basket").removeClass("color_sec");
+                    }, 2000);
+                }else{
+                    $(".btn_basket").addClass("added");
+                    setTimeout(function () {
+                        $(".btn_basket").removeClass("added");
+                    }, 2000);
+                }
             }
 
 

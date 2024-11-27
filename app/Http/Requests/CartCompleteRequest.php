@@ -34,4 +34,11 @@ class CartCompleteRequest extends
             ]
         ];
     }
+
+    public function messages()
+    {
+	return [
+		'select_address' => 'Təhvil məntəqəsi seçimi mütləqdir!'
+	];
+    }
 }

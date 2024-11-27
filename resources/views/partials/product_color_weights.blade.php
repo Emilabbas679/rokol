@@ -12,7 +12,7 @@
                     </label>
                 @endforeach
             @else
-                <button class="f_check_type radio_btn color_btn color_open"><span>@lang('Kataloqa bax')</span></button>
+                <button class="f_check_type radio_btn color_btn color_open select_color"><span>@lang('Kataloqa bax')</span></button>
 
             @endif
         </div>

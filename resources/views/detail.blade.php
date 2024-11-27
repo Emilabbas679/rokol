@@ -166,6 +166,9 @@
                                             <span class="added_basket">
                                                 Səbətə əlavə edildi
                                             </span>
+                                            <span class="added_basket color_sect">
+                                                Rəng seçimi edin
+                                            </span>
                                         </div>
                                         <!-- click after addclass "dofav" -->
 

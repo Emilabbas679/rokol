@@ -18,9 +18,11 @@
 
 				<div class="wrap_left">
 					<div class="adrs_container">
-                        @if($errors->any() && app()->environment('local'))
-                            {{ implode('', $errors->all('<div>:message</div>')) }}
-                        @endif
+                    @if($errors->any() && app()->environment('local'))
+                        @foreach($errors->all() as $error)
+                            <div class="address_error">{!! $error !!}</div>
+                        @endforeach
+                    @endif
 						<form action="{!! route('carts.complete') !!}" method="post" id="checkout_address_form">
 							@csrf
 							<div class="cr_adr_row">
@@ -108,7 +110,7 @@
 								</div>
 							</div>
 							<button type="submit" class="filter_btn btn_send"
-							        form="checkout_address_form">@lang('Checkout')</button>
+							        form="checkout_address_form">@lang('Alışa keç')</button>
 
 						</div>
 					</div>
