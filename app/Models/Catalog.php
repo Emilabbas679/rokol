@@ -11,6 +11,7 @@ class Catalog extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'name',
         'path'
     ];
 }

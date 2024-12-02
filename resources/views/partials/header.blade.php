@@ -128,7 +128,7 @@
                                    class="{!! request()->routeIs('news.*') ? 'active' : '' !!}">{{translate('header_news')}} </a>
                             </li>
                             <li>
-                                <a href="{!! route('catalogs.index') !!}" target="_blank"
+                                <a href="{!! route('catalogs.index') !!}"
                                    class="">{{translate('header_catalogs')}} </a>
                             </li>
                             <li>

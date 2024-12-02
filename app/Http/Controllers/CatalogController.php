@@ -9,12 +9,14 @@ class CatalogController extends Controller
 {
     public function index()
     {
-        $catalog = Catalog::query()->first();
-        if (is_null($catalog)) {
-            $path = storage_path('app/public/pdfs/catalogs.pdf');
-        } else {
-            $path = storage_path('app/public/' . $catalog->path);
-        }
+        $catalogs = Catalog::query()->get();
+        return view( 'catalog', compact('catalogs') );
+    }
+
+    public function show($id)
+    {
+        $catalog = Catalog::query()->findOrFail($id);
+        $path = storage_path('app/public/'.$catalog->path);
         return response()->file($path);
     }
 }

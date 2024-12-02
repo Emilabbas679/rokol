@@ -20,86 +20,27 @@
         </div>
         <div class="sect_body clearfix catalog_pdf">
             <div class="row">
+                @foreach($catalogs as $catalog)
                 <div class="col">
                     <div class="col_in">
-                        <a href="#" title="" class="stat_item_link">
+                        <a href="{{route('catalogs.show', ['id' => $catalog])}}" title="" class="stat_item_link">
                             <div class="stat_img">
-                                <img src="{{asset('img/icons/catalog_pdf.svg?v2')}}" alt="">
+                                <img src="{{asset('img/icons/catalog_pdf.svg?v2')}}" alt="{!! $catalog->name !!}">
                             </div>
                             <div class="news_item_content">
                                 <div class="odds_row">
                                     <h2 class="stat_title">
-                                        Məhsul kataloqu
+                                        {!! $catalog->name !!}
                                     </h2>
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="col_in">
-                        <a href="#" title="" class="stat_item_link">
-                            <div class="stat_img">
-                                <img src="{{asset('img/icons/catalog_pdf.svg?v2')}}" alt="">
-                            </div>
-                            <div class="news_item_content">
-                                <div class="odds_row">
-                                    <h2 class="stat_title">
-                                        Həftənin təklifi kataloqu
-                                    </h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="col_in">
-                        <a href="#" title="" class="stat_item_link">
-                            <div class="stat_img">
-                                <img src="{{asset('img/icons/catalog_pdf.svg?v2')}}" alt="">
-                            </div>
-                            <div class="news_item_content">
-                                <div class="odds_row">
-                                    <h2 class="stat_title">
-                                        İnşaat kataloqu
-                                    </h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="col_in">
-                        <a href="#" title="" class="stat_item_link">
-                            <div class="stat_img">
-                                <img src="{{asset('img/icons/catalog_pdf.svg?v2')}}" alt="">
-                            </div>
-                            <div class="news_item_content">
-                                <div class="odds_row">
-                                    <h2 class="stat_title">
-                                        Məhsul kataloqu
-                                    </h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="col_in">
-                        <a href="#" title="" class="stat_item_link">
-                            <div class="stat_img">
-                                <img src="{{asset('img/icons/catalog_pdf.svg?v2')}}" alt="">
-                            </div>
-                            <div class="news_item_content">
-                                <div class="odds_row">
-                                    <h2 class="stat_title">
-                                        Həftənin təklifi kataloqu
-                                    </h2>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                @endforeach
+
+
+
             </div>
 
         </div>
