@@ -943,6 +943,7 @@ main {
   position: relative;
   overflow: hidden;
   min-height: 480px;
+  margin-bottom: 48px;
 }
 
 .wrap_full_color::before {
@@ -10436,5 +10437,25 @@ img.product_gallery_images_upload {
   font-weight: 600;
   margin-bottom: 12px;
 }
+
+.fm_hd {
+  font-weight: 700 !important;
+}
+
+.catalog_pdf .stat_img {
+  background: #A6E8F5;
+}
+
+.catalog_pdf .stat_img img {
+  width: 120px;
+  height: 120px;
+  margin: auto;
+  object-fit: contain;
+}
+
+.catalog_pdf .stat_title {
+  margin: 0;
+}
+
 
 /*! ====  ALL PAGES CSS FINISH  ===== */

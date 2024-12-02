@@ -33,7 +33,7 @@ Route::post('/product/price/{product_id}', [SiteController::class, 'productPrice
 Route::get('/lang/{locale}', [SiteController::class, 'locale'])->name('locale');
 Route::post('/phone/send-code', [RegisterController::class, 'sendPhoneVerificationCode'])->name('phone.send_code');
 Route::post('/phone/verify', [RegisterController::class, 'verifyNumber'])->name('phone.verify');
-
+Route::get('/catalog-new', function () { return view('catalog');});
 //Route::get('/login', [SiteController::class, 'login'])->name('login');
 //Route::get('/register', [SiteController::class, 'register'])->name('register');
 Route::middleware([AuthenticateFrontUser::class])->group(function () {

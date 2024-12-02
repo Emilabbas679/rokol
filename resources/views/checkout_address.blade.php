@@ -26,8 +26,8 @@
 						<form action="{!! route('carts.complete') !!}" method="post" id="checkout_address_form">
 							@csrf
 							<div class="cr_adr_row">
-								<label class="address_label {{ old('select_address') == 'office' ? 'select_label' : '' }}">
-									<input type="radio" name="select_address" {{ old('select_address') == 'office' ? 'checked' : '' }} value="office">
+								<label class="address_label select_label">
+									<input type="radio" name="select_address" checked value="office">
 									<span class="label_disk"></span>
 									<span class="address_title">Təhvil məntəqəsindən alma</span>
 									<span class="address_info">Bakı-Sumqayıt yolu, 13,5 km AZ0123 Bakı, Azərbaycan
@@ -213,11 +213,22 @@
             @endif
         });
 
-        $('.my_adress_item').click(function () {
-            $(this).siblings().removeClass("select_my_address");
-            $(this).find('input[type="radio"]').attr('checked', true);
-            $(this).addClass("select_my_address");
+        $('.cr_adr_row').click(function () {
+            var firstAddressItem = $(this).find('.my_adress_item').first();
+            if (firstAddressItem.length > 0) { 
+                $(this).find('.my_adress_item').removeClass("select_my_address");
+                firstAddressItem.addClass("select_my_address");
+                firstAddressItem.find('input[type="radio"]').prop('checked', true);
+            }
         });
+
+        $('.my_adress_item').click(function (event) {
+            event.stopPropagation(); 
+            $(this).siblings().removeClass("select_my_address");
+            $(this).addClass("select_my_address");
+            $(this).find('input[type="radio"]').prop('checked', true);
+        });
+
 	</script>
 	<script>
         $(document).ready(function () {
