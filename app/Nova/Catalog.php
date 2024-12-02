@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\File;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Catalog extends Resource
@@ -37,11 +38,12 @@ class Catalog extends Resource
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function fields(NovaRequest $request)
+    public function fields( NovaRequest $request )
     {
         return [
-            File::make('File', 'path')
-                ->disk('public')
+            Text::make( 'name', 'name' ),
+            File::make( 'File', 'path' )
+                ->disk( 'public' )
         ];
     }
 
@@ -51,7 +53,7 @@ class Catalog extends Resource
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function cards(NovaRequest $request)
+    public function cards( NovaRequest $request )
     {
         return [];
     }
@@ -62,7 +64,7 @@ class Catalog extends Resource
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function filters(NovaRequest $request)
+    public function filters( NovaRequest $request )
     {
         return [];
     }
@@ -73,7 +75,7 @@ class Catalog extends Resource
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function lenses(NovaRequest $request)
+    public function lenses( NovaRequest $request )
     {
         return [];
     }
@@ -84,20 +86,9 @@ class Catalog extends Resource
      * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function actions(NovaRequest $request)
+    public function actions( NovaRequest $request )
     {
         return [];
     }
 
-
-    public static function authorizedToCreate(Request $request)
-    {
-        return !\App\Models\Catalog::query()->count();
-    }
-
-
-    public function authorizedToReplicate(Request $request)
-    {
-        return false;
-    }
 }

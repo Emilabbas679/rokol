@@ -33,7 +33,8 @@ Route::post('/product/price/{product_id}', [SiteController::class, 'productPrice
 Route::get('/lang/{locale}', [SiteController::class, 'locale'])->name('locale');
 Route::post('/phone/send-code', [RegisterController::class, 'sendPhoneVerificationCode'])->name('phone.send_code');
 Route::post('/phone/verify', [RegisterController::class, 'verifyNumber'])->name('phone.verify');
-Route::get('/catalog-new', function () { return view('catalog');});
+Route::get('/catalogs', [\App\Http\Controllers\CatalogController::class, 'index'])->name('catalogs.index');
+Route::get( '/catalogs/{id}', [ \App\Http\Controllers\CatalogController::class, 'show' ] )->name( 'catalogs.show' );
 //Route::get('/login', [SiteController::class, 'login'])->name('login');
 //Route::get('/register', [SiteController::class, 'register'])->name('register');
 Route::middleware([AuthenticateFrontUser::class])->group(function () {
@@ -70,7 +71,7 @@ Route::get('/about', [\App\Http\Controllers\AboutController::class, 'index'])->n
 Route::get('/static', [SiteController::class, 'static'])->name('static');
 Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
 Route::post('/messages', [\App\Http\Controllers\MessageController::class, 'store'])->name('messages.store');
-Route::get('/catalog', [\App\Http\Controllers\CatalogController::class, 'index'])->name('catalogs.index');
+//Route::get('/catalog', [\App\Http\Controllers\CatalogController::class, 'index'])->name('catalogs.index');
 Route::get('/view', [\App\Http\Controllers\SiteController::class, 'setView'])->name('view.set');
 Route::get('/getProductsByCategoryId/{id}', [\App\Http\Controllers\SiteController::class, 'getProductsByCategoryId']);
 Route::get('/getConsumptionByProductId/{id}', [\App\Http\Controllers\SiteController::class, 'getConsumptionByProductId']);
