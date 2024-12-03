@@ -154,6 +154,20 @@
                                     @endforeach
                                 </div>
                             </div>
+                            <div class="filter_items drop_filter_item">
+                                <div class="filter_head">
+                                    <h5>{{translate('Brands')}}</h5>
+                                </div>
+                                <div class="filter_check_items">
+                                    @foreach(brands() as $item)
+                                        <label class="f_check_type">
+                                            <input type="checkbox" name="brands[]" value="{{$item->id}}"
+                                                   @if(isset($selected['brands']) and in_array($item->id, $selected['brands'])) checked @endif>
+                                            <span>{{$item->name}}</span>
+                                        </label>
+                                    @endforeach
+                                </div>
+                            </div>
 
                             <div class="filter_buttons">
                                 <button type="button" class="filter_btn btn_reset">Sıfırla</button>

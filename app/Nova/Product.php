@@ -336,8 +336,8 @@ class Product extends Resource
                                 $model->consumption = $consumptions;
                             } ),
                     Number::make( 'Recommended Layers', 'recommended_layers' )->hideFromIndex(),
-                    Number::make( 'Consumption norm', 'consumption_norm' )->step('0.01')->hideFromIndex(),
-                    Boolean::make('Dimension changeable', 'dimension_changeable')->hideFromIndex()
+                    Number::make( 'Consumption norm', 'consumption_norm' )->step( '0.01' )->hideFromIndex(),
+                    Boolean::make( 'Dimension changeable', 'dimension_changeable' )->hideFromIndex()
 
                 ] ),
                 Tab::make( 'Saxlama müddəti', [
@@ -433,12 +433,18 @@ class Product extends Resource
                 Tab::make( 'Color', [
                     Select::make( 'Has color', 'has_colors' )
                           ->options( [
-                                         \App\Models\Product::NO_COLORS => 'No',
+                                         \App\Models\Product::NO_COLORS   => 'No',
                                          \App\Models\Product::SPEC_COLORS => 'Some colors',
-                                         \App\Models\Product::ALL_COLORS => 'All colors',
+                                         \App\Models\Product::ALL_COLORS  => 'All colors',
                                          \App\Models\Product::MAIN_COLORS => 'Main colors',
                                      ] )->displayUsingLabels()
                           ->sortable(),
+                ] ),
+                Tab::make( 'Brand', [
+                    BelongsTo::make( 'Brand', 'brand', Brand::class )
+                        ->display( function ( $category ) {
+                            return $category->name ?? '';
+                        } ),
                 ] ),
             ] ),
         ];
