@@ -32,7 +32,8 @@ if ( !function_exists( 'menu_categories' ) ) {
     function menu_categories()
     {
         $categories = Cache::remember( 'categories', 1200, function () {
-            return Category::query()->with(['children'])->where( 'status', 1 )->where( 'category_id', null )->with( 'children' )->get();
+            return Category::query()->with( [ 'children' ] )->where( 'status', 1 )->where( 'category_id', null )
+                           ->with( 'children' )->get();
         } );
         return $categories;
     }
@@ -82,6 +83,15 @@ if ( !function_exists( 'weights' ) ) {
     }
 }
 
+if ( !function_exists( 'brands' ) ) {
+    function brands()
+    {
+        return Cache::rememberForever( 'brands', function () {
+            return \App\Models\Brand::query()->get();
+        } );
+    }
+}
+
 if ( !function_exists( 'fUser' ) ) {
     function fUser()
     {
@@ -116,14 +126,15 @@ if ( !function_exists( 'getViewCookie' ) ) {
 }
 
 if ( !function_exists( 'productWeightUnit' ) ) {
-    function productWeightUnit(int $weightType): string
+    function productWeightUnit( int $weightType ): string
     {
-        if ($weightType === 1){
+        if ( $weightType === 1 ) {
             return 'Kq';
         }
         else if ( $weightType === 2 ) {
             return 'L';
-        } else {
+        }
+        else {
             return 'Q';
         }
     }

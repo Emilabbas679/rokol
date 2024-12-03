@@ -200,6 +200,11 @@ class SiteController extends Controller
             }
         }
 
+        if ( \request()->has( 'brands' ) ) {
+            $selected['brands'] = request()->brands;
+            $query->whereIntegerInRaw( 'brand_id', $selected['brands'] );
+        }
+
         if ( request()->filled( 'sort_by' ) ) {
             $exploded = explode( ',', request()->input( 'sort_by' ) );
             if ( is_array( $exploded ) && count( $exploded ) == 2 && in_array( $exploded[1], [ 'asc', 'desc' ] ) ) {
