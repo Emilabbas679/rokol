@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Color;
 use App\Models\Slider;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Blog;
 use App\Models\ProductPrice;
 use App\Models\Category;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
@@ -109,7 +112,8 @@ class SiteController extends Controller
                                       'w.weight'
                                   ] )
                         ->with( [
-                                    'category'
+                                    'category',
+                                    'refProperties'
                                 ] )
                         ->where( 'products.status', 1 );
 
@@ -161,6 +165,7 @@ class SiteController extends Controller
 //                });
 //            });
 //        }
+        $filters = collect();
         if ( request()->has( 'properties' ) ) {
             if ( is_array( request()->properties ) ) {
                 $selected['properties'] = request()->properties;
@@ -219,7 +224,11 @@ class SiteController extends Controller
 
         $query->orderBy( 'category_id' );
         $query->orderBy( 'products.id' );
-        $products = $query->paginate( 32 );
+        $products = $query->get( 32 );
+
+        $filters = $this->getFilters( $products );
+
+        $products = $this->paginate( $products, \request()->input( 'page' ) );
 
 
         if ( \request()->ajax() ) {
@@ -234,7 +243,7 @@ class SiteController extends Controller
         }
 
 
-        return view( 'category', compact( 'category', 'categories', 'products', 'selected' ) );
+        return view( 'category', compact( 'category', 'categories', 'products', 'selected','filters' ) );
     }
 
     public function product( Request $request, $id )
@@ -460,6 +469,56 @@ class SiteController extends Controller
                                                                      'dimension_changeable'
                                                                  ] )
                                  ] );
+    }
+
+    private function getFilters( \Illuminate\Support\Collection $collection )
+    {
+//        collect()->put('weights', )
+        $filters = [];
+        $weights = $collection->pluck('weights.*')
+                                ->flatten()
+                                ->unique('id')
+                                ->pluck('id');
+        if ( !empty( $weights ) ) {
+            $filters['weights'] = $weights->toArray();
+        }
+
+
+        $colors = $collection->pluck( 'colors' )->unique( 'id' )->toArray();
+        $colors = array_column( $colors[0], 'id' );
+        if ( !empty( $colors ) ) {
+            $filters['colors'] = $colors;
+        }
+
+        $refProperties = $collection->pluck( 'refProperties' )->unique( 'id' )->toArray();
+        $refProperties = array_column( $refProperties[0], 'id' );
+        if ( !empty( $refProperties ) ) {
+            $filters['refProperties'] = $refProperties;
+        }
+
+        $appearances = $collection->pluck( 'appearances' )->unique( 'id' )->toArray();
+        $appearances = array_column( $appearances[0], 'id' );
+        if ( !empty( $appearances ) ) {
+            $filters['appearances'] = $appearances;
+        }
+
+        return $filters;
+    }
+
+    private function paginate( $items, $page = null, $perPage = 32, $options = [] )
+
+    {
+
+        $page = $page
+            ?: ( Paginator::resolveCurrentPage()
+                ?: 1 );
+
+        $items = $items instanceof Collection
+            ? $items
+            : Collection::make( $items );
+
+        return new LengthAwarePaginator( $items->forPage( $page, $perPage ), $items->count(), $perPage, $page, $options );
+
     }
 }
 
