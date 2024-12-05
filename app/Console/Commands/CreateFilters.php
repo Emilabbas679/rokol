@@ -56,29 +56,20 @@ class CreateFilters extends Command
                 $filter['category_id'] = $product->category_id;
                 $filter['brand_id']    = $product->brand_id
                     ?: null;
+                $filter['weight_id'] = $weight?->id;
                 foreach ( $appearances ?? [ null ] as $appearance ) {
+                    $filter['appearance_id'] = $appearance?->id;
                     foreach ( $refProperties as $property ) {
                         $filter['property_id'] = $property?->id;
+                        Filter::query()->updateOrCreate( $filter, [
+                            'count' => DB::raw( 'count + 1' ),
+                        ] );
                     }
-                    $filter['appearance_id'] = $appearance?->id;
+
                 }
-                $filter['weight_id'] = $weight?->id;
-                $filters[]           = $filter;
+
             }
         }
 
-        foreach ( $filters as $filter ) {
-            Filter::query()->updateOrCreate( $filter, [
-                'count' => DB::raw( 'count + 1' ),
-            ] );
-        }
-
-//
-//        foreach ( $filters as $filter ) {
-//            $f = [];
-//            $f['category_id'] = $filter['category_id'];
-//            $f['brand_id'] = $filter['brand_id'];
-//
-//        }
     }
 }
