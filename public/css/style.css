@@ -10457,5 +10457,8 @@ img.product_gallery_images_upload {
   margin: 0;
 }
 
+.wrap_profile_sect.wrap_category .offer .item_col {
+  width: 25%;
+}
 
 /*! ====  ALL PAGES CSS FINISH  ===== */
