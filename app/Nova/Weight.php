@@ -24,13 +24,18 @@ class Weight extends Resource
      */
     public static $title = 'id';
 
+    public function title()
+    {
+        return $this->weight;
+    }
+
     /**
      * The columns that should be searched.
      *
      * @var array
      */
     public static $search = [
-        'id',
+        'weight',
     ];
 
     /**

@@ -82,6 +82,7 @@ Route::get('/offers', function(){
 
 
 Route::get('/cache/clear', function(){
-    \Illuminate\Support\Facades\Artisan::call('cache:clear');
+    \Illuminate\Support\Facades\Artisan::call( 'app:create-filters' );
 })->name('cache.clear');
+
 

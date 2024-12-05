@@ -2,7 +2,9 @@
 
 namespace App\Nova;
 
+use App\Jobs\ReOrganizeFilters;
 use App\Models\Filter;
+use Benjacho\BelongsToManyField\BelongsToManyField;
 use Eminiarts\Tabs\Tab;
 use Eminiarts\Tabs\Tabs;
 use Eminiarts\Tabs\Traits\HasTabs;
@@ -17,6 +19,7 @@ use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Tag;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Waynestate\Nova\CKEditor4Field\CKEditor;
@@ -112,29 +115,25 @@ class Product extends Resource
                     Number::make( 'Stock count', 'stock_count' )->default( 0 )->sortable(),
                     File::make( 'Image' )->disk( 'public' ),
 
-                    BelongsToMany::make( 'types', 'types', 'App\Nova\Type' )
-                                 ->nullable()
-                                 ->display( function ( $item ) {
-                                     return $item->name[app()->getLocale()] ?? '';
-                                 } ),
-                    BelongsToMany::make( 'Appearances', 'Appearances', 'App\Nova\Appearance' )
-                                 ->nullable()
-                                 ->display( function ( $item ) {
-                                     return $item->name[app()->getLocale()] ?? '';
-                                 } ),
+                    Tag::make( 'Types', 'types', 'App\Nova\Type' )
+                       ->preload()
+                       ->nullable(),
 
-                    BelongsToMany::make( 'Property', 'refProperties', 'App\Nova\Property' )
-                                 ->nullable()
-                                 ->display( function ( $item ) {
-                                     return $item->name[app()->getLocale()] ?? '';
-                                 } ),
+                    Tag::make( 'Appearances', 'appearances', 'App\Nova\Appearance' )
+                       ->preload()
+                       ->nullable(),
+
+                    Tag::make( 'Property', 'refProperties', 'App\Nova\Property' )
+                       ->preload()
+                       ->nullable(),
 
 
-                    BelongsToMany::make( 'Application Areas', 'applicationAreas', 'App\Nova\ApplicationArea' )
-                                 ->nullable()
-                                 ->display( function ( $item ) {
-                                     return $item->name[app()->getLocale()] ?? '';
-                                 } ),
+                    Tag::make( 'Application Areas', 'applicationAreas', 'App\Nova\ApplicationArea' )
+                       ->preload()
+                       ->nullable(),
+
+                    Tag::make( 'Weights', 'weights', 'App\Nova\Weight' )->preload()->nullable(),
+
                     HasMany::make( 'Variations', 'prices', ProductPrice::class ),
                 ] ),
                 Tab::make( 'Haqqında', [
@@ -446,9 +445,9 @@ class Product extends Resource
                 ] ),
                 Tab::make( 'Brand', [
                     BelongsTo::make( 'Brand', 'brand', Brand::class )
-                        ->display( function ( $category ) {
-                            return $category->name ?? '';
-                        } ),
+                             ->display( function ( $category ) {
+                                 return $category->name ?? '';
+                             } ),
                 ] ),
             ] ),
         ];
@@ -500,18 +499,18 @@ class Product extends Resource
 
     public static function afterUpdate( NovaRequest $request, Model $model )
     {
-        DB::table('filters')->truncate();
-        Artisan::call( 'app:create-filters' );
+        ReOrganizeFilters::dispatch();
     }
 
     public static function afterCreate( NovaRequest $request, Model $model )
     {
-        DB::table('filters')->truncate();
-        Artisan::call( 'app:create-filters' );
+        ReOrganizeFilters::dispatch();
     }
+
     public static function afterDelete( NovaRequest $request, Model $model )
     {
-        DB::table('filters')->truncate();
-        Artisan::call( 'app:create-filters' );
+        ReOrganizeFilters::dispatch();
     }
+
+
 }
