@@ -25,7 +25,10 @@
                     <div class="col_in">
                         <a href="{{route('catalogs.show', ['id' => $catalog])}}" title="" class="stat_item_link">
                             <div class="stat_img">
-                                <img src="{{asset('img/icons/catalog_pdf.svg?v2')}}" alt="{!! $catalog->name !!}">
+                                <img class="catalog_main_img" src="https://rokol.az/storage/XSkns4l4BGX2AzQ9NOA38HQrSVJWOJEZMaeiP1ec.jpg" alt="{!! $catalog->name !!}">
+                                <div class="pdf_logo">
+                                    <img src="{{asset('img/icons/catalog_pdf.svg?v2')}}" alt="{!! $catalog->name !!}">
+                                </div>
                             </div>
                             <div class="news_item_content">
                                 <div class="odds_row">
