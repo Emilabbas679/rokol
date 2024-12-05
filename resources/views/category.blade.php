@@ -115,13 +115,28 @@
                                     <h5>{{translate('properties')}}</h5>
                                 </div>
                                 <div class="filter_check_items">
-                                    @foreach(properties() as $item)
-                                        <label class="f_check_type">
-                                            <input type="checkbox" name="properties[]" value="{{$item->id}}"
-                                                   @if(isset($selected['properties']) and in_array($item->id, $selected['properties'])) checked @endif>
-                                            <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
-                                        </label>
-                                    @endforeach
+                                    @if(isset($filters) )
+                                        @if(isset($filters['refProperties']) && !is_null($filters['refProperties']))
+                                            @foreach(properties() as $item)
+                                                @if(!in_array($item->id, $filters['refProperties']))
+                                                    @continue
+                                                @endif
+                                                <label class="f_check_type">
+                                                    <input type="checkbox" name="properties[]" value="{{$item->id}}"
+                                                           @if(isset($selected['properties']) and in_array($item->id, $selected['properties'])) checked @endif>
+                                                    <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
+                                                </label>
+                                            @endforeach
+                                        @endif
+                                    @else
+                                        @foreach(properties() as $item)
+                                            <label class="f_check_type">
+                                                <input type="checkbox" name="properties[]" value="{{$item->id}}"
+                                                       @if(isset($selected['properties']) and in_array($item->id, $selected['properties'])) checked @endif>
+                                                <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
+                                            </label>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
 
@@ -131,13 +146,28 @@
                                     <h5>{{translate('appearances')}}</h5>
                                 </div>
                                 <div class="filter_check_items">
-                                    @foreach(appearances() as $item)
-                                        <label class="f_check_type">
-                                            <input type="checkbox" name="appearances[]" value="{{$item->id}}"
-                                                   @if(isset($selected['appearances']) and in_array($item->id, $selected['appearances'])) checked @endif>
-                                            <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
-                                        </label>
-                                    @endforeach
+                                    @if(isset($filters) )
+                                        @if(isset($filters['appearances']) && !is_null($filters['appearances']))
+                                            @foreach(appearances() as $item)
+                                                @if(!in_array($item->id, $filters['appearances']))
+                                                    @continue
+                                                @endif
+                                                <label class="f_check_type">
+                                                    <input type="checkbox" name="properties[]" value="{{$item->id}}"
+                                                           @if(isset($selected['appearances']) and in_array($item->id, $selected['appearances'])) checked @endif>
+                                                    <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
+                                                </label>
+                                            @endforeach
+                                        @endif
+                                    @else
+                                        @foreach(appearances() as $item)
+                                            <label class="f_check_type">
+                                                <input type="checkbox" name="appearances[]" value="{{$item->id}}"
+                                                       @if(isset($selected['appearances']) and in_array($item->id, $selected['appearances'])) checked @endif>
+                                                <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
+                                            </label>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                             <div class="filter_items drop_filter_item">
@@ -145,13 +175,28 @@
                                     <h5>{{translate('weights')}}</h5>
                                 </div>
                                 <div class="filter_check_items">
-                                    @foreach(weights() as $item)
-                                        <label class="f_check_type">
-                                            <input type="checkbox" name="weights[]" value="{{$item->id}}"
-                                                   @if(isset($selected['weights']) and in_array($item->id, $selected['weights'])) checked @endif>
-                                            <span>{{$item->weight}} {!! productWeightUnit($item->weight_type) !!}</span>
-                                        </label>
-                                    @endforeach
+                                    @if(isset($filters) )
+                                        @if(isset($filters['weights']) && !is_null($filters['weights']))
+                                            @foreach(weights() as $item)
+                                                @if(!in_array($item->id, $filters['weights']))
+                                                    @continue
+                                                @endif
+                                                <label class="f_check_type">
+                                                    <input type="checkbox" name="weights[]" value="{{$item->id}}"
+                                                           @if(isset($selected['weights']) and in_array($item->id, $selected['weights'])) checked @endif>
+                                                    <span>{{$item->weight}} {!! productWeightUnit($item->weight_type) !!}</span>
+                                                </label>
+                                            @endforeach
+                                        @endif
+                                    @else
+                                        @foreach(weights() as $item)
+                                            <label class="f_check_type">
+                                                <input type="checkbox" name="weights[]" value="{{$item->id}}"
+                                                       @if(isset($selected['weights']) and in_array($item->id, $selected['weights'])) checked @endif>
+                                                <span>{{$item->weight}} {!! productWeightUnit($item->weight_type) !!}</span>
+                                            </label>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                             <div class="filter_items drop_filter_item">
@@ -340,7 +385,7 @@
 
                                 if (count === 0) {
                                     $('.favorite_count').remove();
-                                } else if(count > 99) {
+                                } else if (count > 99) {
                                     favoriteCountEl[0].innerText = '99+';
                                 } else {
                                     favoriteCountEl[0].innerText = count;
