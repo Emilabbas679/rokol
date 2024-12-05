@@ -481,22 +481,24 @@ class SiteController extends Controller
         }
 
         $f = Filter::query()
-                         ->when( is_null( $category->category_id ), function ( Builder $query ) use ( $category ) {
-                             $query->whereIntegerInRaw( 'category_id', Category::query()
-                                                                               ->where( 'category_id', $category->id )
-                                                                               ->pluck( 'id' )->toArray() );
-                         } )
-            ->when(\request()->filled('appearances'), function ( Builder $query ) {
-                $query->whereIntegerInRaw('appearance_id', \request()->input('appearances'));
-            })
-            ->when(\request()->filled('properties'), function ( Builder $query ) {
-                $query->whereIntegerInRaw('property_id', \request()->input('properties'));
-            })->get();
+                   ->when( is_null( $category->category_id ), function ( Builder $query ) use ( $category ) {
+                       $query->whereIntegerInRaw( 'category_id', Category::query()
+                                                                         ->where( 'category_id', $category->id )
+                                                                         ->pluck( 'id' )->toArray() );
+                   }, function ( Builder $query ) use ( $category ) {
+                       $query->where( 'category_id', $category->id );
+                   } )
+                   ->when( \request()->filled( 'appearances' ), function ( Builder $query ) {
+                       $query->whereIntegerInRaw( 'appearance_id', \request()->input( 'appearances' ) );
+                   } )
+                   ->when( \request()->filled( 'properties' ), function ( Builder $query ) {
+                       $query->whereIntegerInRaw( 'property_id', \request()->input( 'properties' ) );
+                   } )->get();
 
-        $filters['refProperties'] = $f->pluck('property_id')->unique()->toArray();
-        $filters['appearances'] = $f->pluck('appearance_id')->unique()->toArray();
-        $filters['weights'] = $f->pluck('weight_id')->unique()->toArray();
-        $filters['brands'] = $f->pluck('brand_id')->unique()->toArray();
+        $filters['refProperties'] = $f->pluck( 'property_id' )->unique()->toArray();
+        $filters['appearances']   = $f->pluck( 'appearance_id' )->unique()->toArray();
+        $filters['weights']       = $f->pluck( 'weight_id' )->unique()->toArray();
+        $filters['brands']        = $f->pluck( 'brand_id' )->unique()->toArray();
 
         return $filters;
     }
