@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 //use App\Models\Type;
 
@@ -43,22 +45,22 @@ class Product extends Model
         return $this->belongsTo( Category::class, 'category_id' );
     }
 
-    public function types()
+    public function types(): BelongsToMany
     {
         return $this->belongsToMany( Type::class, 'product_types', 'product_id', 'type_id' );
     }
 
-    public function appearances()
+    public function appearances(): BelongsToMany
     {
         return $this->belongsToMany( Appearance::class, 'product_appearances', 'product_id', 'appearance_id' );
     }
 
-    public function refProperties()
+    public function refProperties(): BelongsToMany
     {
         return $this->belongsToMany( Property::class, 'product_properties', 'product_id', 'property_id' );
     }
 
-    public function applicationAreas()
+    public function applicationAreas(): BelongsToMany
     {
         return $this->belongsToMany( ApplicationArea::class, 'product_application_areas', 'product_id', 'application_area_id' );
     }
@@ -93,5 +95,21 @@ class Product extends Model
     {
         return $this->belongsTo( Brand::class );
     }
+
+//    protected static function boot()
+//    {
+//        parent::boot();
+//        static::saved(function () {
+//            Artisan::call( 'app:create-filters' );
+//        });
+//
+//        static::deleted(function () {
+//            Artisan::call( 'app:create-filters' );
+//        });
+//
+//        static::updated( function () {
+//            Artisan::call( 'app:create-filters' );
+//        });
+//    }
 
 }

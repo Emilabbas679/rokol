@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8397aab22c214211f5cac051e8d7401",
+    "content-hash": "546941edfa954955bc4ff709e421f0df",
     "packages": [
         {
             "name": "acme/analytics",
@@ -10505,8 +10505,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "acme/color-picker": 20,
-        "acme/analytics": 20
+        "acme/analytics": 20,
+        "acme/color-picker": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
@@ -10514,5 +10514,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

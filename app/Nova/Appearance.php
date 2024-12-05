@@ -25,6 +25,11 @@ class Appearance extends Resource
      */
     public static $title = 'id';
 
+    public function title()
+    {
+        return $this->name[app()->getLocale()];
+    }
+
     /**
      * The columns that should be searched.
      *
@@ -32,6 +37,7 @@ class Appearance extends Resource
      */
     public static $search = [
         'id',
+        'name->az'
     ];
 
     /**

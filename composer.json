@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "acme/analytics": "@dev",
         "acme/color-picker": "@dev",
         "alvinhu/nova-child-select": "^1.0",
         "benjacho/belongs-to-many-field": "^2.0",
@@ -25,8 +26,7 @@
         "laravelrotebal/nova-attach-many": "^2.0",
         "stepanenko3/nova-json": "^4.0",
         "waynestate/nova-ckeditor4-field": "^1.4",
-        "zakariatlilani/nova-nested-tree": "^0.0.3",
-        "acme/analytics": "@dev"
+        "zakariatlilani/nova-nested-tree": "^0.0.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",

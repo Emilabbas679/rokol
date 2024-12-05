@@ -28,23 +28,41 @@ class CreateFilters extends Command
      */
     public function handle()
     {
-        $products = Product::query()->with( [ 'refProperties' ] )->get();
-        $filters  = [];
+        DB::statement('truncate table filters');
+        $products = Product::query()->with( [ 'refProperties', 'appearances', 'weights' ] )->get();
         foreach ( $products as $product ) {
             $filter = [];
 
-
-            foreach ( $product->weights as $weight ) {
+            dump();
+            $weights = $product->weights;
+            if ( is_null( $weights ) || !$product->weights->count() ) {
+                $weights = [
+                    null,
+                ];
+            }
+            $appearances = $product->appearances;
+            if ( is_null( $appearances ) || !$product->appearances->count() ) {
+                $appearances = [
+                    null,
+                ];
+            }
+            $refProperties = $product->refProperties;
+            if ( is_null( $refProperties ) || !$product->refProperties->count() ) {
+                $refProperties = [
+                    null,
+                ];
+            }
+            foreach ( $weights as $weight ) {
                 $filter['category_id'] = $product->category_id;
                 $filter['brand_id']    = $product->brand_id
                     ?: null;
-                foreach ( $product->appearances as $appearance ) {
-                    foreach ( $product->refProperties as $property ) {
-                        $filter['property_id'] = $property->id;
+                foreach ( $appearances ?? [ null ] as $appearance ) {
+                    foreach ( $refProperties as $property ) {
+                        $filter['property_id'] = $property?->id;
                     }
-                    $filter['appearance_id'] = $appearance->id;
+                    $filter['appearance_id'] = $appearance?->id;
                 }
-                $filter['weight_id'] = $weight->id;
+                $filter['weight_id'] = $weight?->id;
                 $filters[]           = $filter;
             }
         }
