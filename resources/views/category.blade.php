@@ -153,7 +153,7 @@
                                                     @continue
                                                 @endif
                                                 <label class="f_check_type">
-                                                    <input type="checkbox" name="properties[]" value="{{$item->id}}"
+                                                    <input type="checkbox" name="appearances[]" value="{{$item->id}}"
                                                            @if(isset($selected['appearances']) and in_array($item->id, $selected['appearances'])) checked @endif>
                                                     <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
                                                 </label>
@@ -204,13 +204,28 @@
                                     <h5>{{translate('Brands')}}</h5>
                                 </div>
                                 <div class="filter_check_items">
-                                    @foreach(brands() as $item)
-                                        <label class="f_check_type">
-                                            <input type="checkbox" name="brands[]" value="{{$item->id}}"
-                                                   @if(isset($selected['brands']) and in_array($item->id, $selected['brands'])) checked @endif>
-                                            <span>{{$item->name}}</span>
-                                        </label>
-                                    @endforeach
+                                    @if(isset($filters) )
+                                        @if(isset($filters['brands']) && !is_null($filters['brands']))
+                                            @foreach(brands() as $item)
+                                                @if(!in_array($item->id, $filters['brands']))
+                                                    @continue
+                                                @endif
+                                                <label class="f_check_type">
+                                                    <input type="checkbox" name="brands[]" value="{{$item->id}}"
+                                                           @if(isset($selected['brands']) and in_array($item->id, $selected['brands'])) checked @endif>
+                                                    <span>{{$item->name}}</span>
+                                                </label>
+                                            @endforeach
+                                        @endif
+                                    @else
+                                        @foreach(brands() as $item)
+                                            <label class="f_check_type">
+                                                <input type="checkbox" name="brands[]" value="{{$item->id}}"
+                                                       @if(isset($selected['brands']) and in_array($item->id, $selected['brands'])) checked @endif>
+                                                <span>{{$item->name}}</span>
+                                            </label>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
 
