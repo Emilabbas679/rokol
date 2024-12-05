@@ -2,10 +2,14 @@
 
 namespace App\Nova;
 
+use App\Models\Filter;
 use Eminiarts\Tabs\Tab;
 use Eminiarts\Tabs\Tabs;
 use Eminiarts\Tabs\Traits\HasTabs;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
@@ -492,5 +496,22 @@ class Product extends Resource
     public function actions( NovaRequest $request )
     {
         return [];
+    }
+
+    public static function afterUpdate( NovaRequest $request, Model $model )
+    {
+        DB::table('filters')->truncate();
+        Artisan::call( 'app:create-filters' );
+    }
+
+    public static function afterCreate( NovaRequest $request, Model $model )
+    {
+        DB::table('filters')->truncate();
+        Artisan::call( 'app:create-filters' );
+    }
+    public static function afterDelete( NovaRequest $request, Model $model )
+    {
+        DB::table('filters')->truncate();
+        Artisan::call( 'app:create-filters' );
     }
 }

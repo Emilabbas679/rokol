@@ -100,4 +100,6 @@ class Brand extends Resource
             return \App\Models\Brand::query()->get();
         } );
     }
+
+
 }

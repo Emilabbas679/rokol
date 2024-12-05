@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Color;
+use App\Models\Filter;
 use App\Models\Slider;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -226,7 +227,7 @@ class SiteController extends Controller
         $query->orderBy( 'products.id' );
         $products = $query->get( 32 );
 
-        $filters = $this->getFilters( $products );
+        $filters = $this->getFilters( $category );
 
         $products = $this->paginate( $products, \request()->input( 'page' ) );
 
@@ -243,7 +244,7 @@ class SiteController extends Controller
         }
 
 
-        return view( 'category', compact( 'category', 'categories', 'products', 'selected','filters' ) );
+        return view( 'category', compact( 'category', 'categories', 'products', 'selected', 'filters' ) );
     }
 
     public function product( Request $request, $id )
@@ -471,36 +472,31 @@ class SiteController extends Controller
                                  ] );
     }
 
-    private function getFilters( \Illuminate\Support\Collection $collection )
+    private function getFilters( $category )
     {
 //        collect()->put('weights', )
         $filters = [];
-        $weights = $collection->pluck('weights.*')
-                                ->flatten()
-                                ->unique('id')
-                                ->pluck('id');
-        if ( !empty( $weights ) ) {
-            $filters['weights'] = $weights->toArray();
+        if ( !( $category instanceof Category ) ) {
+            return null;
         }
 
+        $f = Filter::query()
+                         ->when( is_null( $category->category_id ), function ( Builder $query ) use ( $category ) {
+                             $query->whereIntegerInRaw( 'category_id', Category::query()
+                                                                               ->where( 'category_id', $category->id )
+                                                                               ->pluck( 'id' )->toArray() );
+                         } )
+            ->when(\request()->filled('appearances'), function ( Builder $query ) {
+                $query->whereIntegerInRaw('appearance_id', \request()->input('appearances'));
+            })
+            ->when(\request()->filled('properties'), function ( Builder $query ) {
+                $query->whereIntegerInRaw('property_id', \request()->input('properties'));
+            })->get();
 
-        $colors = $collection->pluck( 'colors' )->unique( 'id' )->toArray();
-        $colors = array_column( $colors[0], 'id' );
-        if ( !empty( $colors ) ) {
-            $filters['colors'] = $colors;
-        }
-
-        $refProperties = $collection->pluck( 'refProperties' )->unique( 'id' )->toArray();
-        $refProperties = array_column( $refProperties[0], 'id' );
-        if ( !empty( $refProperties ) ) {
-            $filters['refProperties'] = $refProperties;
-        }
-
-        $appearances = $collection->pluck( 'appearances' )->unique( 'id' )->toArray();
-        $appearances = array_column( $appearances[0], 'id' );
-        if ( !empty( $appearances ) ) {
-            $filters['appearances'] = $appearances;
-        }
+        $filters['refProperties'] = $f->pluck('property_id')->unique()->toArray();
+        $filters['appearances'] = $f->pluck('appearance_id')->unique()->toArray();
+        $filters['weights'] = $f->pluck('weight_id')->unique()->toArray();
+        $filters['brands'] = $f->pluck('brand_id')->unique()->toArray();
 
         return $filters;
     }
