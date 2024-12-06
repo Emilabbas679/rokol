@@ -74,11 +74,11 @@
                             <div class="lang_btn" style="text-transform: capitalize">{{app()->getLocale()}}</div>
                             <ul class="langs">
                                 <li @if(app()->getLocale() == 'az') class="active" @endif><a
-                                        href="{{route('locale', 'az')}}">Az</a></li>
+                                            href="{{route('locale', 'az')}}">Az</a></li>
                                 <li @if(app()->getLocale() == 'en') class="active" @endif><a
-                                        href="{{route('locale', 'en')}}">En</a></li>
+                                            href="{{route('locale', 'en')}}">En</a></li>
                                 <li @if(app()->getLocale() == 'ru') class="active" @endif><a
-                                        href="{{route('locale', 'ru')}}">Ru</a></li>
+                                            href="{{route('locale', 'ru')}}">Ru</a></li>
                             </ul>
                         </div>
                     </div>
@@ -121,7 +121,8 @@
                                    class="{!! request()->routeIs('colors') ? 'active' :  '' !!}">{{translate('header_colors')}} </a>
                             </li>
                             <li>
-                                <a href="{!! route('offers.index') !!}" class="">{{translate('header_offers')}} </a>
+                                <a href="{!! route('offers.index') !!}"
+                                   class="{!! request()->routeIs('offers.*') ? 'active' : '' !!}">{{translate('header_offers')}} </a>
                             </li>
                             <li>
                                 <a href="{!! route('news.index') !!}"
@@ -129,7 +130,7 @@
                             </li>
                             <li>
                                 <a href="{!! route('catalogs.index') !!}"
-                                   class="">{{translate('header_catalogs')}} </a>
+                                   class="{!! request()->routeIs('catalogs.*') ? 'active' : '' !!}">{{translate('header_catalogs')}} </a>
                             </li>
                             <li>
                                 <a href="{!! route('contact') !!}"
@@ -162,7 +163,7 @@
                                                         <option selected disabled value="0">Məhsul sistemi</option>
                                                         @foreach(menu_categories() as $cat)
                                                             <option
-                                                                value="{!! $cat->id !!}">{!! $cat->name[app()->getLocale()] !!}</option>
+                                                                    value="{!! $cat->id !!}">{!! $cat->name[app()->getLocale()] !!}</option>
                                                         @endforeach
                                                     </select>
                                                     <span class="customDrop customDrop-main_calc"></span>
@@ -185,7 +186,7 @@
                                                 </div>
                                             </div>
                                             <div
-                                                id="hiddenDiv">
+                                                    id="hiddenDiv">
                                                 <div class="calc_inputs">
                                                     <div class="form_item">
                                                         <label for="" id="width-label">Səthin eni (m):</label>
@@ -332,6 +333,8 @@
 
 
 
+
+
             @endif><a href="{{route('locale', 'az')}}">Az</a>
                 </li>
                 <li @if(app()->getLocale() == 'en')
@@ -348,10 +351,14 @@
 
 
 
+
+
             @endif><a href="{{route('locale', 'en')}}">En</a>
                 </li>
                 <li @if(app()->getLocale() == 'ru')
                 class="active"
+
+
 
 
 
@@ -399,14 +406,16 @@
                        class="{!! request()->routeIs('colors') ? 'active' :  '' !!}">{{translate('header_colors')}} </a>
                 </li>
                 <li>
-                    <a href="{!! route('offers.index') !!}" class="active">{{translate('header_offers')}} </a>
+                    <a href="{!! route('offers.index') !!}"
+                       class="ac{!! request()->routeIs('offers.*') ? 'active' : '' !!}tive">{{translate('header_offers')}} </a>
                 </li>
                 <li>
                     <a href="{!! route('news.index') !!}"
                        class="{!! request()->routeIs('news.*') ? 'active' : '' !!}">{{translate('header_news')}} </a>
                 </li>
                 <li>
-                    <a href="{!! route('catalogs.index') !!}" class="">{{translate('header_catalogs')}} </a>
+                    <a href="{!! route('catalogs.index') !!}"
+                       class="{!! request()->routeIs('catalogs.*') ? 'active' : '' !!}">{{translate('header_catalogs')}} </a>
                 </li>
                 <li>
                     <a href="{!! route('contact') !!}"
@@ -506,7 +515,7 @@
                 $('#result').text(result.toFixed(2) + "kq");
             });
         });
-        $(".close-modal").click(function(){
+        $(".close-modal").click(function () {
             $(".answer_modal").removeClass("opened")
         })
         $(".new-price").each(function () {
@@ -553,11 +562,11 @@
             $('#hiddenDiv').css('display', 'none');
 
             $('#products_main_calc').val(0).trigger('change');
-            if ($('#products_other_calc > option').length > 1 ) {
+            if ($('#products_other_calc > option').length > 1) {
                 $('#products_other_calc').val(0).trigger('change');
             }
 
-            if ($('#this_product > option').length > 1 ) {
+            if ($('#this_product > option').length > 1) {
                 $('#this_product').val(0).trigger('change');
             }
         })
@@ -574,7 +583,7 @@
                     setTimeout(function () {
                         $(".btn_basket").removeClass("color_sec");
                     }, 2000);
-                }else{
+                } else {
                     $(".btn_basket").addClass("added");
                     setTimeout(function () {
                         $(".btn_basket").removeClass("added");

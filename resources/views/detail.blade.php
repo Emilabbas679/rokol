@@ -26,11 +26,13 @@
                 <div class="sect_body product_container clearfix">
                     <div class="wrap_left">
                         <div class="col_in">
-                            <div class="fav_sect">
-                                <div class="offer-tag">
-                                    <p class="offer_val">Həftənin təklifi</p>
+                            @if($product->offer_of_week)
+                                <div class="fav_sect">
+                                    <div class="offer-tag">
+                                        <p class="offer_val">@lang('Həftənin təklifi')</p>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                             <div class="item_img">
                                 <img src="{{asset('storage/'.$product->image)}}" alt="product">
                             </div>
@@ -59,7 +61,7 @@
                                         <div class="pr_row">
                                             <div class="pr_cat_name">{{translate('product_category')}}:</div>
                                             <div
-                                                class="pr_cat_info">{{$product->category->name[app()->getLocale()] ?? ''}}</div>
+                                                    class="pr_cat_info">{{$product->category->name[app()->getLocale()] ?? ''}}</div>
                                         </div>
                                         @if(count($product->types) > 0)
                                             <div class="pr_row">
@@ -173,8 +175,9 @@
                                         <!-- click after addclass "dofav" -->
 
                                         <div
-                                            class="btn_detail btn_fav @if(!is_null($product->favorites?->where('price_id', $price->id)->first())) dofav @endif"
-                                            data-product-id="{!! $product->id !!}" data-price-id="{!! $price->id !!}">
+                                                class="btn_detail btn_fav @if(!is_null($product->favorites?->where('price_id', $price->id)->first())) dofav @endif"
+                                                data-product-id="{!! $product->id !!}"
+                                                data-price-id="{!! $price->id !!}">
                                             <span>
                                                 Seçilmişlərdə saxla
                                             </span>
@@ -526,7 +529,7 @@
                 minimumResultsForSearch: Infinity,
                 dropdownParent: $('.customDrop-other')
             });
-            $("body").on("click", ".color_open", function() {
+            $("body").on("click", ".color_open", function () {
                 $(".color_modal").addClass("opened");
             });
             $(".modal_select_btn").click(function () {
@@ -571,17 +574,17 @@
                 window.open(shareUrl, '_blank');
             });
         });
-        
+
         let activeLabel = null;
-        $('body').on('click', '.color_save', function() {
-            $('.catalog_row_inner .color_block').each(function() {
-            
+        $('body').on('click', '.color_save', function () {
+            $('.catalog_row_inner .color_block').each(function () {
+
                 if ($(this).hasClass('active')) {
                     let activeLabel = $(this);
-         
+
                     let hexColor = activeLabel.find('.catalog_color').css('background-color');
                     console.log(hexColor);
-    
+
                     let colorLabel = ` 
                         <label class="f_check_type radio_btn color_open">
                             <input type="radio" name="color_main" checked value="selected_color_value">
@@ -594,11 +597,10 @@
         });
 
 
-
-        $(".color_block").click(function () { 
+        $(".color_block").click(function () {
             $('.color_block').removeClass('active');
-            $(this).siblings().find("input").prop("checked",false)
-            $(this).find("input").prop("checked",true)
+            $(this).siblings().find("input").prop("checked", false)
+            $(this).find("input").prop("checked", true)
             $(this).addClass('active');
         });
     </script>
