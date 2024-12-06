@@ -482,9 +482,10 @@ class SiteController extends Controller
 
         $f = Filter::query()
                    ->when( is_null( $category->category_id ), function ( Builder $query ) use ( $category ) {
-                       $query->whereIntegerInRaw( 'category_id', Category::query()
-                                                                         ->where( 'category_id', $category->id )
-                                                                         ->pluck( 'id' )->toArray() );
+                       $query->whereIntegerInRaw( 'category_id',
+                                                  Category::query()
+                                                          ->where( 'category_id', $category->id )
+                                                          ->pluck( 'id' )->toArray() );
                    }, function ( Builder $query ) use ( $category ) {
                        $query->where( 'category_id', $category->id );
                    } )
@@ -500,7 +501,76 @@ class SiteController extends Controller
         $filters['weights']       = $f->pluck( 'weight_id' )->unique()->toArray();
         $filters['brands']        = $f->pluck( 'brand_id' )->unique()->toArray();
 
+
         return $filters;
+    }
+
+    public function getFiltersApi( $id = null )
+    {
+        if ( \request()->filled( 'category_id' ) ) {
+            $category = Category::query()->where( 'id', \request()->input( 'category_id' ) )->first();
+        }
+
+        $f = Filter::query()
+                   ->when( isset( $category ), function ( Builder $query ) use ( $category ) {
+                       $query->whereIntegerInRaw( 'category_id',
+                                                  is_null( $category->category_id )
+                                                      ?
+                                                      Category::query()
+                                                              ->where( 'category_id', $category->id )
+                                                              ->pluck( 'id' )->toArray()
+                                                      : [ $category->id ] );
+                   } )
+                   ->when( \request()->filled( 'appearances' ), function ( Builder $query ) {
+                       $query->whereIntegerInRaw( 'appearance_id', \request()->input( 'appearances' ) );
+                   } )
+                   ->when( \request()->filled( 'brands' ), function ( Builder $query ) {
+                       $query->whereIntegerInRaw( 'brand_id', \request()->input( 'brands' ) );
+                   } )
+                   ->when( \request()->filled( 'weights' ), function ( Builder $query ) {
+                       $query->whereIntegerInRaw( 'weight_id', \request()->input( 'weights' ) );
+                   } )
+                   ->when( \request()->filled( 'properties' ), function ( Builder $query ) {
+                       $query->whereIntegerInRaw( 'property_id', \request()->input( 'properties' ) );
+                   } )->get();
+
+
+        $filters['refProperties'] = [];
+        $refProps                 = $f->pluck( 'property_id' )->unique()->toArray();
+        foreach ( properties() as $property ) {
+            if ( in_array( $property->id, $refProps ) ) {
+                $filters['refProperties'][] = $property->name[app()->getlocale()];
+            }
+        }
+
+        $filters['appearances'] = [];
+        $appearances            = $f->pluck( 'appearance_id' )->unique()->toArray();
+        foreach ( appearances() as $appearance ) {
+            if ( in_array( $appearance->id, $appearances ) ) {
+                $filters['appearances'][] = $appearance->name[app()->getlocale()];
+            }
+        }
+
+        $filters['weights'] = [];
+        $weights            = $f->pluck( 'weight_id' )->unique()->toArray();
+        foreach ( weights() as $weight ) {
+            if ( in_array( $weight->id, $weights ) ) {
+                $filters['weights'][] = $weight->weight;
+            }
+        }
+        $filters['brands'] = [];
+        $brands            = $f->pluck( 'brand_id' )->unique()->toArray();
+        foreach ( brands() as $brand ) {
+            if ( in_array( $brand->id, $brands ) ) {
+                $filters['brands'][] = $brand->name;
+            }
+        }
+
+        return response()->json( [
+                                     'data' => $filters,
+                                 ] );
+
+
     }
 
     private function paginate( $items, $page = null, $perPage = 32, $options = [] )
