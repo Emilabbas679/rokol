@@ -77,6 +77,7 @@ Route::get('/getProductsByCategoryId/{id}', [\App\Http\Controllers\SiteControlle
 Route::get('/getConsumptionByProductId/{id}', [\App\Http\Controllers\SiteController::class, 'getConsumptionByProductId']);
 
 Route::get('/offers', [\App\Http\Controllers\OfferController::class, 'index'])->name('offers.index');
+Route::get('/testingApi/{id?}', [\App\Http\Controllers\SiteController::class, 'getFiltersApi']);
 
 
 Route::get('/cache/clear', function(){
