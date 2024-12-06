@@ -507,6 +507,7 @@ class SiteController extends Controller
 
     public function getFiltersApi()
     {
+        $category = null;
         if ( \request()->filled( 'category_id' ) ) {
             $category = Category::query()->where( 'id', \request()->input( 'category_id' ) )->first();
         }
