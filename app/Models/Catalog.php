@@ -12,6 +12,7 @@ class Catalog extends Model
 
     protected $fillable = [
         'name',
-        'path'
+        'path',
+        'image'
     ];
 }

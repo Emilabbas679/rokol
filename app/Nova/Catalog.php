@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\File;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -43,7 +44,10 @@ class Catalog extends Resource
         return [
             Text::make( 'name', 'name' ),
             File::make( 'File', 'path' )
-                ->disk( 'public' )
+                ->disk( 'public' ),
+            Image::make('Image', 'image')
+                ->disk('public'),
+
         ];
     }
 
