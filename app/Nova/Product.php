@@ -135,6 +135,7 @@ class Product extends Resource
                     Tag::make( 'Weights', 'weights', 'App\Nova\Weight' )->preload()->nullable(),
 
                     HasMany::make( 'Variations', 'prices', ProductPrice::class ),
+                    Boolean::make( __( 'Offer of week' ), 'offer_of_week' ),
                 ] ),
                 Tab::make( 'Haqqında', [
                     CKEditor::make( __( 'About (English)' ), 'about_en' )

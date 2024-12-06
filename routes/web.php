@@ -76,9 +76,7 @@ Route::get('/view', [\App\Http\Controllers\SiteController::class, 'setView'])->n
 Route::get('/getProductsByCategoryId/{id}', [\App\Http\Controllers\SiteController::class, 'getProductsByCategoryId']);
 Route::get('/getConsumptionByProductId/{id}', [\App\Http\Controllers\SiteController::class, 'getConsumptionByProductId']);
 
-Route::get('/offers', function(){
-    return view('offers');
-})->name('offers.index');
+Route::get('/offers', [\App\Http\Controllers\OfferController::class, 'index'])->name('offers.index');
 
 
 Route::get('/cache/clear', function(){
