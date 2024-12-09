@@ -556,7 +556,7 @@ class SiteController extends Controller
         $weights            = $f->pluck( 'weight_id' )->unique()->toArray();
         foreach ( weights() as $weight ) {
             if ( in_array( $weight->id, $weights ) ) {
-                $filters['weights'][$weight->id] = $weight->weight;
+                $filters['weights'][$weight->id] = $weight->weight ." " . productWeightUnit($weight->weight_type);
             }
         }
         $filters['brands'] = [];
