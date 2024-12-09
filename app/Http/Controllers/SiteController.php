@@ -540,7 +540,7 @@ class SiteController extends Controller
         $refProps                 = $f->pluck( 'property_id' )->unique()->toArray();
         foreach ( properties() as $property ) {
             if ( in_array( $property->id, $refProps ) ) {
-                $filters['refProperties'][] = $property->name[app()->getlocale()];
+                $filters['refProperties'][$property->id] = $property->name[app()->getlocale()];
             }
         }
 
@@ -548,7 +548,7 @@ class SiteController extends Controller
         $appearances            = $f->pluck( 'appearance_id' )->unique()->toArray();
         foreach ( appearances() as $appearance ) {
             if ( in_array( $appearance->id, $appearances ) ) {
-                $filters['appearances'][] = $appearance->name[app()->getlocale()];
+                $filters['appearances'][$appearance->id] = $appearance->name[app()->getlocale()];
             }
         }
 
@@ -556,14 +556,14 @@ class SiteController extends Controller
         $weights            = $f->pluck( 'weight_id' )->unique()->toArray();
         foreach ( weights() as $weight ) {
             if ( in_array( $weight->id, $weights ) ) {
-                $filters['weights'][] = $weight->weight;
+                $filters['weights'][$weight->id] = $weight->weight;
             }
         }
         $filters['brands'] = [];
         $brands            = $f->pluck( 'brand_id' )->unique()->toArray();
         foreach ( brands() as $brand ) {
             if ( in_array( $brand->id, $brands ) ) {
-                $filters['brands'][] = $brand->name;
+                $filters['brands'][$brand->id] = $brand->name;
             }
         }
 
