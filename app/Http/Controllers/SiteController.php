@@ -431,6 +431,11 @@ class SiteController extends Controller
         return view( 'about' );
     }
 
+    public function catalog_filter()
+    {
+        return view( 'catalog_filter' );
+    }
+
     public function static()
     {
         return view( 'static' );

@@ -1,0 +1,21 @@
+
+   InvalidArgumentException 
+
+  The [worker.log] queue connection has not been configured.
+
+  at vendor/laravel/framework/src/Illuminate/Queue/QueueManager.php:159
+    155▕     {
+    156▕         $config = $this->getConfig($name);
+    157▕ 
+    158▕         if (is_null($config)) {
+  ➜ 159▕             throw new InvalidArgumentException("The [{$name}] queue connection has not been configured.");
+    160▕         }
+    161▕ 
+    162▕         return $this->getConnector($config['driver'])
+    163▕                         ->connect($config)
+
+      [2m+16 vendor frames [22m
+
+  17  artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+

@@ -163,7 +163,7 @@ $(document).ready(function () {
                     return (className.match(/(^|\s)active_\S+/g) || []).join(' ');
                 });
 
-                $.get(window.location.origin+'/view', {view: index == 0 ? 'list' : 'grid'});
+                $.get(window.location.origin + '/view', { view: index == 0 ? 'list' : 'grid' });
 
                 $(this).siblings(".glider").addClass(`active_${this_id}`);
                 $(this).addClass("active");
@@ -635,19 +635,20 @@ $(document).ready(function () {
     function equalHeight(event) {
         // $('.item_content').matchHeight({ property: 'min-height' });
         // $('.wrap_category .col_in').matchHeight({ property: 'min-height' });
-        $('.wrap_category .bf_tb_items.active .item_content').matchHeight({property: 'min-height'});
-        $('.wrap_category .bf_tb_items.active .col_in').matchHeight({property: 'min-height'});
-        $('.wrap_similar_product .item_content').matchHeight({property: 'min-height'});
-        $('.wrap_similar_product .col_in').matchHeight({property: 'min-height'});
-        $('.item_content_btm').matchHeight({property: 'min-height'});
-        $('.item_content_btm .itm_title').matchHeight({property: 'min-height'});
-        $('.atg_item').matchHeight({property: 'min-height'});
-        $('.atg_content').matchHeight({property: 'min-height'});
-        $('.service_item_title').matchHeight({property: 'min-height'});
-        $('.itm_name.card_head').matchHeight({property: 'min-height'});
-        $('.abt_h').matchHeight({property: 'min-height'});
-        $('.news_item_content').matchHeight({property: 'min-height'});
-        $('.img_cover').matchHeight({property: 'min-height'});
+        $('.wrap_category .bf_tb_items.active .item_content').matchHeight({ property: 'min-height' });
+        $('.wrap_category .bf_tb_items.active .col_in').matchHeight({ property: 'min-height' });
+        $('.wrap_similar_product .item_content').matchHeight({ property: 'min-height' });
+        $('.wrap_similar_product .col_in').matchHeight({ property: 'min-height' });
+        $('.item_content_btm').matchHeight({ property: 'min-height' });
+        $('.item_content_btm .itm_title').matchHeight({ property: 'min-height' });
+        $('.atg_item').matchHeight({ property: 'min-height' });
+        $('.atg_content').matchHeight({ property: 'min-height' });
+        $('.service_item_title').matchHeight({ property: 'min-height' });
+        $('.itm_name.card_head').matchHeight({ property: 'min-height' });
+        $('.abt_h').matchHeight({ property: 'min-height' });
+        $('.news_item_content').matchHeight({ property: 'min-height' });
+        $('.img_cover').matchHeight({ property: 'min-height' });
+        $('.catalog_filter .catalog_val_n').matchHeight({ property: 'min-height' });
     }
 
     // *Equal height
@@ -656,7 +657,7 @@ $(document).ready(function () {
         $(".drop_list li").removeClass("active")
         $(this).addClass("active")
     })
-    $(".drop_list").mouseleave(function(){
+    $(".drop_list").mouseleave(function () {
         $(".drop_list li").removeClass("active")
     })
 });

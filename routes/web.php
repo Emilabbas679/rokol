@@ -84,4 +84,4 @@ Route::get('/cache/clear', function(){
     \Illuminate\Support\Facades\Artisan::call( 'app:create-filters' );
 })->name('cache.clear');
 
-
+Route::get('/catalog_filter', function() { return view('catalog_filter');});
