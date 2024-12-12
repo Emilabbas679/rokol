@@ -117,8 +117,8 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="{!! route('colors') !!}"
-                                   class="{!! request()->routeIs('colors') ? 'active' :  '' !!}">{{translate('header_colors')}} </a>
+                                <a href="{!! route('colors.groups.index') !!}"
+                                   class="{!! request()->routeIs('colors.groups.*') ? 'active' :  '' !!}">{{translate('header_colors')}} </a>
                             </li>
                             <li>
                                 <a href="{!! route('offers.index') !!}"
@@ -402,8 +402,8 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{!! route('colors') !!}"
-                       class="{!! request()->routeIs('colors') ? 'active' :  '' !!}">{{translate('header_colors')}} </a>
+                    <a href="{!! route('colors.groups.index') !!}"
+                       class="{!! request()->routeIs('colors.groups.*') ? 'active' :  '' !!}">{{translate('header_colors')}} </a>
                 </li>
                 <li>
                     <a href="{!! route('offers.index') !!}"

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Color;
 use App\Models\Filter;
+use App\Models\Modal;
 use App\Models\Slider;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -30,7 +31,11 @@ class SiteController extends Controller
         $sliders   = Slider::query()
                            ->where( 'status', Slider::STATUS_ACTIVE )
                            ->get();
-        return view( 'index', compact( 'sliders', 'videoNews' ) );
+
+        $modal = Modal::query()
+            ->where('expire_time', '>', now())
+                      ->first();
+        return view( 'index', compact( 'sliders', 'videoNews', 'modal' ) );
     }
 
 

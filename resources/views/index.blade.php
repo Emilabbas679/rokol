@@ -9,188 +9,199 @@
 @endpush
 
 @section('content')
-<!-- <div class="modal home_modal" style="display:none">
-    <div class="modal_section">
-        <div class="modal_container">
-            <div class="close_modal_div">
-                <span class="close_modal"></span>
-            </div>
-            <a class="home_modal_img" href="#">
-                <img src="https://rokol.az/storage/C0XGwJ4faxA2EL8ORDWyVXNNf9CyCoVPBZnYtwmT.png"
-                    alt="Main slider Image">
-            </a>
-            <div class="home_modal_img">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/RhSd3sWwGe4?si=aiHqhiGSBff6LN_v"
-                    title="YouTube video player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    @if($modal)
+        <div class="modal home_modal" style="display:none">
+            <div class="modal_section">
+                <div class="modal_container">
+                    <div class="close_modal_div">
+                        <span class="close_modal"></span>
+                    </div>
+                    @if(!$modal->is_video)
+                        <a class="home_modal_img" href="#">
+                            <img src="{!! asset('storage/'.$modal->image_path) !!}"
+                                 alt="Main slider Image">
+                        </a>
+                    @else
+                        <div class="home_modal_img">
+                            <iframe width="560" height="315"
+                                    src="{{ str_replace('watch?v=', 'embed/', $modal->video_url ) }}"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
-    </div>
-</div> -->
-<!-- Main Slider -->
-<div class="section_wrap wrap_slider wrap_main_slider main_slider">
-    <div class="sect_body slider_container clearfix">
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                @foreach($sliders as $slider)
-                    <div class="swiper-slide">
-                        <div class="swiper-link clearfix">
-                            <div class="col_in">
-                                <div class="item_img">
-                                    <img src="{{asset('storage/' . $slider->image)}}" alt="Main slider Image">
-                                </div>
-                                <div class="main_slider_content">
-                                    <div class="main_center clearfix">
-                                        <div class="main_slider_inner clearfix">
-                                            <h4 class="itm_title">
-                                                {{ $slider->header[app()->getLocale()] }}
-                                            </h4>
-                                            <p class="itm_info">
-                                                {{ $slider->content[app()->getLocale()] }}
-                                            </p>
-                                            <!-- <div class="go_product">
+    @endif
+    <!-- Main Slider -->
+    <div class="section_wrap wrap_slider wrap_main_slider main_slider">
+        <div class="sect_body slider_container clearfix">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    @foreach($sliders as $slider)
+                        <div class="swiper-slide">
+                            <div class="swiper-link clearfix">
+                                <div class="col_in">
+                                    <div class="item_img">
+                                        <img src="{{asset('storage/' . $slider->image)}}" alt="Main slider Image">
+                                    </div>
+                                    <div class="main_slider_content">
+                                        <div class="main_center clearfix">
+                                            <div class="main_slider_inner clearfix">
+                                                <h4 class="itm_title">
+                                                    {{ $slider->header[app()->getLocale()] }}
+                                                </h4>
+                                                <p class="itm_info">
+                                                    {{ $slider->content[app()->getLocale()] }}
+                                                </p>
+                                                <!-- <div class="go_product">
                                                 <a href="{{ $slider->url }}">@lang('Ətraflı')</a>
                                             </div> -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-        <div class="swiper_pagin_items">
-            <div class="swiper-pagination"></div>
-        </div>
-        <!-- Add Arrows -->
-        @if($sliders->count() - 1)
-            <div class="swiper_arrows clearfix">
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-            </div>
-        @endif
-    </div>
-</div>
-<!-- Main Slider -->
-
-
-
-<!-- Prodcts section -->
-<div class="section_wrap wrap_advantage product_items wrap_slider">
-    <div class="main_center clearfix">
-        <div class="sect_body slider_container clearfix">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-
-                    <div class="swiper-slide">
-                        <a href="./category/3" class="atg_item">
-                            <div class="atg_img">
-                                <img src="{{asset('img/product1.png')}}" alt="Daxili boyalar">
-                            </div>
-                            <div class="atg_content">
-                                <div class="row_inner">
-                                    <h5 class="itm_title">Daxili boyalar</h5>
-                                    <p class="itm_info">
-                                        Akrilik sopolimer əsaslı, yüksək örtücülük qabliyyətinə malik, ətraf mühit üçün
-                                        zərərsiz və qoxusuz daxili səth boyalarıdır.
-                                    </p>
-                                    <div class="go_product">
-                                        <span>Məhsullara keçin</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="./category/1" class="atg_item">
-                            <div class="atg_img">
-                                <img src="{{asset('img/boyadolgu.jpg')}}" alt="Boya, Dolğu və Iaklar">
-                            </div>
-                            <div class="atg_content">
-                                <div class="row_inner">
-                                    <h5 class="itm_title">Boya, Dolğu və Iaklar</h5>
-                                    <p class="itm_info">
-                                        Uretan alkid əsaslı, bütün növ ağac məmulatlarının səthlərinin qorunmasını təmin
-                                        edən məhsullardır.
-                                    </p>
-                                    <div class="go_product">
-                                        <span>Məhsullara keçin</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="./category/5" class="atg_item">
-                            <div class="atg_img">
-                                <img src="{{asset('img/yolcizgi.jpg')}}" alt="Yol Cizgi Boyaları">
-                            </div>
-                            <div class="atg_content">
-                                <div class="row_inner">
-                                    <h5 class="itm_title">Yol Cizgi Boyaları</h5>
-                                    <p class="itm_info">
-                                        Alkid və xlor kauçuk, Termoplastik akrilik qətran əsaslı, aşınmaya, sürtünməyə
-                                        qarşı davamlı, avtomagistrallarda, hava limanlarında və digər beton və asfalt
-                                        səthlərin işarələnməsində istifadə olunan boyalardır.
-                                    </p>
-                                    <div class="go_product">
-                                        <span>Məhsullara keçin</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="./category/2" class="atg_item">
-                            <div class="atg_img">
-                                <img src="{{asset('img/sanaye.jpg')}}" alt="Sənaye boyaları">
-                            </div>
-                            <div class="atg_content">
-                                <div class="row_inner">
-                                    <h5 class="itm_title">Sənaye boyaları</h5>
-                                    <p class="itm_info">
-                                        Nitrosellüloz alkid əsaslı, birkomponentli, antikorroziv, sənayenin bütün
-                                        sahələrində, metal,ağac və beton səthlərdə istifadə olunan boyalardır.
-                                    </p>
-                                    <div class="go_product">
-                                        <span>Məhsullara keçin</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="./category/4" class="atg_item">
-                            <div class="atg_img">
-                                <img src="{{asset('img/product2.png')}}" alt="Fasad boyaları">
-                            </div>
-                            <div class="atg_content">
-                                <div class="row_inner">
-                                    <h5 class="itm_title">Fasad boyaları</h5>
-                                    <p class="itm_info">
-                                        Akrilik soplimer əsaslı, yağışa, nəmə və digər xarici təsirlərə qarşı davamlı
-                                        son qat boyalarıdır.
-                                    </p>
-                                    <div class="go_product">
-                                        <span>Məhsullara keçin</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
+                    @endforeach
                 </div>
             </div>
-        </div>
-        <div class="swiper_pagin_items">
-            <div class="swiper-pagination"></div>
+            <div class="swiper_pagin_items">
+                <div class="swiper-pagination"></div>
+            </div>
+            <!-- Add Arrows -->
+            @if($sliders->count() - 1)
+                <div class="swiper_arrows clearfix">
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            @endif
         </div>
     </div>
-</div>
+    <!-- Main Slider -->
 
-<!-- <div class="section_wrap wrap_advantage product_items">
+
+
+    <!-- Prodcts section -->
+    <div class="section_wrap wrap_advantage product_items wrap_slider">
+        <div class="main_center clearfix">
+            <div class="sect_body slider_container clearfix">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <a href="./category/3" class="atg_item">
+                                <div class="atg_img">
+                                    <img src="{{asset('img/product1.png')}}" alt="Daxili boyalar">
+                                </div>
+                                <div class="atg_content">
+                                    <div class="row_inner">
+                                        <h5 class="itm_title">Daxili boyalar</h5>
+                                        <p class="itm_info">
+                                            Akrilik sopolimer əsaslı, yüksək örtücülük qabliyyətinə malik, ətraf mühit
+                                            üçün
+                                            zərərsiz və qoxusuz daxili səth boyalarıdır.
+                                        </p>
+                                        <div class="go_product">
+                                            <span>Məhsullara keçin</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="./category/1" class="atg_item">
+                                <div class="atg_img">
+                                    <img src="{{asset('img/boyadolgu.jpg')}}" alt="Boya, Dolğu və Iaklar">
+                                </div>
+                                <div class="atg_content">
+                                    <div class="row_inner">
+                                        <h5 class="itm_title">Boya, Dolğu və Iaklar</h5>
+                                        <p class="itm_info">
+                                            Uretan alkid əsaslı, bütün növ ağac məmulatlarının səthlərinin qorunmasını
+                                            təmin
+                                            edən məhsullardır.
+                                        </p>
+                                        <div class="go_product">
+                                            <span>Məhsullara keçin</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="./category/5" class="atg_item">
+                                <div class="atg_img">
+                                    <img src="{{asset('img/yolcizgi.jpg')}}" alt="Yol Cizgi Boyaları">
+                                </div>
+                                <div class="atg_content">
+                                    <div class="row_inner">
+                                        <h5 class="itm_title">Yol Cizgi Boyaları</h5>
+                                        <p class="itm_info">
+                                            Alkid və xlor kauçuk, Termoplastik akrilik qətran əsaslı, aşınmaya,
+                                            sürtünməyə
+                                            qarşı davamlı, avtomagistrallarda, hava limanlarında və digər beton və
+                                            asfalt
+                                            səthlərin işarələnməsində istifadə olunan boyalardır.
+                                        </p>
+                                        <div class="go_product">
+                                            <span>Məhsullara keçin</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="./category/2" class="atg_item">
+                                <div class="atg_img">
+                                    <img src="{{asset('img/sanaye.jpg')}}" alt="Sənaye boyaları">
+                                </div>
+                                <div class="atg_content">
+                                    <div class="row_inner">
+                                        <h5 class="itm_title">Sənaye boyaları</h5>
+                                        <p class="itm_info">
+                                            Nitrosellüloz alkid əsaslı, birkomponentli, antikorroziv, sənayenin bütün
+                                            sahələrində, metal,ağac və beton səthlərdə istifadə olunan boyalardır.
+                                        </p>
+                                        <div class="go_product">
+                                            <span>Məhsullara keçin</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="./category/4" class="atg_item">
+                                <div class="atg_img">
+                                    <img src="{{asset('img/product2.png')}}" alt="Fasad boyaları">
+                                </div>
+                                <div class="atg_content">
+                                    <div class="row_inner">
+                                        <h5 class="itm_title">Fasad boyaları</h5>
+                                        <p class="itm_info">
+                                            Akrilik soplimer əsaslı, yağışa, nəmə və digər xarici təsirlərə qarşı
+                                            davamlı
+                                            son qat boyalarıdır.
+                                        </p>
+                                        <div class="go_product">
+                                            <span>Məhsullara keçin</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="swiper_pagin_items">
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="section_wrap wrap_advantage product_items">
         <div class="main_center clearfix">
             <div class="sect_body clearfix">
                 <div class="row">
@@ -305,51 +316,51 @@
             </div>
         </div>
     </div> -->
-<!-- Prodcts section -->
+    <!-- Prodcts section -->
 
-<!-- Colors table Part -->
-<div class="about_gallery_item">
-    <div class="main_center clearfix">
-        <div class="abt_left abt_h">
-            <div class="abt_title">
-                RƏNGLƏR CƏDVƏLİ
-            </div>
-            <div class="abt_info">
-                <p>
-                    Yorğun bir günün ardından evdə dinc saatlar keçirmək istərdinizmi?
-                </p>
+    <!-- Colors table Part -->
+    <div class="about_gallery_item">
+        <div class="main_center clearfix">
+            <div class="abt_left abt_h">
+                <div class="abt_title">
+                    RƏNGLƏR CƏDVƏLİ
+                </div>
+                <div class="abt_info">
+                    <p>
+                        Yorğun bir günün ardından evdə dinc saatlar keçirmək istərdinizmi?
+                    </p>
 
-                <p>
-                    Sizə yetər ki, Rokoldan ilham alın! Daxili boya üçün seçdiyiniz rənglərə uyğun olacaq digər
-                    tonları
-                    öyrənmək və onları otağınızda istifadə etmək üçün Polisanın rəng seçimlərinə nəzər salın.
-                </p>
-                <p>
-                    İnteryer dizaynerlərinin tətbiq etdiyi 60-30-10 qaydasına uyğun olaraq divarlarınızda istifadə
-                    etdiyiniz açıq tonlar yaşayış məkanınıza parlaq bir görünüş verəcək.
-                </p>
-                <p>
-                    Bu rənglərlə birləşdirildikdə möcüzələr yaradan orta tonları əlavə etməklə sakit atmosferin
-                    davamlılığını təmin edə bilərsiniz.
-                </p>
+                    <p>
+                        Sizə yetər ki, Rokoldan ilham alın! Daxili boya üçün seçdiyiniz rənglərə uyğun olacaq digər
+                        tonları
+                        öyrənmək və onları otağınızda istifadə etmək üçün Polisanın rəng seçimlərinə nəzər salın.
+                    </p>
+                    <p>
+                        İnteryer dizaynerlərinin tətbiq etdiyi 60-30-10 qaydasına uyğun olaraq divarlarınızda istifadə
+                        etdiyiniz açıq tonlar yaşayış məkanınıza parlaq bir görünüş verəcək.
+                    </p>
+                    <p>
+                        Bu rənglərlə birləşdirildikdə möcüzələr yaradan orta tonları əlavə etməklə sakit atmosferin
+                        davamlılığını təmin edə bilərsiniz.
+                    </p>
+                </div>
+                <div class="more_color">
+                    <a href="{!! route('colors') !!}">Rəngləri kəşf et</a>
+                </div>
             </div>
-            <div class="more_color">
-                <a href="{!! route('colors') !!}">Rəngləri kəşf et</a>
-            </div>
-        </div>
-        <div class="abt_right abt_h">
-            <div class="abt_big">
-                <img src="{{asset('img/rokol_colors.png?v1')}}" alt="rokol_colors">
+            <div class="abt_right abt_h">
+                <div class="abt_big">
+                    <img src="{{asset('img/rokol_colors.png?v1')}}" alt="rokol_colors">
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Colors table Part -->
+    <!-- Colors table Part -->
 
-<!-- Full image color porpover -->
-<div class="wrap_full_color">
-    <img src="{{asset('img/full_colors.png?v2')}}" alt="Fullcolor">
-    <!-- <div class="item_color_hov how_1">
+    <!-- Full image color porpover -->
+    <div class="wrap_full_color">
+        <img src="{{asset('img/full_colors.png?v2')}}" alt="Fullcolor">
+        <!-- <div class="item_color_hov how_1">
             <a href="https://rokol.az/product/74">
                 <div class="hov_item"><span>1</span></div>
                 <div class="hov_content">
@@ -379,45 +390,45 @@
                 </div>
             </a>
         </div> -->
-</div>
-<!-- Full image color porpover -->
+    </div>
+    <!-- Full image color porpover -->
 
 
-@if($videoNews->count())
-    <div class="section_wrap wrap_advantage video_items wrap_slider  ">
-        <div class="main_center clearfix">
-            <div class="sect_header clearfix">
-                <h2 class="sect_title">
-                    <a href="">Videolar</a>
-                </h2>
-            </div>
-            <div class="sect_body slider_container clearfix">
-                <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                        @foreach($videoNews as $video)
-                            <div class="swiper-slide">
-                                <a href="{!! route('news.show', $video) !!}" class="atg_item">
-                                    <div class="atg_img">
-                                        <img src="{{asset('storage/' . $video->image)}}"
-                                            alt="{{ $video->title[app()->getLocale()] }}">
-                                    </div>
-                                    <div class="atg_content">
-                                        <div class="row_inner">
-                                            <h5 class="itm_title">{{ $video->title[app()->getLocale()] }}</h5>
+    @if($videoNews->count())
+        <div class="section_wrap wrap_advantage video_items wrap_slider  ">
+            <div class="main_center clearfix">
+                <div class="sect_header clearfix">
+                    <h2 class="sect_title">
+                        <a href="">Videolar</a>
+                    </h2>
+                </div>
+                <div class="sect_body slider_container clearfix">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            @foreach($videoNews as $video)
+                                <div class="swiper-slide">
+                                    <a href="{!! route('news.show', $video) !!}" class="atg_item">
+                                        <div class="atg_img">
+                                            <img src="{{asset('storage/' . $video->image)}}"
+                                                 alt="{{ $video->title[app()->getLocale()] }}">
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
-                        @endforeach
+                                        <div class="atg_content">
+                                            <div class="row_inner">
+                                                <h5 class="itm_title">{{ $video->title[app()->getLocale()] }}</h5>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="swiper_pagin_items">
-                <div class="swiper-pagination"></div>
+                <div class="swiper_pagin_items">
+                    <div class="swiper-pagination"></div>
+                </div>
             </div>
         </div>
-    </div>
-@endif
+    @endif
 @endsection
 
 @push('js')
@@ -520,6 +531,7 @@
                 },
             },
         });
+        @if($modal)
         $(document).ready(function () {
             const modal = $(".home_modal");
             const closeBtn = $(".close_modal");
@@ -533,6 +545,7 @@
                 }
                 return false;
             }
+
             function hideModal() {
                 modal.css("display", "none");
                 localStorage.setItem("modalLastShownTime", new Date().getTime());
@@ -541,7 +554,7 @@
             // Sayfa yüklendiğinde modalı göster
             if (shouldShowModal()) {
                 modal.css("display", "flex");
-                localStorage.setItem("modalLastShownTime", new Date().getTime()); 
+                localStorage.setItem("modalLastShownTime", new Date().getTime());
             } else {
                 modal.css("display", "none");
             }
@@ -549,6 +562,7 @@
                 hideModal();
             });
         });
+        @endif
 
     </script>
 @endpush
