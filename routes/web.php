@@ -78,10 +78,14 @@ Route::get('/getConsumptionByProductId/{id}', [\App\Http\Controllers\SiteControl
 
 Route::get('/offers', [\App\Http\Controllers\OfferController::class, 'index'])->name('offers.index');
 Route::get('/filters', [\App\Http\Controllers\SiteController::class, 'getFiltersApi']);
+Route::get( '/colors/groups', [\App\Http\Controllers\ColorController::class, 'colorGroups'])->name('colors.groups.index');
+Route::get( '/colors/groups/{id}', [\App\Http\Controllers\ColorController::class, 'colorGroupsShow'])->name('colors.groups.show');
 
 
 Route::get('/cache/clear', function(){
     \Illuminate\Support\Facades\Artisan::call( 'app:create-filters' );
 })->name('cache.clear');
 
-Route::get('/catalog_filter', function() { return view('catalog_filter');});
+Route::get( '/catalog_filter', function () {
+    return view( 'catalog_filter' );
+} );
