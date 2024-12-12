@@ -59,6 +59,12 @@ class Modal extends Resource
                             'nullable',
                             'url:https'
                         ] ),
+            URL::make( 'Redirect url', 'redirect_url' )
+               ->rules( [
+                            Rule::requiredIf( $request->filled( 'is_video' ) && $request->input( 'is_video' ) === '0' ),
+                            'nullable',
+                            'url:http,https'
+                        ] ),
             Boolean::make( 'Is video', 'is_video' )
                    ->trueValue( true )
                    ->falseValue( false ),

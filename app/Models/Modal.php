@@ -10,7 +10,9 @@ class Modal extends Model
     protected $table = 'modals';
 
     protected $fillable = [
-        'resource',
+        'image_path',
+        'video_url',
+        'redirect_url',
         'is_video',
         'expire_time',
     ];

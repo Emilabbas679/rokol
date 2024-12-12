@@ -17,7 +17,7 @@
                         <span class="close_modal"></span>
                     </div>
                     @if(!$modal->is_video)
-                        <a class="home_modal_img" href="#">
+                        <a class="home_modal_img" href="{!! $modal->redirect_url !!}">
                             <img src="{!! asset('storage/'.$modal->image_path) !!}"
                                  alt="Main slider Image">
                         </a>
