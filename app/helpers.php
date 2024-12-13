@@ -86,7 +86,11 @@ if ( !function_exists( 'settings' ) ) {
     function settings()
     {
         return Cache::rememberForever( 'settings', function () {
-            return \App\Models\Setting::query()->first()->toArray();
+            $settings = \App\Models\Setting::query()->first();
+            if ( $settings ) {
+                return $settings->toArray();
+            }
+            return [];
         } );
     }
 }
