@@ -82,6 +82,44 @@ if ( !function_exists( 'weights' ) ) {
         return $weights;
     }
 }
+if ( !function_exists( 'settings' ) ) {
+    function settings()
+    {
+        return Cache::rememberForever( 'settings', function () {
+            return \App\Models\Setting::query()->first()->toArray();
+        } );
+    }
+}
+
+if ( !function_exists( 'setting' ) ) {
+    function setting($key, $default = null)
+    {
+        if (empty($key)) {
+            return $default;
+        }
+        $settings = settings();
+        if (array_key_exists($key, $settings)){
+            return $settings[$key];
+        }
+        return $default;
+    }
+}
+
+if ( !function_exists( 'settingSocialMedia' ) ) {
+    function settingSocialMedia($key, $default = null)
+    {
+        if (empty($key)) {
+            return $default;
+        }
+        $socialMedia = setting('social_media');
+        if (array_key_exists($key, $socialMedia)){
+            return $socialMedia[$key];
+        }
+        return $default;
+    }
+}
+
+
 
 if ( !function_exists( 'brands' ) ) {
     function brands()
