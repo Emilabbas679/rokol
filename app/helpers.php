@@ -116,7 +116,7 @@ if ( !function_exists( 'settingSocialMedia' ) ) {
             return $default;
         }
         $socialMedia = setting('social_media');
-        if (array_key_exists($key, $socialMedia)){
+        if (is_array($socialMedia) && array_key_exists($key, $socialMedia)){
             return $socialMedia[$key];
         }
         return $default;
