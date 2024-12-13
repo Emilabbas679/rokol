@@ -26,17 +26,17 @@
                             <ul class="adrs_list">
                                 <li>
                                     <span class="adr_name">@lang('Telefon nömrəsi'):</span>
-                                    <a href="tel:*3030" class="adr_info"><sup>*</sup>3030</a>
+                                    <a href="tel:*{!! setting('phone_number_short', '3030') !!}" class="adr_info"><sup>*</sup>{!! setting('phone_number_short', '3030') !!}</a>
                                 </li>
                                 <li>
                                     <span class="adr_name">@lang('E-poçt'):</span>
                                     <span class="adr_info">
-                                    <a href="mailto:info@rokol.az">info@rokol.az</a>
+                                    <a href="mailto:{!! setting('email_contact', 'info@rokol.az') !!}">{!! setting('email_contact', 'info@rokol.az') !!}</a>
                                 </span>
                                 </li>
                                 <li>
                                     <span class="adr_name">@lang('Ünvan'):</span>
-                                    <span class="adr_info adr_info_val">Bakı-Sumqayıt yolu, 13,5 km AZ0123 Bakı, Azərbaycan</span>
+                                    <span class="adr_info adr_info_val">{!! setting('address_contact', 'Bakı-Sumqayıt yolu, 13,5 km AZ0123 Bakı, Azərbaycan') !!}</span>
                                 </li>
                             </ul>
                             <div class="map">
@@ -52,35 +52,35 @@
                                 </div>
                                 <ul class="socials">
                                     <li>
-                                        <a href="https://wa.me/+994102603030" class="social_icon" target="_blank">
+                                        <a href="{!! settingSocialMedia('whatsapp', 'https://wa.me/+994102603030') !!}" class="social_icon" target="_blank">
                                             <span class="scl_icn">
                                                 <img src="{{asset('img/icons/wp_w.svg?v1')}}" alt="Whatsapp">
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="https://www.facebook.com/RokolBoyalari" class="social_icon" target="_blank">
+                                        <a href="{!! settingSocialMedia('facebook', 'https://www.facebook.com/RokolBoyalari') !!}" class="social_icon" target="_blank">
                                             <span class="scl_icn">
                                                 <img src="{{asset('img/icons/fb_w.svg?v1')}}" alt="Facebook">
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="https://www.instagram.com/rokolboyalari/" class="social_icon" target="_blank">
+                                        <a href="{!! settingSocialMedia('instagram', 'https://www.instagram.com/rokolboyalari/') !!}" class="social_icon" target="_blank">
                                             <span class="scl_icn">
                                                 <img src="{{asset('img/icons/ins_w.svg?v1')}}" alt="Instagram">
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="https://www.linkedin.com/company/rokol-boyalar%C4%B1/" class="social_icon" target="_blank">
+                                        <a href="{!! settingSocialMedia('linkedin', 'https://www.linkedin.com/company/rokol-boyalar%C4%B1/') !!}" class="social_icon" target="_blank">
                                             <span class="scl_icn">
                                                 <img src="{{asset('img/icons/lnkd_w.svg?v1')}}" alt="Linkedn">
                                             </span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="https://www.youtube.com/@MatanatAcompany" class="social_icon" target="_blank">
+                                        <a href="{!! settingSocialMedia('youtube', 'https://www.youtube.com/@MatanatAcompany') !!}" class="social_icon" target="_blank">
                                             <span class="scl_icn">
                                                 <img src="{{asset('img/icons/ytb_w.svg?v1')}}" alt="Youtube">
                                             </span>

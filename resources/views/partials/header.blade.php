@@ -5,7 +5,8 @@
                 <div class="logo_sect clearfix">
                     <a href="/" class="logo">
                         <div class="logo_img">
-                            <img src="{{asset('img/icons/logo.svg?v2')}}" alt="Logo">
+                            <img src="{{ setting('site_logo') ? asset( 'storage/'.setting('site_logo')) : asset('img/icons/logo.svg?v2') }}"
+                                 alt="Logo">
                         </div>
                     </a>
                 </div>
@@ -24,38 +25,43 @@
                     </div>
                     <div class="hd_r_icons">
                         <a href="{{route('products')}}" class="register_btn">Online sifariş</a>
-                        <a href="tel:*3030" class="call_center">*3030</a>
+                        <a href="tel:*{!! setting('phone_number_short', '3030') !!}"
+                           class="call_center">*{!! setting('phone_number_short', '3030') !!}</a>
                         <ul class="socials clearfix">
                             <li>
-                                <a href="https://wa.me/+994102603030" class="social_icon" target="_blank">
+                                <a href="{!! settingSocialMedia('whatsapp', 'https://wa.me/+994102603030') !!}"
+                                   class="social_icon" target="_blank">
                                     <span class="scl_icn">
                                         <img src="{{asset('img/icons/wp_social.svg?v1')}}" alt="Whatsapp">
                                     </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="https://www.facebook.com/RokolBoyalari" class="social_icon" target="_blank">
+                                <a href="{!! settingSocialMedia('facebook', 'https://www.facebook.com/RokolBoyalari') !!}"
+                                   class="social_icon" target="_blank">
                                     <span class="scl_icn">
                                         <img src="{{asset('img/icons/fb.svg?v1')}}" alt="Facebook">
                                     </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="https://www.instagram.com/rokolboyalari/" class="social_icon" target="_blank">
+                                <a href="{!! settingSocialMedia('instagram', 'https://www.instagram.com/rokolboyalari/') !!}"
+                                   class="social_icon" target="_blank">
                                     <span class="scl_icn">
                                         <img src="{{asset('img/icons/ins.svg?v1')}}" alt="Instagram">
                                     </span>
                                 </a>
                             </li>
-                            <!-- <li>
-                                <a href="" class="social_icon" target="_blank">
-                                    <span class="scl_icn">
-                                        <img src="{{asset('img/icons/tiktok.svg?v1')}}" alt="Tiktok">
-                                    </span>
-                                </a>
-                            </li> -->
+                            {{--                            <!-- <li>--}}
+                            {{--                                <a href="" class="social_icon" target="_blank">--}}
+                            {{--                                    <span class="scl_icn">--}}
+                            {{--                                        <img src="{{asset('img/icons/tiktok.svg?v1')}}" alt="Tiktok">--}}
+                            {{--                                    </span>--}}
+                            {{--                                </a>--}}
+                            {{--                            </li> -->--}}
                             <li>
-                                <a href="https://www.linkedin.com/company/rokol-boyalar%C4%B1/" class="social_icon"
+                                <a href="{!! settingSocialMedia('linkedin', 'https://www.linkedin.com/company/rokol-boyalar%C4%B1/') !!}"
+                                   class="social_icon"
                                    target="_blank">
                                     <span class="scl_icn">
                                         <img src="{{asset('img/icons/lnkd.svg?v1')}}" alt="Linkedn">
@@ -63,7 +69,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="https://www.youtube.com/@MatanatAcompany" class="social_icon" target="_blank">
+                                <a href="{!! settingSocialMedia('youtube', 'https://www.youtube.com/@MatanatAcompany') !!}"
+                                   class="social_icon" target="_blank">
                                     <span class="scl_icn">
                                         <img src="{{asset('img/icons/ytb.svg?v1')}}" alt="Youtube">
                                     </span>
@@ -318,62 +325,24 @@
     <nav class="nav_mobile">
         <div class="menu_btn close"></div>
         <div class="mob_header">
-            <!-- <ul class="langs">
-                <li @if(app()->getLocale() == 'az')
-                class="active"
+            {{--            <!-- <ul class="langs">--}}
+            {{--                <li @if(app()->getLocale() == 'az')--}}
+            {{--                class="active"--}}
+
+            {{--            @endif><a href="{{route('locale', 'az')}}">Az</a>--}}
+            {{--                </li>--}}
+            {{--                <li @if(app()->getLocale() == 'en')--}}
+            {{--                class="active"--}}
 
 
+            {{--            @endif><a href="{{route('locale', 'en')}}">En</a>--}}
+            {{--                </li>--}}
+            {{--                <li @if(app()->getLocale() == 'ru')--}}
+            {{--                class="active"--}}
 
-
-
-
-
-
-
-
-
-
-
-
-            @endif><a href="{{route('locale', 'az')}}">Az</a>
-                </li>
-                <li @if(app()->getLocale() == 'en')
-                class="active"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            @endif><a href="{{route('locale', 'en')}}">En</a>
-                </li>
-                <li @if(app()->getLocale() == 'ru')
-                class="active"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            @endif><a href="{{route('locale', 'ru')}}">Ru</a>
-                </li>
-            </ul> -->
+            {{--            @endif><a href="{{route('locale', 'ru')}}">Ru</a>--}}
+            {{--                </li>--}}
+            {{--            </ul> -->--}}
             <a href="{{route('products')}}" class="register_btn">Online sifariş</a>
             <a href="tel:*3030" class="call_center">*3030</a>
         </div>
@@ -426,42 +395,47 @@
         <div class="mob_ftr">
             <ul class="socials clearfix">
                 <li>
-                    <a href="https://wa.me/+994102603030" class="social_icon" target="_blank">
+                    <a href="{!! settingSocialMedia('whatsapp', 'https://wa.me/+994102603030') !!}" class="social_icon"
+                       target="_blank">
                         <span class="scl_icn">
                             <img src="{{asset('img/icons/wp_social.svg?v1')}}" alt="Whatsapp">
                         </span>
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.facebook.com/RokolBoyalari" class="social_icon" target="_blank">
+                    <a href="{!! settingSocialMedia('facebook', 'https://www.facebook.com/RokolBoyalari') !!}"
+                       class="social_icon" target="_blank">
                         <span class="scl_icn">
                             <img src="{{asset('img/icons/fb.svg?v1')}}" alt="Facebook">
                         </span>
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.instagram.com/rokolboyalari/" class="social_icon" target="_blank">
+                    <a href="{!! settingSocialMedia('instagram', 'https://www.instagram.com/rokolboyalari/') !!}"
+                       class="social_icon" target="_blank">
                         <span class="scl_icn">
                             <img src="{{asset('img/icons/ins.svg?v1')}}" alt="Instagram">
                         </span>
                     </a>
                 </li>
-                <!-- <li>
-                    <a href="" class="social_icon" target="_blank">
-                        <span class="scl_icn">
-                            <img src="{{asset('img/icons/tiktok.svg?v1')}}" alt="Tiktok">
-                        </span>
-                    </a>
-                </li> -->
+                {{--                <!-- <li>--}}
+                {{--                    <a href="" class="social_icon" target="_blank">--}}
+                {{--                        <span class="scl_icn">--}}
+                {{--                            <img src="{{asset('img/icons/tiktok.svg?v1')}}" alt="Tiktok">--}}
+                {{--                        </span>--}}
+                {{--                    </a>--}}
+                {{--                </li> -->--}}
                 <li>
-                    <a href="https://www.linkedin.com/company/rokol-boyalar%C4%B1/" class="social_icon" target="_blank">
+                    <a href="{!! settingSocialMedia('linkedin', 'https://www.linkedin.com/company/rokol-boyalar%C4%B1/') !!}"
+                       class="social_icon" target="_blank">
                         <span class="scl_icn">
                             <img src="{{asset('img/icons/lnkd.svg?v1')}}" alt="Linkedn">
                         </span>
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.youtube.com/@MatanatAcompany" class="social_icon" target="_blank">
+                    <a href="{!! settingSocialMedia('youtube', 'https://www.youtube.com/@MatanatAcompany') !!}"
+                       class="social_icon" target="_blank">
                         <span class="scl_icn">
                             <img src="{{asset('img/icons/ytb.svg?v1')}}" alt="Youtube">
                         </span>
