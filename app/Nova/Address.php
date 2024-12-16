@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -91,5 +92,33 @@ class Address extends Resource
     public static function availableForNavigation(Request $request)
     {
         return false;
+    }
+
+
+    public static function authorizeToCreate(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 2']);
+    }
+
+    public static function authorizedToCreate(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 2']);
+    }
+
+    public function authorizedToDelete(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 2']);
+    }
+
+
+    public function authorizedToReplicate(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 2']);
+    }
+
+
+    public function availablePanelsForCreate( $request, FieldCollection $fields = null )
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 2']);
     }
 }

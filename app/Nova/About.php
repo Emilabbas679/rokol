@@ -3,6 +3,9 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
@@ -12,6 +15,12 @@ use Waynestate\Nova\CKEditor4Field\CKEditor;
 
 class About extends Resource
 {
+
+    public function __construct( $resource = null )
+    {
+        parent::__construct( $resource );
+    }
+
     /**
      * The model the resource corresponds to.
      *
@@ -106,7 +115,12 @@ class About extends Resource
 
     public static function authorizedToCreate(Request $request)
     {
-        return !\App\Models\About::query()->count();
+        return !\App\Models\About::query()->count() && $request->user()->hasRole(['Main admin', 'Admin 1']);
+    }
+
+    public function authorizedToDelete(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
     }
 
 
@@ -114,5 +128,16 @@ class About extends Resource
     {
         return false;
     }
+
+    public static function availableForNavigation(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+    }
+
+    public function availablePanelsForCreate( $request, FieldCollection $fields = null )
+    {
+        return $request->user()?->hasRole(['Admin 1']);
+    }
+
 
 }

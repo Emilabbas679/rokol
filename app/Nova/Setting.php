@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
@@ -153,6 +154,28 @@ class Setting extends Resource
     public function authorizedToReplicate(Request $request)
     {
         return false;
+    }
+
+
+    public static function authorizeToCreate(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+    }
+
+    public function authorizedToDelete(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+    }
+
+
+    public static function availableForNavigation(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+    }
+
+    public function availablePanelsForCreate( $request, FieldCollection $fields = null )
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
     }
 
 }

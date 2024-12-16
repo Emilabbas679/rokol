@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
@@ -105,5 +106,37 @@ class Weight extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+
+    public static function authorizeToCreate(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+    }
+
+    public static function authorizedToCreate(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+    }
+
+    public function authorizedToDelete(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+    }
+
+
+    public function authorizedToReplicate(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+    }
+
+    public static function availableForNavigation(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+    }
+
+    public function availablePanelsForCreate( $request, FieldCollection $fields = null )
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
     }
 }
