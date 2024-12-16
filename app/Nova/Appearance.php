@@ -143,33 +143,33 @@ class Appearance extends Resource
 
     public static function authorizeToCreate(Request $request)
     {
-        return $request->user()->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
     }
 
     public static function authorizedToCreate(Request $request)
     {
-        return $request->user()->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
     }
 
     public function authorizedToDelete(Request $request)
     {
-        return $request->user()->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
     }
 
 
     public function authorizedToReplicate(Request $request)
     {
-        return $request->user()->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
     }
 
     public static function availableForNavigation(Request $request)
     {
-        return $request->user()->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
     }
 
     public function availablePanelsForCreate( $request, FieldCollection $fields = null )
     {
-        return $request->user()->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
     }
 
 }

@@ -10,11 +10,13 @@ use Eminiarts\Tabs\Tabs;
 use Eminiarts\Tabs\Traits\HasTabs;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\Number;
@@ -511,6 +513,38 @@ class Product extends Resource
     public static function afterDelete( NovaRequest $request, Model $model )
     {
         ReOrganizeFilters::dispatch();
+    }
+
+
+    public static function authorizeToCreate(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+    }
+
+    public static function authorizedToCreate(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+    }
+
+    public function authorizedToDelete(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+    }
+
+
+    public function authorizedToReplicate(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+    }
+
+    public static function availableForNavigation(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+    }
+
+    public function availablePanelsForCreate( $request, FieldCollection $fields = null )
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
     }
 
 

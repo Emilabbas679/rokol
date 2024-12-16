@@ -6,8 +6,10 @@ use App\Rules\PhoneNumberRule;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -64,8 +66,10 @@ class User extends Resource
                 ->sortable()
                 ->rules( 'nullable', 'max:254' )
                 ->creationRules( [ 'unique:users,phone', new PhoneNumberRule() ] )
-                ->placeholder("Nömrə +(994) xx xxx xx xx formatında olmalıdır")
+                ->placeholder( "Nömrə +(994) xx xxx xx xx formatında olmalıdır" )
                 ->updateRules( 'unique:users,phone,{{resourceId}}' ),
+
+            MorphToMany::make( 'Roles', 'roles', Role::class ),
 
             Boolean::make( 'Admin', 'is_admin' )
                    ->trueValue( '1' )
@@ -131,5 +135,37 @@ class User extends Resource
 
         // Otherwise, use the default authorization logic
         return parent::authorizedToUpdate( $request );
+    }
+
+
+    public static function authorizeToCreate( Request $request )
+    {
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
+    }
+
+    public static function authorizedToCreate( Request $request )
+    {
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
+    }
+
+    public function authorizedToDelete( Request $request )
+    {
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
+    }
+
+
+    public function authorizedToReplicate( Request $request )
+    {
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
+    }
+
+    public static function availableForNavigation( Request $request )
+    {
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
+    }
+
+    public function availablePanelsForCreate( $request, FieldCollection $fields = null )
+    {
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 }

@@ -6,6 +6,7 @@ use App\Models\ProductOrder;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
@@ -207,4 +208,26 @@ class Order extends Resource
 //    {
 //        return false;
 //    }
+
+
+    public static function authorizeToCreate(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1', 'Admin 2']);
+    }
+
+    public function authorizedToDelete(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1', 'Admin 2']);
+    }
+
+    public static function availableForNavigation(Request $request)
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1', 'Admin 2']);
+    }
+
+    public function availablePanelsForCreate( $request, FieldCollection $fields = null )
+    {
+        return $request->user()?->hasRole(['Main admin', 'Admin 1', 'Admin 2']);
+    }
+
 }

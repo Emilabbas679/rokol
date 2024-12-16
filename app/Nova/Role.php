@@ -2,28 +2,29 @@
 
 namespace App\Nova;
 
+use App\Models\ProductOrder;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Tag;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class ColorGroup extends Resource
+class Role extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
-     * @var class-string<\App\Models\ColorGroup>
+     * @var class-string<\Spatie\Permission\Models\Role>
      */
-    public static $model = \App\Models\ColorGroup::class;
+    public static $model = \Spatie\Permission\Models\Role::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -32,6 +33,7 @@ class ColorGroup extends Resource
      */
     public static $search = [
         'id',
+        'name'
     ];
 
     /**
@@ -44,12 +46,13 @@ class ColorGroup extends Resource
     {
         return [
             ID::make()->sortable(),
-            Text::make( 'Name (AZ)', 'name->az' ),
-            Text::make( 'Name (EN)', 'name->en' )->hideFromIndex(),
-            Text::make( 'Name (RU)', 'name->ru' )->hideFromIndex(),
-            Tag::make( 'Colors', 'colors', Color::class )
-               ->preload()
-               ->nullable(),
+            Text::make( 'Name', 'name' ),
+//            Select::make( 'Guard name', 'guard_name' )
+//                  ->options( [
+//                                 'web'    => 'web',
+//                                 'admins' => 'admins'
+//                             ] )
+//                  ->showOnPreview()
         ];
     }
 
@@ -98,34 +101,36 @@ class ColorGroup extends Resource
     }
 
 
-    public static function authorizeToCreate(Request $request)
+    public static function authorizeToCreate( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin' ] );
     }
 
-    public static function authorizedToCreate(Request $request)
+    public static function authorizedToCreate( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin' ] );
     }
 
-    public function authorizedToDelete(Request $request)
+    public function authorizedToDelete( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin' ] );
     }
 
 
-    public function authorizedToReplicate(Request $request)
+    public function authorizedToReplicate( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
-    }
-
-    public static function availableForNavigation(Request $request)
-    {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin' ] );
     }
 
     public function availablePanelsForCreate( $request, FieldCollection $fields = null )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin' ] );
     }
+
+    public static function availableForNavigation(Request $request)
+    {
+        return false;
+    }
+
+
 }

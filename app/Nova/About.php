@@ -120,7 +120,7 @@ class About extends Resource
 
     public function authorizedToDelete(Request $request)
     {
-        return $request->user()->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
     }
 
 
@@ -131,12 +131,12 @@ class About extends Resource
 
     public static function availableForNavigation(Request $request)
     {
-        return $request->user()->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
     }
 
     public function availablePanelsForCreate( $request, FieldCollection $fields = null )
     {
-        return $request->user()->hasRole(['Admin 1']);
+        return $request->user()?->hasRole(['Admin 1']);
     }
 
 
