@@ -27,20 +27,20 @@ class MakeRoles extends Command
      */
     public function handle()
     {
-//        Role::query()->create( [
-//                                   'name' => 'Main admin',
-//                                   'guard_name' => 'admins'
-//                               ] );
-//
-//        Role::query()->create( [
-//                                   'name' => 'Admin 1',
-//                                   'guard_name' => 'admins'
-//                               ] );
-//
-//        Role::query()->create( [
-//                                   'name' => 'Admin 2',
-//                                   'guard_name' => 'admins'
-//                               ] );
+        Role::query()->create( [
+                                   'name' => 'Main admin',
+                                   'guard_name' => 'admins'
+                               ] );
+
+        Role::query()->create( [
+                                   'name' => 'Admin 1',
+                                   'guard_name' => 'admins'
+                               ] );
+
+        Role::query()->create( [
+                                   'name' => 'Admin 2',
+                                   'guard_name' => 'admins'
+                               ] );
 
         $user = \App\Models\User::query()->where('email', 'emilabbas679@gmail.com')
             ->first();
