@@ -47,12 +47,12 @@ class Role extends Resource
         return [
             ID::make()->sortable(),
             Text::make( 'Name', 'name' ),
-//            Select::make( 'Guard name', 'guard_name' )
-//                  ->options( [
-//                                 'web'    => 'web',
-//                                 'admins' => 'admins'
-//                             ] )
-//                  ->showOnPreview()
+            Select::make( 'Guard name', 'guard_name' )
+                  ->options( [
+                                 'web'    => 'web',
+                                 'admins' => 'admins'
+                             ] )
+                  ->showOnPreview()
         ];
     }
 
@@ -124,12 +124,9 @@ class Role extends Resource
 
     public function availablePanelsForCreate( $request, FieldCollection $fields = null )
     {
-        return $request->user()?->hasRole( [ 'Main admin' ] );
-    }
-
-    public static function availableForNavigation(Request $request)
-    {
-        return false;
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] )
+            ? parent::availablePanelsForCreate( $request, $fields )
+            : false;
     }
 
 

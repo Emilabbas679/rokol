@@ -544,7 +544,9 @@ class Product extends Resource
 
     public function availablePanelsForCreate( $request, FieldCollection $fields = null )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] )
+            ? parent::availablePanelsForCreate( $request, $fields )
+            : false;
     }
 
 
