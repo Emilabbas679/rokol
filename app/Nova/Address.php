@@ -116,9 +116,10 @@ class Address extends Resource
         return $request->user()?->hasRole(['Main admin', 'Admin 2']);
     }
 
-
     public function availablePanelsForCreate( $request, FieldCollection $fields = null )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 2']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] )
+            ? parent::availablePanelsForCreate( $request, $fields )
+            : false;
     }
 }
