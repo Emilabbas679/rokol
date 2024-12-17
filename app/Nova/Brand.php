@@ -102,6 +102,29 @@ class Brand extends Resource
         } );
     }
 
+    public static function afterUpdate( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'brands' );
+        Cache::rememberForever( 'brands', function () {
+            return \App\Models\Brand::query()->get();
+        } );
+    }
+
+    public static function afterDelete( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'brands' );
+        Cache::rememberForever( 'brands', function () {
+            return \App\Models\Brand::query()->get();
+        } );
+    }
+
+    public static function afterRestore( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'brands' );
+        Cache::rememberForever( 'brands', function () {
+            return \App\Models\Brand::query()->get();
+        } );
+    }
 
     public static function authorizeToCreate(Request $request)
     {

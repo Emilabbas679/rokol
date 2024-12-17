@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+
 class Appearance extends Resource
 {
     /**
@@ -44,57 +45,57 @@ class Appearance extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function fields(NovaRequest $request)
+    public function fields( NovaRequest $request )
     {
         return [
             ID::make()->sortable(),
-            Text::make(__('Name (English)'), 'name_en')
-                ->resolveUsing(function ($value, $resource) {
+            Text::make( __( 'Name (English)' ), 'name_en' )
+                ->resolveUsing( function ( $value, $resource ) {
                     return $resource->name['en'] ?? '';
-                })
-                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    $names = $model->name ?? [];
+                } )
+                ->fillUsing( function ( NovaRequest $request, $model, $attribute, $requestAttribute ) {
+                    $names       = $model->name ?? [];
                     $names['en'] = $request->$requestAttribute;
                     $model->name = $names;
-                }),
+                } ),
 
-            Text::make(__('Name (Azerbaijan)'), 'name_az')->hideFromIndex()
-                ->resolveUsing(function ($value, $resource) {
+            Text::make( __( 'Name (Azerbaijan)' ), 'name_az' )->hideFromIndex()
+                ->resolveUsing( function ( $value, $resource ) {
                     return $resource->name['az'] ?? '';
-                })
-                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    $names = $model->name ?? [];
+                } )
+                ->fillUsing( function ( NovaRequest $request, $model, $attribute, $requestAttribute ) {
+                    $names       = $model->name ?? [];
                     $names['az'] = $request->$requestAttribute;
                     $model->name = $names;
-                }),
+                } ),
 
-            Text::make(__('Name (Russian)'), 'name_ru')->hideFromIndex()
-                ->resolveUsing(function ($value, $resource) {
+            Text::make( __( 'Name (Russian)' ), 'name_ru' )->hideFromIndex()
+                ->resolveUsing( function ( $value, $resource ) {
                     return $resource->name['ru'] ?? '';
-                })
-                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    $names = $model->name ?? [];
+                } )
+                ->fillUsing( function ( NovaRequest $request, $model, $attribute, $requestAttribute ) {
+                    $names       = $model->name ?? [];
                     $names['ru'] = $request->$requestAttribute;
                     $model->name = $names;
-                }),
-            Select::make('Status')->options([
-                '0' => 'Deaktiv',
-                '1' => 'Aktiv',
-                '2' => 'Silinib',
-            ])->sortable()->rules('required')->displayUsingLabels(),
+                } ),
+            Select::make( 'Status' )->options( [
+                                                   '0' => 'Deaktiv',
+                                                   '1' => 'Aktiv',
+                                                   '2' => 'Silinib',
+                                               ] )->sortable()->rules( 'required' )->displayUsingLabels(),
         ];
     }
 
     /**
      * Get the cards available for the request.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function cards(NovaRequest $request)
+    public function cards( NovaRequest $request )
     {
         return [];
     }
@@ -102,10 +103,10 @@ class Appearance extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function filters(NovaRequest $request)
+    public function filters( NovaRequest $request )
     {
         return [];
     }
@@ -113,10 +114,10 @@ class Appearance extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function lenses(NovaRequest $request)
+    public function lenses( NovaRequest $request )
     {
         return [];
     }
@@ -124,10 +125,10 @@ class Appearance extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function actions(NovaRequest $request)
+    public function actions( NovaRequest $request )
     {
         return [];
     }
@@ -140,31 +141,55 @@ class Appearance extends Resource
         } );
     }
 
-
-    public static function authorizeToCreate(Request $request)
+    public static function afterUpdate( NovaRequest $request, Model $model )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        Cache::forget( 'appearances' );
+        Cache::rememberForever( 'appearances', function () {
+            return \App\Models\Appearance::query()->where( 'status', 1 )->get();
+        } );
     }
 
-    public static function authorizedToCreate(Request $request)
+    public static function afterDelete( NovaRequest $request, Model $model )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        Cache::forget( 'appearances' );
+        Cache::rememberForever( 'appearances', function () {
+            return \App\Models\Appearance::query()->where( 'status', 1 )->get();
+        } );
     }
 
-    public function authorizedToDelete(Request $request)
+    public static function afterRestore( NovaRequest $request, Model $model )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        Cache::forget( 'appearances' );
+        Cache::rememberForever( 'appearances', function () {
+            return \App\Models\Appearance::query()->where( 'status', 1 )->get();
+        } );
     }
 
 
-    public function authorizedToReplicate(Request $request)
+    public static function authorizeToCreate( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
-    public static function availableForNavigation(Request $request)
+    public static function authorizedToCreate( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
+    }
+
+    public function authorizedToDelete( Request $request )
+    {
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
+    }
+
+
+    public function authorizedToReplicate( Request $request )
+    {
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
+    }
+
+    public static function availableForNavigation( Request $request )
+    {
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
     public function availablePanelsForCreate( $request, FieldCollection $fields = null )

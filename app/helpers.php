@@ -1,12 +1,13 @@
 <?php
 
-use App\Models\Translation;
-use App\Models\Category;
-use App\Models\Type;
-use App\Models\ApplicationArea;
 use App\Models\Appearance;
+use App\Models\ApplicationArea;
+use App\Models\Category;
 use App\Models\Property;
+use App\Models\Translation;
+use App\Models\Type;
 use App\Models\Weight;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 
 if ( !function_exists( 'translate' ) ) {
@@ -31,38 +32,39 @@ if ( !function_exists( 'translate' ) ) {
 if ( !function_exists( 'menu_categories' ) ) {
     function menu_categories()
     {
-        $categories = Cache::remember( 'categories', 1200, function () {
-            return Category::query()->with( [ 'children' ] )->where( 'status', 1 )->where( 'category_id', null )
-                           ->with( 'children' )->get();
+        return Cache::remember( 'categories', 1200, function () {
+            return Category::query()
+                           ->with( [ 'children' ] )
+                           ->where( 'status', 1 )
+                           ->where( 'category_id', null )
+                           ->get();
         } );
-        return $categories;
     }
 }
+
+
 if ( !function_exists( 'properties' ) ) {
     function properties()
     {
-        $properties = Cache::remember( 'properties', 1200, function () {
-            return $properties = Property::where( 'status', 1 )->get();
+        return Cache::remember( 'properties', 1200, function () {
+            return Property::where( 'status', 1 )->get();
         } );
-        return $properties;
     }
 }
 if ( !function_exists( 'types' ) ) {
     function types()
     {
-        $types = Cache::remember( 'types', 1200, function () {
-            return $types = Type::where( 'status', 1 )->get();
+        return Cache::remember( 'types', 1200, function () {
+            return Type::where( 'status', 1 )->get();
         } );
-        return $types;
     }
 }
 if ( !function_exists( 'applicationAreas' ) ) {
     function applicationAreas()
     {
-        $applicationAreas = Cache::remember( 'applicationAreas', 1200, function () {
-            return $applicationAreas = ApplicationArea::where( 'status', 1 )->get();
+        return Cache::remember( 'applicationAreas', 1200, function () {
+            return ApplicationArea::where( 'status', 1 )->get();
         } );
-        return $applicationAreas;
     }
 }
 if ( !function_exists( 'appearances' ) ) {
@@ -76,53 +78,50 @@ if ( !function_exists( 'appearances' ) ) {
 if ( !function_exists( 'weights' ) ) {
     function weights()
     {
-        $weights = Cache::remember( 'weights', 1200, function () {
-            return $weights = Weight::where( 'status', 1 )->get();
+        return Cache::remember( 'weights', 1200, function () {
+            return Weight::where( 'status', 1 )->get();
         } );
-        return $weights;
     }
 }
 if ( !function_exists( 'settings' ) ) {
     function settings()
     {
         return Cache::rememberForever( 'settings', function () {
-            $settings = \App\Models\Setting::query()->first();
-            if ( $settings ) {
-                return $settings->toArray();
-            }
-            return [];
+            return \App\Models\Setting::query()->first();
         } );
     }
 }
 
 if ( !function_exists( 'setting' ) ) {
-    function setting($key, $default = null)
+    function setting( $key, $default = null )
     {
-        if (empty($key)) {
+        if ( empty( $key ) ) {
             return $default;
         }
         $settings = settings();
-        if (array_key_exists($key, $settings)){
-            return $settings[$key];
+        if ( empty( $settings ) ) {
+            return $default;
+        }
+        if ( array_key_exists($key, $settings->attributesToArray()) ) {
+            return $settings->$key;
         }
         return $default;
     }
 }
 
 if ( !function_exists( 'settingSocialMedia' ) ) {
-    function settingSocialMedia($key, $default = null)
+    function settingSocialMedia( $key, $default = null )
     {
-        if (empty($key)) {
+        if ( empty( $key ) ) {
             return $default;
         }
-        $socialMedia = setting('social_media');
-        if (is_array($socialMedia) && array_key_exists($key, $socialMedia)){
+        $socialMedia = setting( 'social_media' );
+        if ( is_array( $socialMedia ) && array_key_exists( $key, $socialMedia ) ) {
             return $socialMedia[$key];
         }
         return $default;
     }
 }
-
 
 
 if ( !function_exists( 'brands' ) ) {
