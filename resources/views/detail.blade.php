@@ -123,10 +123,10 @@
                                                     <img src="{{asset('img/icons/pr_calc.svg?v1')}}" alt="calculator">
                                                 </a>
                                             @endif
-                                            <!-- <a href="#" target="_blank" class="pr_buttons">
-                                                <img src="{{asset('img/icons/pr_tpdf.svg?v1')}}" alt="pdf">
-                                            </a>
                                             <a href="#" target="_blank" class="pr_buttons">
+                                                <img src="{{asset('img/icons/pr_pdf.svg?v1')}}" alt="pdf">
+                                            </a>
+                                            <!-- <a href="#" target="_blank" class="pr_buttons">
                                                 <img src="{{asset('img/icons/pr_mpdf.svg?v1')}}" alt="pdf">
                                             </a> -->
                                             @if($product->video)

@@ -363,6 +363,7 @@ main {
   flex-wrap: wrap;
   width: 100%;
   margin: 8px 0 16px 0;
+  justify-content: space-between;
 }
 
 .new-price {
@@ -10604,7 +10605,7 @@ img.product_gallery_images_upload {
 }
 
 .home_modal .modal_container {
-  max-width: 1764px;
+  max-width: 1000px;
   width: auto;
   height: 100%;
   position: relative;
@@ -10723,6 +10724,12 @@ img.product_gallery_images_upload {
 
 .catalog_filter .col {
   padding: 0 44px;
+}
+
+.info_link{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*! ====  ALL PAGES CSS FINISH  ===== */

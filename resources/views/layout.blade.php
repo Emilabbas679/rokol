@@ -49,18 +49,20 @@
 
 </div>
 
-<script src="{{asset('js/swiper-bundle.min.js')}}"></script>
-<script src="{{asset('js/select2.min.js')}}"></script>
-<script src="{{asset('js/jquery.fancybox.min.js')}}"></script>
-<script src="{{asset('js/jquery.matchHeight-min.js')}}"></script>
-<script src="{{asset('js/jquery.inputmask.min.js?v123')}}"></script>
-<script src="{{asset('js/myjs.js?v=' . time())}}"></script>
-<!-- Google Tag Manager (noscript) -->
-<noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5Z2765RC" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe>
-</noscript>
-<!-- End Google Tag Manager (noscript) -->
+    <script src="{{asset('js/swiper-bundle.min.js')}}"></script>
+    <script src="{{asset('js/select2.min.js')}}"></script>
+    <script src="{{asset('js/jquery.fancybox.min.js')}}"></script>
+    <script src="{{asset('js/jquery.matchHeight-min.js')}}"></script>
+    <script src="{{asset('js/jquery.inputmask.min.js?v123')}}"></script>
+    <script src="{{asset('js/myjs.js?v=' . time())}}"></script>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5Z2765RC" height="0" width="0"
+            style="display:none;visibility:hidden">
+        </iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
 
 @stack('js')
 
