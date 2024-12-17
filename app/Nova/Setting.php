@@ -48,7 +48,7 @@ class Setting extends Resource
             Text::make( 'Site name', 'site_name' ),
             Image::make( 'Site logo', 'site_logo' )
                  ->hideFromIndex()
-                 ->acceptedTypes( '.jpg,.png,.svg,.webp,.jpeg,.svg' )
+                 ->acceptedTypes( '.jpg,.png,.webp,.jpeg,.svg' )
                  ->rules( [
                               'nullable',
                               'mimetypes:image/jpeg,image/png,image/webp,image/svg+xml',
