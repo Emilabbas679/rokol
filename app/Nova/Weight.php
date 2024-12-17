@@ -2,7 +2,9 @@
 
 namespace App\Nova;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
@@ -106,6 +108,39 @@ class Weight extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+
+    public static function afterCreate( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'weights' );
+        Cache::remember( 'weights', 1200, function () {
+            return Weight::where( 'status', 1 )->get();
+        } );
+    }
+
+    public static function afterUpdate( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'weights' );
+        Cache::remember( 'weights', 1200, function () {
+            return Weight::where( 'status', 1 )->get();
+        } );
+    }
+
+    public static function afterDelete( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'weights' );
+        Cache::remember( 'weights', 1200, function () {
+            return Weight::where( 'status', 1 )->get();
+        } );
+    }
+
+    public static function afterRestore( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'weights' );
+        Cache::remember( 'weights', 1200, function () {
+            return Weight::where( 'status', 1 )->get();
+        } );
     }
 
 

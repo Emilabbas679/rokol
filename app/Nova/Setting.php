@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Laravel\Nova\Fields\FieldCollection;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\URL;
@@ -48,8 +47,8 @@ class Setting extends Resource
         return [
             Text::make( 'Site name', 'site_name' ),
             Image::make( 'Site logo', 'site_logo' )
-                ->hideFromIndex()
-                ->acceptedTypes('.jpg,.png,.svg,.webp,.jpeg,.svg')
+                 ->hideFromIndex()
+                 ->acceptedTypes( '.jpg,.png,.svg,.webp,.jpeg,.svg' )
                  ->rules( [
                               'nullable',
                               'mimetypes:image/jpeg,image/png,image/webp,image/svg+xml',
@@ -144,33 +143,57 @@ class Setting extends Resource
         } );
     }
 
+    public static function afterUpdate( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'settings' );
+        Cache::rememberForever( 'settings', function () {
+            return \App\Models\Setting::query()->first();
+        } );
+    }
 
-    public static function authorizedToCreate(Request $request)
+    public static function afterDelete( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'settings' );
+        Cache::rememberForever( 'settings', function () {
+            return \App\Models\Setting::query()->first();
+        } );
+    }
+
+    public static function afterRestore( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'settings' );
+        Cache::rememberForever( 'settings', function () {
+            return \App\Models\Setting::query()->first();
+        } );
+    }
+
+
+    public static function authorizedToCreate( Request $request )
     {
         return !\App\Models\Setting::query()->count();
     }
 
 
-    public function authorizedToReplicate(Request $request)
+    public function authorizedToReplicate( Request $request )
     {
         return false;
     }
 
 
-    public static function authorizeToCreate(Request $request)
+    public static function authorizeToCreate( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
-    public function authorizedToDelete(Request $request)
+    public function authorizedToDelete( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
 
-    public static function availableForNavigation(Request $request)
+    public static function availableForNavigation( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
     public function availablePanelsForCreate( $request, FieldCollection $fields = null )
