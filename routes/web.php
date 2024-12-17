@@ -80,6 +80,7 @@ Route::get('/offers', [\App\Http\Controllers\OfferController::class, 'index'])->
 Route::get('/filters', [\App\Http\Controllers\SiteController::class, 'getFiltersApi']);
 Route::get( '/colors/groups', [\App\Http\Controllers\ColorController::class, 'colorGroups'])->name('colors.groups.index');
 Route::get( '/colors/groups/{id}', [\App\Http\Controllers\ColorController::class, 'colorGroupsShow'])->name('colors.groups.show');
+Route::get( '/pages/{id}', [\App\Http\Controllers\SiteController::class, 'pages'])->name('pages.index');
 
 
 Route::get('/cache/clear', function(){

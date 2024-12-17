@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Cart;
 use App\Models\Favorite;
+use App\Models\Page;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
@@ -24,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Paginator::defaultView('vendor.pagination.default');
+        Paginator::defaultView( 'vendor.pagination.default' );
         View::composer( 'partials.cart_icon', function ( \Illuminate\View\View $view ) {
             if ( fUser() ) {
                 $carts = Cart::query()
@@ -48,20 +49,31 @@ class AppServiceProvider extends ServiceProvider
         } );
         View::composer( 'partials.fav_icon', function ( \Illuminate\View\View $view ) {
             if ( fUser() ) {
-                $favoritesCount = Cache::rememberForever("favorites:count:user:".fUserId(), function () {
+                $favoritesCount = Cache::remember( "favorites:count:user:" . fUserId(), 600, function () {
                     $favoritesCount = Favorite::query()
-                                   ->where( 'user_id', fUserId() )
-                                   ->count( 'id' );
-                    if ($favoritesCount > 99) {
+                                              ->where( 'user_id', fUserId() )
+                                              ->count( 'id' );
+                    if ( $favoritesCount > 99 ) {
                         $favoritesCount = '99+';
                     }
                     return $favoritesCount;
-                });
+                } );
 
                 $view->with( 'favoritesCount', $favoritesCount );
-            } else {
+            }
+            else {
                 $view->with( 'favoritesCount', 0 );
             }
+
+        } );
+
+        View::composer( 'partials.static_page_dropdown', function ( \Illuminate\View\View $view ) {
+            $staticPages = Cache::rememberForever( "staticpages", function () {
+                return Page::query()
+                           ->where( 'active_status', 1 )
+                           ->get( [ 'id', 'title' ] );
+            } );
+            $view->with( 'staticPages', $staticPages );
 
         } );
     }

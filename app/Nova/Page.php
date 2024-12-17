@@ -47,22 +47,23 @@ class Page extends Resource
         return [
             ID::make()->sortable(),
             Text::make( 'Title (AZ)', 'title->az' )->rules( [ 'required' ] ),
-            Text::make( 'Title (EN)', 'title->en' ),
-            Text::make( 'Title (RU)', 'title->ru' ),
+            Text::make( 'Title (EN)', 'title->en' )->hideFromIndex(),
+            Text::make( 'Title (RU)', 'title->ru' )->hideFromIndex(),
             CKEditor::make( 'Body (AZ)', 'body->az' )
                     ->rules( [ 'required' ] ),
             CKEditor::make( 'Body (EN)', 'body->en' ),
             CKEditor::make( 'Body (RU)', 'body->ru' ),
-            Image::make('image')
-            ->disk('public')
-            ->path('pages/images')
-            ->acceptedTypes('.jpg,.png,.webp,.jpeg,.svg')
-            ->rules(
-                [
-                    'nullable',
-                    'mimetypes:image/jpeg,image/png,image/webp',
-                ]
-            ),
+            Image::make( 'image' )
+                 ->hideFromIndex()
+                 ->disk( 'public' )
+                 ->path( 'pages/images' )
+                 ->acceptedTypes( '.jpg,.png,.webp,.jpeg,.svg' )
+                 ->rules(
+                     [
+                         'nullable',
+                         'mimetypes:image/jpeg,image/png,image/webp',
+                     ]
+                 ),
             Boolean::make( 'Active status', 'active_status' )
                    ->trueValue( true )
                    ->falseValue( false ),
