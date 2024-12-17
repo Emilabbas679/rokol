@@ -34,7 +34,7 @@ class SiteController extends Controller
                            ->get();
 
         $modal = Modal::query()
-            ->where('expire_time', '>', now())
+                      ->where( 'expire_time', '>', now() )
                       ->first();
         return view( 'index', compact( 'sliders', 'videoNews', 'modal' ) );
     }
@@ -568,7 +568,7 @@ class SiteController extends Controller
         $weights            = $f->pluck( 'weight_id' )->unique()->toArray();
         foreach ( weights() as $weight ) {
             if ( in_array( $weight->id, $weights ) ) {
-                $filters['weights'][$weight->id] = $weight->weight ." " . productWeightUnit($weight->weight_type);
+                $filters['weights'][$weight->id] = $weight->weight . " " . productWeightUnit( $weight->weight_type );
             }
         }
         $filters['brands'] = [];
@@ -605,6 +605,7 @@ class SiteController extends Controller
     public function pages( $id )
     {
         $page = Page::query()
+                    ->where( 'active_status', true )
                     ->findOrFail( $id );
         return view( 'static_page', compact( 'page' ) );
     }
