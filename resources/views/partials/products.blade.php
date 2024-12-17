@@ -31,7 +31,10 @@
 								<span class="new-price">@if($product->price > 0) {{$product->price}} AZN @else *** @endif</span>
 							@endif
 						@endif
-
+						
+						<a href="#" target="_blank" class="info_link">
+							<img src="{{asset('img/icons/info.svg')}}" alt="">
+						</a>
 					</div>
 					<!-- <div class="itm_stock stocked">
 		                <span class="stock_text">Stokda: 25 ədəd</span>
