@@ -110,6 +110,7 @@ class SiteController extends Controller
                                       'products.category_id',
                                       'products.image',
                                       'products.name',
+                                      'products.pdf_path',
                                       DB::raw( 'pp.id as price_id' ),
                                       'pp.sale_price',
                                       'pp.price',

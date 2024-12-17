@@ -123,12 +123,14 @@
                                                     <img src="{{asset('img/icons/pr_calc.svg?v1')}}" alt="calculator">
                                                 </a>
                                             @endif
-                                            <a href="#" target="_blank" class="pr_buttons">
+                                            @if(!is_null($product->pdf_path))
+                                            <a href="{!! asset('storage/'.$product->pdf_path) !!}" target="_blank" class="pr_buttons">
                                                 <img src="{{asset('img/icons/pr_pdf.svg?v1')}}" alt="pdf">
                                             </a>
-                                            <!-- <a href="#" target="_blank" class="pr_buttons">
-                                                <img src="{{asset('img/icons/pr_mpdf.svg?v1')}}" alt="pdf">
-                                            </a> -->
+                                                @endif
+{{--                                            <a href="#" target="_blank" class="pr_buttons">--}}
+{{--                                                <img src="{{asset('img/icons/pr_mpdf.svg?v1')}}" alt="pdf">--}}
+{{--                                            </a>--}}
                                             @if($product->video)
                                                 <a href="javascript:void(0)" class="pr_buttons video_button">
                                                     <img src="{{asset('img/icons/pr_video.svg?v1')}}" alt="video">

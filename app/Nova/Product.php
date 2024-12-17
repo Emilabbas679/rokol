@@ -116,6 +116,11 @@ class Product extends Resource
                              } ),
                     Number::make( 'Stock count', 'stock_count' )->default( 0 )->sortable(),
                     File::make( 'Image' )->disk( 'public' ),
+                    File::make( 'PDF', 'pdf_path' )
+                        ->disk( 'public' )
+                        ->acceptedTypes( '.pdf' )
+                        ->path('pdfs')
+                        ->rules( 'mimetypes:application/pdf' ),
 
                     Tag::make( 'Types', 'types', 'App\Nova\Type' )
                        ->preload()
@@ -516,30 +521,30 @@ class Product extends Resource
     }
 
 
-    public static function authorizeToCreate(Request $request)
+    public static function authorizeToCreate( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
-    public static function authorizedToCreate(Request $request)
+    public static function authorizedToCreate( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
-    public function authorizedToDelete(Request $request)
+    public function authorizedToDelete( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
 
-    public function authorizedToReplicate(Request $request)
+    public function authorizedToReplicate( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
-    public static function availableForNavigation(Request $request)
+    public static function availableForNavigation( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
     public function availablePanelsForCreate( $request, FieldCollection $fields = null )
