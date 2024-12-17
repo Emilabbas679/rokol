@@ -2,7 +2,9 @@
 
 namespace App\Nova;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -154,6 +156,55 @@ class Category extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+
+    public static function afterCreate( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'categories' );
+        Cache::remember( 'categories', 1200, function () {
+            return Category::query()
+                           ->with( [ 'children' ] )
+                           ->where( 'status', 1 )
+                           ->where( 'category_id', null )
+                           ->get();
+        } );
+    }
+
+    public static function afterUpdate( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'categories' );
+        Cache::remember( 'categories', 1200, function () {
+            return Category::query()
+                           ->with( [ 'children' ] )
+                           ->where( 'status', 1 )
+                           ->where( 'category_id', null )
+                           ->get();
+        } );
+    }
+
+    public static function afterDelete( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'categories' );
+        Cache::remember( 'categories', 1200, function () {
+            return Category::query()
+                           ->with( [ 'children' ] )
+                           ->where( 'status', 1 )
+                           ->where( 'category_id', null )
+                           ->get();
+        } );
+    }
+
+    public static function afterRestore( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'categories' );
+        Cache::remember( 'categories', 1200, function () {
+            return Category::query()
+                           ->with( [ 'children' ] )
+                           ->where( 'status', 1 )
+                           ->where( 'category_id', null )
+                           ->get();
+        } );
     }
 
     public static function authorizeToCreate(Request $request)

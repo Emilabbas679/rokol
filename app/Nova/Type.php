@@ -2,13 +2,14 @@
 
 namespace App\Nova;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Type extends Resource
 {
@@ -138,6 +139,38 @@ class Type extends Resource
         return [];
     }
 
+    public static function afterCreate( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'types' );
+        Cache::remember( 'types', 1200, function () {
+            return Type::query()->where( 'status', 1 )->get();
+        } );
+    }
+
+    public static function afterUpdate( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'types' );
+        Cache::remember( 'types', 1200, function () {
+            return Type::query()->where( 'status', 1 )->get();
+        } );
+    }
+
+    public static function afterDelete( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'types' );
+        Cache::remember( 'types', 1200, function () {
+            return Type::query()->where( 'status', 1 )->get();
+        } );
+    }
+
+
+    public static function afterRestore( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'types' );
+        Cache::remember( 'types', 1200, function () {
+            return Type::query()->where( 'status', 1 )->get();
+        } );
+    }
 
     public static function authorizeToCreate(Request $request)
     {
