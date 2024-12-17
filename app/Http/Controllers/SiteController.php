@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Color;
 use App\Models\Filter;
 use App\Models\Modal;
+use App\Models\Page;
 use App\Models\Slider;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -599,6 +600,13 @@ class SiteController extends Controller
 
         return new LengthAwarePaginator( $items->forPage( $page, $perPage ), $items->count(), $perPage, $page, $options );
 
+    }
+
+    public function pages( $id )
+    {
+        $page = Page::query()
+                    ->findOrFail( $id );
+        return view( 'static_page', compact( 'page' ) );
     }
 }
 

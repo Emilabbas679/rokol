@@ -95,15 +95,10 @@
                         <ul class="hdr_menu clearfix">
                             <li>
                                 <a href="{!! route('about') !!}"
-                                   class="{!! request()->routeIs('about') ? 'active' :  '' !!}">{{translate('header_about')}} </a>
+                                   class="{!! request()->routeIs('about') || request()->routeIs('pages.index') ? 'active' :  '' !!}">{{translate('header_about')}} </a>
                                 <div class="drop_section">
                                     <ul class="drop_list">
-                                        <li>
-                                            <a href="#">test</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">test</a>
-                                        </li>
+                                        @include('partials.static_page_dropdown')
                                     </ul>
                                 </div>
                             </li>
@@ -359,7 +354,8 @@
         <div class="mob_body">
             <ul class="hdr_menu clearfix">
                 <li>
-                    <a href="{!! route('about') !!}" class="">{{translate('header_about')}} </a>
+                    <a href="{!! route('about') !!}"
+                       class="{!! request()->routeIs('about') || request()->routeIs('pages.index') ? 'active' :  '' !!}">{{translate('header_about')}} </a>
                 </li>
                 <li>
                     <a href="" class="">{{translate('header_products')}}</a>
