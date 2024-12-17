@@ -57,34 +57,45 @@ class Setting extends Resource
             URL::make( 'Facebook', 'social_media->facebook' )
                ->hideFromIndex()
                ->rules( [
+                            'nullable',
                             'url:http,https'
                         ] ),
             URL::make( 'Whatsapp', 'social_media->whatsapp' )
                ->hideFromIndex()
                ->rules( [
+                            'nullable',
                             'url:http,https'
                         ] ),
             URL::make( 'Instagram', 'social_media->instagram' )
                ->hideFromIndex()
                ->rules( [
+                            'nullable',
                             'url:http,https'
                         ] ),
             URL::make( 'Linkedin', 'social_media->linkedin' )
                ->hideFromIndex()
                ->rules( [
+                            'nullable',
                             'url:http,https'
                         ] ),
             URL::make( 'Youtube', 'social_media->youtube' )
                ->hideFromIndex()
                ->rules( [
+                            'nullable',
                             'url:http,https'
                         ] ),
             Text::make( 'Phone number short', 'phone_number_short' ),
             Text::make( 'Phone number long', 'phone_number_long' ),
             Text::make( 'Email contact', 'email_contact' )
-                ->rules( [ 'email' ] ),
+                ->rules( [
+                             'nullable',
+                             'email'
+                         ] ),
             Text::make( 'Email footer', 'email_footer' )
-                ->rules( [ 'email' ] ),
+                ->rules( [
+                             'nullable',
+                             'email'
+                         ] ),
             Text::make( 'Address contact', 'address_contact' ),
             Text::make( 'Address footer', 'address_footer' ),
         ];
