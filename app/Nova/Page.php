@@ -2,8 +2,11 @@
 
 namespace App\Nova;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
@@ -112,5 +115,79 @@ class Page extends Resource
     public function actions( NovaRequest $request )
     {
         return [];
+    }
+
+    public static function afterCreate( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'staticpages' );
+        Cache::rememberForever( "staticpages", function () {
+            return \App\Models\Page::query()
+                                   ->where( 'active_status', 1 )
+                                   ->get( [ 'id', 'title' ] );
+        } );
+    }
+
+    public static function afterUpdate( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'staticpages' );
+        Cache::rememberForever( "staticpages", function () {
+            return \App\Models\Page::query()
+                                   ->where( 'active_status', 1 )
+                                   ->get( [ 'id', 'title' ] );
+        } );
+    }
+
+    public static function afterDelete( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'staticpages' );
+        Cache::rememberForever( "staticpages", function () {
+            return \App\Models\Page::query()
+                                   ->where( 'active_status', 1 )
+                                   ->get( [ 'id', 'title' ] );
+        } );
+    }
+
+    public static function afterRestore( NovaRequest $request, Model $model )
+    {
+        Cache::forget( 'staticpages' );
+        Cache::rememberForever( "staticpages", function () {
+            return \App\Models\Page::query()
+                                   ->where( 'active_status', 1 )
+                                   ->get( [ 'id', 'title' ] );
+        } );
+    }
+
+
+    public static function authorizeToCreate( Request $request )
+    {
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
+    }
+
+    public static function authorizedToCreate( Request $request )
+    {
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
+    }
+
+    public function authorizedToDelete( Request $request )
+    {
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
+    }
+
+
+    public function authorizedToReplicate( Request $request )
+    {
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
+    }
+
+    public static function availableForNavigation( Request $request )
+    {
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
+    }
+
+    public function availablePanelsForCreate( $request, FieldCollection $fields = null )
+    {
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] )
+            ? parent::availablePanelsForCreate( $request, $fields )
+            : false;
     }
 }
