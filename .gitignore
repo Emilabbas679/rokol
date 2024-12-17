@@ -18,5 +18,3 @@ yarn-error.log
 /.idea
 /.vscode
 /.htaccess
-!/storage/app/public/pdfs
-!/storage/app/public/pdfs/*

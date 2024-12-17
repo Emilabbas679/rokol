@@ -96,6 +96,16 @@
                             <li>
                                 <a href="{!! route('about') !!}"
                                    class="{!! request()->routeIs('about') ? 'active' :  '' !!}">{{translate('header_about')}} </a>
+                                <div class="drop_section">
+                                    <ul class="drop_list">
+                                        <li>
+                                            <a href="#">test</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">test</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                             <li>
                                 <a href="{{route('products')}}"
