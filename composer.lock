@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b9d29ee07d9d09f64744389c06d618f",
+    "content-hash": "8668effe27a88f8ccc9ed3ad58b44123",
     "packages": [
         {
             "name": "acme/analytics",
@@ -2012,13 +2012,13 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "v5.0.x-dev"
-                },
                 "laravel": {
                     "providers": [
                         "Kalnoy\\Nestedset\\NestedSetServiceProvider"
                     ]
+                },
+                "branch-alias": {
+                    "dev-master": "v5.0.x-dev"
                 }
             },
             "autoload": {

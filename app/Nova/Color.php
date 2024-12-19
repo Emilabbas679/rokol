@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Color as ColorField;
@@ -46,52 +47,66 @@ class Color extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function fields(NovaRequest $request)
+    public function fields( NovaRequest $request )
     {
+        $colors = \App\Models\Color::query()
+                                   ->where( 'parent_id', null )
+                                   ->get();
         return [
             ID::make()->sortable(),
-            Text::make(__('Name (English)'), 'name_en')
-                ->resolveUsing(function ($value, $resource) {
+            Select::make( 'Parent', 'parent_id' )
+                  ->searchable()
+                  ->options(
+                      function () use ( $colors ) {
+                          $arr = [];
+                          foreach ( $colors as $color ) {
+                              $arr[$color->id] = $color->name[app()->getLocale()];
+                          }
+                          return $arr;
+                      }
+                  ),
+
+            Text::make( __( 'Name (English)' ), 'name_en' )
+                ->resolveUsing( function ( $value, $resource ) {
                     return $resource->name['en'] ?? '';
-                })
-                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    $names = $model->name ?? [];
+                } )
+                ->fillUsing( function ( NovaRequest $request, $model, $attribute, $requestAttribute ) {
+                    $names       = $model->name ?? [];
                     $names['en'] = $request->$requestAttribute;
                     $model->name = $names;
-                }),
+                } ),
 
-            Text::make(__('Name (Azerbaijan)'), 'name_az')->hideFromIndex()
-                ->resolveUsing(function ($value, $resource) {
+            Text::make( __( 'Name (Azerbaijan)' ), 'name_az' )->hideFromIndex()
+                ->resolveUsing( function ( $value, $resource ) {
                     return $resource->name['az'] ?? '';
-                })
-                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    $names = $model->name ?? [];
+                } )
+                ->fillUsing( function ( NovaRequest $request, $model, $attribute, $requestAttribute ) {
+                    $names       = $model->name ?? [];
                     $names['az'] = $request->$requestAttribute;
                     $model->name = $names;
-                }),
+                } ),
 
-            Text::make(__('Name (Russian)'), 'name_ru')->hideFromIndex()
-                ->resolveUsing(function ($value, $resource) {
+            Text::make( __( 'Name (Russian)' ), 'name_ru' )->hideFromIndex()
+                ->resolveUsing( function ( $value, $resource ) {
                     return $resource->name['ru'] ?? '';
-                })
-                ->fillUsing(function (NovaRequest $request, $model, $attribute, $requestAttribute) {
-                    $names = $model->name ?? [];
+                } )
+                ->fillUsing( function ( NovaRequest $request, $model, $attribute, $requestAttribute ) {
+                    $names       = $model->name ?? [];
                     $names['ru'] = $request->$requestAttribute;
                     $model->name = $names;
-                }),
+                } ),
 
-            Number::make('code')->min(0)->max(1000000),
+            Number::make( 'code' )->min( 0 )->max( 1000000 ),
 
-            ColorField::make('Color', 'hex'),
+            ColorField::make( 'Color', 'hex' ),
 
             Boolean::make( 'Catalog', 'is_catalog' )
                    ->trueValue( '1' )
                    ->falseValue( '0' )
-                ->default(true)
-
+                   ->default( true )
 
 
         ];
@@ -100,10 +115,10 @@ class Color extends Resource
     /**
      * Get the cards available for the request.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function cards(NovaRequest $request)
+    public function cards( NovaRequest $request )
     {
         return [];
     }
@@ -111,10 +126,10 @@ class Color extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function filters(NovaRequest $request)
+    public function filters( NovaRequest $request )
     {
         return [];
     }
@@ -122,10 +137,10 @@ class Color extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function lenses(NovaRequest $request)
+    public function lenses( NovaRequest $request )
     {
         return [];
     }
@@ -133,39 +148,39 @@ class Color extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param \Laravel\Nova\Http\Requests\NovaRequest $request
      * @return array
      */
-    public function actions(NovaRequest $request)
+    public function actions( NovaRequest $request )
     {
         return [];
     }
 
 
-    public static function authorizeToCreate(Request $request)
+    public static function authorizeToCreate( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
-    public static function authorizedToCreate(Request $request)
+    public static function authorizedToCreate( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
-    public function authorizedToDelete(Request $request)
+    public function authorizedToDelete( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
 
-    public function authorizedToReplicate(Request $request)
+    public function authorizedToReplicate( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
-    public static function availableForNavigation(Request $request)
+    public static function availableForNavigation( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
     public function availablePanelsForCreate( $request, FieldCollection $fields = null )
