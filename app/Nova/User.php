@@ -54,16 +54,25 @@ class User extends Resource
 
             Text::make( 'Full name', 'full_name' )
                 ->sortable()
+                ->readonly( function () {
+                    return !$this->resource->is_admin;
+                })
                 ->rules( 'required', 'max:255' ),
 
             Text::make( 'Email' )
                 ->sortable()
+                ->readonly( function () {
+                    return !$this->resource->is_admin;
+                })
                 ->rules( 'nullable', 'email', 'max:254' )
                 ->creationRules( 'unique:users,email' )
                 ->updateRules( 'unique:users,email,{{resourceId}}' ),
 
             Text::make( 'Phone' )
                 ->sortable()
+                ->readonly( function () {
+                    return !$this->resource->is_admin;
+                })
                 ->rules( 'nullable', 'max:254' )
                 ->creationRules( [ 'unique:users,phone', new PhoneNumberRule() ] )
                 ->placeholder( "Nömrə +(994) xx xxx xx xx formatında olmalıdır" )
@@ -128,12 +137,6 @@ class User extends Resource
 
     public function authorizedToUpdate( Request $request )
     {
-        // Add your condition here. For example, if the resource has a 'status' field:
-        if ( !$this->is_admin ) {
-            return false;
-        }
-
-        // Otherwise, use the default authorization logic
         return parent::authorizedToUpdate( $request );
     }
 
