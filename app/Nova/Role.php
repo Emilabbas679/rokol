@@ -129,5 +129,10 @@ class Role extends Resource
             : false;
     }
 
+    public static function availableForNavigation( Request $request )
+    {
+        return false;
+    }
+
 
 }

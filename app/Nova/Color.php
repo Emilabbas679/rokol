@@ -59,6 +59,9 @@ class Color extends Resource
             ID::make()->sortable(),
             Select::make( 'Parent', 'parent_id' )
                   ->searchable()
+                  ->displayUsing( function ($d, \App\Models\Color $color ) {
+                      return $color->parent()->first()?->name[app()->getLocale()];
+                  } )
                   ->options(
                       function () use ( $colors ) {
                           $arr = [];
