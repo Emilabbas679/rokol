@@ -9,82 +9,70 @@
 @endpush
 
 @section('content')
+    <div class="section_wrap wrap_catalogs_page">
 
-<!-- Wrap Color Table -->
+        <div class="main_center clearfix">
+            <div class="adrs_container clearfix">
+                <div class="sect_header clearfix">
+                    <h2 class="sect_title">Rəng kataloqu </h2>
+                </div>
+                <div class="sect_body clearfix">
+                    @php
+                        $looped = false;
+                    @endphp
 
-<div class="section_wrap wrap_catalogs_page">
-
-    <div class="main_center clearfix">
-        <div class="adrs_container clearfix">
-            <div class="sect_header clearfix">
-                <h2 class="sect_title">Rəng kataloqu </h2>
-            </div>
-            <div class="sect_body clearfix">
-                <div class="row catalog_row_main">
-
-                    @foreach($colors->groupBy('code') as $colorCat)
-
-                        <div class="col item_col clearfix">
-                        <div class="catalog_head">
-                            <div class="catalog_title">
-                                <span class="catalog_val">{{ $colorCat->first()->code }}</span>
-                                <span class="catalog_val_n">{{ $colorCat->first()->name['az'] }}</span>
+                    @foreach($colors as $color)
+                        @if($color->children->count())
+                            @php
+                                $looped = true;
+                            @endphp
+                            <div class="row catalog_row_main">
+                                <div class="col item_col clearfix">
+                                    <div class="catalog_head">
+                                        <div class="catalog_title">
+                                            <span class="catalog_val">{{ $color->code }}</span>
+                                            <span class="catalog_val_n">{{ $color->name['az'] }}</span>
+                                        </div>
+                                        <div class="catalog_info">{{ $color->name['en'] }}
+                                            / {{ $color->name['ru'] }}</div>
+                                    </div>
+                                    <div class="row catalog_row_inner">
+                                        <div class="col item_col clearfix">
+                                            <div class="catalog_color" style="background: {{ $color->hex }};"></div>
+                                            <div class="catalog_name">{{ $color->name[app()->getLocale()] }}</div>
+                                        </div>
+                                        @foreach($color->children as $c)
+                                            <div class="col item_col clearfix">
+                                                <div class="catalog_color" style="background: {{ $c->hex }};"></div>
+                                                <div class="catalog_name">{{ $c->name[app()->getLocale()] }}</div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
-                            <div class="catalog_info">{{ $colorCat->first()->name['en'] }} / {{ $colorCat->first()->name['ru'] }}</div>
-                        </div>
-                        <div class="row catalog_row_inner">
+                        @endif
 
-                            @foreach($colorCat as $color)
-                            <div class="col item_col clearfix">
-                                <div class="catalog_color" style="background: {{ $color->hex }};"></div>
-                                <div class="catalog_name">{{ $color->name[app()->getLocale()] }}</div>
-                            </div>
-                            @endforeach
-
-                        </div>
-                    </div>
                     @endforeach
 
+                    @if(!$looped)
+                        <div class="row catalog_row_main m-0 full_colors">
+                            <div class="row catalog_row_inner">
+
+                                @foreach($colors as $color)
+
+                                    <div class="col item_col clearfix">
+                                        <div class="catalog_color" style="background: {{ $color->hex }};"></div>
+                                        <div class="catalog_name">{{ $color->name[app()->getLocale()] }}</div>
+                                    </div>
+
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-
-</div>
-<!-- Product similar items -->
-
-<div class="section_wrap wrap_catalogs_page">
-
-    <div class="main_center clearfix">
-        <div class="adrs_container clearfix full_colors_container">
-            <div class="sect_header clearfix">
-                <h2 class="sect_title">Rəng kataloqu </h2>
-            </div>
-            <div class="sect_body clearfix">
-                <div class="row catalog_row_main m-0 full_colors">
-
-                    @foreach($colors->groupBy('code') as $colorCat)
-                        <div class="row catalog_row_inner">
-
-                            @foreach($colorCat as $color)
-                            <div class="col item_col clearfix">
-                                <div class="catalog_color" style="background: {{ $color->hex }};"></div>
-                                <div class="catalog_name">{{ $color->name[app()->getLocale()] }}</div>
-                            </div>
-                            @endforeach
-
-                        </div>
-                    @endforeach
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<!-- Wrap Profile section -->
-
 @endsection
 
 @push('js')
