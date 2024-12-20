@@ -53,6 +53,36 @@
 </div>
 <!-- Product similar items -->
 
+<div class="section_wrap wrap_catalogs_page">
+
+    <div class="main_center clearfix">
+        <div class="adrs_container clearfix full_colors_container">
+            <div class="sect_header clearfix">
+                <h2 class="sect_title">Rəng kataloqu </h2>
+            </div>
+            <div class="sect_body clearfix">
+                <div class="row catalog_row_main m-0 full_colors">
+
+                    @foreach($colors->groupBy('code') as $colorCat)
+                        <div class="row catalog_row_inner">
+
+                            @foreach($colorCat as $color)
+                            <div class="col item_col clearfix">
+                                <div class="catalog_color" style="background: {{ $color->hex }};"></div>
+                                <div class="catalog_name">{{ $color->name[app()->getLocale()] }}</div>
+                            </div>
+                            @endforeach
+
+                        </div>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 <!-- Wrap Profile section -->
 
 @endsection
