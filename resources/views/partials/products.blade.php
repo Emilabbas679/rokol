@@ -2,6 +2,9 @@
     <div class="col item_col clearfix">
         <div class="col_in">
             <div class="fav_sect">
+                <div class="offer-tag">
+                    <p class="offer_val">HƏFTƏNİN TƏKLİFİ</p>
+                </div>
                 @auth()
                     <span class="favotites @if(!is_null($product->favorites?->where('price_id', $product->price_id)->first())) dofav @endif"
                           data-product-id="{!! $product->id !!}" data-price-id="{!! $product->price_id !!}"></span>
