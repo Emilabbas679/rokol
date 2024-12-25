@@ -115,7 +115,7 @@ class Weight extends Resource
     {
         Cache::forget( 'weights' );
         Cache::remember( 'weights', 1200, function () {
-            return Weight::where( 'status', 1 )->get();
+            return \App\Models\Weight::where( 'status', 1 )->get();
         } );
     }
 
@@ -123,7 +123,7 @@ class Weight extends Resource
     {
         Cache::forget( 'weights' );
         Cache::remember( 'weights', 1200, function () {
-            return Weight::where( 'status', 1 )->get();
+            return \App\Models\Weight::where( 'status', 1 )->get();
         } );
     }
 
@@ -131,7 +131,7 @@ class Weight extends Resource
     {
         Cache::forget( 'weights' );
         Cache::remember( 'weights', 1200, function () {
-            return Weight::where( 'status', 1 )->get();
+            return \App\Models\Weight::where( 'status', 1 )->get();
         } );
     }
 
@@ -139,7 +139,7 @@ class Weight extends Resource
     {
         Cache::forget( 'weights' );
         Cache::remember( 'weights', 1200, function () {
-            return Weight::where( 'status', 1 )->get();
+            return \App\Models\Weight::where( 'status', 1 )->get();
         } );
     }
 

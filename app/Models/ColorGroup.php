@@ -12,7 +12,7 @@ class ColorGroup extends Model
 
     protected $table = 'color_groups';
 
-    protected $fillable = [ 'name' ];
+    protected $fillable = [ 'name', 'display' ];
 
     protected $casts = [
         'name' => 'array'

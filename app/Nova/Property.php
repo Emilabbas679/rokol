@@ -137,7 +137,7 @@ class Property extends Resource
     {
         Cache::forget( 'properties' );
         Cache::remember( 'properties', 1200, function () {
-            return Property::query()->where( 'status', 1 )->get();
+            return \App\Models\Property::query()->where( 'status', 1 )->get();
         } );
     }
 
@@ -145,7 +145,7 @@ class Property extends Resource
     {
         Cache::forget( 'properties' );
         Cache::remember( 'properties', 1200, function () {
-            return Property::query()->where( 'status', 1 )->get();
+            return \App\Models\Property::query()->where( 'status', 1 )->get();
         } );
     }
 
@@ -153,14 +153,14 @@ class Property extends Resource
     {
         Cache::forget( 'properties' );
         Cache::remember( 'properties', 1200, function () {
-            return Property::query()->where( 'status', 1 )->get();
+            return \App\Models\Property::query()->where( 'status', 1 )->get();
         } );
     }
     public static function afterRestore( NovaRequest $request, Model $model )
     {
         Cache::forget( 'properties' );
         Cache::remember( 'properties', 1200, function () {
-            return Property::query()->where( 'status', 1 )->get();
+            return \App\Models\Property::query()->where( 'status', 1 )->get();
         } );
     }
 

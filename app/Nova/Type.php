@@ -143,7 +143,7 @@ class Type extends Resource
     {
         Cache::forget( 'types' );
         Cache::remember( 'types', 1200, function () {
-            return Type::query()->where( 'status', 1 )->get();
+            return \App\Models\Type::query()->where( 'status', 1 )->get();
         } );
     }
 
@@ -151,7 +151,7 @@ class Type extends Resource
     {
         Cache::forget( 'types' );
         Cache::remember( 'types', 1200, function () {
-            return Type::query()->where( 'status', 1 )->get();
+            return \App\Models\Type::query()->where( 'status', 1 )->get();
         } );
     }
 
@@ -159,7 +159,7 @@ class Type extends Resource
     {
         Cache::forget( 'types' );
         Cache::remember( 'types', 1200, function () {
-            return Type::query()->where( 'status', 1 )->get();
+            return \App\Models\Type::query()->where( 'status', 1 )->get();
         } );
     }
 
@@ -168,7 +168,7 @@ class Type extends Resource
     {
         Cache::forget( 'types' );
         Cache::remember( 'types', 1200, function () {
-            return Type::query()->where( 'status', 1 )->get();
+            return \App\Models\Type::query()->where( 'status', 1 )->get();
         } );
     }
 

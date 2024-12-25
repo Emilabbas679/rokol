@@ -137,7 +137,7 @@ class ApplicationArea extends Resource
     {
         Cache::forget( 'applicationAreas' );
         Cache::remember( 'applicationAreas', 1200, function () {
-            return ApplicationArea::where( 'status', 1 )->get();
+            return \App\Models\ApplicationArea::where( 'status', 1 )->get();
         } );
     }
 
@@ -145,7 +145,7 @@ class ApplicationArea extends Resource
     {
         Cache::forget( 'applicationAreas' );
         Cache::remember( 'applicationAreas', 1200, function () {
-            return ApplicationArea::where( 'status', 1 )->get();
+            return \App\Models\ApplicationArea::where( 'status', 1 )->get();
         } );
     }
 
@@ -153,7 +153,7 @@ class ApplicationArea extends Resource
     {
         Cache::forget( 'applicationAreas' );
         Cache::remember( 'applicationAreas', 1200, function () {
-            return ApplicationArea::where( 'status', 1 )->get();
+            return \App\Models\ApplicationArea::where( 'status', 1 )->get();
         } );
     }
 
@@ -161,7 +161,7 @@ class ApplicationArea extends Resource
     {
         Cache::forget( 'applicationAreas' );
         Cache::remember( 'applicationAreas', 1200, function () {
-            return ApplicationArea::where( 'status', 1 )->get();
+            return \App\Models\ApplicationArea::where( 'status', 1 )->get();
         } );
     }
 
