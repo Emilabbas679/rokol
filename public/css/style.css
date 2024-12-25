@@ -335,6 +335,7 @@ main {
   width: auto;
   max-width: calc(100% - 90px);
   margin-right: auto;
+  word-break: normal;
 }
 
 .itm_weight {
@@ -446,8 +447,8 @@ main {
   display: block;
   width: 100%;
   position: relative;
-  padding: 10px 8px;
-  height: 36px;
+  padding: 5px;
+  height: 24px;
   z-index: 3;
 }
 
@@ -457,7 +458,7 @@ main {
   width: auto;
   background-color: #FD1010;
   text-align: center;
-  font-size: 12px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 500;
   line-height: 1.3;
@@ -1761,32 +1762,6 @@ main {
     padding-bottom: 24px;
   }
 
-  .catalog_filter .col .catalog_title:not(.catalog_filter .col:nth-child(1) .catalog_title) {
-    border-top: none !important;
-  }
-
-  .catalog_filter .col:nth-child(2n-1) .catalog_title {
-    border-right: 1px solid #dee2e6 !important;
-  }
-
-  .catalog_filter .col:nth-child(1) .catalog_title {
-    border-top-left-radius: 8px !important;
-    border-top-right-radius: 8px !important;
-  }
-
-  .catalog_filter .col:nth-child(2) .catalog_title {
-    border-top-right-radius: 0 !important;
-  }
-
-  .catalog_filter .col:nth-last-child(2) .catalog_title {
-    border-bottom-left-radius: 0 !important;
-  }
-
-  .catalog_filter .col:last-child .catalog_title {
-    border-bottom-left-radius: 8px !important;
-    border-bottom-right-radius: 8px !important;
-  }
-
   .full_colors .col {
     width: 16.6666667% !important;
     padding: 8px !important;
@@ -1828,31 +1803,6 @@ main {
     padding-bottom: 24px;
   }
 
-  .catalog_filter .col .catalog_title:not(.catalog_filter .col:nth-child(1) .catalog_title) {
-    border-top: none !important;
-  }
-
-  .catalog_filter .col:nth-child(2n-1) .catalog_title {
-    border-right: 1px solid #dee2e6 !important;
-  }
-
-  .catalog_filter .col:nth-child(1) .catalog_title {
-    border-top-left-radius: 8px !important;
-    border-top-right-radius: 8px !important;
-  }
-
-  .catalog_filter .col:nth-child(2) .catalog_title {
-    border-top-right-radius: 0 !important;
-  }
-
-  .catalog_filter .col:nth-last-child(2) .catalog_title {
-    border-bottom-left-radius: 0 !important;
-  }
-
-  .catalog_filter .col:last-child .catalog_title {
-    border-bottom-left-radius: 8px !important;
-    border-bottom-right-radius: 8px !important;
-  }
   .full_colors .col {
     width: 16.6666667% !important;
     padding: 8px !important;
@@ -1900,32 +1850,6 @@ main {
 
   .catalog_filter {
     padding-bottom: 24px;
-  }
-
-  .catalog_filter .col .catalog_title:not(.catalog_filter .col:nth-child(1) .catalog_title) {
-    border-top: none !important;
-  }
-
-  .catalog_filter .col:nth-child(2n-1) .catalog_title {
-    border-right: 1px solid #dee2e6 !important;
-  }
-
-  .catalog_filter .col:nth-child(1) .catalog_title {
-    border-top-left-radius: 8px !important;
-    border-top-right-radius: 8px !important;
-  }
-
-  .catalog_filter .col:nth-child(2) .catalog_title {
-    border-top-right-radius: 0 !important;
-  }
-
-  .catalog_filter .col:nth-last-child(2) .catalog_title {
-    border-bottom-left-radius: 0 !important;
-  }
-
-  .catalog_filter .col:last-child .catalog_title {
-    border-bottom-left-radius: 8px !important;
-    border-bottom-right-radius: 8px !important;
   }
 
   .catalog_filter .catalog_title {
@@ -10707,32 +10631,8 @@ img.product_gallery_images_upload {
   padding-left: 0;
 }
 
-.catalog_filter .col .catalog_title:not(.catalog_filter .col:nth-child(1) .catalog_title, .catalog_filter .col:nth-child(2) .catalog_title) {
-  border-top: none;
-}
-
-.catalog_filter .col:nth-child(1) .catalog_title {
-  border-top-left-radius: 8px;
-}
-
-.catalog_filter .col:nth-child(2) .catalog_title {
-  border-top-right-radius: 8px;
-}
-
-.catalog_filter .col:nth-last-child(2) .catalog_title {
-  border-bottom-left-radius: 8px;
-}
-
-.catalog_filter .col:last-child .catalog_title {
-  border-bottom-right-radius: 8px;
-}
-
 .catalog_filter .col:nth-child(2n-1) {
   padding-right: 0;
-}
-
-.catalog_filter .col:nth-child(2n-1) .catalog_title {
-  border-right: none;
 }
 
 .catalog_filter .col {
@@ -10761,5 +10661,17 @@ img.product_gallery_images_upload {
 
 .wrap_catalogs_page .adrs_container.full_colors_container{
   padding: 24px 16px;
+}
+.color_group_page .item_col{
+  width: 49%;
+}
+.color_group_page .catalog_title{
+  border-radius: 8px;
+}
+.color_group_page .col:nth-child(2n-1){
+  margin-right: 23px;
+}
+.color_group_page .col:not(:first-child,:nth-child(2)){
+  margin-top: 23px;
 }
 /*! ====  ALL PAGES CSS FINISH  ===== */

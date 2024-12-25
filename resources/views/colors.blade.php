@@ -21,12 +21,12 @@
                         $looped = false;
                     @endphp
 
+                <div class="row catalog_row_main">
                     @foreach($colors as $color)
                         @if($color->children->count())
                             @php
                                 $looped = true;
                             @endphp
-                            <div class="row catalog_row_main">
                                 <div class="col item_col clearfix">
                                     <div class="catalog_head">
                                         <div class="catalog_title">
@@ -49,11 +49,11 @@
                                         @endforeach
                                     </div>
                                 </div>
-                            </div>
+
                         @endif
 
                     @endforeach
-
+                </div>
                     @if(!$looped)
                         <div class="row catalog_row_main m-0 full_colors">
                             <div class="row catalog_row_inner">

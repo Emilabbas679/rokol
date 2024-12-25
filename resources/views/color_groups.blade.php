@@ -12,7 +12,7 @@
 
     <!-- Wrap Color Table -->
 
-    <div class="section_wrap wrap_catalogs_page">
+    <div class="section_wrap wrap_catalogs_page color_group_page">
 
         <div class="main_center clearfix">
             <div class="adrs_container clearfix">
