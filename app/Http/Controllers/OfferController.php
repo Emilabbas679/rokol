@@ -17,6 +17,7 @@ class OfferController extends Controller
                                          'products.category_id',
                                          'products.image',
                                          'products.name',
+                                         'products.offer_of_week',
                                          'products.created_at',
                                          DB::raw( 'pp.id as price_id' ),
                                          'pp.sale_price',

@@ -12,7 +12,8 @@ class Page extends Model
         'title',
         'body',
         'image',
-        'active_status'
+        'active_status',
+        'under_news',
     ];
 
     protected $casts = [

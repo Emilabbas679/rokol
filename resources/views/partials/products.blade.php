@@ -3,7 +3,9 @@
         <div class="col_in">
             <div class="fav_sect">
                 <div class="offer-tag">
-                    <p class="offer_val">HƏFTƏNİN TƏKLİFİ</p>
+                    @if($product->offer_of_week)
+                        <p class="offer_val">HƏFTƏNİN TƏKLİFİ</p>
+                    @endif
                 </div>
                 @auth()
                     <span class="favotites @if(!is_null($product->favorites?->where('price_id', $product->price_id)->first())) dofav @endif"

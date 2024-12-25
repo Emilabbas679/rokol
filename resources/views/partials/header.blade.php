@@ -139,6 +139,11 @@
                             <li>
                                 <a href="{!! route('news.index') !!}"
                                    class="{!! request()->routeIs('news.*') ? 'active' : '' !!}">{{translate('header_news')}} </a>
+                                <div class="drop_section">
+                                    <ul class="drop_list">
+                                        @include('partials.static_page_dropdown', ['underNews' => true])
+                                    </ul>
+                                </div>
                             </li>
                             <li>
                                 <a href="{!! route('catalogs.index') !!}"

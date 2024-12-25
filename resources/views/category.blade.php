@@ -366,37 +366,38 @@
                 const urlParams = new URLSearchParams(window.location.search);
 
                 urlParams.forEach((value, key) => {
-                if (key.endsWith("[]")) {
-                    const filterClass = key.replace("[]", "");
-                    if (!tiklananValues[filterClass]) {
-                    tiklananValues[filterClass] = [];
+                    if (key.endsWith("[]")) {
+                        const filterClass = key.replace("[]", "");
+                        if (!tiklananValues[filterClass]) {
+                            tiklananValues[filterClass] = [];
+                        }
+                        tiklananValues[filterClass].push(value);
                     }
-                    tiklananValues[filterClass].push(value);
-                }
                 });
 
-                guncelleFiltreler({ data: tiklananValues });
+                guncelleFiltreler({data: tiklananValues});
             }
+
             $(document).on("change", 'input[type="checkbox"]', function () {
                 const parentFilterHead = $(this)
-                .closest(".filter_items")
-                .find(".filter_head");
+                    .closest(".filter_items")
+                    .find(".filter_head");
                 const filterClass = parentFilterHead
-                .attr("class")
-                .split(" ")
-                .find((cls) => cls !== "filter_head");
+                    .attr("class")
+                    .split(" ")
+                    .find((cls) => cls !== "filter_head");
 
                 const tiklananValue = $(this).val();
 
                 if ($(this).is(":checked")) {
-                if (!tiklananValues[filterClass]) {
-                    tiklananValues[filterClass] = [];
-                }
-                tiklananValues[filterClass].push(tiklananValue);
+                    if (!tiklananValues[filterClass]) {
+                        tiklananValues[filterClass] = [];
+                    }
+                    tiklananValues[filterClass].push(tiklananValue);
                 } else {
-                tiklananValues[filterClass] = tiklananValues[filterClass].filter(
-                    (value) => value !== tiklananValue,
-                );
+                    tiklananValues[filterClass] = tiklananValues[filterClass].filter(
+                        (value) => value !== tiklananValue,
+                    );
                 }
                 let apiUrl = "https://rokol.az/filters?";
                 Object.keys(tiklananValues).forEach((filter) => {
@@ -407,114 +408,115 @@
 
                 sessionStorage.setItem("apiUrl", apiUrl);
                 $.ajax({
-                url: apiUrl,
-                type: "GET", // GET isteği
-                success: function (data) {
-                    guncelleFiltreler(data);
-                },
-                error: function () {
-                    console.error("API isteği başarısız oldu.");
-                },
+                    url: apiUrl,
+                    type: "GET", // GET isteği
+                    success: function (data) {
+                        guncelleFiltreler(data);
+                    },
+                    error: function () {
+                        console.error("API isteği başarısız oldu.");
+                    },
                 });
             });
 
             function guncelleFiltreler(data) {
                 $(".filter_items").each(function () {
-                const parentFilterHead = $(this).find(".filter_head");
-                const currentFilterClass = parentFilterHead
-                    .attr("class")
-                    .split(" ")
-                    .find((cls) => cls !== "filter_head");
-                const filterItems = $(this).find(".filter_check_items");
+                    const parentFilterHead = $(this).find(".filter_head");
+                    const currentFilterClass = parentFilterHead
+                        .attr("class")
+                        .split(" ")
+                        .find((cls) => cls !== "filter_head");
+                    const filterItems = $(this).find(".filter_check_items");
 
-                const apiData = data.data || {};
+                    const apiData = data.data || {};
 
-                let yeniVeri = null;
+                    let yeniVeri = null;
 
-                if (
-                    currentFilterClass === "properties" &&
-                    apiData.hasOwnProperty("refProperties")
-                ) {
-                    yeniVeri = apiData.refProperties;
-                } else if (
-                    currentFilterClass === "brands" &&
-                    apiData.hasOwnProperty("brands")
-                ) {
-                    yeniVeri = apiData.brands;
-                } else if (
-                    currentFilterClass === "appearances" &&
-                    apiData.hasOwnProperty("appearances")
-                ) {
-                    yeniVeri = apiData.appearances;
-                } else if (
-                    currentFilterClass === "weights" &&
-                    apiData.hasOwnProperty("weights")
-                ) {
-                    yeniVeri = apiData.weights;
-                }
-                if (!yeniVeri) {
-                    // console.error(`Veri bulunamadı: ${currentFilterClass}`);
-                    return;
-                }
-                const existingChecked = filterItems.find("input:checked");
-                const existingCheckedValue = existingChecked.val();
-
-                filterItems.empty();
-                Object.keys(yeniVeri).forEach((key) => {
-                    const label = $('<label class="f_check_type"></label>');
-                    const input = $("<input>", {
-                    type: "checkbox",
-                    name: `${currentFilterClass}[]`,
-                    value: key,
-                    }).appendTo(label);
-
-                    const span = $("<span></span>").text(yeniVeri[key]).appendTo(label);
                     if (
-                    tiklananValues[currentFilterClass] &&
-                    tiklananValues[currentFilterClass].includes(key)
+                        currentFilterClass === "properties" &&
+                        apiData.hasOwnProperty("refProperties")
                     ) {
-                    input.prop("checked", true);
+                        yeniVeri = apiData.refProperties;
+                    } else if (
+                        currentFilterClass === "brands" &&
+                        apiData.hasOwnProperty("brands")
+                    ) {
+                        yeniVeri = apiData.brands;
+                    } else if (
+                        currentFilterClass === "appearances" &&
+                        apiData.hasOwnProperty("appearances")
+                    ) {
+                        yeniVeri = apiData.appearances;
+                    } else if (
+                        currentFilterClass === "weights" &&
+                        apiData.hasOwnProperty("weights")
+                    ) {
+                        yeniVeri = apiData.weights;
                     }
-                    filterItems.append(label);
-                });
+                    if (!yeniVeri) {
+                        // console.error(`Veri bulunamadı: ${currentFilterClass}`);
+                        return;
+                    }
+                    const existingChecked = filterItems.find("input:checked");
+                    const existingCheckedValue = existingChecked.val();
+
+                    filterItems.empty();
+                    Object.keys(yeniVeri).forEach((key) => {
+                        const label = $('<label class="f_check_type"></label>');
+                        const input = $("<input>", {
+                            type: "checkbox",
+                            name: `${currentFilterClass}[]`,
+                            value: key,
+                        }).appendTo(label);
+
+                        const span = $("<span></span>").text(yeniVeri[key]).appendTo(label);
+                        if (
+                            tiklananValues[currentFilterClass] &&
+                            tiklananValues[currentFilterClass].includes(key)
+                        ) {
+                            input.prop("checked", true);
+                        }
+                        filterItems.append(label);
+                    });
                 });
             }
+
             $(".btn_reset").on("click", function () {
                 tiklananValues = {};
 
                 $('input[type="checkbox"]').prop("checked", false);
 
                 $.ajax({
-                url: "https://rokol.az/filters",
-                type: "GET",
-                success: function (data) {
-                    guncelleFiltreler(data);
-                },
-                error: function () {
-                    console.error("API isteği başarısız oldu.");
-                },
+                    url: "https://rokol.az/filters",
+                    type: "GET",
+                    success: function (data) {
+                        guncelleFiltreler(data);
+                    },
+                    error: function () {
+                        console.error("API isteği başarısız oldu.");
+                    },
                 });
             });
 
             const storedApiUrl = sessionStorage.getItem("apiUrl");
             if (storedApiUrl) {
                 $.ajax({
-                url: storedApiUrl,
-                type: "GET",
-                success: function (data) {
-                    guncelleFiltreler(data);
-                },
-                error: function () {
-                    console.error("Stored API isteği başarısız oldu.");
-                },
+                    url: storedApiUrl,
+                    type: "GET",
+                    success: function (data) {
+                        guncelleFiltreler(data);
+                    },
+                    error: function () {
+                        console.error("Stored API isteği başarısız oldu.");
+                    },
                 });
             }
             $(".filter_btn.btn_send").on("click", function () {
                 let apiUrl = "https://rokol.az/filters?";
                 Object.keys(tiklananValues).forEach((filter) => {
-                tiklananValues[filter].forEach((value) => {
-                    apiUrl += `${filter}[]=${value}&`;
-                });
+                    tiklananValues[filter].forEach((value) => {
+                        apiUrl += `${filter}[]=${value}&`;
+                    });
                 });
                 sessionStorage.setItem("apiUrl", apiUrl);
             });
@@ -618,26 +620,44 @@
     </script>
 
     <script>
-        var page = 0;
-        let nextPageUrl = "{{ $products->nextPageUrl() }}";
+        let page = 1;
+        let pageUrl = window.location.protocol + window.location.pathname;
         $(".more").on('click', function () {
             let parent = $(this).parent();
             parent.hide();
             event.preventDefault();
-            let form = document.getElementById('formData');
-            let formData = new FormData(form);
-            let data = {};
-            formData.forEach((value, key) => {
-                if (data[key]) {
-                    if (Array.isArray(data[key])) {
-                        data[key].push(value);
-                    } else {
-                        data[key] = [data[key], value];
-                    }
-                } else {
-                    data[key] = value;
-                }
-            });
+            //
+            //
+            // let form = document.getElementById('formData');
+            //
+            // let formData = new FormData(form);
+            // let data = {};
+            // formData.forEach((value, key) => {
+            //     if (value !== '' || value !== null) {
+            //         console.log(key);
+            //         if (data[key]) {
+            //             if (Array.isArray(data[key])) {
+            //                 data[key].push(value);
+            //             } else {
+            //                 data[key] = [data[key], value];
+            //             }
+            //         } else {
+            //             data[key] = value;
+            //         }
+            //     }
+            //
+            // });
+
+            let urlSearchParams = new URLSearchParams(window.location.search);
+            let params = Object.fromEntries(urlSearchParams.entries());
+
+            if (params.hasOwnProperty('page')) {
+                page = parseInt(params.page) + 1;
+                params.page = page;
+            } else {
+                params.page = ++page;
+            }
+
 
             $.ajaxSetup({
                 headers: {
@@ -646,17 +666,15 @@
             });
             $.ajax({
                 type: "GET",
-                url: nextPageUrl,
+                url: pageUrl,
                 dataType: 'JSON',
-                data
+                data: params
             }).done(function (data) {
                 if (data.status) {
                     $("#product_grid").append(data.htmlGrid)
                     $("#product_list").append(data.htmlList)
-                    console.log(data.hasMorePages)
                     if (data.hasMorePages === true) {
                         parent.show();
-                        nextPageUrl = data.nextPageUrl;
                     } else {
                         parent.hide();
                     }
