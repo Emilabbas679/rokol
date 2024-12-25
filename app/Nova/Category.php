@@ -163,7 +163,7 @@ class Category extends Resource
     {
         Cache::forget( 'categories' );
         Cache::remember( 'categories', 1200, function () {
-            return Category::query()
+            return \App\Models\Category::query()
                            ->with( [ 'children' ] )
                            ->where( 'status', 1 )
                            ->where( 'category_id', null )
@@ -175,7 +175,7 @@ class Category extends Resource
     {
         Cache::forget( 'categories' );
         Cache::remember( 'categories', 1200, function () {
-            return Category::query()
+            return \App\Models\Category::query()
                            ->with( [ 'children' ] )
                            ->where( 'status', 1 )
                            ->where( 'category_id', null )
@@ -187,7 +187,7 @@ class Category extends Resource
     {
         Cache::forget( 'categories' );
         Cache::remember( 'categories', 1200, function () {
-            return Category::query()
+            return \App\Models\Category::query()
                            ->with( [ 'children' ] )
                            ->where( 'status', 1 )
                            ->where( 'category_id', null )
@@ -199,7 +199,7 @@ class Category extends Resource
     {
         Cache::forget( 'categories' );
         Cache::remember( 'categories', 1200, function () {
-            return Category::query()
+            return \App\Models\Category::query()
                            ->with( [ 'children' ] )
                            ->where( 'status', 1 )
                            ->where( 'category_id', null )

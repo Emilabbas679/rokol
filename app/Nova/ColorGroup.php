@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Tag;
@@ -47,6 +48,9 @@ class ColorGroup extends Resource
             Text::make( 'Name (AZ)', 'name->az' ),
             Text::make( 'Name (EN)', 'name->en' )->hideFromIndex(),
             Text::make( 'Name (RU)', 'name->ru' )->hideFromIndex(),
+            Boolean::make( 'Display', 'display' )
+                   ->falseValue( 0 )
+                   ->trueValue( 1 ),
             Tag::make( 'Colors', 'colors', Color::class )
                ->preload()
                ->nullable(),
@@ -98,30 +102,30 @@ class ColorGroup extends Resource
     }
 
 
-    public static function authorizeToCreate(Request $request)
+    public static function authorizeToCreate( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
-    public static function authorizedToCreate(Request $request)
+    public static function authorizedToCreate( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
-    public function authorizedToDelete(Request $request)
+    public function authorizedToDelete( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
 
-    public function authorizedToReplicate(Request $request)
+    public function authorizedToReplicate( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
-    public static function availableForNavigation(Request $request)
+    public static function availableForNavigation( Request $request )
     {
-        return $request->user()?->hasRole(['Main admin', 'Admin 1']);
+        return $request->user()?->hasRole( [ 'Main admin', 'Admin 1' ] );
     }
 
     public function availablePanelsForCreate( $request, FieldCollection $fields = null )

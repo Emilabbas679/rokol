@@ -54,8 +54,11 @@ class Page extends Resource
             Text::make( 'Title (RU)', 'title->ru' )->hideFromIndex(),
             CKEditor::make( 'Body (AZ)', 'body->az' )
                     ->rules( [ 'required' ] ),
-            CKEditor::make( 'Body (EN)', 'body->en' ),
-            CKEditor::make( 'Body (RU)', 'body->ru' ),
+            CKEditor::make( 'Body (EN)', 'body->en' )->hideFromIndex(),
+            CKEditor::make( 'Body (RU)', 'body->ru' )->hideFromIndex(),
+            Boolean::make( 'Under news', 'under_news' )
+                   ->falseValue( 0 )
+                   ->trueValue( 1 ),
             Image::make( 'image' )
                  ->hideFromIndex()
                  ->disk( 'public' )
@@ -123,7 +126,7 @@ class Page extends Resource
         Cache::rememberForever( "staticpages", function () {
             return \App\Models\Page::query()
                                    ->where( 'active_status', 1 )
-                                   ->get( [ 'id', 'title' ] );
+                                   ->get( [ 'id', 'title', 'under_news' ] );
         } );
     }
 
@@ -133,7 +136,7 @@ class Page extends Resource
         Cache::rememberForever( "staticpages", function () {
             return \App\Models\Page::query()
                                    ->where( 'active_status', 1 )
-                                   ->get( [ 'id', 'title' ] );
+                                   ->get( [ 'id', 'title', 'under_news' ] );
         } );
     }
 
@@ -143,7 +146,7 @@ class Page extends Resource
         Cache::rememberForever( "staticpages", function () {
             return \App\Models\Page::query()
                                    ->where( 'active_status', 1 )
-                                   ->get( [ 'id', 'title' ] );
+                                   ->get( [ 'id', 'title', 'under_news' ] );
         } );
     }
 
@@ -153,7 +156,7 @@ class Page extends Resource
         Cache::rememberForever( "staticpages", function () {
             return \App\Models\Page::query()
                                    ->where( 'active_status', 1 )
-                                   ->get( [ 'id', 'title' ] );
+                                   ->get( [ 'id', 'title', 'under_news' ] );
         } );
     }
 
