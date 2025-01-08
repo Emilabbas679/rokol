@@ -121,20 +121,20 @@
                                                 @if(!in_array($item->id, $filters['refProperties']))
                                                     @continue
                                                 @endif
-                                                <label class="f_check_type">
-                                                    <input type="checkbox" name="properties[]" value="{{$item->id}}"
+                                                <a href="{!! request()->filled('properties.'.$item->id) ? request()->fullUrlWithoutQuery("properties.{$item->id}.") : request()->fullUrlWithQuery(["properties[{$item->id}]" => $item->id]) !!}" class="f_check_type">
+                                                    <input type="checkbox" name="properties[{!! $item->id !!}]" value="{{$item->id}}"
                                                            @if(isset($selected['properties']) and in_array($item->id, $selected['properties'])) checked @endif>
                                                     <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
-                                                </label>
+                                                </a>
                                             @endforeach
                                         @endif
                                     @else
                                         @foreach(properties() as $item)
-                                            <label class="f_check_type">
-                                                <input type="checkbox" name="properties[]" value="{{$item->id}}"
+                                            <a href="{!! request()->filled('properties.'.$item->id) ? request()->fullUrlWithoutQuery("properties.{$item->id}") : request()->fullUrlWithQuery(["properties[{$item->id}]" => $item->id]) !!}" class="f_check_type">
+                                                <input type="checkbox" name="properties[{!! $item->id !!}]" value="{{$item->id}}"
                                                        @if(isset($selected['properties']) and in_array($item->id, $selected['properties'])) checked @endif>
                                                 <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
-                                            </label>
+                                            </a>
                                         @endforeach
                                     @endif
                                 </div>
@@ -152,8 +152,8 @@
                                                 @if(!in_array($item->id, $filters['appearances']))
                                                     @continue
                                                 @endif
-                                                <label class="f_check_type">
-                                                    <input type="checkbox" name="appearances[]" value="{{$item->id}}"
+                                                <label href="{!! request()->filled('appearances.'.$item->id) ? request()->fullUrlWithoutQuery("appearances.{$item->id}") : request()->fullUrlWithQuery(["appearances[{$item->id}]" => $item->id]) !!}" class="f_check_type">
+                                                    <input type="checkbox" name="appearances[{!! $item->id !!}]" value="{{$item->id}}"
                                                            @if(isset($selected['appearances']) and in_array($item->id, $selected['appearances'])) checked @endif>
                                                     <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
                                                 </label>
@@ -161,11 +161,11 @@
                                         @endif
                                     @else
                                         @foreach(appearances() as $item)
-                                            <label class="f_check_type">
-                                                <input type="checkbox" name="appearances[]" value="{{$item->id}}"
+                                            <a href="{!! request()->filled('appearances.'.$item->id) ? request()->fullUrlWithoutQuery("appearances.{$item->id}") : request()->fullUrlWithQuery(["appearances[{$item->id}]" => $item->id]) !!}" class="f_check_type">
+                                                <input type="checkbox" name="appearances[{!! $item->id !!}]" value="{{$item->id}}"
                                                        @if(isset($selected['appearances']) and in_array($item->id, $selected['appearances'])) checked @endif>
                                                 <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
-                                            </label>
+                                            </a>
                                         @endforeach
                                     @endif
                                 </div>
@@ -181,20 +181,20 @@
                                                 @if(!in_array($item->id, $filters['weights']))
                                                     @continue
                                                 @endif
-                                                <label class="f_check_type">
-                                                    <input type="checkbox" name="weights[]" value="{{$item->id}}"
+                                                <a href="{!! request()->filled('weights.'.$item->id) ? request()->fullUrlWithoutQuery("weights.{$item->id}") : request()->fullUrlWithQuery(["weights[{$item->id}]" => $item->id]) !!}" class="f_check_type">
+                                                    <input type="checkbox" name="weights[{!! $item->id !!}]" value="{{$item->id}}"
                                                            @if(isset($selected['weights']) and in_array($item->id, $selected['weights'])) checked @endif>
                                                     <span>{{$item->weight}} {!! productWeightUnit($item->weight_type) !!}</span>
-                                                </label>
+                                                </a>
                                             @endforeach
                                         @endif
                                     @else
                                         @foreach(weights() as $item)
-                                            <label class="f_check_type">
-                                                <input type="checkbox" name="weights[]" value="{{$item->id}}"
+                                            <a href="{!! request()->filled('weights.'.$item->id) ? request()->fullUrlWithoutQuery("weights.{$item->id}") : request()->fullUrlWithQuery(["weights[{$item->id}]" => $item->id]) !!}" class="f_check_type">
+                                                <input type="checkbox" name="weights[{!! $item->id !!}]" value="{{$item->id}}"
                                                        @if(isset($selected['weights']) and in_array($item->id, $selected['weights'])) checked @endif>
                                                 <span>{{$item->weight}} {!! productWeightUnit($item->weight_type) !!}</span>
-                                            </label>
+                                            </a>
                                         @endforeach
                                     @endif
                                 </div>
