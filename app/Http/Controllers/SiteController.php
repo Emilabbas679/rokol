@@ -555,9 +555,9 @@ class SiteController extends Controller
             if ( in_array( $property->id, $refProps ) ) {
                 $filters['refProperties'][$property->id] = [
                     'name' => $property->name[app()->getlocale()],
-                    'url'  => request()->filled( "properties.$property->id" )
+                    'search'  => parse_url( request()->filled( "properties.$property->id" )
                         ? \request()->fullUrlWithoutQuery( \request()->input( "properties.$property->id" ) )
-                        : \request()->fullUrlWithQuery( [ "properties[$property->id]" => $property->id ] )
+                        : \request()->fullUrlWithQuery( [ "properties[$property->id]" => $property->id ] ), PHP_URL_QUERY)
                 ];
             }
         }
@@ -568,9 +568,9 @@ class SiteController extends Controller
             if ( in_array( $appearance->id, $appearances ) ) {
                 $filters['appearances'][$appearance->id] = [
                     'name' => $appearance->name[app()->getlocale()],
-                    'url'  => request()->filled( "appearances.$appearance->id" )
+                    'search'  => parse_url( request()->filled( "appearances.$appearance->id" )
                         ? \request()->fullUrlWithoutQuery( \request()->input( "appearances.$appearance->id" ) )
-                        : \request()->fullUrlWithQuery( [ "appearances[$appearance->id]" => $appearance->id ] )
+                        : \request()->fullUrlWithQuery( [ "appearances[$appearance->id]" => $appearance->id ] ), PHP_URL_QUERY)
                 ];
             }
         }
@@ -582,9 +582,9 @@ class SiteController extends Controller
                 $filters['weights'][$weight->id] =
                     [
                         'name' => $weight->weight . " " . productWeightUnit( $weight->weight_type ),
-                        'url'  => request()->filled( "weights.$appearance->id" )
+                        'search'  => parse_url( request()->filled( "weights.$appearance->id" )
                             ? \request()->fullUrlWithoutQuery( \request()->input( "weights.$appearance->id" ) )
-                            : \request()->fullUrlWithQuery( [ "weights[$appearance->id]" => $appearance->id ] )
+                            : \request()->fullUrlWithQuery( [ "weights[$appearance->id]" => $appearance->id ] ), PHP_URL_QUERY)
                     ];
             }
         }
@@ -594,12 +594,13 @@ class SiteController extends Controller
             if ( in_array( $brand->id, $brands ) ) {
                 $filters['brands'][$brand->id] = [
                     'name' => $brand->name,
-                    'url'  => request()->filled( "brands.$appearance->id" )
-                        ? \request()->fullUrlWithoutQuery( \request()->input( "brands.$appearance->id" ) )
-                        : \request()->fullUrlWithQuery( [ "brands[$appearance->id]" => $appearance->id ] )
+                    'search'  => parse_url(request()->filled( "brands.$appearance->id" )
+                                            ? \request()->fullUrlWithoutQuery( \request()->input( "brands.$appearance->id" ) )
+                                            : \request()->fullUrlWithQuery( [ "brands[$appearance->id]" => $appearance->id ] ), PHP_URL_QUERY)
                 ];
             }
         }
+
 
         if ( $return ) {
             return $filters;
