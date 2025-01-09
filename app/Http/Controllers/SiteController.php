@@ -582,9 +582,9 @@ class SiteController extends Controller
                 $filters['weights'][$weight->id] =
                     [
                         'name' => $weight->weight . " " . productWeightUnit( $weight->weight_type ),
-                        'search'  => parse_url( request()->filled( "weights.$appearance->id" )
-                            ? \request()->fullUrlWithoutQuery( \request()->input( "weights.$appearance->id" ) )
-                            : \request()->fullUrlWithQuery( [ "weights[$appearance->id]" => $appearance->id ] ), PHP_URL_QUERY)
+                        'search'  => parse_url( request()->filled( "weights.$weight->id" )
+                            ? \request()->fullUrlWithoutQuery( \request()->input( "weights.$weight->id" ) )
+                            : \request()->fullUrlWithQuery( [ "weights[$weight->id]" => $weight->id ] ), PHP_URL_QUERY)
                     ];
             }
         }
@@ -594,9 +594,9 @@ class SiteController extends Controller
             if ( in_array( $brand->id, $brands ) ) {
                 $filters['brands'][$brand->id] = [
                     'name' => $brand->name,
-                    'search'  => parse_url(request()->filled( "brands.$appearance->id" )
-                                            ? \request()->fullUrlWithoutQuery( \request()->input( "brands.$appearance->id" ) )
-                                            : \request()->fullUrlWithQuery( [ "brands[$appearance->id]" => $appearance->id ] ), PHP_URL_QUERY)
+                    'search'  => parse_url(request()->filled( "brands.$brand->id" )
+                                            ? \request()->fullUrlWithoutQuery( \request()->input( "brands.$brand->id" ) )
+                                            : \request()->fullUrlWithQuery( [ "brands[$brand->id]" => $brand->id ] ), PHP_URL_QUERY)
                 ];
             }
         }
