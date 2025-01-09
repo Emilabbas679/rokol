@@ -121,20 +121,20 @@
                                                 @if(!in_array($item->id, $filters['refProperties']))
                                                     @continue
                                                 @endif
-                                                <a href="{!! request()->filled('properties.'.$item->id) ? request()->fullUrlWithoutQuery("properties.{$item->id}.") : request()->fullUrlWithQuery(["properties[{$item->id}]" => $item->id]) !!}" class="f_check_type">
+                                                <label data-url="{!! request()->filled('properties.'.$item->id) ? request()->fullUrlWithoutQuery("properties.{$item->id}.") : request()->fullUrlWithQuery(["properties[{$item->id}]" => $item->id]) !!}" class="f_check_type">
                                                     <input type="checkbox" name="properties[{!! $item->id !!}]" value="{{$item->id}}"
                                                            @if(isset($selected['properties']) and in_array($item->id, $selected['properties'])) checked @endif>
                                                     <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
-                                                </a>
+                                                </label>
                                             @endforeach
                                         @endif
                                     @else
                                         @foreach(properties() as $item)
-                                            <a href="{!! request()->filled('properties.'.$item->id) ? request()->fullUrlWithoutQuery("properties.{$item->id}") : request()->fullUrlWithQuery(["properties[{$item->id}]" => $item->id]) !!}" class="f_check_type">
+                                            <label data-url="{!! request()->filled('properties.'.$item->id) ? request()->fullUrlWithoutQuery("properties.{$item->id}") : request()->fullUrlWithQuery(["properties[{$item->id}]" => $item->id]) !!}" class="f_check_type">
                                                 <input type="checkbox" name="properties[{!! $item->id !!}]" value="{{$item->id}}"
                                                        @if(isset($selected['properties']) and in_array($item->id, $selected['properties'])) checked @endif>
                                                 <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
-                                            </a>
+                                            </label>
                                         @endforeach
                                     @endif
                                 </div>
@@ -152,7 +152,7 @@
                                                 @if(!in_array($item->id, $filters['appearances']))
                                                     @continue
                                                 @endif
-                                                <label href="{!! request()->filled('appearances.'.$item->id) ? request()->fullUrlWithoutQuery("appearances.{$item->id}") : request()->fullUrlWithQuery(["appearances[{$item->id}]" => $item->id]) !!}" class="f_check_type">
+                                                <label data-url="{!! request()->filled('appearances.'.$item->id) ? request()->fullUrlWithoutQuery("appearances.{$item->id}") : request()->fullUrlWithQuery(["appearances[{$item->id}]" => $item->id]) !!}" class="f_check_type">
                                                     <input type="checkbox" name="appearances[{!! $item->id !!}]" value="{{$item->id}}"
                                                            @if(isset($selected['appearances']) and in_array($item->id, $selected['appearances'])) checked @endif>
                                                     <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
@@ -161,11 +161,11 @@
                                         @endif
                                     @else
                                         @foreach(appearances() as $item)
-                                            <a href="{!! request()->filled('appearances.'.$item->id) ? request()->fullUrlWithoutQuery("appearances.{$item->id}") : request()->fullUrlWithQuery(["appearances[{$item->id}]" => $item->id]) !!}" class="f_check_type">
+                                            <label data-url="{!! request()->filled('appearances.'.$item->id) ? request()->fullUrlWithoutQuery("appearances.{$item->id}") : request()->fullUrlWithQuery(["appearances[{$item->id}]" => $item->id]) !!}" class="f_check_type">
                                                 <input type="checkbox" name="appearances[{!! $item->id !!}]" value="{{$item->id}}"
                                                        @if(isset($selected['appearances']) and in_array($item->id, $selected['appearances'])) checked @endif>
                                                 <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
-                                            </a>
+                                            </label>
                                         @endforeach
                                     @endif
                                 </div>
@@ -181,20 +181,20 @@
                                                 @if(!in_array($item->id, $filters['weights']))
                                                     @continue
                                                 @endif
-                                                <a href="{!! request()->filled('weights.'.$item->id) ? request()->fullUrlWithoutQuery("weights.{$item->id}") : request()->fullUrlWithQuery(["weights[{$item->id}]" => $item->id]) !!}" class="f_check_type">
+                                                <label data-url="{!! request()->filled('weights.'.$item->id) ? request()->fullUrlWithoutQuery("weights.{$item->id}") : request()->fullUrlWithQuery(["weights[{$item->id}]" => $item->id]) !!}" class="f_check_type">
                                                     <input type="checkbox" name="weights[{!! $item->id !!}]" value="{{$item->id}}"
                                                            @if(isset($selected['weights']) and in_array($item->id, $selected['weights'])) checked @endif>
                                                     <span>{{$item->weight}} {!! productWeightUnit($item->weight_type) !!}</span>
-                                                </a>
+                                                </label>
                                             @endforeach
                                         @endif
                                     @else
                                         @foreach(weights() as $item)
-                                            <a href="{!! request()->filled('weights.'.$item->id) ? request()->fullUrlWithoutQuery("weights.{$item->id}") : request()->fullUrlWithQuery(["weights[{$item->id}]" => $item->id]) !!}" class="f_check_type">
+                                            <label data-url="{!! request()->filled('weights.'.$item->id) ? request()->fullUrlWithoutQuery("weights.{$item->id}") : request()->fullUrlWithQuery(["weights[{$item->id}]" => $item->id]) !!}" class="f_check_type">
                                                 <input type="checkbox" name="weights[{!! $item->id !!}]" value="{{$item->id}}"
                                                        @if(isset($selected['weights']) and in_array($item->id, $selected['weights'])) checked @endif>
                                                 <span>{{$item->weight}} {!! productWeightUnit($item->weight_type) !!}</span>
-                                            </a>
+                                            </label>
                                         @endforeach
                                     @endif
                                 </div>
@@ -230,8 +230,8 @@
                             </div>
 
                             <div class="filter_buttons">
-                                <button type="button" class="filter_btn btn_reset">Sıfırla</button>
-                                <button type="submit" class="filter_btn btn_send">Təsdiqlə</button>
+                                <button type="button" class="filter_btn btn_reset" style="width:100%">Sıfırla</button>
+                                <!-- <button type="submit" class="filter_btn btn_send">Təsdiqlə</button> -->
                             </div>
                         </form>
 
@@ -360,168 +360,256 @@
             });
         });
         $(document).ready(function () {
-            let tiklananValues = {};
+    let tiklananValues = {};
 
-            function applyFiltersFromUrl() {
-                const urlParams = new URLSearchParams(window.location.search);
+    const storedValues = sessionStorage.getItem("tiklananValues");
+    if (storedValues) {
+        tiklananValues = JSON.parse(storedValues);
+        $(".filter_items").each(function () {
+            const parentFilterHead = $(this).find(".filter_head");
+            const currentFilterClass = parentFilterHead
+                .attr("class")
+                .split(" ")
+                .find((cls) => cls !== "filter_head");
+            const filterItems = $(this).find(".filter_check_items");
 
-                urlParams.forEach((value, key) => {
-                    if (key.endsWith("[]")) {
-                        const filterClass = key.replace("[]", "");
-                        if (!tiklananValues[filterClass]) {
-                            tiklananValues[filterClass] = [];
-                        }
-                        tiklananValues[filterClass].push(value);
-                    }
-                });
-
-                guncelleFiltreler({data: tiklananValues});
-            }
-
-            $(document).on("change", 'input[type="checkbox"]', function () {
-                const parentFilterHead = $(this)
-                    .closest(".filter_items")
-                    .find(".filter_head");
-                const filterClass = parentFilterHead
-                    .attr("class")
-                    .split(" ")
-                    .find((cls) => cls !== "filter_head");
-
-                const tiklananValue = $(this).val();
-
-                if ($(this).is(":checked")) {
-                    if (!tiklananValues[filterClass]) {
-                        tiklananValues[filterClass] = [];
-                    }
-                    tiklananValues[filterClass].push(tiklananValue);
-                } else {
-                    tiklananValues[filterClass] = tiklananValues[filterClass].filter(
-                        (value) => value !== tiklananValue,
-                    );
-                }
-                let apiUrl = "https://rokol.az/filters?";
-                Object.keys(tiklananValues).forEach((filter) => {
-                    tiklananValues[filter].forEach((value) => {
-                        apiUrl += `${filter}[]=${value}&`;
-                    });
-                });
-
-                sessionStorage.setItem("apiUrl", apiUrl);
-                $.ajax({
-                    url: apiUrl,
-                    type: "GET", // GET isteği
-                    success: function (data) {
-                        guncelleFiltreler(data);
-                    },
-                    error: function () {
-                        console.error("API isteği başarısız oldu.");
-                    },
-                });
-            });
-
-            function guncelleFiltreler(data) {
-                $(".filter_items").each(function () {
-                    const parentFilterHead = $(this).find(".filter_head");
-                    const currentFilterClass = parentFilterHead
-                        .attr("class")
-                        .split(" ")
-                        .find((cls) => cls !== "filter_head");
-                    const filterItems = $(this).find(".filter_check_items");
-
-                    const apiData = data.data || {};
-
-                    let yeniVeri = null;
-
-                    if (
-                        currentFilterClass === "properties" &&
-                        apiData.hasOwnProperty("refProperties")
-                    ) {
-                        yeniVeri = apiData.refProperties;
-                    } else if (
-                        currentFilterClass === "brands" &&
-                        apiData.hasOwnProperty("brands")
-                    ) {
-                        yeniVeri = apiData.brands;
-                    } else if (
-                        currentFilterClass === "appearances" &&
-                        apiData.hasOwnProperty("appearances")
-                    ) {
-                        yeniVeri = apiData.appearances;
-                    } else if (
-                        currentFilterClass === "weights" &&
-                        apiData.hasOwnProperty("weights")
-                    ) {
-                        yeniVeri = apiData.weights;
-                    }
-                    if (!yeniVeri) {
-                        // console.error(`Veri bulunamadı: ${currentFilterClass}`);
-                        return;
-                    }
-                    const existingChecked = filterItems.find("input:checked");
-                    const existingCheckedValue = existingChecked.val();
-
-                    filterItems.empty();
-                    Object.keys(yeniVeri).forEach((key) => {
-                        const label = $('<label class="f_check_type"></label>');
-                        const input = $("<input>", {
-                            type: "checkbox",
-                            name: `${currentFilterClass}[]`,
-                            value: key,
-                        }).appendTo(label);
-
-                        const span = $("<span></span>").text(yeniVeri[key]).appendTo(label);
-                        if (
-                            tiklananValues[currentFilterClass] &&
-                            tiklananValues[currentFilterClass].includes(key)
-                        ) {
-                            input.prop("checked", true);
-                        }
-                        filterItems.append(label);
-                    });
+            if (tiklananValues[currentFilterClass]) {
+                tiklananValues[currentFilterClass].forEach((value) => {
+                    filterItems.find(`input[type="checkbox"][value="${value}"]`).prop("checked", true);
                 });
             }
-
-            $(".btn_reset").on("click", function () {
-                tiklananValues = {};
-
-                $('input[type="checkbox"]').prop("checked", false);
-
-                $.ajax({
-                    url: "https://rokol.az/filters",
-                    type: "GET",
-                    success: function (data) {
-                        guncelleFiltreler(data);
-                    },
-                    error: function () {
-                        console.error("API isteği başarısız oldu.");
-                    },
-                });
-            });
-
-            const storedApiUrl = sessionStorage.getItem("apiUrl");
-            if (storedApiUrl) {
-                $.ajax({
-                    url: storedApiUrl,
-                    type: "GET",
-                    success: function (data) {
-                        guncelleFiltreler(data);
-                    },
-                    error: function () {
-                        console.error("Stored API isteği başarısız oldu.");
-                    },
-                });
-            }
-            $(".filter_btn.btn_send").on("click", function () {
-                let apiUrl = "https://rokol.az/filters?";
-                Object.keys(tiklananValues).forEach((filter) => {
-                    tiklananValues[filter].forEach((value) => {
-                        apiUrl += `${filter}[]=${value}&`;
-                    });
-                });
-                sessionStorage.setItem("apiUrl", apiUrl);
-            });
-            applyFiltersFromUrl();
         });
+    }
+
+    function applyFiltersFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        urlParams.forEach((value, key) => {
+            if (key.endsWith("[]")) {
+                const filterClass = key.replace("[]", "");
+                if (!tiklananValues[filterClass]) {
+                    tiklananValues[filterClass] = [];
+                }
+                tiklananValues[filterClass].push(value);
+            }
+        });
+
+        guncelleFiltreler({ data: tiklananValues });
+
+        sessionStorage.setItem("tiklananValues", JSON.stringify(tiklananValues));
+    }
+    applyFiltersFromUrl();
+
+    $(document).on("change", 'input[type="checkbox"]', function () {
+        const parentFilterHead = $(this)
+            .closest(".filter_items")
+            .find(".filter_head");
+        const filterClass = parentFilterHead
+            .attr("class")
+            .split(" ")
+            .find((cls) => cls !== "filter_head");
+
+        const tiklananValue = $(this).val();
+
+        if ($(this).is(":checked")) {
+            if (!tiklananValues[filterClass]) {
+                tiklananValues[filterClass] = [];
+            }
+            tiklananValues[filterClass].push(tiklananValue);
+        } else {
+            tiklananValues[filterClass] = tiklananValues[filterClass].filter(
+                (value) => value !== tiklananValue
+            );
+        }
+
+        let apiUrl = "https://rokol.az/filters?";
+        Object.keys(tiklananValues).forEach((filter) => {
+            tiklananValues[filter].forEach((value) => {
+                apiUrl += `${filter}[]=${value}&`;
+            });
+        });
+
+        const minVal = $(".minVal").text().replace(/\D/g, '');
+        const maxVal = $(".maxVal").text().replace(/\D/g, '');
+        apiUrl += `min_price=${minVal}&max_price=${maxVal}&`;
+
+        sessionStorage.setItem("apiUrl", apiUrl);
+        sessionStorage.setItem("tiklananValues", JSON.stringify(tiklananValues));
+        const updatedUrl = apiUrl.replace("filters", "products");
+        sessionStorage.setItem("updatedUrl", updatedUrl);
+        window.history.pushState({}, "", updatedUrl);
+
+        $.ajax({
+            url: apiUrl,
+            type: "GET",
+            success: function (data) {
+                guncelleFiltreler(data);
+            },
+            error: function (xhr, status, error) {
+            },
+        });
+        window.location.href = updatedUrl;
+    });
+
+    $(".range-input input").on("change", function () {
+        const minVal = $(".minVal").text().replace(/\D/g, '');
+        const maxVal = $(".maxVal").text().replace(/\D/g, ''); 
+
+        let apiUrl = "https://rokol.az/filters?";
+        Object.keys(tiklananValues).forEach((filter) => {
+            tiklananValues[filter].forEach((value) => {
+                apiUrl += `${filter}[]=${value}&`;
+            });
+        });
+
+        apiUrl += `min_price=${minVal}&max_price=${maxVal}&`;
+
+        sessionStorage.setItem("apiUrl", apiUrl);
+        sessionStorage.setItem("tiklananValues", JSON.stringify(tiklananValues));
+        // console.log("Range API URL:", apiUrl);
+        const updatedUrl = apiUrl.replace("filters", "products");
+        sessionStorage.setItem("updatedUrl", updatedUrl);
+        window.history.pushState({}, "", updatedUrl);
+
+        $.ajax({
+            url: apiUrl,
+            type: "GET",
+            success: function (data) {
+                guncelleFiltreler(data);
+            },
+            error: function (xhr, status, error) {
+            },
+        });
+
+        window.location.href = updatedUrl;
+    });
+
+    function guncelleFiltreler(data) {
+        $(".filter_items").each(function () {
+            const parentFilterHead = $(this).find(".filter_head");
+            const currentFilterClass = parentFilterHead
+                .attr("class")
+                .split(" ")
+                .find((cls) => cls !== "filter_head");
+            const filterItems = $(this).find(".filter_check_items");
+
+            const apiData = data.data || {};
+
+            let yeniVeri = null;
+
+            if (
+                currentFilterClass === "properties" &&
+                apiData.hasOwnProperty("refProperties")
+            ) {
+                yeniVeri = apiData.refProperties;
+            } else if (
+                currentFilterClass === "brands" &&
+                apiData.hasOwnProperty("brands")
+            ) {
+                yeniVeri = apiData.brands;
+            } else if (
+                currentFilterClass === "appearances" &&
+                apiData.hasOwnProperty("appearances")
+            ) {
+                yeniVeri = apiData.appearances;
+            } else if (
+                currentFilterClass === "weights" &&
+                apiData.hasOwnProperty("weights")
+            ) {
+                yeniVeri = apiData.weights;
+            }
+
+            if (!yeniVeri) {
+                console.warn(`Veri bulunamadı: ${currentFilterClass}`);
+                return;
+            }
+
+            filterItems.empty();
+            Object.keys(yeniVeri).forEach((key) => {
+                const label = $('<label class="f_check_type"></label>')
+                    .attr("data-url", "https://rokol.az/products?" + yeniVeri[key].search);
+                const input = $("<input>", {
+                    type: "checkbox",
+                    name: `${currentFilterClass}[${key}]`,
+                    value: key,
+                }).appendTo(label);
+
+                const span = $("<span></span>")
+                    .text(yeniVeri[key].name)
+                    .appendTo(label);
+
+                if (
+                    tiklananValues[currentFilterClass] &&
+                    tiklananValues[currentFilterClass].includes(key)
+                ) {
+                    input.prop("checked", true);
+                }
+
+                filterItems.append(label);
+            });
+            const storedUpdatedUrl = sessionStorage.getItem("updatedUrl");
+            if (storedUpdatedUrl) {
+                window.history.pushState({}, "", storedUpdatedUrl);
+            }
+        });
+    }
+
+    $(".btn_reset").on("click", function () {
+        tiklananValues = {};
+
+        $('input[type="checkbox"]').prop("checked", false);
+
+        $.ajax({
+            url: "https://rokol.az/filters",
+            type: "GET",
+            success: function (data) {
+                guncelleFiltreler(data);
+            },
+            error: function (xhr, status, error) {
+                // console.error("Sıfırlama API isteği başarısız oldu:", error);
+                // console.error("Hata Detayları:", xhr, status);
+            },
+        });
+        window.location.href = "https://rokol.az/products";
+        sessionStorage.clear();
+    });
+
+    const storedApiUrl = sessionStorage.getItem("apiUrl");
+    if (storedApiUrl) {
+        $.ajax({
+            url: storedApiUrl,
+            type: "GET",
+            success: function (data) {
+                guncelleFiltreler(data);
+            },
+            error: function (xhr, status, error) {
+                // console.error("Stored API isteği başarısız oldu:", error);
+                // console.error("Hata Detayları:", xhr, status);
+            },
+        });
+    }
+
+    $(".filter_check_items .f_check_type").on("click", function () {
+        let apiUrl = "https://rokol.az/filters?";
+        Object.keys(tiklananValues).forEach((filter) => {
+            tiklananValues[filter].forEach((value) => {
+                apiUrl += `${filter}[]=${value}&`;
+            });
+        });
+
+        sessionStorage.setItem("apiUrl", apiUrl);
+    });
+
+    $(document).on("click", ".f_check_type", function (event) {
+        const url = $(this).data("url");
+        if (url && url !== "#") {
+            window.location.href = url;
+        }
+    });
+});
+
+
+
     </script>
     <script>
         $(document).ready(function () {
@@ -531,7 +619,7 @@
                 let el = $(this);
                 let route = '{!! route('favorites.store') !!}';
                 let method = 'post';
-                console.log(el.hasClass('dofav'))
+                // console.log(el.hasClass('dofav'))
                 if (el.hasClass('dofav')) {
                     method = 'delete'
                     route = '{!! url('favorites') !!}/' + productId;

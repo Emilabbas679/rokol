@@ -66,7 +66,15 @@
         </iframe>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
-
+    <script>
+        $(document).ready(function () {
+            const currentUrl = window.location.href;
+            if (!currentUrl.includes("/products")) {
+                sessionStorage.clear();
+            } else {
+            }
+        });
+    </script>
 
     @stack('js')
 
