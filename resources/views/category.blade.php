@@ -36,10 +36,10 @@
                                     <div class="form_item">
                                         <select name="parent_category_id" class="js-example-basic-single "
                                                 id="products_main" data-placeholder="{{translate('main_categories')}}">
-                                            <option>{{translate('all')}}</option>
+                                            <option value="0">{{translate('all')}}</option>
                                             @foreach($categories as $item)
                                                 <option value="{{$item->id}}"
-                                                        @if($category['id']==$item->id or $category['category_id'] == $item->id) selected @endif>{{$item->name[app()->getLocale()] ?? ''}}</option>
+                                                        @if(request()->input('parent_category_id') ==  $item->id) selected @endif>{{$item->name[app()->getLocale()] ?? ''}}</option>
                                             @endforeach
 
                                         </select>
@@ -229,7 +229,7 @@
                             </div>
 
                             <div class="filter_buttons">
-                                <button type="button" class="filter_btn btn_reset" style="width:100%">Sıfırla</button>
+                                <a class="filter_btn btn_reset" href="{!! route('products') !!}" style="width:100%">Sıfırla</a>
                                 <!-- <button type="submit" class="filter_btn btn_send">Təsdiqlə</button> -->
                             </div>
                         </form>
