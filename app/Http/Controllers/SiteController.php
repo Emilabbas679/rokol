@@ -235,7 +235,7 @@ class SiteController extends Controller
         $query->orderBy( 'products.id' );
         $products = $query->get( 32 );
 
-        $filters = $this->getFilters( $category );
+        $filters = $this->getFiltersApi( $category['id'], true );
 
         $products = $this->paginate( $products, \request()->input( 'page' ) );
 
@@ -518,11 +518,15 @@ class SiteController extends Controller
         return $filters;
     }
 
-    public function getFiltersApi( $return = false )
+    public function getFiltersApi( $categoryId = null, $return = false )
     {
         $category = null;
-        if ( \request()->filled( 'category_id' ) ) {
-            $category = Category::query()->where( 'id', \request()->input( 'category_id' ) )->first();
+        if (is_null($categoryId)) {
+            $categoryId = \request()->input( 'category_id' );
+        }
+
+        if ( !is_null($categoryId) ) {
+            $category = Category::query()->where( 'id', $categoryId )->first();
         }
 
         $f = Filter::query()
@@ -553,12 +557,7 @@ class SiteController extends Controller
         $refProps                 = $f->pluck( 'property_id' )->unique()->toArray();
         foreach ( properties() as $property ) {
             if ( in_array( $property->id, $refProps ) ) {
-                $filters['refProperties'][$property->id] = [
-                    'name' => $property->name[app()->getlocale()],
-                    'search'  => parse_url( request()->filled( "properties.$property->id" )
-                        ? \request()->fullUrlWithoutQuery( \request()->input( "properties.$property->id" ) )
-                        : \request()->fullUrlWithQuery( [ "properties[$property->id]" => $property->id ] ), PHP_URL_QUERY)
-                ];
+                $filters['refProperties'][$property->id] = $property->name[app()->getlocale()];
             }
         }
 
@@ -566,12 +565,7 @@ class SiteController extends Controller
         $appearances            = $f->pluck( 'appearance_id' )->unique()->toArray();
         foreach ( appearances() as $appearance ) {
             if ( in_array( $appearance->id, $appearances ) ) {
-                $filters['appearances'][$appearance->id] = [
-                    'name' => $appearance->name[app()->getlocale()],
-                    'search'  => parse_url( request()->filled( "appearances.$appearance->id" )
-                        ? \request()->fullUrlWithoutQuery( \request()->input( "appearances.$appearance->id" ) )
-                        : \request()->fullUrlWithQuery( [ "appearances[$appearance->id]" => $appearance->id ] ), PHP_URL_QUERY)
-                ];
+                $filters['appearances'][$appearance->id] = $appearance->name[app()->getlocale()];
             }
         }
 
@@ -579,25 +573,14 @@ class SiteController extends Controller
         $weights            = $f->pluck( 'weight_id' )->unique()->toArray();
         foreach ( weights() as $weight ) {
             if ( in_array( $weight->id, $weights ) ) {
-                $filters['weights'][$weight->id] =
-                    [
-                        'name' => $weight->weight . " " . productWeightUnit( $weight->weight_type ),
-                        'search'  => parse_url( request()->filled( "weights.$weight->id" )
-                            ? \request()->fullUrlWithoutQuery( \request()->input( "weights.$weight->id" ) )
-                            : \request()->fullUrlWithQuery( [ "weights[$weight->id]" => $weight->id ] ), PHP_URL_QUERY)
-                    ];
+                $filters['weights'][$weight->id] =  $weight->weight ." " . productWeightUnit($weight->weight_type);
             }
         }
         $filters['brands'] = [];
         $brands            = $f->pluck( 'brand_id' )->unique()->toArray();
         foreach ( brands() as $brand ) {
             if ( in_array( $brand->id, $brands ) ) {
-                $filters['brands'][$brand->id] = [
-                    'name' => $brand->name,
-                    'search'  => parse_url(request()->filled( "brands.$brand->id" )
-                                            ? \request()->fullUrlWithoutQuery( \request()->input( "brands.$brand->id" ) )
-                                            : \request()->fullUrlWithQuery( [ "brands[$brand->id]" => $brand->id ] ), PHP_URL_QUERY)
-                ];
+                $filters['brands'][$brand->id] = $brand->name;
             }
         }
 
