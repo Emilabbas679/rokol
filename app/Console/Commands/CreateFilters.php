@@ -32,8 +32,6 @@ class CreateFilters extends Command
         $products = Product::query()->with( [ 'refProperties', 'appearances', 'weights' ] )->get();
         foreach ( $products as $product ) {
             $filter = [];
-
-            dump();
             $weights = $product->weights;
             if ( is_null( $weights ) || !$product->weights->count() ) {
                 $weights = [

@@ -36,7 +36,7 @@
                                     <div class="form_item">
                                         <select name="parent_category_id" class="js-example-basic-single "
                                                 id="products_main" data-placeholder="{{translate('main_categories')}}">
-                                            <option value="0">{{translate('all')}}</option>
+                                            <option>{{translate('all')}}</option>
                                             @foreach($categories as $item)
                                                 <option value="{{$item->id}}"
                                                         @if($category['id']==$item->id or $category['category_id'] == $item->id) selected @endif>{{$item->name[app()->getLocale()] ?? ''}}</option>
@@ -115,23 +115,24 @@
                                     <h5>{{translate('properties')}}</h5>
                                 </div>
                                 <div class="filter_check_items">
-                                    @if(isset($filters) )
-                                        @if(isset($filters['refProperties']) && !is_null($filters['refProperties']))
-                                            @foreach(properties() as $item)
-                                                @if(!in_array($item->id, $filters['refProperties']))
-                                                    @continue
-                                                @endif
-                                                <label data-url="{!! request()->filled('properties.'.$item->id) ? request()->fullUrlWithoutQuery("properties.{$item->id}.") : request()->fullUrlWithQuery(["properties[{$item->id}]" => $item->id]) !!}" class="f_check_type">
-                                                    <input type="checkbox" name="properties[{!! $item->id !!}]" value="{{$item->id}}"
-                                                           @if(isset($selected['properties']) and in_array($item->id, $selected['properties'])) checked @endif>
-                                                    <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
-                                                </label>
-                                            @endforeach
-                                        @endif
+                                    @if(isset($filters) && isset($filters['refProperties']) && !is_null($filters['refProperties']))
+                                        @foreach(properties() as $item)
+                                            @if(!isset($filters['refProperties'][(string)$item->id]))
+                                                @continue
+                                            @endif
+                                            <label class="f_check_type">
+                                                <input type="checkbox" name="properties[{!! $item->id !!}]"
+                                                       value="{{$item->id}}"
+                                                       @if(isset($selected['properties']) and in_array($item->id, $selected['properties'])) checked @endif>
+                                                <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
+                                            </label>
+                                        @endforeach
                                     @else
                                         @foreach(properties() as $item)
-                                            <label data-url="{!! request()->filled('properties.'.$item->id) ? request()->fullUrlWithoutQuery("properties.{$item->id}") : request()->fullUrlWithQuery(["properties[{$item->id}]" => $item->id]) !!}" class="f_check_type">
-                                                <input type="checkbox" name="properties[{!! $item->id !!}]" value="{{$item->id}}"
+                                            <label data-url="{!! request()->filled('properties.'.$item->id) ? request()->fullUrlWithoutQuery("properties.{$item->id}") : request()->fullUrlWithQuery(["properties[{$item->id}]" => $item->id]) !!}"
+                                                   class="f_check_type">
+                                                <input type="checkbox" name="properties[{!! $item->id !!}]"
+                                                       value="{{$item->id}}"
                                                        @if(isset($selected['properties']) and in_array($item->id, $selected['properties'])) checked @endif>
                                                 <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
                                             </label>
@@ -146,23 +147,23 @@
                                     <h5>{{translate('appearances')}}</h5>
                                 </div>
                                 <div class="filter_check_items">
-                                    @if(isset($filters) )
-                                        @if(isset($filters['appearances']) && !is_null($filters['appearances']))
-                                            @foreach(appearances() as $item)
-                                                @if(!in_array($item->id, $filters['appearances']))
-                                                    @continue
-                                                @endif
-                                                <label data-url="{!! request()->filled('appearances.'.$item->id) ? request()->fullUrlWithoutQuery("appearances.{$item->id}") : request()->fullUrlWithQuery(["appearances[{$item->id}]" => $item->id]) !!}" class="f_check_type">
-                                                    <input type="checkbox" name="appearances[{!! $item->id !!}]" value="{{$item->id}}"
-                                                           @if(isset($selected['appearances']) and in_array($item->id, $selected['appearances'])) checked @endif>
-                                                    <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
-                                                </label>
-                                            @endforeach
-                                        @endif
+                                    @if(isset($filters) && isset($filters['appearances']) && !is_null($filters['appearances']))
+                                        @foreach(appearances() as $item)
+                                            @if(!isset($filters['appearances'][(string)$item->id]))
+                                                @continue
+                                            @endif
+                                            <label class="f_check_type">
+                                                <input type="checkbox" name="appearances[{!! $item->id !!}]"
+                                                       value="{{$item->id}}"
+                                                       @if(isset($selected['appearances']) and in_array($item->id, $selected['appearances'])) checked @endif>
+                                                <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
+                                            </label>
+                                        @endforeach
                                     @else
                                         @foreach(appearances() as $item)
-                                            <label data-url="{!! request()->filled('appearances.'.$item->id) ? request()->fullUrlWithoutQuery("appearances.{$item->id}") : request()->fullUrlWithQuery(["appearances[{$item->id}]" => $item->id]) !!}" class="f_check_type">
-                                                <input type="checkbox" name="appearances[{!! $item->id !!}]" value="{{$item->id}}"
+                                            <label class="f_check_type">
+                                                <input type="checkbox" name="appearances[{!! $item->id !!}]"
+                                                       value="{{$item->id}}"
                                                        @if(isset($selected['appearances']) and in_array($item->id, $selected['appearances'])) checked @endif>
                                                 <span>{{$item->name[app()->getlocale()] ?? ''}}</span>
                                             </label>
@@ -175,23 +176,23 @@
                                     <h5>{{translate('weights')}}</h5>
                                 </div>
                                 <div class="filter_check_items">
-                                    @if(isset($filters) )
-                                        @if(isset($filters['weights']) && !is_null($filters['weights']))
-                                            @foreach(weights() as $item)
-                                                @if(!in_array($item->id, $filters['weights']))
-                                                    @continue
-                                                @endif
-                                                <label data-url="{!! request()->filled('weights.'.$item->id) ? request()->fullUrlWithoutQuery("weights.{$item->id}") : request()->fullUrlWithQuery(["weights[{$item->id}]" => $item->id]) !!}" class="f_check_type">
-                                                    <input type="checkbox" name="weights[{!! $item->id !!}]" value="{{$item->id}}"
-                                                           @if(isset($selected['weights']) and in_array($item->id, $selected['weights'])) checked @endif>
-                                                    <span>{{$item->weight}} {!! productWeightUnit($item->weight_type) !!}</span>
-                                                </label>
-                                            @endforeach
-                                        @endif
+                                    @if(isset($filters) && isset($filters['weights']) && !is_null($filters['weights']))
+                                        @foreach(weights() as $item)
+                                            @if(!isset($filters['weights'][(string)$item->id]))
+                                                @continue
+                                            @endif
+                                            <label class="f_check_type">
+                                                <input type="checkbox" name="weights[{!! $item->id !!}]"
+                                                       value="{{$item->id}}"
+                                                       @if(isset($selected['weights']) and in_array($item->id, $selected['weights'])) checked @endif>
+                                                <span>{{$item->weight}} {!! productWeightUnit($item->weight_type) !!}</span>
+                                            </label>
+                                        @endforeach
                                     @else
                                         @foreach(weights() as $item)
-                                            <label data-url="{!! request()->filled('weights.'.$item->id) ? request()->fullUrlWithoutQuery("weights.{$item->id}") : request()->fullUrlWithQuery(["weights[{$item->id}]" => $item->id]) !!}" class="f_check_type">
-                                                <input type="checkbox" name="weights[{!! $item->id !!}]" value="{{$item->id}}"
+                                            <label class="f_check_type">
+                                                <input type="checkbox" name="weights[{!! $item->id !!}]"
+                                                       value="{{$item->id}}"
                                                        @if(isset($selected['weights']) and in_array($item->id, $selected['weights'])) checked @endif>
                                                 <span>{{$item->weight}} {!! productWeightUnit($item->weight_type) !!}</span>
                                             </label>
@@ -204,23 +205,21 @@
                                     <h5>{{translate('Brands')}}</h5>
                                 </div>
                                 <div class="filter_check_items">
-                                    @if(isset($filters) )
-                                        @if(isset($filters['brands']) && !is_null($filters['brands']))
-                                            @foreach(brands() as $item)
-                                                @if(!in_array($item->id, $filters['brands']))
-                                                    @continue
-                                                @endif
-                                                <label class="f_check_type">
-                                                    <input type="checkbox" name="brands[]" value="{{$item->id}}"
-                                                           @if(isset($selected['brands']) and in_array($item->id, $selected['brands'])) checked @endif>
-                                                    <span>{{$item->name}}</span>
-                                                </label>
-                                            @endforeach
-                                        @endif
+                                    @if(isset($filters) && isset($filters['brands']) && !is_null($filters['brands']))
+                                        @foreach(brands() as $item)
+                                            @if(!isset($filters['brands'][(string)$item->id]))
+                                                @continue
+                                            @endif
+                                            <label class="f_check_type">
+                                                <input type="checkbox" name="brands[{{$item->id}}]" value="{{$item->id}}"
+                                                       @if(isset($selected['brands']) and in_array($item->id, $selected['brands'])) checked @endif>
+                                                <span>{{$item->name}}</span>
+                                            </label>
+                                        @endforeach
                                     @else
                                         @foreach(brands() as $item)
                                             <label class="f_check_type">
-                                                <input type="checkbox" name="brands[]" value="{{$item->id}}"
+                                                <input type="checkbox" name="brands[{{$item->id}}]" value="{{$item->id}}"
                                                        @if(isset($selected['brands']) and in_array($item->id, $selected['brands'])) checked @endif>
                                                 <span>{{$item->name}}</span>
                                             </label>
@@ -354,269 +353,18 @@
     <script>
         $(document).ready(function () {
             $('.radio_btn input[type="checkbox"]').click(function () {
+                console.log("asdasndajsndjknasd");
                 if ($(this).prop('checked')) {
                     $('.radio_btn input[type="checkbox"]').not(this).prop('checked', false);
                 }
             });
         });
-        $(document).ready(function () {
-    let tiklananValues = {};
 
-    const storedValues = sessionStorage.getItem("tiklananValues");
-    if (storedValues) {
-        tiklananValues = JSON.parse(storedValues);
-        $(".filter_items").each(function () {
-            const parentFilterHead = $(this).find(".filter_head");
-            const currentFilterClass = parentFilterHead
-                .attr("class")
-                .split(" ")
-                .find((cls) => cls !== "filter_head");
-            const filterItems = $(this).find(".filter_check_items");
 
-            if (tiklananValues[currentFilterClass]) {
-                tiklananValues[currentFilterClass].forEach((value) => {
-                    filterItems.find(`input[type="checkbox"][value="${value}"]`).prop("checked", true);
-                });
-            }
+        $(document).on("change", '#formData :input', function () {
+            let query = $('#formData').serialize();
+            window.location.href = window.location.origin + '/products?' + query;
         });
-    }
-
-    function applyFiltersFromUrl() {
-        const urlParams = new URLSearchParams(window.location.search);
-
-        urlParams.forEach((value, key) => {
-            if (key.endsWith("[]")) {
-                const filterClass = key.replace("[]", "");
-                if (!tiklananValues[filterClass]) {
-                    tiklananValues[filterClass] = [];
-                }
-                tiklananValues[filterClass].push(value);
-            }
-        });
-
-        guncelleFiltreler({ data: tiklananValues });
-
-        sessionStorage.setItem("tiklananValues", JSON.stringify(tiklananValues));
-    }
-    applyFiltersFromUrl();
-
-    $(document).on("change", 'input[type="checkbox"]', function () {
-        const parentFilterHead = $(this)
-            .closest(".filter_items")
-            .find(".filter_head");
-        const filterClass = parentFilterHead
-            .attr("class")
-            .split(" ")
-            .find((cls) => cls !== "filter_head");
-
-        const tiklananValue = $(this).val();
-
-        if ($(this).is(":checked")) {
-            if (!tiklananValues[filterClass]) {
-                tiklananValues[filterClass] = [];
-            }
-            tiklananValues[filterClass].push(tiklananValue);
-        } else {
-            tiklananValues[filterClass] = tiklananValues[filterClass].filter(
-                (value) => value !== tiklananValue
-            );
-        }
-
-        let apiUrl = "https://rokol.az/filters?";
-        Object.keys(tiklananValues).forEach((filter) => {
-            tiklananValues[filter].forEach((value) => {
-                apiUrl += `${filter}[]=${value}&`;
-            });
-        });
-
-        const minVal = $(".minVal").text().replace(/\D/g, '');
-        const maxVal = $(".maxVal").text().replace(/\D/g, '');
-        apiUrl += `min_price=${minVal}&max_price=${maxVal}&`;
-
-        sessionStorage.setItem("apiUrl", apiUrl);
-        sessionStorage.setItem("tiklananValues", JSON.stringify(tiklananValues));
-        const updatedUrl = apiUrl.replace("filters", "products");
-        sessionStorage.setItem("updatedUrl", updatedUrl);
-        window.history.pushState({}, "", updatedUrl);
-
-        $.ajax({
-            url: apiUrl,
-            type: "GET",
-            success: function (data) {
-                guncelleFiltreler(data);
-            },
-            error: function (xhr, status, error) {
-            },
-        });
-        window.location.href = updatedUrl;
-    });
-
-    $(".range-input input").on("change", function () {
-        const minVal = $(".minVal").text().replace(/\D/g, '');
-        const maxVal = $(".maxVal").text().replace(/\D/g, ''); 
-
-        let apiUrl = "https://rokol.az/filters?";
-        Object.keys(tiklananValues).forEach((filter) => {
-            tiklananValues[filter].forEach((value) => {
-                apiUrl += `${filter}[]=${value}&`;
-            });
-        });
-
-        apiUrl += `min_price=${minVal}&max_price=${maxVal}&`;
-
-        sessionStorage.setItem("apiUrl", apiUrl);
-        sessionStorage.setItem("tiklananValues", JSON.stringify(tiklananValues));
-        // console.log("Range API URL:", apiUrl);
-        const updatedUrl = apiUrl.replace("filters", "products");
-        sessionStorage.setItem("updatedUrl", updatedUrl);
-        window.history.pushState({}, "", updatedUrl);
-
-        $.ajax({
-            url: apiUrl,
-            type: "GET",
-            success: function (data) {
-                guncelleFiltreler(data);
-            },
-            error: function (xhr, status, error) {
-            },
-        });
-
-        window.location.href = updatedUrl;
-    });
-
-    function guncelleFiltreler(data) {
-        $(".filter_items").each(function () {
-            const parentFilterHead = $(this).find(".filter_head");
-            const currentFilterClass = parentFilterHead
-                .attr("class")
-                .split(" ")
-                .find((cls) => cls !== "filter_head");
-            const filterItems = $(this).find(".filter_check_items");
-
-            const apiData = data.data || {};
-
-            let yeniVeri = null;
-
-            if (
-                currentFilterClass === "properties" &&
-                apiData.hasOwnProperty("refProperties")
-            ) {
-                yeniVeri = apiData.refProperties;
-            } else if (
-                currentFilterClass === "brands" &&
-                apiData.hasOwnProperty("brands")
-            ) {
-                yeniVeri = apiData.brands;
-            } else if (
-                currentFilterClass === "appearances" &&
-                apiData.hasOwnProperty("appearances")
-            ) {
-                yeniVeri = apiData.appearances;
-            } else if (
-                currentFilterClass === "weights" &&
-                apiData.hasOwnProperty("weights")
-            ) {
-                yeniVeri = apiData.weights;
-            }
-
-            if (!yeniVeri) {
-                console.warn(`Veri bulunamadı: ${currentFilterClass}`);
-                return;
-            }
-
-            filterItems.empty();
-            Object.keys(yeniVeri).forEach((key) => {
-                const label = $('<label class="f_check_type"></label>')
-                    .attr("data-url", "https://rokol.az/products?" + yeniVeri[key].search);
-                const input = $("<input>", {
-                    type: "checkbox",
-                    name: `${currentFilterClass}[${key}]`,
-                    value: key,
-                }).appendTo(label);
-
-                const span = $("<span></span>")
-                    .text(yeniVeri[key].name)
-                    .appendTo(label);
-
-                if (
-                    tiklananValues[currentFilterClass] &&
-                    tiklananValues[currentFilterClass].includes(key)
-                ) {
-                    input.prop("checked", true);
-                }
-
-                filterItems.append(label);
-            });
-            const storedUpdatedUrl = sessionStorage.getItem("updatedUrl");
-            if (storedUpdatedUrl) {
-                window.history.pushState({}, "", storedUpdatedUrl);
-            }
-        });
-    }
-
-    $(".btn_reset").on("click", function () {
-        tiklananValues = {};
-
-        $('input[type="checkbox"]').prop("checked", false);
-
-        $.ajax({
-            url: "https://rokol.az/filters",
-            type: "GET",
-            success: function (data) {
-                guncelleFiltreler(data);
-            },
-            error: function (xhr, status, error) {
-                // console.error("Sıfırlama API isteği başarısız oldu:", error);
-                // console.error("Hata Detayları:", xhr, status);
-            },
-        });
-        window.location.href = "https://rokol.az/products";
-        sessionStorage.clear();
-    });
-
-    const storedApiUrl = sessionStorage.getItem("apiUrl");
-    if (storedApiUrl) {
-        $.ajax({
-            url: storedApiUrl,
-            type: "GET",
-            success: function (data) {
-                guncelleFiltreler(data);
-            },
-            error: function (xhr, status, error) {
-                // console.error("Stored API isteği başarısız oldu:", error);
-                // console.error("Hata Detayları:", xhr, status);
-            },
-        });
-    }
-
-    $(".filter_check_items .f_check_type").on("click", function () {
-        let apiUrl = "https://rokol.az/filters?";
-        Object.keys(tiklananValues).forEach((filter) => {
-            tiklananValues[filter].forEach((value) => {
-                apiUrl += `${filter}[]=${value}&`;
-            });
-        });
-
-        sessionStorage.setItem("apiUrl", apiUrl);
-
-        const form = $(this).closest("form");
-        if (form.length > 0) {
-            form.submit();
-        } else {
-            console.warn("form tapilmadi");
-        }
-    });
-
-    $(document).on("click", ".f_check_type", function (event) {
-        const url = $(this).data("url");
-        if (url && url !== "#") {
-            window.location.href = url;
-        }
-    });
-});
-
-
-
     </script>
     <script>
         $(document).ready(function () {
@@ -721,27 +469,6 @@
             let parent = $(this).parent();
             parent.hide();
             event.preventDefault();
-            //
-            //
-            // let form = document.getElementById('formData');
-            //
-            // let formData = new FormData(form);
-            // let data = {};
-            // formData.forEach((value, key) => {
-            //     if (value !== '' || value !== null) {
-            //         console.log(key);
-            //         if (data[key]) {
-            //             if (Array.isArray(data[key])) {
-            //                 data[key].push(value);
-            //             } else {
-            //                 data[key] = [data[key], value];
-            //             }
-            //         } else {
-            //             data[key] = value;
-            //         }
-            //     }
-            //
-            // });
 
             let urlSearchParams = new URLSearchParams(window.location.search);
             let params = Object.fromEntries(urlSearchParams.entries());
