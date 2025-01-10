@@ -598,6 +598,13 @@
         });
 
         sessionStorage.setItem("apiUrl", apiUrl);
+
+        const form = $(this).closest("form");
+        if (form.length > 0) {
+            form.submit();
+        } else {
+            console.warn("form tapilmadi");
+        }
     });
 
     $(document).on("click", ".f_check_type", function (event) {
