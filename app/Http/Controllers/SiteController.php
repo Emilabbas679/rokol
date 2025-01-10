@@ -69,6 +69,14 @@ class SiteController extends Controller
                            ->where( 'category_id', null )->get();
         } );
 
+        if ( \request()->filled( 'parent_category_id' ) ) {
+            $id = \request()->input( 'parent_category_id' );
+        }
+
+        if ( \request()->filled( 'category_id' ) ) {
+            $id = \request()->input( 'category_id' );
+        }
+
         if ( $id == 0 ) {
             $categoryIds = [];
             $category    = [
@@ -521,11 +529,11 @@ class SiteController extends Controller
     public function getFiltersApi( $categoryId = null, $return = false )
     {
         $category = null;
-        if (is_null($categoryId)) {
+        if ( is_null( $categoryId ) ) {
             $categoryId = \request()->input( 'category_id' );
         }
 
-        if ( !is_null($categoryId) ) {
+        if ( !is_null( $categoryId ) ) {
             $category = Category::query()->where( 'id', $categoryId )->first();
         }
 
@@ -573,7 +581,7 @@ class SiteController extends Controller
         $weights            = $f->pluck( 'weight_id' )->unique()->toArray();
         foreach ( weights() as $weight ) {
             if ( in_array( $weight->id, $weights ) ) {
-                $filters['weights'][$weight->id] =  $weight->weight ." " . productWeightUnit($weight->weight_type);
+                $filters['weights'][$weight->id] = $weight->weight . " " . productWeightUnit( $weight->weight_type );
             }
         }
         $filters['brands'] = [];
