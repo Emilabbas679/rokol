@@ -37,6 +37,7 @@
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-5Z2765RC');</script>
     <!-- End Google Tag Manager -->
+    <meta name="google-site-verification" content="NKCG-YTaeT_5FUuJ1ZNYppM-CyDxSLfzbRnqcASsCsk" />
     @stack('css')
 </head>
 
