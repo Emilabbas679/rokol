@@ -12,7 +12,8 @@
                     </label>
                 @endforeach
             @else
-                <button class="f_check_type radio_btn color_btn color_open select_color"><span>@lang('Kataloqa bax')</span></button>
+                <button class="f_check_type radio_btn color_btn color_open select_color">
+                    <span>@lang('Kataloqa bax')</span></button>
 
             @endif
         </div>
@@ -28,7 +29,20 @@
                     <div class="row catalog_row_main">
                         <div class="col item_col clearfix">
                             <div class="row catalog_row_inner">
-                                @if($product->has_colors == \App\Models\Product::ALL_COLORS)
+                                @if($product->has_colors == \App\Models\Product::GROUP_COLORS && $product->colorGroups->count())
+                                    @foreach($product->colorGroups as $colorGroup)
+                                        @foreach($colorGroup->colors as $color)
+
+                                            <label class="col item_col clearfix color_block">
+                                                <input name="color" type="checkbox" value="{{ $color->id }}">
+                                                <span style="display:none;"> {{ $color->hex }}</span>
+                                                <div class="catalog_color"
+                                                     style="background-color: {{ $color->hex }};"></div>
+                                                <div class="catalog_name">{{ $color->name[app()->getLocale()] }}</div>
+                                            </label>
+                                        @endforeach
+                                    @endforeach
+                                @elseif($product->has_colors == \App\Models\Product::ALL_COLORS)
                                     @foreach($groupedColors as $colors)
                                         @foreach($colors as $color)
 

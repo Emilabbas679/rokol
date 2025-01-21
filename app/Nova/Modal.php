@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Laravel\Nova\Fields\Boolean;

@@ -3,18 +3,13 @@
 namespace App\Nova;
 
 use App\Jobs\ReOrganizeFilters;
-use App\Models\Filter;
-use Benjacho\BelongsToManyField\BelongsToManyField;
 use Eminiarts\Tabs\Tab;
 use Eminiarts\Tabs\Tabs;
 use Eminiarts\Tabs\Traits\HasTabs;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\File;
@@ -119,7 +114,7 @@ class Product extends Resource
                     File::make( 'PDF', 'pdf_path' )
                         ->disk( 'public' )
                         ->acceptedTypes( '.pdf' )
-                        ->path('pdfs')
+                        ->path( 'pdfs' )
                         ->rules( 'mimetypes:application/pdf' ),
 
                     Tag::make( 'Types', 'types', 'App\Nova\Type' )
@@ -444,10 +439,11 @@ class Product extends Resource
                 Tab::make( 'Color', [
                     Select::make( 'Has color', 'has_colors' )
                           ->options( [
-                                         \App\Models\Product::NO_COLORS   => 'No',
-                                         \App\Models\Product::SPEC_COLORS => 'Some colors',
-                                         \App\Models\Product::ALL_COLORS  => 'All colors',
-                                         \App\Models\Product::MAIN_COLORS => 'Main colors',
+                                         \App\Models\Product::NO_COLORS    => 'No',
+                                         \App\Models\Product::SPEC_COLORS  => 'Some colors',
+                                         \App\Models\Product::ALL_COLORS   => 'All colors',
+                                         \App\Models\Product::MAIN_COLORS  => 'Main colors',
+                                         \App\Models\Product::GROUP_COLORS => 'Group colors',
                                      ] )->displayUsingLabels()
                           ->sortable(),
                 ] ),

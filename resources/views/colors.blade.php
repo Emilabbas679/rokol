@@ -14,7 +14,7 @@
         <div class="main_center clearfix">
             <div class="adrs_container clearfix">
                 <div class="sect_header clearfix">
-                    <h2 class="sect_title">Rəng kataloqu </h2>
+                    <h2 class="sect_title">{!! isset($colorGroup) ? $colorGroup->name[app()->getLocale()] : translate('Rəng kataloqu')  !!}</h2>
                 </div>
                 <div class="sect_body clearfix">
                     @php

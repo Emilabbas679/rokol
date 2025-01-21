@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ColorGroup extends Model
 {
-    use SoftDeletes;
-
     protected $table = 'color_groups';
 
     protected $fillable = [ 'name', 'display' ];
