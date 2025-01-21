@@ -22,13 +22,13 @@
             @endif
 
             <div class="sign_header">
-                <div class="sign_title">Yeni şifrə yarat</div>
+                <div class="sign_title">{{translate('create_new_pass')}}</div>
                 <!-- <div class="sign_info">Telefon nömrənizi daxil edin</div> -->
             </div>
             <form action="{!! route('password.reset.do') !!}" method="post">
                 @csrf
                 <div class="form_item">
-                    <input type="password" name="password" placeholder="Şifrə" class="item_input">
+                    <input type="password" name="password" placeholder="{{translate('password')}}" class="item_input">
                     <!-- <div class="error_type">Warning text</div> -->
                     <div class="pass_eye">
                         <span class="password-showhide">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="form_item">
-                    <input type="password" name="password_confirmation" placeholder="Şifrə təkrar" class="item_input" >
+                    <input type="password" name="password_confirmation" placeholder="{{translate('repeat_pass')}}" class="item_input" >
 {{--                    <div class="error_type">Warning text</div>--}}
                     <div class="pass_eye">
                         <span class="password-showhide">
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="form_item">
-                    <button type="submit" class="btn_sign submit_btn">Şifrəni dəyiş </button>
+                    <button type="submit" class="btn_sign submit_btn">{{translate('change_pass')}} </button>
                 </div>
             </form>
 

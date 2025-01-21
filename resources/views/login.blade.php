@@ -17,21 +17,21 @@
 
             <div class="reg_text" style="@if(!session()->has('success_register')) display:none @endif">
                     <span>
-                        @lang('Qeydiyyat uğurla tamamlandı daxil ola bilərsiniz')
+                        {{translate('login_succes')}}
                     </span>
             </div>
 
             <div class="section_wrap wrap_sign_content ">
                 <div class="benefit_tabs">
                     <div class="sign_header">
-                        <div class="sign_title">@lang('Şəxsi kabinetə xoş gəlmisiniz')</div>
-                        <div class="sign_info">@lang('Giriş məlumatlarını daxil edin')</div>
+                        <div class="sign_title">{{translate('login_title')}}</div>
+                        <div class="sign_info">{{translate('login_info')}}</div>
                     </div>
                     <div class="sign_tab_sect">
                         <div class="bf_tb_hd">
                             <span class="glider "></span>
-                            <div class="bt_tb_title clicked_tab_btn" data-id="0"><span>@lang('Telefon nömrəsi')</span></div>
-                            <div class="bt_tb_title clicked_tab_btn" data-id="1"><span>@lang('E-poçt ünvanı')</span></div>
+                            <div class="bt_tb_title clicked_tab_btn" data-id="0"><span>{{translate('phone_number')}}</span></div>
+                            <div class="bt_tb_title clicked_tab_btn" data-id="1"><span>{{translate('email')}}</span></div>
                         </div>
                     </div>
                     <div class="bf_tb_content clearfix">
@@ -41,14 +41,14 @@
                             <form action="{!! route('login') !!}" method="post">
                                 @csrf
                                 <div class="form_item">
-                                    <input type="text" name="email" placeholder="@lang('E-poçt ünvanı')" value=""
+                                    <input type="text" name="email" placeholder="{{translate('email')}}" value=""
                                            class="item_input">
                                     @error('email')
                                     <div class="error_type">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form_item">
-                                    <input type="password" name="password" placeholder="@lang('Şifrə')" value=""
+                                    <input type="password" name="password" placeholder="{{translate('password')}}" value=""
                                            class="item_input">
                                     @error('password')
                                     <div class="error_type">{{ $message }}</div>
@@ -61,13 +61,13 @@
                                     </div>
                                 </div>
                                 <a href="{!! route('password.phone') !!}"
-                                   class="forgot_password">@lang('Şifrəni unutmusan?')</a>
+                                   class="forgot_password">{{translate('forgot_pass')}}a>
                                 <div class="form_item">
-                                    <button type="submit" class="btn_sign submit_btn">@lang('Daxil ol')</button>
+                                    <button type="submit" class="btn_sign submit_btn">{{translate('login')}}</button>
                                 </div>
                                 <div class="form_item">
                                     <a href="{!! route('register') !!}"
-                                       class="btn_sign link_btn">@lang('Qeydiyyatdan keç')</a>
+                                       class="btn_sign link_btn">{{translate('register')}}</a>
                                 </div>
                             </form>
 
@@ -77,7 +77,7 @@
                             <form action="{!! route('login') !!}" method="post">
                                 @csrf
                                 <div class="form_item">
-                                    <input type="text" name="phone" placeholder="@lang('Telefon nömrəsi') (+994)"
+                                    <input type="text" name="phone" placeholder="{{translate('phone_number')}}"
                                            value="994"
                                            class="item_input phone">
                                     @error('phone')
@@ -85,7 +85,7 @@
                                     @enderror
                                 </div>
                                 <div class="form_item">
-                                    <input type="password" name="password" placeholder="@lang('Şifrə')" value=""
+                                    <input type="password" name="password" placeholder="{{translate('password')}}" value=""
                                            class="item_input">
                                     @error('password')
                                     <div class="error_type">{{ $message }}</div>
@@ -98,13 +98,13 @@
                                     </div>
                                 </div>
                                 <a href="{!! route('password.phone') !!}"
-                                   class="forgot_password">@lang('Şifrəni unutmusan?')</a>
+                                   class="forgot_password">{{translate('forgot_pass')}}</a>
                                 <div class="form_item">
-                                    <button type="submit" class="btn_sign submit_btn">@lang('Daxil ol')</button>
+                                    <button type="submit" class="btn_sign submit_btn">{{translate('login')}}</button>
                                 </div>
                                 <div class="form_item">
                                     <a href="{!! route('register') !!}"
-                                       class="btn_sign link_btn">@lang('Qeydiyyatdan keç')</a>
+                                       class="btn_sign link_btn">{{translate('register')}}</a>
                                 </div>
                             </form>
 

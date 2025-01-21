@@ -168,7 +168,7 @@
                             <div class="modal_section" style="overflow: visible;">
                                 <div class="modal_container" style="overflow: visible;">
                                     <div class="modal_header">
-                                        <h5 class="modal_title">Kalkulyator</h5>
+                                        <h5 class="modal_title">{{translate('calc')}}</h5>
                                         <span class="close_modal"></span>
                                     </div>
                                     <div class="modal_body">
@@ -177,7 +177,7 @@
                                                 <div class="form_item">
                                                     <select name="parent_category_id" class="js-example-basic-single "
                                                             id="products_main_calc" data-placeholder="">
-                                                        <option selected disabled value="0">Məhsul sistemi</option>
+                                                        <option selected disabled value="0">{{translate('product_system')}}</option>
                                                         @foreach(menu_categories() as $cat)
                                                             <option
                                                                     value="{!! $cat->id !!}">{!! $cat->name[app()->getLocale()] !!}</option>
@@ -189,7 +189,7 @@
                                                     <select name="category_id" class="js-example-basic-single "
                                                             id="products_other_calc"
                                                             data-placeholder="">
-                                                        <option selected disabled value="0">Məhsul qrupu</option>
+                                                        <option selected disabled value="0">{{translate('product_group')}}</option>
                                                     </select>
                                                     <span class="customDrop customDrop-other_calc"></span>
                                                 </div>
@@ -197,7 +197,7 @@
                                                     <select name="product_id" class="js-example-basic-single "
                                                             id="this_product"
                                                             data-placeholder="">
-                                                        <option selected disabled value="0">Məhsul</option>
+                                                        <option selected disabled value="0">{{translate('products')}}</option>
                                                     </select>
                                                     <span class="customDrop customDrop-this_calc"></span>
                                                 </div>
@@ -206,46 +206,45 @@
                                                     id="hiddenDiv">
                                                 <div class="calc_inputs">
                                                     <div class="form_item">
-                                                        <label for="" id="width-label">Səthin eni (m):</label>
+                                                        <label for="" id="width-label">{{translate('surface_width')}}</label>
                                                         <input type="text" id="width" name="email"
-                                                               placeholder="Səthin eni (m):" value=""
+                                                               placeholder="{{translate('surface_width')}}" value=""
                                                                class="item_input">
                                                     </div>
                                                     <div class="form_item">
-                                                        <label for="" id="length-label">Səthin uzunluğu
-                                                            (m):</label>
+                                                        <label for="" id="length-label">{{translate('surface_length')}}</label>
                                                         <input type="text" name="email" id="length"
-                                                               placeholder="Səthin uzunluğu (m):" value=""
+                                                               placeholder="{{translate('surface_length')}}" value=""
                                                                class="item_input">
                                                     </div>
                                                     <div class="form_item">
-                                                        <label for="">Tövsiyyə olunan qatın sayı:</label>
+                                                        <label for="">{{translate('layers_number')}}</label>
                                                         <input type="text" name="email" id="layers"
-                                                               placeholder="Tövsiyyə olunan qatın sayı"
+                                                               placeholder="{{translate('layers_number')}}"
                                                                class="item_input">
                                                     </div>
                                                     <div class="form_item disable_input">
-                                                        <label for="">Sərfiyyat norması (kq/kv.m):</label>
+                                                        <label for="">{{translate('consumption_rate')}}</label>
                                                         <input disabled type="text" name="email"
                                                                id="consumption"
-                                                               placeholder="sərfiyyat norması (kq/kv.m):"
+                                                               placeholder="{{translate('consumption_rate')}}"
                                                                class="item_input">
                                                     </div>
                                                     <div class="form_item">
                                                         <button type="button" class="btn_sign submit_btn"
-                                                                id="calculateBtn">Hesabla
+                                                                id="calculateBtn">{{translate('calculate')}}
                                                         </button>
                                                     </div>
                                                     <div class="modal answer_modal">
                                                         <div class="modal_section" style="overflow: visible;">
                                                             <div class="modal_container" style="overflow: visible;">
                                                                 <div class="modal_header">
-                                                                    <h5 class="modal_title">Hesablama nəticəsi</h5>
+                                                                    <h5 class="modal_title">{{translate('calculate')}}</h5>
                                                                     <span class="close-modal"></span>
                                                                 </div>
                                                                 <div class="modal_body">
                                                                     <p>
-                                                                        <strong>Hesablama nəticəsi: </strong>
+                                                                        <strong>{{translate('calculate')}}: </strong>
                                                                         <span id="result">
 
                                                                         </span>
@@ -257,7 +256,7 @@
                                                 </div>
                                             </div>
                                             <div id="changeable" class="hidden" style="text-align: center">
-                                                Dəyişkəndir
+                                                {{translate('volatile')}}
                                             </div>
                                         </div>
                                     </div>
@@ -284,29 +283,29 @@
                                         </li>
                                         <li class="prof_icon">
                                             <a href="{!! route('orders.index') !!}" class="clearfix">
-                                                <span class="prof_icon_name">@lang('Sifarişlərim')</span>
+                                                <span class="prof_icon_name">{{translate('my_orders')}}</span>
                                             </a>
                                         </li>
                                         <li class="prof_icon">
                                             <a href="{!! route('favorites.index') !!}" class="clearfix">
-                                                <span class="prof_icon_name">@lang('Seçilmişlərim')</span>
+                                                <span class="prof_icon_name">{{translate('my_favorites')}}</span>
                                             </a>
                                         </li>
                                         <li class="prof_icon">
                                             <a href="{!! route('addresses.index') !!}" class="clearfix">
-                                                <span class="prof_icon_name">@lang('Ünvanlarım')</span>
+                                                <span class="prof_icon_name">{{translate('my_addresses')}}</span>
                                             </a>
                                         </li>
                                         <li class="prof_icon">
                                             <a href="{!! route('settings.edit') !!}" class="clearfix">
-                                                <span class="prof_icon_name">@lang('Şəxsi məlumatlarım')</span>
+                                                <span class="prof_icon_name">{{translate('personal_information')}}</span>
                                             </a>
                                         </li>
                                         <li class="prof_icon icon_exit">
                                             <form action="{!! route('logout') !!}" method="post">
                                                 @csrf
                                                 <button class="clearfix">
-                                                    <span class="prof_icon_name">@lang('Çıxış')</span>
+                                                    <span class="prof_icon_name">{{translate('log_out')}}</span>
                                                 </button>
                                             </form>
                                         </li>
