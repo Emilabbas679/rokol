@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8668effe27a88f8ccc9ed3ad58b44123",
+    "content-hash": "d6bba65c4875625e9b62bfc9f7f17ba4",
     "packages": [
         {
             "name": "acme/analytics",
@@ -358,6 +358,71 @@
                 }
             ],
             "time": "2023-12-11T17:09:12+00:00"
+        },
+        {
+            "name": "cartalyst/tags",
+            "version": "v13.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cartalyst/tags.git",
+                "reference": "07651fcf3641b597b76655ec9c0e21aa8f201a44"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cartalyst/tags/zipball/07651fcf3641b597b76655ec9c0e21aa8f201a44",
+                "reference": "07651fcf3641b597b76655ec9c0e21aa8f201a44",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^10.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "cartalyst/php-cs-fixer-config": "^2.0",
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^8.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Cartalyst\\Tags\\TagsServiceProvider"
+                    ]
+                },
+                "component": "package",
+                "branch-alias": {
+                    "dev-master": "13.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cartalyst\\Tags\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Cartalyst LLC",
+                    "email": "help@cartalyst.com",
+                    "homepage": "https://cartalyst.com"
+                }
+            ],
+            "description": "Easily add tags to your Eloquent models.",
+            "keywords": [
+                "cartalyst",
+                "laravel",
+                "php",
+                "tags"
+            ],
+            "support": {
+                "issues": "https://github.com/cartalyst/tags/issues",
+                "source": "https://github.com/cartalyst/tags/tree/v13.0.0"
+            },
+            "time": "2023-02-17T14:39:46+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -3904,6 +3969,69 @@
                 }
             ],
             "time": "2024-09-24T09:03:42+00:00"
+        },
+        {
+            "name": "palauaandsons/nova-tags-field",
+            "version": "4.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/palauaandsons/nova-tags-field.git",
+                "reference": "900e7c132315400d7a674a05a3425ba6f4f30b90"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/palauaandsons/nova-tags-field/zipball/900e7c132315400d7a674a05a3425ba6f4f30b90",
+                "reference": "900e7c132315400d7a674a05a3425ba6f4f30b90",
+                "shasum": ""
+            },
+            "require": {
+                "cartalyst/tags": ">=8.0",
+                "laravel/nova": "*"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.7",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "PalauaAndSons\\TagsField\\TagsFieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PalauaAndSons\\TagsField\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Isern Palaus",
+                    "email": "isern@palauaandsons.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A tags field for Nova apps that uses cartalyst/tags",
+            "homepage": "https://github.com/palauaandsons/nova-tags-field",
+            "keywords": [
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/palauaandsons/nova-tags-field/issues",
+                "source": "https://github.com/palauaandsons/nova-tags-field/tree/4.0.1"
+            },
+            "time": "2023-03-31T09:32:44+00:00"
         },
         {
             "name": "phpoption/phpoption",

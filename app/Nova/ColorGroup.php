@@ -26,6 +26,11 @@ class ColorGroup extends Resource
      */
     public static $title = 'id';
 
+    public function title()
+    {
+        return $this->name[app()->getLocale()];
+    }
+
     /**
      * The columns that should be searched.
      *
@@ -134,4 +139,6 @@ class ColorGroup extends Resource
             ? parent::availablePanelsForCreate( $request, $fields )
             : false;
     }
+
+
 }

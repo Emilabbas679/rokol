@@ -25,6 +25,7 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.5",
         "laravelrotebal/nova-attach-many": "^2.0",
+        "palauaandsons/nova-tags-field": "^4.0",
         "spatie/laravel-permission": "^6.10",
         "stepanenko3/nova-json": "^4.0",
         "waynestate/nova-ckeditor4-field": "^1.4",

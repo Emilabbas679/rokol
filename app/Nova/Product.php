@@ -19,6 +19,8 @@ use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Tag;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Http\Requests\UpdateResourceRequest;
+use PalauaAndSons\TagsField\Tags;
 use Waynestate\Nova\CKEditor4Field\CKEditor;
 
 class Product extends Resource
@@ -437,15 +439,24 @@ class Product extends Resource
                     Text::make( 'Video' )->rules( 'nullable' ),
                 ] ),
                 Tab::make( 'Color', [
-                    Select::make( 'Has color', 'has_colors' )
-                          ->options( [
-                                         \App\Models\Product::NO_COLORS    => 'No',
-                                         \App\Models\Product::SPEC_COLORS  => 'Some colors',
-                                         \App\Models\Product::ALL_COLORS   => 'All colors',
-                                         \App\Models\Product::MAIN_COLORS  => 'Main colors',
-                                         \App\Models\Product::GROUP_COLORS => 'Group colors',
-                                     ] )->displayUsingLabels()
-                          ->sortable(),
+                    Tag::make( 'Color group', 'colorGroups', ColorGroup::class )
+                       ->preload()
+                       ->rules( 'nullable', function ( $attribute, $value, $fail ) {
+                           $groups = json_decode( $value, true );
+                           if (count($groups) > 1) {
+                               return $fail('You can choose only 1 color group.');
+                           }
+                       } ),
+                    //
+                    //                    Select::make( 'Has color', 'has_colors' )
+                    //                          ->options( [
+                    //                                         \App\Models\Product::NO_COLORS    => 'No',
+                    //                                         \App\Models\Product::SPEC_COLORS  => 'Some colors',
+                    //                                         \App\Models\Product::ALL_COLORS   => 'All colors',
+                    //                                         \App\Models\Product::MAIN_COLORS  => 'Main colors',
+                    //                                         \App\Models\Product::GROUP_COLORS => 'Group colors',
+                    //                                     ] )->displayUsingLabels()
+                    //                          ->sortable(),
                 ] ),
                 Tab::make( 'Brand', [
                     BelongsTo::make( 'Brand', 'brand', Brand::class )
