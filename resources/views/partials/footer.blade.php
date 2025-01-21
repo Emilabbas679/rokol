@@ -152,7 +152,7 @@
             </div>
             <div class="copyrite">
                 <div class="copyrite_inner"><a target="_blank" href="https://matanata.com/"><img
-                                src="{{asset('img/matanat-a-l.png')}}" alt="Logo" ></a> 2024 © MATANAT A</div>
+                                src="{{asset('img/matanat-a-l.png')}}" alt="Logo" ></a> {!! date('Y') !!} © MATANAT A</div>
             </div>
         </div>
     </div>

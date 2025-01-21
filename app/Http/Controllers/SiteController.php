@@ -278,7 +278,8 @@ class SiteController extends Controller
                                                    'refProperties',
                                                    'applicationAreas',
                                                    'favorites',
-                                                   'similar'
+                                                   'similar',
+                                                   'colorGroups.colors'
                                                ] )
                                        ->firstorfail();
         $locale               = app()->getLocale();

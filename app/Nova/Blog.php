@@ -2,28 +2,19 @@
 
 namespace App\Nova;
 
+use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
+use Eminiarts\Tabs\Tab;
+use Eminiarts\Tabs\Tabs;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\FieldCollection;
-use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\File;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\URL;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Eminiarts\Tabs\Traits\HasTabs;
-use Eminiarts\Tabs\Tabs;
-use Eminiarts\Tabs\Tab;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\File;
-use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\BelongsToMany;
-use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\Markdown;
 use Waynestate\Nova\CKEditor4Field\CKEditor;
-use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
-
 
 
 class Blog extends Resource

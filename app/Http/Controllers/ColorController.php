@@ -10,21 +10,22 @@ class ColorController extends Controller
 {
     public function index()
     {
-        $colors = Color::query()->where('is_catalog', true)->get();
+        $colors = Color::query()->where( 'is_catalog', true )->get();
 
-        return view('colors', compact('colors'));
+        return view( 'colors', compact( 'colors' ) );
     }
 
     public function colorGroups()
     {
-        $colorGroups = ColorGroup::query()->get();
+        $colorGroups = ColorGroup::query()->where( 'display', true )->get();
         return view( 'color_groups', compact( 'colorGroups' ) );
     }
-    public function colorGroupsShow($id)
+
+    public function colorGroupsShow( $id )
     {
 
-        $colorGroup = ColorGroup::query()->findOrFail($id);
-        $colors = $colorGroup->colors;
-        return view( 'colors', compact( 'colors' ) );
+        $colorGroup = ColorGroup::query()->where( 'display', true )->findOrFail( $id );
+        $colors     = $colorGroup->colors;
+        return view( 'colors', compact( 'colors', 'colorGroup' ) );
     }
 }

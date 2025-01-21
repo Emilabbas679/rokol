@@ -19,6 +19,7 @@ class Product extends Model
     const SPEC_COLORS = 1;
     const ALL_COLORS = 2;
     const MAIN_COLORS = 3;
+    const GROUP_COLORS = 4;
 
     protected $guarded = [];
 
@@ -90,6 +91,11 @@ class Product extends Model
     public function brand(): BelongsTo
     {
         return $this->belongsTo( Brand::class );
+    }
+
+    public function colorGroups(): BelongsToMany
+    {
+        return $this->belongsToMany( ColorGroup::class, 'product_color_groups', 'product_id', 'color_group_id' );
     }
 
 //    protected static function boot()

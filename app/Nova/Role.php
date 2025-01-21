@@ -2,7 +2,6 @@
 
 namespace App\Nova;
 
-use App\Models\ProductOrder;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\ID;

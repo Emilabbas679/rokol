@@ -2,20 +2,17 @@
 
 namespace App\Nova;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Laravel\Nova\Fields\FieldCollection;
-use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Select;
-use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\FieldCollection;
 use Laravel\Nova\Fields\HasMany;
-use Stepanenko3\NovaJson\Fields\JsonArray;
-use Stepanenko3\NovaJson\Fields\JsonRepeatable;
-use Illuminate\Database\Eloquent\Builder;
+use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 
 class Category extends Resource
