@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Benjacho\BelongsToManyField\HasBelongsToMany;
+use Cartalyst\Tags\TaggableInterface;
+use Cartalyst\Tags\TaggableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,9 +13,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 //use App\Models\Type;
 
 
-class Product extends Model
+class Product extends Model implements TaggableInterface
 {
-    use HasBelongsToMany;
+    use HasBelongsToMany, TaggableTrait;
 
     const NO_COLORS = 0;
     const SPEC_COLORS = 1;
