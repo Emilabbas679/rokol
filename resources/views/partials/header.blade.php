@@ -335,24 +335,24 @@
     <nav class="nav_mobile">
         <div class="menu_btn close"></div>
         <div class="mob_header">
-            {{--            <!-- <ul class="langs">--}}
-            {{--                <li @if(app()->getLocale() == 'az')--}}
-            {{--                class="active"--}}
+                        <ul class="langs">
+                            <li @if(app()->getLocale() == 'az')
+                            class="active"
 
-            {{--            @endif><a href="{{route('locale', 'az')}}">Az</a>--}}
-            {{--                </li>--}}
-            {{--                <li @if(app()->getLocale() == 'en')--}}
-            {{--                class="active"--}}
+                        @endif><a href="{{route('locale', 'az')}}">Az</a>
+                            </li>
+                           <li @if(app()->getLocale() == 'en')
+                            class="active"
 
 
-            {{--            @endif><a href="{{route('locale', 'en')}}">En</a>--}}
-            {{--                </li>--}}
-            {{--                <li @if(app()->getLocale() == 'ru')--}}
-            {{--                class="active"--}}
+                       @endif><a href="{{route('locale', 'en')}}">En</a>
+                           </li>
+                            <li @if(app()->getLocale() == 'ru')
+                   class="active"
 
-            {{--            @endif><a href="{{route('locale', 'ru')}}">Ru</a>--}}
-            {{--                </li>--}}
-            {{--            </ul> -->--}}
+                       @endif><a href="{{route('locale', 'ru')}}">Ru</a>
+                           </li>
+                       </ul>
             <a href="{{route('products')}}" class="register_btn">Online sifariş</a>
             <a href="tel:*3030" class="call_center">*3030</a>
         </div>

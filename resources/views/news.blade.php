@@ -15,7 +15,7 @@
     <div class="main_center clearfix">
         <div class="sect_header clearfix news_header">
             <h2 class="sect_title">
-                <a href="">Xəbərlər</a>
+                <a href="">{{translate('header_news')}}</a>
             </h2>
             <div class="sort_items">
                <div class="sort_itm_mob">

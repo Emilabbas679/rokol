@@ -2245,9 +2245,6 @@ main {
   background: url("../img/icons/arw_top.svg?v1") no-repeat 100%;
 }
 
-.lang_sect {
-  display: none;
-}
 
 .wrap_main_slider {
   /* height: calc(100vh - 62px); */
