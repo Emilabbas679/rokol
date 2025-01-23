@@ -20,13 +20,13 @@
             <div class="sort_items">
                <div class="sort_itm_mob">
                    <div class="sort_seletc_item">
-                        <span>Bölmə:</span>
+                        <span>{{translate('section')}}:</span>
                         <div class="form_item">
-                            <select name="sort_category_id" class="js-example-basic-single article_category_id" id="sort_main" data-placeholder="Hamısı">
-                                <option value="0">Hamısı</option>
-                                <option value="{!! \App\Models\Blog::CATEGORY_MASTERS_CLUB !!}" {!! request()->input('category_id') == \App\Models\Blog::CATEGORY_MASTERS_CLUB ? 'selected' : '' !!}>Ustalar Klubu</option>
-                                <option value="{!! \App\Models\Blog::CATEGORY_CAMPAIGNS !!}" {!! request()->input('category_id') == \App\Models\Blog::CATEGORY_CAMPAIGNS ? 'selected' : '' !!}>Kompaniyalar</option>
-                                <option value="{!! \App\Models\Blog::CATEGORY_MEETS_AND_SEMINARS !!}" {!! request()->input('category_id') == \App\Models\Blog::CATEGORY_MEETS_AND_SEMINARS ? 'selected' : '' !!}>Görüş və seminarlar</option>
+                            <select name="sort_category_id" class="js-example-basic-single article_category_id" id="sort_main" data-placeholder="{{translate('all')}}">
+                                <option value="0">{{translate('all')}}</option>
+                                <option value="{!! \App\Models\Blog::CATEGORY_MASTERS_CLUB !!}" {!! request()->input('category_id') == \App\Models\Blog::CATEGORY_MASTERS_CLUB ? 'selected' : '' !!}>{{translate('masters_club')}}</option>
+                                <option value="{!! \App\Models\Blog::CATEGORY_CAMPAIGNS !!}" {!! request()->input('category_id') == \App\Models\Blog::CATEGORY_CAMPAIGNS ? 'selected' : '' !!}>{{translate('companies')}}</option>
+                                <option value="{!! \App\Models\Blog::CATEGORY_MEETS_AND_SEMINARS !!}" {!! request()->input('category_id') == \App\Models\Blog::CATEGORY_MEETS_AND_SEMINARS ? 'selected' : '' !!}>{{translate('meetings_seminars')}}</option>
                             </select>
                             <span class="customDrop customDrop-sort"></span>
                         </div>

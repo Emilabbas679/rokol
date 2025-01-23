@@ -18,24 +18,24 @@
 
                 <div class="adrs_container clearfix">
                     <div class="sect_header clearfix">
-                        <h2 class="sect_title">@lang('Əlaqə') </h2>
+                        <h2 class="sect_title">{{translate('contact')}} </h2>
                     </div>
                     <form action="{!! route('messages.store') !!}" method="post" class="create_address_form clearfix">
                         @csrf
                         <div class="left_setting">
                             <ul class="adrs_list">
                                 <li>
-                                    <span class="adr_name">@lang('Telefon nömrəsi'):</span>
+                                    <span class="adr_name">{{translate('phone_number')}}:</span>
                                     <a href="tel:*{!! setting('phone_number_short', '3030') !!}" class="adr_info"><sup>*</sup>{!! setting('phone_number_short', '3030') !!}</a>
                                 </li>
                                 <li>
-                                    <span class="adr_name">@lang('E-poçt'):</span>
+                                    <span class="adr_name">{{translate('email')}}:</span>
                                     <span class="adr_info">
                                     <a href="mailto:{!! setting('email_contact', 'info@rokol.az') !!}">{!! setting('email_contact', 'info@rokol.az') !!}</a>
                                 </span>
                                 </li>
                                 <li>
-                                    <span class="adr_name">@lang('Ünvan'):</span>
+                                    <span class="adr_name">{{translate('address')}}:</span>
                                     <span class="adr_info adr_info_val">{!! setting('address_contact', 'Bakı-Sumqayıt yolu, 13,5 km AZ0123 Bakı, Azərbaycan') !!}</span>
                                 </li>
                             </ul>
@@ -48,7 +48,7 @@
                             </div>
                             <div class="clearfix">
                                 <div class="adrs_head">
-                                    @lang('Sosial şəbəkələrimiz'):
+                                    {{translate('contact')}}:
                                 </div>
                                 <ul class="socials">
                                     <li>
@@ -98,12 +98,12 @@
                         </div>
                         <div class="right_setting">
                             <div class="sect_header clearfix">
-                                <h2 class="sect_title">@lang('Bizə yazın')</h2>
+                                <h2 class="sect_title">{{translate('write_to_us')}}</h2>
                             </div>
                             <div class="row_setg">
-                                <label class="itm_inp_label" for="firstname">@lang('Ad')</label>
+                                <label class="itm_inp_label" for="firstname">{{translate('name')}}</label>
                                 <div class="form_item ">
-                                    <input type="text" name="firstname" placeholder="@lang('Ad')"
+                                    <input type="text" name="firstname" placeholder="{{translate('name')}}"
                                            value="{{ old('firstname') }}" id="firstname" class="item_input">
                                     @error('firstname')
                                     <div class="error_type">{{ $message }}</div>
@@ -111,9 +111,9 @@
                                 </div>
                             </div>
                             <div class="row_setg">
-                                <label class="itm_inp_label" for="lastname">@lang('Soyad')</label>
+                                <label class="itm_inp_label" for="lastname">{{translate('surname')}}</label>
                                 <div class="form_item ">
-                                    <input type="text" name="lastname" placeholder="@lang('Soyad')"
+                                    <input type="text" name="lastname" placeholder="{{translate('surname')}}"
                                            value="{!! old('lastname') !!}" id="lastname" class="item_input">
                                     @error('lastname')
                                     <div class="error_type">{{ $message }}</div>
@@ -121,9 +121,9 @@
                                 </div>
                             </div>
                             <div class="row_setg">
-                                <label class="itm_inp_label" for="phone">@lang('Telefon')</label>
+                                <label class="itm_inp_label" for="phone">{{translate('phone')}}</label>
                                 <div class="form_item ">
-                                    <input type="text" name="phone" placeholder="@lang('Telefon')"
+                                    <input type="text" name="phone" placeholder="{{translate('phone')}}"
                                            value="{{ old('phone') }}" id="phone" class="item_input phone">
                                     @error('phone')
                                     <div class="error_type">{{ $message }}</div>
@@ -131,9 +131,9 @@
                                 </div>
                             </div>
                             <div class="row_setg">
-                                <label class="itm_inp_label" for="email">@lang('E-poçt')</label>
+                                <label class="itm_inp_label" for="email">{{translate('email')}}</label>
                                 <div class="form_item ">
-                                    <input type="text" name="email" placeholder="@lang('E-poçt')"
+                                    <input type="text" name="email" placeholder="{{translate('email')}}"
                                            value="{{ old('email') }}" id="email" class="item_input">
                                     @error('email')
                                     <div class="error_type">{{ $message }}</div>
@@ -141,9 +141,9 @@
                                 </div>
                             </div>
                             <div class="row_setg">
-                                <label class="itm_inp_label" for="content">@lang('Yazın')</label>
+                                <label class="itm_inp_label" for="content">{{translate('write')}}</label>
                                 <div class="form_item ">
-                                    <textarea name="content" placeholder="@lang('Yazın')" class="item_input"
+                                    <textarea name="content" placeholder="{{translate('write')}}" class="item_input"
                                               id="content" style="height: 140px;">{{ old('content') }}</textarea>
                                     @error('content')
                                     <div class="error_type">{{ $message }}</div>
@@ -151,7 +151,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn_sign submit_btn">@lang('Göndər')</button>
+                            <button type="submit" class="btn_sign submit_btn">{{translate('send')}}</button>
                         </div>
 
                     </form>

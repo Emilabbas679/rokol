@@ -31,7 +31,7 @@
 					</div>
 					<div class="itm_more_sect">
 						<div class="itm_more">
-							Səbətə əlavə et
+							{{translate('add_basket')}}
 						</div>
 	{{--					<div class="itm_stock stocked">--}}
 	{{--						<span class="stock_text">Stokda: 25 ədəd</span>--}}

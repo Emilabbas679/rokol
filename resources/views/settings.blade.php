@@ -25,38 +25,38 @@
                     @method('PUT')
                     <div class="left_setting">
                         <div class="sect_header clearfix">
-                            <h2 class="sect_title">@lang('Şəxsi məlumatlarım')</h2>
+                            <h2 class="sect_title">{{translate('my_information')}}</h2>
                         </div>
                         <div class="row_setg">
-                            <label class="itm_inp_label">@lang('Ad, Soyad')</label>
+                            <label class="itm_inp_label">{{translate('name_surname')}}</label>
                             <div class="form_item ">
-                                <input type="text" name="full_name" required placeholder="@lang('Ad, Soyad')" value="{{ $user->full_name }}" class="item_input">
+                                <input type="text" name="full_name" required placeholder="{{translate('name_surname')}}" value="{{ $user->full_name }}" class="item_input">
                                 @error('full_name')
                                 <div class="error_type">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                         <div class="row_setg">
-                            <label class="itm_inp_label">@lang('Telefon')</label>
+                            <label class="itm_inp_label">{{translate('phone')}}</label>
                             <div class="form_item ">
-                                <input type="text" placeholder="@lang('Telefon')" value="{!! $user->phone !!}" class="item_input phone">
+                                <input type="text" placeholder="{{translate('phone')}}" value="{!! $user->phone !!}" class="item_input phone">
                             </div>
                         </div>
                         <div class="row_setg">
-                            <label class="itm_inp_label">@lang('E-poçt ünvanı')</label>
+                            <label class="itm_inp_label">{{translate('email')}}</label>
                             <div class="form_item ">
-                                <input type="text" placeholder="@lang('E-poçt ünvanı')" value="{!! $user->email !!}" class="item_input">
+                                <input type="text" placeholder="{{translate('email')}}" value="{!! $user->email !!}" class="item_input">
                             </div>
                         </div>
                     </div>
                     <div class="right_setting">
                         <div class="sect_header clearfix">
-                            <h2 class="sect_title">@lang('Şifrəni dəyiş')</h2>
+                            <h2 class="sect_title">{{translate('change_pass')}}</h2>
                         </div>
                         <div class="row_setg">
-                            <label class="itm_inp_label">@lang('Hazırki şifrə')</label>
+                            <label class="itm_inp_label">{{translate('current_pass')}}</label>
                             <div class="form_item">
-                                <input type="password" required name="current_password" placeholder="@lang('Hazırki şifrə')" class="item_input">
+                                <input type="password" required name="current_password" placeholder="{{translate('current_pass')}}" class="item_input">
                                 @error('current_password')
                                 <div class="error_type">{{ $message }}</div>
                                 @enderror
@@ -69,9 +69,9 @@
                             </div>
                         </div>
                         <div class="row_setg">
-                            <label class="itm_inp_label">Yeni şifrə</label>
+                            <label class="itm_inp_label">{{translate('new_pass')}}</label>
                             <div class="form_item">
-                                <input type="password" required name="password" placeholder="@lang('Yeni şifrə')" class="item_input">
+                                <input type="password" required name="password" placeholder="{{translate('new_pass')}}" class="item_input">
                                 @error('password')
                                 <div class="error_type">{{ $message }}</div>
                                 @enderror
@@ -84,9 +84,9 @@
                             </div>
                         </div>
                         <div class="row_setg">
-                            <label class="itm_inp_label">@lang('Yeni şifrə təkrar')</label>
+                            <label class="itm_inp_label">{{translate('repeat_new_pass')}}</label>
                             <div class="form_item">
-                                <input type="password" required name="password_confirmation" placeholder="@lang('Yeni şifrə təkrar')" class="item_input">
+                                <input type="password" required name="password_confirmation" placeholder="{{translate('repeat_new_pass')}}" class="item_input">
                                 <div class="pass_eye">
                                     <span class="password-showhide">
                                         <span class="show-password"> </span>
@@ -98,7 +98,7 @@
                     </div>
                     <div class="row_setg">
                         <div class="left_setting">
-                            <button type="submit" class="btn_sign submit_btn">Yadda saxla</button>
+                            <button type="submit" class="btn_sign submit_btn">{{translate('remember')}}</button>
                         </div>
                     </div>
                 </form>
@@ -113,13 +113,13 @@
     <div class="modal_section">
         <div class="modal_container phone_modal">
             <div class="modal_header">
-                <h5 class="modal_title">Yeni ünvan yarat</h5>
+                <h5 class="modal_title">{{translate('create_new_address')}}</h5>
                 <span class="close_modal"></span>
             </div>
             <div class="modal_body">
                 <form action="{!! route('addresses.store') !!}" method="post" class="create_address_form" id="address_form">
                     <div class="security_content">
-                        @lang('+994 55 *** ** 20 nömrəsinə SMS kod göndərildi')
+                        {{translate('send_code')}}
                     </div>
 
                     <div class="row">
@@ -151,10 +151,10 @@
 
                         </div>
 
-                    <button type="submit" class="btn_sign submit_btn submit_address">@lang('Yadda saxla')</button>
+                    <button type="submit" class="btn_sign submit_btn submit_address">{{translate('remember')}}</button>
 
                     <a href="javascript:void(0)" class="security_content modal_little_content modal_centered resend_code">
-                        Kodu yenidən göndər
+                        {{translate('resend_code')}}
                     </a>
                 </form>
             </div>

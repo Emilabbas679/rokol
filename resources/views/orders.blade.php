@@ -14,12 +14,12 @@
 	<div class="section_wrap wrap_category wrap_profile_sect wrap_orders">
 		<div class="main_center clearfix">
 			<div class="sect_header clearfix">
-				<h2 class="sect_title">Sifarişlərim </h2>
+				<h2 class="sect_title">{{translate('my_orders')}} </h2>
 				<div class="order_links">
-					<a href="{!! route('orders.index') !!}" class="{!! !request()->filled('status') ? 'active' : '' !!}">@lang('Hamısı')</a>
-					<a href="{!! route('orders.index', ['status' => \App\Models\ProductOrder::DELIVERED_STATUS_COMPLETED]) !!}" class="{!! activeClassByQueryParam('status', \App\Models\ProductOrder::DELIVERED_STATUS_COMPLETED)  !!}">@lang('Tamamlanmış')</a>
-					<a href="{!! route('orders.index', ['status' => \App\Models\ProductOrder::DELIVERED_STATUS_PREPARING]) !!}" class="{!! activeClassByQueryParam('status', \App\Models\ProductOrder::DELIVERED_STATUS_PREPARING)  !!}">@lang('Hazırlananlar')</a>
-					<a href="{!! route('orders.index', ['status' => \App\Models\ProductOrder::DELIVERED_STATUS_CANCELED]) !!}" class="{!! activeClassByQueryParam('status', \App\Models\ProductOrder::DELIVERED_STATUS_CANCELED)  !!}">@lang('Ləğv edilmişlər')</a>
+					<a href="{!! route('orders.index') !!}" class="{!! !request()->filled('status') ? 'active' : '' !!}">{{translate('all')}}</a>
+					<a href="{!! route('orders.index', ['status' => \App\Models\ProductOrder::DELIVERED_STATUS_COMPLETED]) !!}" class="{!! activeClassByQueryParam('status', \App\Models\ProductOrder::DELIVERED_STATUS_COMPLETED)  !!}">{{translate('completed')}}</a>
+					<a href="{!! route('orders.index', ['status' => \App\Models\ProductOrder::DELIVERED_STATUS_PREPARING]) !!}" class="{!! activeClassByQueryParam('status', \App\Models\ProductOrder::DELIVERED_STATUS_PREPARING)  !!}">{{translate('prepared')}}</a>
+					<a href="{!! route('orders.index', ['status' => \App\Models\ProductOrder::DELIVERED_STATUS_CANCELED]) !!}" class="{!! activeClassByQueryParam('status', \App\Models\ProductOrder::DELIVERED_STATUS_CANCELED)  !!}">{{translate('cancelled')}}</a>
 				</div>
 			</div>
 			<div class="sect_body clearfix">
@@ -31,17 +31,17 @@
 								<div class="row">
 									<div class="col">
 										<div class="row_list">
-											<span class="bck_itm_name">Sifariş No:</span>
+											<span class="bck_itm_name">{{translate('order_no')}}:</span>
 											<span class="bck_itm_val">{!! $order->id !!}</span>
 										</div>
 										<div class="row_list">
-											<span class="bck_itm_name">Sifariş Tarixi:</span>
+											<span class="bck_itm_name">{{translate('order_date')}}:</span>
 											<span class="bck_itm_val">{!! $order->created_at->format('d F Y') !!}</span>
 										</div>
 									</div>
 									<div class="col">
 										<div class="row_list">
-											<span class="bck_itm_name">Məbləğ</span>
+											<span class="bck_itm_name">{{translate('amount')}}</span>
 										</div>
 										<div class="row_list">
 											<span class="bck_itm_val price">{!! $order->amount !!} AZN</span>
@@ -50,17 +50,17 @@
 
 									@if( $order->delivered_status == \App\Models\ProductOrder::DELIVERED_STATUS_COMPLETED)
 										@php
-											$txt = __('Tamamlandı');
+											$txt = __('{{translate("complated")}}');
 											$class = 'completed'
 										@endphp
 									@elseif($order->delivered_status == \App\Models\ProductOrder::DELIVERED_STATUS_PREPARING)
 										@php
-											$txt = __('Hazırlanır');
+											$txt = __('{{translate("preparing")}}');
 											$class = 'preparing'
 										@endphp
 									@else
 										@php
-											$txt = __('Ləğv olunmuş');
+											$txt = __('{{translate("rejected")}}');
 											$class = 'rejected'
 										@endphp
 									@endif

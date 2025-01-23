@@ -15,7 +15,7 @@
     <div class="main_center clearfix">
         <div class="sect_header clearfix news_header">
             <h2 class="sect_title">
-                <a href="">Kataloqlar</a>
+                <a href="">{{translate('header_catalogs')}}</a>
             </h2>
         </div>
         <div class="sect_body clearfix catalog_pdf">

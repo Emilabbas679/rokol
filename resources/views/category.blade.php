@@ -21,7 +21,7 @@
                 <div class="wrap_left mobile_fix_item">
                     <div class="filter_container">
                         <h2 class="filter_title">
-                            Filterlər
+                            {{translate('filters')}}
                             <span class="close_filter"></span>
                         </h2>
                         @php $route = route('category', $category['id']);
@@ -30,7 +30,7 @@
                         <form action="{{$route}}" id="formData">
                             <div class="filter_items">
                                 <div class="filter_head">
-                                    <h5>Məhsullar</h5>
+                                    <h5>{{translate('products')}}</h5>
                                 </div>
                                 <div class="select_item">
                                     <div class="form_item">
@@ -229,7 +229,7 @@
                             </div>
 
                             <div class="filter_buttons">
-                                <a class="filter_btn btn_reset" href="{!! route('products') !!}" style="width:100%">Sıfırla</a>
+                                <a class="filter_btn btn_reset" href="{!! route('products') !!}" style="width:100%">{{translate('reset')}}</a>
                                 <!-- <button type="submit" class="filter_btn btn_send">Təsdiqlə</button> -->
                             </div>
                         </form>
@@ -242,24 +242,24 @@
                     <div class="benefit_tabs">
 
                         <div class="filter_sort_sect">
-                            <div class="sort_count desk_show ">{!! $products->total() !!} @lang('məhsul tapıldı')</div>
+                            <div class="sort_count desk_show ">{!! $products->total() !!} {{translate('product_found')}}</div>
                             <div class="sort_items">
 
                                 <div class="sort_itm_mob">
                                     <div class="open_filter">
-                                        Filter
+                                        {{translate('filters')}}
                                     </div>
 
                                     <div class="sort_seletc_item">
-                                        <span>Sırala:</span>
+                                        <span>{{translate('sort_by')}}</span>
                                         <div class="form_item">
                                             <select name="sort_category_id" class="js-example-basic-single "
                                                     id="sort_main" data-placeholder="Most popular">
-                                                <option value="0">@lang('Hamısı')</option>
-                                                <option value="{!! request()->fullUrlWithQuery(['sort_by' => 'price,desc']) !!}" {!! request()->input('sort_by') == 'price,desc' ? 'selected' : '' !!}>@lang('Ən bahalı')</option>
-                                                <option value="{!! request()->fullUrlWithQuery(['sort_by' => 'price,asc']) !!}" {!! request()->input('sort_by') == 'price,asc' ? 'selected' : '' !!}>@lang('Ən ucuz')</option>
-                                                <option value="{!! request()->fullUrlWithQuery(['sort_by' => 'name,asc']) !!}" {!! request()->input('sort_by') == 'name,asc' ? 'selected' : '' !!}>@lang('Adına görə A-Z')</option>
-                                                <option value="{!! request()->fullUrlWithQuery(['sort_by' => 'name,desc']) !!}" {!! request()->input('sort_by') == 'name,desc' ? 'selected' : '' !!}>@lang('Adına görə Z-A')</option>
+                                                <option value="0">{{translate('all')}}</option>
+                                                <option value="{!! request()->fullUrlWithQuery(['sort_by' => 'price,desc']) !!}" {!! request()->input('sort_by') == 'price,desc' ? 'selected' : '' !!}>{{translate('most_expensive')}}</option>
+                                                <option value="{!! request()->fullUrlWithQuery(['sort_by' => 'price,asc']) !!}" {!! request()->input('sort_by') == 'price,asc' ? 'selected' : '' !!}>{{translate('cheapest')}}</option>
+                                                <option value="{!! request()->fullUrlWithQuery(['sort_by' => 'name,asc']) !!}" {!! request()->input('sort_by') == 'name,asc' ? 'selected' : '' !!}>{{translate('A-Z_by_name')}}</option>
+                                                <option value="{!! request()->fullUrlWithQuery(['sort_by' => 'name,desc']) !!}" {!! request()->input('sort_by') == 'name,desc' ? 'selected' : '' !!}>{{translate('Z-A_by_name')}}</option>
                                             </select>
                                             <span class="customDrop customDrop-sort"></span>
                                         </div>
@@ -267,7 +267,7 @@
                                 </div>
 
                                 <div class="bf_tb_hd grid_button_items">
-                                    <div class="sort_count">230 məhsul tapıldı</div>
+                                    <div class="sort_count">{!! $products->total() !!} {{translate('product_found')}}</div>
                                     <div class="grid_button clicked_tab_btn btn_list {!! getViewCookie() == 'list' ? 'active' : '' !!}"
                                          data-id="0"></div>
                                     <div class="grid_button clicked_tab_btn btn_grid {!! getViewCookie() == 'grid' ? 'active' : '' !!}"
@@ -286,7 +286,7 @@
                                 @if($products->hasMorePages())
                                     <div class="sect_footer clearfix" id="more-list">
                                         <a class="more">
-                                            Daha çox
+                                        {{translate('more')}}
                                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24"
                                                  viewBox="0 0 25 24" fill="none">
                                                 <path
@@ -305,7 +305,7 @@
                                 @if($products->hasMorePages())
                                     <div class="sect_footer clearfix" id="more">
                                         <a href="javascript:void(0)" class="more">
-                                            Daha çox
+                                        {{translate('more')}}
                                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24"
                                                  viewBox="0 0 25 24" fill="none">
                                                 <path

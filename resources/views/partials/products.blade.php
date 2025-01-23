@@ -4,7 +4,7 @@
             <div class="fav_sect">
                 <div class="offer-tag">
                     @if($product->offer_of_week)
-                        <p class="offer_val">HƏFTƏNİN TƏKLİFİ</p>
+                        <p class="offer_val">{{translate('header_offers')}}</p>
                     @endif
                 </div>
                 @auth()
@@ -51,7 +51,7 @@
                         <span class="stock_text">Stokda: 25 ədəd</span>
                     </div> -->
                     <div class="itm_more">
-                        Səbətə əlavə et
+                        {{translate('add_basket')}}
                     </div>
                 </div>
             </a>

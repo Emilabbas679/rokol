@@ -33,7 +33,7 @@
             <div class="modal_section">
                 <div class="modal_container">
                     <div class="modal_header">
-                        <h5 class="modal_title">@lang('Rəng Kataloqu')</h5>
+                        <h5 class="modal_title">{{translate('color_catalog')}}</h5>
                         <span class="close_modal"></span>
                     </div>
                     <div class="modal_body">
@@ -52,16 +52,11 @@
                                 </div>
                             </div>
                             <p>
-                                Xəbərdarlıq: Elektron cihazlarda (monitor, planşet, telefon və s.) göstərilən rənglər
-                                cihazın ekran ayarlarına və ətraf işıqlandırmaya görə fərqlənə bilər. Əsl rəng təsirini
-                                qiymətləndirmək üçün ən yaxın satış məntəqəmizdəki rəng nümunələrinə baxmağınız
-                                məsləhətdir.
-                                Eyni zamanda, seçdiyiniz rəngin necə göründüyü təbii gün işığı və istifadə olunan
-                                işıqlandırma növünə görə dəyişə bilər.
+                                {{translate('warning_text')}}
                             </p>
                             <div class="btn_detail btn_basket modal_select_btn color_save">
                             <span class="add_basket">
-                                Əlavə et
+                                {{translate('add')}}
                             </span>
                             </div>
                         </div>

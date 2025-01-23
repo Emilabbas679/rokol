@@ -21,9 +21,9 @@
                 @if((!isset($carts) || !$carts->count()) && (!isset($products) || !$products->count()))
                     <div class="empty_basket_section clearfix">
                         <div class="empty_bs_icon"></div>
-                        <div class="empty_bs_title">Səbətinizdə məhsul yoxdur!</div>
+                        <div class="empty_bs_title">{{translate('empty_cart')}}</div>
                         <div class="empty_bs_button">
-                            <a href="/" class="filter_btn btn_send">Alış-verişə davam et</a>
+                            <a href="/" class="filter_btn btn_send">{{translate('continue_shopping')}}</a>
                         </div>
                     </div>
                     <!-- Empty basket sect -->
