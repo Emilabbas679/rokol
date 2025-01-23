@@ -66,7 +66,7 @@
                             <div class="news_in_social clearfix">
                                 <div class="nw_social_sect">
                                     <div class="share_name">
-                                        PAYLAŞ:
+                                        {{translate('share')}}:
                                     </div>
                                     <ul class="nw_socials">
                                         <li class="sh_fb">
@@ -110,7 +110,7 @@
         <div class="main_center clearfix">
             <div class="sect_header clearfix">
                 <h2 class="sect_title">
-                    <a href="">Oxşar xəbərlər</a>
+                    <a href="">{{translate('similar_news')}}</a>
                 </h2>
             </div>
             <div class="sect_body clearfix">

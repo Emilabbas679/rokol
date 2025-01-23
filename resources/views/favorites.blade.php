@@ -19,7 +19,7 @@
     <div class="section_wrap wrap_category wrap_profile_sect">
         <div class="main_center clearfix">
             <div class="sect_header clearfix">
-                <h2 class="sect_title">Seçilmişlərim </h2>
+                <h2 class="sect_title">{{translate('my_favorites')}} </h2>
             </div>
             <div class="sect_body clearfix">
                 <div class="row">
@@ -60,7 +60,7 @@
                                         </span>
                                         </h4>
                                         <div class="itm_info">
-                                            Sellülozik Boya
+                                        {!! $product->category->name[app()->getLocale()] !!}
                                         </div>
                                         <div class="itm_price">
                                             @include('partials.product_price', ['price' => $favorite->productPrice])
@@ -70,7 +70,7 @@
                                            <span class="stock_text">Stokda: 25 ədəd</span>
                                         </div> -->
                                         <div class="itm_more">
-                                            Səbətə əlavə et
+                                            {{translate('add_basket')}}
                                         </div>
                                     </div>
                                 </a>

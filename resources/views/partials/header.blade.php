@@ -18,7 +18,7 @@
                         <form method="get" action="{!! route('products') !!}">
                             <div class="search_row clearfix">
                                 <input type="text" name="q" class="search_input" value="{{ request()->get('q') }}"
-                                       placeholder="@lang('Sayt üzrə axtarış')">
+                                       placeholder="{{translate('search')}}">
                                 <button type="submit" class="search_btn"></button>
                             </div>
                         </form>
@@ -239,12 +239,12 @@
                                                         <div class="modal_section" style="overflow: visible;">
                                                             <div class="modal_container" style="overflow: visible;">
                                                                 <div class="modal_header">
-                                                                    <h5 class="modal_title">{{translate('calculate')}}</h5>
+                                                                    <h5 class="modal_title">{{translate('calculation_result')}}</h5>
                                                                     <span class="close-modal"></span>
                                                                 </div>
                                                                 <div class="modal_body">
                                                                     <p>
-                                                                        <strong>{{translate('calculate')}}: </strong>
+                                                                        <strong>{{translate('calculation_result')}}: </strong>
                                                                         <span id="result">
 
                                                                         </span>

@@ -14,8 +14,8 @@
         <div class="main_center clearfix">
             <div class="section_wrap wrap_breadcrumb">
                 <div class="breadcrumb">
-                    <a href="{{route('home')}}">Əsas səhifə</a>
-                    <a href="{{route('category', $product->category_id)}}">Məhsullar</a>
+                    <a href="{{route('home')}}">{{translate('home_page')}}</a>
+                    <a href="{{route('category', $product->category_id)}}">{{translate('products')}}</a>
                     <a href="javascript:void(0)">{{$product->name}}</a>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                             @if($product->offer_of_week)
                                 <div class="fav_sect">
                                     <div class="offer-tag">
-                                        <p class="offer_val">@lang('Həftənin təklifi')</p>
+                                        <p class="offer_val">{{translate('header_offers')}}</p>
                                     </div>
                                 </div>
                             @endif
@@ -45,7 +45,7 @@
 
                                     <div class="pr_tbl_left">
                                         <h1 class="product_title">{{ $product->name }}</h1>
-                                        <p class="pr_short_info">Məhsulun kodu: {{$product->code}}</p>
+                                        <p class="pr_short_info">{{translate('product_code')}}: {{$product->code}}</p>
 
                                         <div class="price_section">
                                             <div class="pr_price_info">
@@ -165,13 +165,13 @@
                                         <div class="btn_detail btn_basket"
                                              onclick="addToCart({!! $product->id !!})">
                                             <span class="add_basket detail_basket_btn">
-                                                Səbətə əlavə et
+                                                {{translate('add_basket')}}
                                             </span>
                                             <span class="added_basket">
-                                                Səbətə əlavə edildi
+                                                {{translate('added_basket')}}
                                             </span>
                                             <span class="added_basket color_sect">
-                                                Rəng seçimi edin
+                                                {{translate('change_color')}}
                                             </span>
                                         </div>
                                         <!-- click after addclass "dofav" -->
@@ -181,13 +181,13 @@
                                                 data-product-id="{!! $product->id !!}"
                                                 data-price-id="{!! $price->id !!}">
                                             <span>
-                                                Seçilmişlərdə saxla
+                                                {{translate('save_to_favorites')}}
                                             </span>
                                         </div>
 
                                     </div>
                                     <div class="share_section">
-                                        <span class="sh_name">Paylaş:</span>
+                                        <span class="sh_name">{{translate('share')}}:</span>
                                         <ul>
                                             <li class="sh_fb">
                                                 <a href="javascript:void(0)"><img src="{{asset('img/icons/s_fb.svg')}}"
@@ -208,7 +208,7 @@
 
                                     <div class="in_detail">
                                         <p class="pr_select_title">
-                                            200 AZN-dən yuxarı çatdırılma pulsuzdur.
+                                        {{translate('free_delivery')}}
                                         </p>
                                         <!-- <span class="pr_cat_name open_pop">
                                             Ətraflı
@@ -229,40 +229,40 @@
 
                         <div class="benefit_tabs">
                             <div class="bf_tb_hd">
-                                <div class="bt_tb_title clicked_tab_btn active" data-id="0">Məhsul haqqında</div>
-                                <div class="bt_tb_title clicked_tab_btn" data-id="1">Texniki göstəricilər</div>
-                                <div class="bt_tb_title clicked_tab_btn" data-id="2">Zəmanət və texniki dəstək</div>
+                                <div class="bt_tb_title clicked_tab_btn active" data-id="0">{{translate('detail_tab_1')}}</div>
+                                <div class="bt_tb_title clicked_tab_btn" data-id="1">{{translate('detail_tab_2')}}</div>
+                                <div class="bt_tb_title clicked_tab_btn" data-id="2">{{translate('detail_tab_3')}}</div>
                             </div>
                             <div class="bf_tb_content">
                                 <div class="bf_tb_items " data-id="0">
                                     <div class="indicators_content">
                                         @if(!empty(trim($product->about)))
                                             <div class="indicators_items">
-                                                <h6 class="indicator_title">Məhsul haqqında:</h6>
+                                                <h6 class="indicator_title">{{translate('detail_tab_1')}}:</h6>
                                                 <div>{!! $product->about !!}</div>
                                             </div>
                                         @endif
                                         @if(!empty(trim($product->usage)))
                                             <div class="indicators_items">
-                                                <h6 class="indicator_title">İstifadə Sahələri:</h6>
+                                                <h6 class="indicator_title">{{translate('areas_of_use')}}:</h6>
                                                 <div>{!! $product->usage !!}</div>
                                             </div>
                                         @endif
                                         @if(!empty(trim($product->usage_rules)))
                                             <div class="indicators_items">
-                                                <h6 class="indicator_title">İstifadə Qaydaları:</h6>
+                                                <h6 class="indicator_title">{{translate('terms_of_use')}}:</h6>
                                                 <div>{!! $product->usage_rules !!}</div>
                                             </div>
                                         @endif
                                         @if(!empty(trim($product->advantage)))
                                             <div class="indicators_items">
-                                                <h6 class="indicator_title">Üstünlükləri :</h6>
+                                                <h6 class="indicator_title">{{translate('advantages')}}:</h6>
                                                 <div>{!! $product->advantage !!}</div>
                                             </div>
                                         @endif
                                         @if(!empty(trim($product->apply)))
                                             <div class="indicators_items">
-                                                <h6 class="indicator_title">Tətbiqi :</h6>
+                                                <h6 class="indicator_title">{{translate('application')}}:</h6>
                                                 <div>{!! $product->apply !!}</div>
                                             </div>
                                         @endif
@@ -283,13 +283,13 @@
                                         @endif
                                         @if(!empty(trim($product->properties)))
                                             <div class="indicators_items">
-                                                <h6 class="indicator_title">Saxlama müddəti:</h6>
+                                                <h6 class="indicator_title">{{translate('shelf_life')}}:</h6>
                                                 <div>{!! $product->retention !!}</div>
                                             </div>
                                         @endif
                                         @if(!empty(trim($product->properties)))
                                             <div class="indicators_items">
-                                                <h6 class="indicator_title">Xəbərdarlıqlar:</h6>
+                                                <h6 class="indicator_title">{{translate('warnings')}}:</h6>
                                                 <div>{!! $product->warning !!}</div>
                                             </div>
                                         @endif
@@ -305,24 +305,19 @@
                                     <div class="indicators_content">
                                         <ul style="list-style: none;margin: 0">
                                             <li>
-                                                - @lang('Texniki göstəricilərdə qeyd edilmiş məlumatlar elmi ve təcrübi biliklərə əsaslanir')
-                                                ;
+                                                - {{translate('technical_description_1')}}
                                             </li>
                                             <li>
-                                                - @lang('"Matanat A" şirkəti məhsulun müvafiq texniki şərt və dövlət standartlarına uyğunluğuna zəmanət verir')
-                                                .
+                                                - {{translate('technical_description_2')}}
                                             </li>
                                             <li>
-                                                - @lang('Şirkətin mütəxəssislərinin rəhbərliyi altında görülən işlər istisna olmaqla, digər istifadəçilər tərəfindən təlimatdan kənar istifadə halları zamanı yarana biləcək problemlərə görə "Matanat A" şirkəti məsuliyyət daşımır')
-                                                ;
+                                                - {{translate('technical_description_3')}}
                                             </li>
                                             <li>
-                                                - @lang('Şirkət elmi-texniki inkişafla bağlı məhsulda dəyişiklik etmə hüququnu özündə saxlayır')
-                                                ;
+                                                - {{translate('technical_description_4')}}
                                             </li>
                                             <li>
-                                                - @lang('Texniki dəstək va ya daha geniş məlumat almaq üçün "Matanat A" şirkətinə müraciat edin')
-                                                !
+                                                - {{translate('technical_description_5')}}
                                             </li>
                                         </ul>
                                     </div>
@@ -337,7 +332,7 @@
                     <div class="section_wrap wrap_category wrap_similar_product">
                         <div class="sect_header clearfix">
                             <h2 class="sect_title">
-                                <a href="{!! route('category', $product->category_id) !!}">@lang('Oxşar məhsullar')</a>
+                                <a href="{!! route('category', $product->category_id) !!}">{{translate('similar_products')}}</a>
                             </h2>
                         </div>
                         <div class="sect_body clearfix product detail_product">
@@ -386,11 +381,11 @@
                                                     @endif
                                                 </div>
                                                 <!-- stocked, unstocked -->
-                                                <div class="itm_stock stocked">
+                                                <!-- <div class="itm_stock stocked">
                                                     <span class="stock_text">Stokda: 25 ədəd</span>
-                                                </div>
+                                                </div> -->
                                                 <div class="itm_more">
-                                                    Səbətə əlavə et
+                                                    {{translate('add_basket')}}
                                                 </div>
                                             </div>
                                         </div>
@@ -405,16 +400,11 @@
                     <div class="modal_section">
                         <div class="modal_container">
                             <div class="modal_header">
-                                <h5 class="modal_title">Ətraflı məlumat</h5>
+                                <h5 class="modal_title">{{translate('more_info')}}</h5>
                                 <span class="close_modal"></span>
                             </div>
                             <div class="modal_body">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi at iusto similique
-                                delectus, quos nemo sunt porro vero ipsum sint nihil, voluptatum eaque accusantium culpa
-                                inventore, pariatur labore debitis voluptates.
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio excepturi architecto
-                                possimus aspernatur explicabo. Similique, commodi. Est a tempore perspiciatis nisi nemo
-                                quidem consequuntur officia ratione? Obcaecati, nobis? Ad, minima?
+                                {{translate('more_info_body')}}
                             </div>
                         </div>
                     </div>
@@ -444,7 +434,7 @@
         <div class="modal_section" style="overflow: visible;">
             <div class="modal_container" style="overflow: visible;">
                 <div class="modal_header">
-                    <h5 class="modal_title">Kalkulyator</h5>
+                    <h5 class="modal_title">{{translate('calc')}}</h5>
                     <span class="close_modal"></span>
                 </div>
                 <div class="modal_body">
@@ -452,48 +442,47 @@
                         @if(!$product->dimension_changeable)
                             <div class="calc_inputs">
                                 <div class="form_item">
-                                    <label for="" id="width-label">Səthin eni (m):</label>
+                                    <label for="" id="width-label">{{translate('surface_width')}}</label>
                                     <input type="text" id="selfWidth" name="email"
-                                           placeholder="Səthin eni (m):" value=""
+                                           placeholder="{{translate('surface_width')}}" value=""
                                            class="item_input">
                                 </div>
                                 <div class="form_item">
-                                    <label for="" id="length-label">Səthin uzunluğu
-                                        (m):</label>
+                                    <label for="" id="length-label">{{translate('surface_length')}}</label>
                                     <input type="text" name="email" id="selfLength"
-                                           placeholder="Səthin uzunluğu (m):" value=""
+                                           placeholder="{{translate('surface_length')}}" value=""
                                            class="item_input">
                                 </div>
                                 <div class="form_item">
-                                    <label for="">Tövsiyyə olunan qatın sayı:</label>
+                                    <label for="">{{translate('layers_number')}}</label>
                                     <input type="text" name="email" id="selfLayers"
-                                           placeholder="Tövsiyyə olunan qatın sayı"
+                                           placeholder="{{translate('layers_number')}}"
                                            value="{!! isset($product) && !is_null($product->recommended_layers) ? $product->recommended_layers : '' !!}"
                                            class="item_input">
                                 </div>
                                 <div class="form_item disable_input">
-                                    <label for="">Sərfiyyat norması (kq/kv.m):</label>
+                                    <label for="">{{translate('consumption_rate')}}</label>
                                     <input disabled type="text" name="email"
                                            id="selfConsumption"
-                                           placeholder="sərfiyyat norması (kq/kv.m):"
+                                           placeholder="{{translate('consumption_rate')}}"
                                            value="{!! isset($product) && !is_null($product->consumption_norm) ? $product->consumption_norm : '' !!}"
                                            class="item_input">
                                 </div>
                                 <div class="form_item">
                                     <button type="submit" class="btn_sign submit_btn"
-                                            id="selfCalculateBtn">Hesabla
+                                            id="selfCalculateBtn">{{translate('calculate')}}
                                     </button>
                                 </div>
                                 <div class="modal answer_modal">
                                     <div class="modal_section" style="overflow: visible;">
                                         <div class="modal_container" style="overflow: visible;">
                                             <div class="modal_header">
-                                                <h5 class="modal_title">Hesablama nəticəsi</h5>
+                                                <h5 class="modal_title">{{translate('calculation_result')}}</h5>
                                                 <span class="close_modal"></span>
                                             </div>
                                             <div class="modal_body">
                                                 <p>
-                                                    <strong>Hesablama nəticəsi: </strong>
+                                                    <strong>{{translate('calculation_result')}}: </strong>
                                                     <span id="selfResult">
 
                                                     </span>
@@ -505,7 +494,7 @@
                             </div>
                         @else
                             <div style="text-align: center">
-                                Dəyişkəndir
+                                {{translate('volatile')}}
                             </div>
                         @endif
                     </div>

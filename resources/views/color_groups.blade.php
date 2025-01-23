@@ -17,7 +17,7 @@
         <div class="main_center clearfix">
             <div class="adrs_container clearfix">
                 <div class="sect_header clearfix">
-                    <h2 class="sect_title">Rəng kataloqu </h2>
+                    <h2 class="sect_title">{{translate('color_catalog')}} </h2>
                 </div>
                 <div class="sect_body clearfix catalog_filter">
                     <div class="row catalog_row_main">
@@ -28,7 +28,7 @@
                                 <span class="catalog_val_n">
                                     {{ $colorGroup->name[app()->getLocale()] }}
                                 </span>
-                                        <a class="login_btn" href="{!! route('colors.groups.show', $colorGroup) !!}">kataloqa bax</a>
+                                        <a class="login_btn" href="{!! route('colors.groups.show', $colorGroup) !!}">{{translate('view_catalog')}}</a>
                                     </div>
                                 </div>
                             </div>

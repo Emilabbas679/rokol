@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                                 <a href="{!! route('password.phone') !!}"
-                                   class="forgot_password">{{translate('forgot_pass')}}a>
+                                   class="forgot_password">{{translate('forgot_pass')}}</a>
                                 <div class="form_item">
                                     <button type="submit" class="btn_sign submit_btn">{{translate('login')}}</button>
                                 </div>

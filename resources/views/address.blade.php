@@ -21,9 +21,9 @@
 
                 <div class="adrs_container ">
                     <div class="sect_header clearfix">
-                        <h2 class="sect_title">Ünvanlarım </h2>
+                        <h2 class="sect_title">{{translate('my_adresses')}} </h2>
                         <button type="button" class="filter_btn btn_create btn_create_address">
-                            <span>Yeni ünvan yarat</span></button>
+                            <span>{{translate('create_new_address')}}</span></button>
                     </div>
                     <div class="my_adress_sect">
                         @foreach($addresses ?? [] as $address)
@@ -60,7 +60,7 @@
         <div class="modal_section">
             <div class="modal_container">
                 <div class="modal_header">
-                    <h5 class="modal_title">Yeni ünvan yarat</h5>
+                    <h5 class="modal_title">{{translate('create_new_address')}}</h5>
                     <span class="close_modal"></span>
                 </div>
                 <div class="modal_body">
@@ -68,29 +68,29 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form_item ">
-                                    <label class="itm_inp_label" for="first-name">Ad</label>
-                                    <input type="text" id="first-name" name="first_name" placeholder="@lang('Ad')" class="item_input">
+                                    <label class="itm_inp_label" for="first-name">{{translate('name')}}</label>
+                                    <input type="text" id="first-name" name="first_name" placeholder="{{translate('name')}}" class="item_input">
                                     <!-- <div class="error_type">Supporting text</div> -->
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form_item ">
-                                    <label class="itm_inp_label" for="last-name">Soyad</label>
-                                    <input type="text" id="last-name" name="last_name" placeholder="@lang('Soyad')" class="item_input">
+                                    <label class="itm_inp_label" for="last-name">{{translate('surname')}}</label>
+                                    <input type="text" id="last-name" name="last_name" placeholder="{{translate('surname')}}" class="item_input">
                                     <!-- <div class="error_type">Supporting text</div> -->
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form_item ">
-                                    <label class="itm_inp_label" for="phone">Telefon</label>
-                                    <input type="text" id="phone" name="phone" placeholder="@lang('Telefon')" class="item_input phone">
+                                    <label class="itm_inp_label" for="phone">{{translate('phone')}}</label>
+                                    <input type="text" id="phone" name="phone" placeholder="{{translate('phone')}}" class="item_input phone">
                                     <!-- <div class="error_type">Supporting text</div> -->
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form_item ">
-                                    <label class="itm_inp_label" for="city">Şəhər/Rayon</label>
-                                    <input type="text" id="city" name="city" placeholder="@lang('Şəhər/Rayon')"
+                                    <label class="itm_inp_label" for="city">{{translate('city')}}</label>
+                                    <input type="text" id="city" name="city" placeholder="{{translate('city')}}"
                                            class="item_input">
                                     <!-- <div class="error_type">Supporting text</div> -->
                                 </div>
@@ -98,19 +98,19 @@
 
                         </div>
                         <div class="form_item ">
-                            <label class="itm_inp_label" for="address">Ünvan</label>
-                            <input type="text" id="address" name="address" placeholder="@lang('Ünvan')" class="item_input">
+                            <label class="itm_inp_label" for="address">{{translate('address')}}</label>
+                            <input type="text" id="address" name="address" placeholder="{{translate('address')}}" class="item_input">
                             <!-- <div class="error_type">Supporting text</div> -->
                         </div>
                         <div class="security_content">
-                            @lang('Yükünüzün problemsiz sizə çatması üçün məhəllə, küçə, küçə və bina kimi ətraflı məlumatları mütləq daxil edin.')
+                            {{translate('security_content')}}
                         </div>
                         <div class="form_item ">
-                            <label class="itm_inp_label" for="title">Ünvan başlığı</label>
-                            <input type="text" id="title" name="title" placeholder="@lang('Ünvan başlığı')" class="item_input">
+                            <label class="itm_inp_label" for="title">{{translate('address_head')}}</label>
+                            <input type="text" id="title" name="title" placeholder="{{translate('address_head')}}" class="item_input">
                             <!-- <div class="error_type">Supporting text</div> -->
                         </div>
-                        <button type="submit" class="btn_sign submit_btn submit_address">@lang('Yadda saxla')</button>
+                        <button type="submit" class="btn_sign submit_btn submit_address">{{translate('remember')}}</button>
 
                     </form>
                 </div>
