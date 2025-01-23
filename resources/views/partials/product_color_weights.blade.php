@@ -2,9 +2,19 @@
     <div class="choose_color">
         <div class="pr_select_title">{{translate('choose_color')}}</div>
         <div class="filter_check_items colors">
-            @if($product->colorGroups->first()->colors->count() <= 5)
-
-                @foreach($product->colorGroups->first()->colors as $color)
+                <?php
+                $colors = collect();
+                foreach ( $product->colorGroups->first()->colors as $color ) {
+                    $colors->add( $color );
+                    if ( $color->children->count() ) {
+                        foreach ( $color->children as $child ) {
+                            $colors->add( $color );
+                        }
+                    }
+                }
+                ?>
+            @if($colors->count() <= 5 )
+                @foreach($colors as $color)
                     <label class="f_check_type radio_btn">
                         <input type="radio" name="color" @if($price->color_id == $color->id) checked
                                @endif value="{{$color->id}}">
@@ -18,7 +28,7 @@
             @endif
         </div>
     </div>
-    @if($product->colorGroups->first()->colors->count() > 5)
+    @if($colors->count() > 5)
         <div class="modal color_modal" id="new_address_modal" data-id="create_address_modal">
             <div class="modal_section">
                 <div class="modal_container">
@@ -30,20 +40,15 @@
                         <div class="row catalog_row_main">
                             <div class="col item_col clearfix">
                                 <div class="row catalog_row_inner">
-                                    @if($product->colorGroups->count())
-                                        @foreach($product->colorGroups as $colorGroup)
-                                            @foreach($colorGroup->colors as $color)
-
-                                                <label class="col item_col clearfix color_block">
-                                                    <input name="color" type="checkbox" value="{{ $color->id }}">
-                                                    <span style="display:none;"> {{ $color->hex }}</span>
-                                                    <div class="catalog_color"
-                                                         style="background-color: {{ $color->hex }};"></div>
-                                                    <div class="catalog_name">{{ $color->name[app()->getLocale()] }}</div>
-                                                </label>
-                                            @endforeach
-                                        @endforeach
-                                    @endif
+                                    @foreach($colors as $color)
+                                        <label class="col item_col clearfix color_block">
+                                            <input name="color" type="checkbox" value="{{ $color->id }}">
+                                            <span style="display:none;"> {{ $color->hex }}</span>
+                                            <div class="catalog_color"
+                                                 style="background-color: {{ $color->hex }};"></div>
+                                            <div class="catalog_name">{{ $color->name[app()->getLocale()] }}</div>
+                                        </label>
+                                    @endforeach
                                 </div>
                             </div>
                             <p>
