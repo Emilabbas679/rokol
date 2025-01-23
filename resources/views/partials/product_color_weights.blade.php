@@ -13,7 +13,7 @@
                     }
                 }
                 ?>
-            @if($colors->count() <= 5 )
+            @if($colors->count() <= 6 )
                 @foreach($colors as $color)
                     <label class="f_check_type radio_btn">
                         <input type="radio" name="color" @if($price->color_id == $color->id) checked
@@ -28,7 +28,7 @@
             @endif
         </div>
     </div>
-    @if($colors->count() > 5)
+    @if($colors->count() > 6)
         <div class="modal color_modal" id="new_address_modal" data-id="create_address_modal">
             <div class="modal_section">
                 <div class="modal_container">
