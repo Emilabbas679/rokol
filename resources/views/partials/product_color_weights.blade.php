@@ -8,7 +8,7 @@
                     $colors->add( $color );
                     if ( $color->children->count() ) {
                         foreach ( $color->children as $child ) {
-                            $colors->add( $color );
+                            $colors->add( $child );
                         }
                     }
                 }
