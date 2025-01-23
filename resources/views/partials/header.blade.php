@@ -81,11 +81,11 @@
                             <div class="lang_btn" style="text-transform: capitalize">{{app()->getLocale()}}</div>
                             <ul class="langs">
                                 <li @if(app()->getLocale() == 'az') class="active" @endif><a
-                                            href="{{route('locale', 'az')}}">Az</a></li>
+                                            href="{{route('locale', 'az')}}">{{translate('lang_az')}}</a></li>
                                 <li @if(app()->getLocale() == 'en') class="active" @endif><a
-                                            href="{{route('locale', 'en')}}">En</a></li>
+                                            href="{{route('locale', 'en')}}">{{translate('lang_en')}}</a></li>
                                 <li @if(app()->getLocale() == 'ru') class="active" @endif><a
-                                            href="{{route('locale', 'ru')}}">Ru</a></li>
+                                            href="{{route('locale', 'ru')}}">{{translate('lang_ru')}}</a></li>
                             </ul>
                         </div>
                     </div>

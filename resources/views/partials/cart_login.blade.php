@@ -7,12 +7,12 @@
 <div class="basket_mob_fix">
     <div class="basket_mob_fix_content">
         <div class="basket_total_mob discount_price">
-            <span class="bsk_itm_name">@lang('Cəmi')</span>
+            <span class="bsk_itm_name">{{translate('total')}}</span>
             <span class="bsk_itm_val total-price">{!! $totalPriceWithDiscount + \App\Models\ProductOrder::DELIVERY_PRICE !!} AZN</span>
         </div>
         <div class="basket_btn_mob">
             <button type="submit" class="filter_btn btn_send"
-                    form="cart_form" id="mobileCheck">@lang('Alışa keç')</button>
+                    form="cart_form" id="mobileCheck">{{translate('purchase')}}</button>
         </div>
     </div>
 </div>
@@ -20,8 +20,8 @@
 <div class="wrap_left">
     <div class="basket_items_sect">
         <div class="sect_header clearfix">
-            <h2 class="sect_title">@lang('Səbət')</h2>
-            <div class="basket_count_items">{!! $carts->count() !!} @lang('məhsul')</div>
+            <h2 class="sect_title">{{translate('basket')}}</h2>
+            <div class="basket_count_items">{!! $carts->count() !!} {{translate('product')}}</div>
         </div>
         <div class="sect_body clearfix">
             @foreach($carts as $cart)
@@ -48,12 +48,12 @@
                         </div>
                         @if($cart->color)
                             <div class="bsk_row_list">
-                                <span class="bck_itm_name">@lang('Color'):</span>
+                                <span class="bck_itm_name">{{translate('color')}}:</span>
                                 <span class="bck_itm_val">{{ $cart->color->name[app()->getLocale()] }}</span>
                             </div>
                         @endif
                         <div class="bsk_row_list">
-                            <span class="bck_itm_name">@lang('Weight'):</span>
+                            <span class="bck_itm_name">{{translate('weights')}}:</span>
                             <span
                                     class="bck_itm_val">{!! $cart->productPrice->weight->weight . " " . productWeightUnit($cart->productPrice->weight->weight_type) !!}
 											</span>
@@ -115,22 +115,22 @@
 <div class="wrap_right mobile_fix_item">
     <div class="basket_info_sect">
         <ul class="basket_info_list">
-            <li>@lang('Sifariş təsdiqindən sonra məhsullar 3 iş günündə çatdırılacaq').</li>
-            <li>@lang('Ünvanı yoxlayın, lazım olsa dəyişiklik edin').</li>
-            <li>@lang('Sifariş statusunu e-poçt və ya SMS ilə izləyin').</li>
+            <li>{{translate('basket_info_line_1')}}</li>
+            <li>{{translate('basket_info_line_2')}}</li>
+            <li>{{translate('basket_info_line_3')}}</li>
         </ul>
         <div class="basket_items_table">
             <form action="{!! route('carts.address') !!}" method="get" id="cart_form">
                 <!-- Endirim varsa "discount_price",  cemi ise bu class "total_price"  -->
                 <div class="bsk_itm_row">
-                    <div class="bsk_itm_name">@lang('Qiymət'):</div>
+                    <div class="bsk_itm_name">{{translate('price')}}:</div>
                     <div class="bsk_itm_val total-price">
                         {!! $totalPrice !!}
                         AZN
                     </div>
                 </div>
                 <div class="bsk_itm_row discount_price">
-                    <div class="bsk_itm_name">@lang('Endirim'):</div>
+                    <div class="bsk_itm_name">{{translate('discount')}}:</div>
                     <div class="bsk_itm_val sale-price">
                         {!! $discount !!}
                         AZN
@@ -138,19 +138,19 @@
                 </div>
                 @if(\App\Models\ProductOrder::DELIVERY_PRICE > 0)
                     <div class="bsk_itm_row">
-                        <div class="bsk_itm_name">@lang('Çatıdırılma'):</div>
+                        <div class="bsk_itm_name">{{translate('delivery')}}:</div>
                         <div class="bsk_itm_val">{!! \App\Models\ProductOrder::DELIVERY_PRICE !!}AZN
                         </div>
                     </div>
                 @endif
                 <div class="bsk_itm_row total_price">
-                    <div class="bsk_itm_name">@lang('Ödəniləcək məbləğ'):</div>
+                    <div class="bsk_itm_name">{{translate('paid')}}:</div>
                     <div class="bsk_itm_val total-basket">
                         {!! $totalPriceWithDiscount + \App\Models\ProductOrder::DELIVERY_PRICE !!}
                         AZN
                     </div>
                 </div>
-                <button type="submit" class="filter_btn btn_send">@lang('Alışa keç')</button>
+                <button type="submit" class="filter_btn btn_send">{{translate('purchase')}}</button>
             </form>
 
         </div>

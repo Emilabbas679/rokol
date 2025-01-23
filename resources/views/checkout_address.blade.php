@@ -82,7 +82,7 @@
 
 							<!-- Endirim varsa "discount_price",  cemi ise bu class "total_price"  -->
 							<div class="bsk_itm_row">
-								<div class="bsk_itm_name">@lang('Qiymət'):</div>
+								<div class="bsk_itm_name">{{translate('price')}}:</div>
 								<div
 										class="bsk_itm_val">
 									{!! $totalPrice = $carts->sum(fn ($cart) => $cart->productPrice->price * $cart->count) !!}
@@ -90,7 +90,7 @@
 								</div>
 							</div>
 							<div class="bsk_itm_row discount_price">
-								<div class="bsk_itm_name">@lang('Endirim'):</div>
+								<div class="bsk_itm_name">{{translate('discount')}}:</div>
 								<div class="bsk_itm_val">
 									{!! $totalPrice - ( $totalPriceWithDiscount = $carts->sum(fn ($cart) => $cart->productPrice->sale_price > 0 ? $cart->productPrice->sale_price * $cart->count : $cart->productPrice->price * $cart->count ) ) !!}
 									AZN
@@ -98,19 +98,19 @@
 							</div>
                             @if(\App\Models\ProductOrder::DELIVERY_PRICE > 0)
                                 <div class="bsk_itm_row">
-                                    <div class="bsk_itm_name">@lang('Çatıdırılma'):</div>
+                                    <div class="bsk_itm_name">{{translate('delivery')}}:</div>
                                     <div class="bsk_itm_val">{!! \App\Models\ProductOrder::DELIVERY_PRICE !!}AZN
                                     </div>
                                 </div>
                             @endif
 							<div class="bsk_itm_row total_price">
-								<div class="bsk_itm_name">@lang('Ödəniləcək məbləğ'):</div>
+								<div class="bsk_itm_name">{{translate('paid')}}:</div>
 								<div class="bsk_itm_val">{!! $totalPriceWithDiscount + \App\Models\ProductOrder::DELIVERY_PRICE !!}
 									AZN
 								</div>
 							</div>
 							<button type="submit" class="filter_btn btn_send"
-							        form="checkout_address_form">@lang('Alışa keç')</button>
+							        form="checkout_address_form">{{translate('purchase')}}</button>
 
 						</div>
 					</div>

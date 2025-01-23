@@ -16,22 +16,22 @@
 
         <div class="section_wrap wrap_sign_content ">
             <div class="sign_header">
-                <div class="sign_title">@lang('Şifrəni unutmusan?')</div>
-                <div class="sign_info">@lang('Telefon nömrənizi daxil edin')</div>
+                <div class="sign_title">{{translate('forgot_pass')}}</div>
+                <div class="sign_info">{{translate('write_phone_number')}}</div>
             </div>
             <form method="post" id="forgot_password_form">
                 @csrf
                 <div class="form_item ">
-                    <input type="text" name="phone" placeholder="@lang('Telefon nömrəsi') (+994)" class="item_input phone" value="994" required>
+                    <input type="text" name="phone" placeholder="{{translate('phone_number_994')}}" class="item_input phone" value="994" required>
                     @error('phone')
                         <div class="error_type">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form_item">
-                    <button type="submit" class="btn_sign submit_btn">@lang('Davam et')</button>
+                    <button type="submit" class="btn_sign submit_btn">{{translate('continue')}}</button>
                 </div>
                 <div class="form_item">
-                    <a href="{!! back()->getTargetUrl() !!}" class="btn_sign link_btn"><span class="back_link"></span>@lang('Geri qayıt') </a>
+                    <a href="{!! back()->getTargetUrl() !!}" class="btn_sign link_btn"><span class="back_link"></span>{{translate('go_back')}} </a>
                 </div>
             </form>
         </div>
@@ -42,14 +42,14 @@
     <div class="modal_section">
         <div class="modal_container phone_modal">
             <div class="modal_header">
-                <h5 class="modal_title">Təsdiqlə</h5>
+                <h5 class="modal_title">{{translate('approval')}}</h5>
                 <span class="close_modal"></span>
             </div>
             <div class="modal_body">
                 <form id="code_form">
                     <div class="security_content">
                         <span class="phone_number"></span>
-                        @lang('nömrəsinə SMS kod göndərildi')
+                            {{translate('phone_code_send')}}
                     </div>
 
                     <div class="row">
@@ -81,12 +81,12 @@
 
                     </div>
 
-                    <div class="error_type" id="code_error" style="display:none">@lang('Kod düzgün daxil edilməyib')</div>
-                    <button type="submit" class="btn_sign submit_btn submit_code">@lang('Göndər')</button>
+                    <div class="error_type" id="code_error" style="display:none">{{translate('code_error')}}</div>
+                    <button type="submit" class="btn_sign submit_btn submit_code">{{translate('send')}}</button>
 
                     <a href="javascript:void(0)"
                        class="security_content modal_little_content modal_centered resend_code">
-                        @lang('Kodu yenidən göndər')
+                       {{translate('resend_code')}}
                     </a>
                 </form>
             </div>

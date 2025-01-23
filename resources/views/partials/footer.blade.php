@@ -34,7 +34,7 @@
                     <div class="ftr_menu_sect">
                         <ul class="footer_menu">
                             <li>
-                                <span class="fm_hd">Menyular </span>
+                                <span class="fm_hd">{{translate('menues')}} </span>
                             </li>
                             <li>
                                 <a href="{!! route('about') !!}" class="">{{translate('header_about')}} </a>
@@ -60,7 +60,7 @@
                         </ul>
                         <ul class="footer_menu">
                             <li>
-                                <span class="fm_hd">Kateqoriyalar </span>
+                                <span class="fm_hd">{{translate('categories')}} </span>
                             </li>
 
                             @foreach(menu_categories() as $item)
@@ -85,7 +85,7 @@
                             <div class="adrs_row">
                                 <div>
                                     <div class="adrs_head">
-                                        Sosial şəbəkələrimiz:
+                                        {{translate('social_networks')}}:
                                     </div>
                                     <ul class="socials ftr_desk">
                                         <li>
@@ -140,7 +140,7 @@
                             </div>
                             <div class="adrs_row">
                                 <div>
-                                    <div class="adrs_head">E-poçt:</div>
+                                    <div class="adrs_head">{{translate('email')}}:</div>
                                     <a href="mailto:{!! setting('email_contact', 'info@rokol.az') !!}"
                                        class="call_center_mail">{!! setting('email_contact', 'info@rokol.az') !!}</a>
                                 </div>

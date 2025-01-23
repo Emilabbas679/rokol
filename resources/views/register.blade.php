@@ -17,34 +17,34 @@
 
             <div class="section_wrap wrap_sign_content ">
                 <div class="sign_header">
-                    <div class="sign_title">Qeydiyyatdan keç</div>
-                    <div class="sign_info">Giriş məlumatlarını daxil edin</div>
+                    <div class="sign_title">{{translate('register')}}</div>
+                    <div class="sign_info">{{translate('reg_info')}}</div>
                 </div>
                 <form action="{!! route('register') !!}" method="post" id="register_form">
                     @csrf
                     <div class="form_item ">
-                        <input type="text" name="full_name" placeholder="@lang('Ad, Soyad *')" class="item_input"
+                        <input type="text" name="full_name" placeholder="{{translate('name_surname')}}" class="item_input"
                                required>
                         @error('full_name')
                         <div class="error_type">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form_item ">
-                        <input type="text" name="phone" placeholder="@lang('Telefon nömrəsi (+994)')"
+                        <input type="text" name="phone" placeholder="{{translate('phone_number_994')}}"
                                class="item_input phone" value="994" required>
                         @error('phone')
                         <div class="error_type">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form_item ">
-                        <input type="text" name="email" placeholder="@lang('E-poçt ünvanı (zəruri deyil)')" class="item_input"
+                        <input type="text" name="email" placeholder="{{translate('email_optional')}}" class="item_input"
                                >
                         @error('email')
                         <div class="error_type">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form_item">
-                        <input type="password" name="password" placeholder="@lang('Şifrə *')" class="item_input "
+                        <input type="password" name="password" placeholder="{{translate('password_*')}}" class="item_input "
                                required>
                         @error('password')
                         <div class="error_type">{{ $message }}</div>
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="form_item">
-                        <input type="password" name="password_confirmation" placeholder="@lang('Şifrə təkrar *')"
+                        <input type="password" name="password_confirmation" placeholder="{{translate('repeat_pass_*')}}"
                                class="item_input ">
                         <!-- <div class="error_type">Supporting text</div> -->
                         <div class="pass_eye">
@@ -68,14 +68,13 @@
                         </div>
                     </div>
                     <div class="security_content">
-                        Siz davam et düyməsini sıxmaqla <a href="javascrivt:void(0)" style="text-decoration:underline;">Məxfilik
-                            siyasətini</a> qəbul etmiş olursunuz.
+                    {{translate('security_content_1')}} <a href="javascrivt:void(0)" style="text-decoration:underline;">{{translate('security_content_2')}}</a> {{translate('security_content_3')}}
                     </div>
                     <div class="form_item">
-                        <button type="submit" class="btn_sign submit_btn">Qeydiyyatdan keç</button>
+                        <button type="submit" class="btn_sign submit_btn">{{translate('register')}}</button>
                     </div>
                     <div class="form_item">
-                        <a href="{!! route('login') !!}" class="btn_sign link_btn">Daxil ol</a>
+                        <a href="{!! route('login') !!}" class="btn_sign link_btn">{{translate('login')}}</a>
                     </div>
                 </form>
 
@@ -89,14 +88,14 @@
         <div class="modal_section">
             <div class="modal_container phone_modal">
                 <div class="modal_header">
-                    <h5 class="modal_title">Təsdiqlə</h5>
+                    <h5 class="modal_title">{{translate('approval')}}</h5>
                     <span class="close_modal"></span>
                 </div>
                 <div class="modal_body">
                     <form id="code_form">
                         <div class="security_content">
                             <span class="phone_number">+994 55 *** ** 20</span>
-                            @lang('nömrəsinə SMS kod göndərildi')
+                            {{translate('phone_code_send')}}
                         </div>
 
                         <div class="row">
@@ -128,15 +127,15 @@
 
                         </div>
 
-                        <div class="error_type" id="code_error" style="display:none">Kod düzgün daxil edilməyib</div>
+                        <div class="error_type" id="code_error" style="display:none">K{{translate('code_error')}}</div>
                         <div>
-                            <button type="submit" class="btn_sign submit_btn submit_code send">@lang('Göndər')</button>
-                            <button type="submit" class="btn_sign submit_btn sended">@lang('Göndərildi')</button>
+                            <button type="submit" class="btn_sign submit_btn submit_code send">{{translate('send')}}</button>
+                            <button type="submit" class="btn_sign submit_btn sended">{{translate('sended')}}</button>
                         </div>
 
                         <a href="javascript:void(0)"
                            class="security_content modal_little_content modal_centered resend_code">
-                            Kodu yenidən göndər
+                           {{translate('resend_code')}}
                         </a>
                     </form>
                 </div>
