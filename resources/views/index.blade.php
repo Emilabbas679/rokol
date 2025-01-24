@@ -91,7 +91,7 @@
                     <div class="swiper-wrapper">
 
                         <div class="swiper-slide">
-                            <a href="./category/3" class="atg_item">
+                            <a href="https://rokol.az/products?parent_category_id=1&category_id=3" class="atg_item">
                                 <div class="atg_img">
                                     <img src="{{asset('img/product1.png')}}" alt="Daxili boyalar">
                                 </div>
@@ -109,7 +109,7 @@
                             </a>
                         </div>
                         <div class="swiper-slide">
-                            <a href="./category/1" class="atg_item">
+                            <a href="https://rokol.az/products?parent_category_id=1&category_id=1" class="atg_item">
                                 <div class="atg_img">
                                     <img src="{{asset('img/boyadolgu.jpg')}}" alt="Boya, Dolğu və Iaklar">
                                 </div>
@@ -127,7 +127,7 @@
                             </a>
                         </div>
                         <div class="swiper-slide">
-                            <a href="./category/5" class="atg_item">
+                            <a href="https://rokol.az/products?parent_category_id=1&category_id=5" class="atg_item">
                                 <div class="atg_img">
                                     <img src="{{asset('img/yolcizgi.jpg')}}" alt="Yol Cizgi Boyaları">
                                 </div>
@@ -145,7 +145,7 @@
                             </a>
                         </div>
                         <div class="swiper-slide">
-                            <a href="./category/2" class="atg_item">
+                            <a href="https://rokol.az/products?parent_category_id=2" class="atg_item">
                                 <div class="atg_img">
                                     <img src="{{asset('img/sanaye.jpg')}}" alt="Sənaye boyaları">
                                 </div>
@@ -163,7 +163,7 @@
                             </a>
                         </div>
                         <div class="swiper-slide">
-                            <a href="./category/4" class="atg_item">
+                            <a href="https://rokol.az/products?parent_category_id=1&category_id=4" class="atg_item">
                                 <div class="atg_img">
                                     <img src="{{asset('img/product2.png')}}" alt="Fasad boyaları">
                                 </div>
@@ -330,7 +330,7 @@
                     </p>
                 </div>
                 <div class="more_color">
-                    <a href="{!! route('colors') !!}">{{translate('discover_colors')}}</a>
+                    <a href="https://rokol.az/colors/groups">{{translate('discover_colors')}}</a>
                 </div>
             </div>
             <div class="abt_right abt_h">
