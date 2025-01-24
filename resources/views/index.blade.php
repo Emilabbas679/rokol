@@ -97,14 +97,12 @@
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
-                                        <h5 class="itm_title">Daxili boyalar</h5>
+                                        <h5 class="itm_title">{{translate('category_1')}}</h5>
                                         <p class="itm_info">
-                                            Akrilik sopolimer əsaslı, yüksək örtücülük qabliyyətinə malik, ətraf mühit
-                                            üçün
-                                            zərərsiz və qoxusuz daxili səth boyalarıdır.
+                                            {{translate('category_1_info')}}
                                         </p>
                                         <div class="go_product">
-                                            <span>Məhsullara keçin</span>
+                                            <span>{{translate('go_to_products')}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -117,14 +115,12 @@
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
-                                        <h5 class="itm_title">Boya, Dolğu və Iaklar</h5>
+                                        <h5 class="itm_title">{{translate('category_2')}}</h5>
                                         <p class="itm_info">
-                                            Uretan alkid əsaslı, bütün növ ağac məmulatlarının səthlərinin qorunmasını
-                                            təmin
-                                            edən məhsullardır.
+                                            {{translate('category_2_info')}}
                                         </p>
                                         <div class="go_product">
-                                            <span>Məhsullara keçin</span>
+                                            <span>{{translate('go_to_products')}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -137,16 +133,12 @@
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
-                                        <h5 class="itm_title">Yol Cizgi Boyaları</h5>
+                                        <h5 class="itm_title">{{translate('category_3')}}</h5>
                                         <p class="itm_info">
-                                            Alkid və xlor kauçuk, Termoplastik akrilik qətran əsaslı, aşınmaya,
-                                            sürtünməyə
-                                            qarşı davamlı, avtomagistrallarda, hava limanlarında və digər beton və
-                                            asfalt
-                                            səthlərin işarələnməsində istifadə olunan boyalardır.
+                                            {{translate('category_3_info')}}
                                         </p>
                                         <div class="go_product">
-                                            <span>Məhsullara keçin</span>
+                                            <span>{{translate('go_to_products')}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -159,13 +151,12 @@
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
-                                        <h5 class="itm_title">Sənaye boyaları</h5>
+                                        <h5 class="itm_title">{{translate('category_4')}}</h5>
                                         <p class="itm_info">
-                                            Nitrosellüloz alkid əsaslı, birkomponentli, antikorroziv, sənayenin bütün
-                                            sahələrində, metal,ağac və beton səthlərdə istifadə olunan boyalardır.
+                                            {{translate('category_4_info')}}
                                         </p>
                                         <div class="go_product">
-                                            <span>Məhsullara keçin</span>
+                                            <span>{{translate('go_to_products')}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -178,14 +169,12 @@
                                 </div>
                                 <div class="atg_content">
                                     <div class="row_inner">
-                                        <h5 class="itm_title">Fasad boyaları</h5>
+                                        <h5 class="itm_title">{{translate('category_5')}}</h5>
                                         <p class="itm_info">
-                                            Akrilik soplimer əsaslı, yağışa, nəmə və digər xarici təsirlərə qarşı
-                                            davamlı
-                                            son qat boyalarıdır.
+                                            {{translate('category_5_info')}}
                                         </p>
                                         <div class="go_product">
-                                            <span>Məhsullara keçin</span>
+                                            <span>{{translate('go_to_products')}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -323,29 +312,25 @@
         <div class="main_center clearfix">
             <div class="abt_left abt_h">
                 <div class="abt_title">
-                    RƏNGLƏR CƏDVƏLİ
+                    {{translate('color_chart')}}
                 </div>
                 <div class="abt_info">
                     <p>
-                        Yorğun bir günün ardından evdə dinc saatlar keçirmək istərdinizmi?
+                        {{translate('color_info_line_1')}}
                     </p>
 
                     <p>
-                        Sizə yetər ki, Rokoldan ilham alın! Daxili boya üçün seçdiyiniz rənglərə uyğun olacaq digər
-                        tonları
-                        öyrənmək və onları otağınızda istifadə etmək üçün Polisanın rəng seçimlərinə nəzər salın.
+                        {{translate('color_info_line_2')}}
                     </p>
                     <p>
-                        İnteryer dizaynerlərinin tətbiq etdiyi 60-30-10 qaydasına uyğun olaraq divarlarınızda istifadə
-                        etdiyiniz açıq tonlar yaşayış məkanınıza parlaq bir görünüş verəcək.
+                        {{translate('color_info_line_3')}}
                     </p>
                     <p>
-                        Bu rənglərlə birləşdirildikdə möcüzələr yaradan orta tonları əlavə etməklə sakit atmosferin
-                        davamlılığını təmin edə bilərsiniz.
+                        {{translate('color_info_line_4')}}
                     </p>
                 </div>
                 <div class="more_color">
-                    <a href="{!! route('colors') !!}">Rəngləri kəşf et</a>
+                    <a href="{!! route('colors') !!}">{{translate('discover_colors')}}</a>
                 </div>
             </div>
             <div class="abt_right abt_h">
@@ -399,7 +384,7 @@
             <div class="main_center clearfix">
                 <div class="sect_header clearfix">
                     <h2 class="sect_title">
-                        <a href="">Videolar</a>
+                        <a href="">{{translate('videos')}}</a>
                     </h2>
                 </div>
                 <div class="sect_body slider_container clearfix">
