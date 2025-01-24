@@ -32,7 +32,6 @@ class CartAddProductRequest extends FormRequest
                 Rule::requiredIf( function () {
                     return Product::query()
                                   ->where( 'id', $this->input( 'product_id' ) )
-                                  ->whereIn( 'has_colors', [ Product::ALL_COLORS, Product::SPEC_COLORS ] )
                                   ->exists();
                 } ), 'string', Rule::exists( Color::class, 'id' )
             ],
