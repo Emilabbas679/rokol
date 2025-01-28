@@ -317,7 +317,7 @@
                     <div class="menu_btn open"></div>
 
                     <div class="hd_search mobile_search_sect">
-                        <form method="post" action="{!! route('products') !!}">
+                        <form method="get" action="{!! route('products') !!}">
                             <div class="search_row clearfix">
                                 <input type="text" name="q" class="search_input" value="{{ request()->get('q') }}"
                                        placeholder="@lang('Sayt üzrə axtarış')">
