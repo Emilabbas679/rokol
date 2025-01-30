@@ -20,7 +20,29 @@
     <link rel="shortcut icon" href="{{asset('favrokol.ico')}}" type="image/x-icon">
     <script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>
     <!-- Start of HubSpot Embed Code -->
-    <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/48598643.js"></script>
+    <script type="text/javascript">
+        function loadScript() {
+            var isSmallScreen = window.innerWidth < 1024;
+            var isCartPage = window.location.pathname.includes("carts");
+            if (!isSmallScreen || !isCartPage) {
+                if (!document.getElementById("hs-script-loader")) {
+                    var script = document.createElement("script");
+                    script.type = "text/javascript";
+                    script.id = "hs-script-loader";
+                    script.async = true;
+                    script.defer = true;
+                    script.src = "//js-na1.hs-scripts.com/48598643.js";
+                    document.head.appendChild(script);
+                }
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", loadScript);
+        window.addEventListener("resize", loadScript);
+    </script>
+
+
+
     <!-- End of HubSpot Embed Code -->
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
