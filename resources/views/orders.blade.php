@@ -50,17 +50,17 @@
 
 									@if( $order->delivered_status == \App\Models\ProductOrder::DELIVERED_STATUS_COMPLETED)
 										@php
-											$txt = __('{{translate("complated")}}');
+											$txt = translate("complated");
 											$class = 'completed'
 										@endphp
 									@elseif($order->delivered_status == \App\Models\ProductOrder::DELIVERED_STATUS_PREPARING)
 										@php
-											$txt = __('{{translate("preparing")}}');
+											$txt = translate("preparing");
 											$class = 'preparing'
 										@endphp
 									@else
 										@php
-											$txt = __('{{translate("rejected")}}');
+											$txt = translate("rejected");
 											$class = 'rejected'
 										@endphp
 									@endif
