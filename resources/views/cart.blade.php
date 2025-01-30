@@ -54,6 +54,9 @@
             $(".delete").click(function (e) {
                 $(this).toggleClass("dodel");
             });
+            $(".basket_mob_fix .btn_send").on("click", function() {                
+                $("#cart_form").submit();
+            });
         });
     </script>
     <script>
