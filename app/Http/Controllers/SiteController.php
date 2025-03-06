@@ -625,7 +625,7 @@ class SiteController extends Controller
     public function pages( $id )
     {
         $page = Page::query()
-                    ->where( 'active_status', true )
+                  // ->where( 'active_status', true )
                     ->findOrFail( $id );
         return view( 'static_page', compact( 'page' ) );
     }

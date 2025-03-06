@@ -66,15 +66,16 @@
         </div>
     @endif
 @endif
+
 <div class="choose_weight">
     <div class="pr_select_title">{{translate('choose_weight')}}</div>
     <div class="filter_check_items">
         @foreach($product->prices->sort() as $p)
-            <label class="f_check_type radio_btn">
+            <a href="{{ url('/product/' . $product->id . '?price_id=' . $p->id) }}" class="f_check_type radio_btn">
                 <input type="radio" name="weight" value="{{$p->weight_id}}"
                        @if($price->weight_id == $p->weight_id) checked @endif>
                 <span>{{$p->weight->weight}} {!! productWeightUnit($p->weight->weight_type) !!}</span>
-            </label>
+            </a>
         @endforeach
     </div>
 </div>
